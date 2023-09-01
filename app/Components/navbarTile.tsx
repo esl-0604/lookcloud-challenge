@@ -1,5 +1,3 @@
-import { ReactElement } from "react";
-
 interface NavBarButtonProps {
     type: string;
     activate: boolean;
