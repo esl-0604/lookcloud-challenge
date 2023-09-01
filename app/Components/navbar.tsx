@@ -1,24 +1,32 @@
-import Trophy from "../../public/trophyicon.svg";
-import Lookbook from "../../public/lookbookicon.svg";
-import Chat from "../../public/chaticon.svg";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import NavBarButton from "./navbarButton";
 
-export default function NavBar() {
+interface NavBarProps {
+    page: string;
+}
+export default function NavBar({ page }: NavBarProps) {
     return (
-        <div className="absolute bottom-0 flex justify-around items-center w-[100%] h-[56px] bg-slate-500">
+        <div className="absolute bottom-0 flex justify-around items-center w-[100%] h-[50px] bg-white">
             <Link href="/challenge">
-                <NavBarButton type={"challenge"} />
+                <NavBarButton
+                    type={"challenge"}
+                    activate={page === "challenge"}
+                />
             </Link>
             <Link href="/lookbook">
-                <NavBarButton type={"lookbook"} />
+                <NavBarButton
+                    type={"lookbook"}
+                    activate={page === "lookbook"}
+                />
             </Link>
             <Link href="/feedback">
-                <NavBarButton type={"feedback"} />
+                <NavBarButton
+                    type={"feedback"}
+                    activate={page === "feedback"}
+                />
             </Link>
             <Link href="/loading">
-                <NavBarButton type={"loading"} />
+                <NavBarButton type={"loading"} activate={page === "nothing"} />
             </Link>
         </div>
     );
