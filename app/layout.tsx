@@ -1,4 +1,3 @@
-import NavBar from "./Components/navbar";
 import "./global.css";
 import type { Metadata } from "next";
 
@@ -16,9 +15,8 @@ export default function RootLayout({
         <html>
             <body>
                 <div className="flex justify-center items-center w-screen h-screen">
-                    <div className="w-[100%] h-[100%] max-w-[480px] ">
+                    <div className="relative w-[100%] h-[100%] max-w-[480px] ">
                         {children}
-                        <NavBar />
                     </div>
                 </div>
             </body>
