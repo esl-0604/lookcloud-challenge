@@ -41,6 +41,7 @@ export default function NavBar({ page }: NavBarProps) {
             {navigateList.map((tile: Tile) => {
                 return (
                     <Link
+                        key={tile.title}
                         href={"/" + tile.title}
                         className="flex flex-col justify-around items-center h-[42px]"
                     >
