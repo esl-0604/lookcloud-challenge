@@ -13,7 +13,7 @@ export default function NavBarTile({ type, activate }: NavBarButtonProps) {
             case "feedback":
                 return "피드백";
             default:
-                return "프로필";
+                return "로그인";
         }
     };
     return (

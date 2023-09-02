@@ -32,8 +32,8 @@ export default function NavBar({ page }: NavBarProps) {
             title: "feedback",
         },
         {
-            icon: <Trophy color={page === "loading" ? "#3E3AFF" : "#9B9BA1"} />,
-            title: "loading",
+            icon: <Trophy color={page === "login" ? "#3E3AFF" : "#9B9BA1"} />,
+            title: "login",
         },
     ];
     return (
