@@ -17,6 +17,9 @@ const config: Config = {
                 activate: "#3E3AFF",
                 deactivate: "#9B9BA1",
             },
+            fontFamily: {
+                mainFont: ["Jacques Francois", "serif"],
+            },
         },
     },
     plugins: [],
