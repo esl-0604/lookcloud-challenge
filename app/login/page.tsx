@@ -1,5 +1,6 @@
 import TitleIcon from "../../public/LookCloudTitle.svg";
-import LoginButton from "./loginbutton";
+import FacebookLoginButton from "./facebookloginbutton";
+import InstagramLoginButton from "./instagramloginbutton";
 
 export default function Login() {
     return (
@@ -7,11 +8,9 @@ export default function Login() {
             <div className="mt-[60px]">
                 <TitleIcon width={"310"} height={"47"} color={"white"} />
             </div>
-            {/* <div>ID/PASS box</div>
-            <div>forget password</div>
-            <div>login button box</div>
-            <div>sns login box</div> */}
-            <LoginButton />
+
+            <FacebookLoginButton />
+            <InstagramLoginButton />
         </main>
     );
 }

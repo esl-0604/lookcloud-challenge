@@ -1,34 +1,11 @@
 "use client";
+
 import FacebookLogin from "@greatsumini/react-facebook-login";
 import { useState } from "react";
 
-interface Profile {
-    name: string;
-    email: string;
-    picture: {
-        data: {
-            width: number;
-            height: number;
-            is_silhouette: boolean;
-            url: string;
-        };
-    };
-    id: string;
-}
-export default function LoginButton() {
-    // const { data: session, status } = useSession();
-    // console.log(session);
-    // console.log(status);
-
-    // if (status === "authenticated") {
-    //     return (
-    //         <div className="flex flex-col justify-center items-center w-[200px] h-[50px] mt-[50px]">
-    //             <img src={session?.user?.image || ""} alt="profile image" />
-    //             {session?.user?.name}
-    //         </div>
-    //     );
-    // }
+export default function FacebookLoginButton() {
     const [profile, setProfile] = useState<any>();
+
     if (profile?.name) {
         return (
             <>
@@ -61,12 +38,6 @@ export default function LoginButton() {
                     }}
                 />
             </div>
-            {/* <div
-                className="flex justify-center items-center w-[200px] h-[50px] bg-white text-black mt-[50px] cursor-pointer"
-                onClick={() => {}}
-            >
-                <Link href={signinurl}>인스타그램 로그인</Link>
-            </div> */}
         </>
     );
 }
