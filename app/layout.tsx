@@ -1,7 +1,5 @@
 import "./global.css";
 import type { Metadata } from "next";
-import type { AppProps } from "next/app";
-import AuthSession from "./authsession";
 
 export const metadata: Metadata = {
     title: "Lookcloud",
@@ -18,7 +16,7 @@ export default function RootLayout({
             <body>
                 <div className="flex justify-center items-center w-screen h-screen">
                     <div className="relative w-[100%] h-[100%] max-w-[480px] ">
-                        <AuthSession>{children}</AuthSession>
+                        {children}
                     </div>
                 </div>
             </body>
