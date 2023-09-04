@@ -1,22 +1,41 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 export default function InstagramLoginButton() {
     const CODE_REQUEST_URL = `https://api.instagram.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_INSTAGRAM_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_INSTAGRAM_REDIRECT_URL}&scope=user_profile,user_media&response_type=code`;
 
     const param = useSearchParams();
     const code = param.get("code");
+    const router = useRouter();
 
     if (code) {
-        // 서버에 코드 전달 후 응답 데이터를 렌더링
         console.log(code);
+        // 서버에 코드 전달 후 응답 데이터 처리
+        // {
+        //     "status" : "OK",
+        //     "message" : "",
+        //     "data" : {
+        //           registerStatus: 'NOT_REGISTERED' | 'REGISTERED'
+        //           userId: number | null
+        //           instagram: {
+        //               loginId: number,
+        //               userName: string,
+        //           }
+        //       }
+        //   }
+        // instagramLoginID를 onboarding page로 전달
+        const instagramID: number = 1432424;
 
+        router.push(`./onboarding?id=${instagramID}`);
         return (
-            <div className="flex justify-center items-center w-[200px] h-[50px] bg-white text-black mt-[50px] cursor-pointer">
-                코드 수령 완료! url 확인 바람.
-            </div>
+            <>
+                {/* <Onboarding code={code} /> */}
+                <div className="flex justify-center items-center w-[200px] h-[50px] bg-white text-black mt-[50px] cursor-pointer">
+                    코드 수령 완료! url 확인 바람.
+                </div>
+            </>
         );
     }
 
