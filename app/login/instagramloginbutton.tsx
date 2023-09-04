@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 export default function InstagramLoginButton() {
@@ -20,10 +21,10 @@ export default function InstagramLoginButton() {
     }
 
     return (
-        <a href={CODE_REQUEST_URL}>
+        <Link href={CODE_REQUEST_URL}>
             <div className="flex justify-center items-center w-[200px] h-[50px] bg-white text-black mt-[50px] cursor-pointer">
                 인스타그램 로그인
             </div>
-        </a>
+        </Link>
     );
 }

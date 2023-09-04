@@ -8,8 +8,7 @@ export default function Login() {
             <div className="mt-[60px]">
                 <TitleIcon width={"310"} height={"47"} color={"white"} />
             </div>
-
-            <FacebookLoginButton />
+            {/* <FacebookLoginButton /> */}
             <InstagramLoginButton />
         </main>
     );
