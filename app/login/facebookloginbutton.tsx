@@ -10,7 +10,7 @@ export default function FacebookLoginButton() {
         return (
             <>
                 <div className="flex flex-col justify-center items-center w-[200px] bg-white text-black mt-[50px] cursor-pointer">
-                    <img src={profile.picture.data.url} alt="" />
+                    <img src={profile.picture.data.url} alt="profile_img" />
                     <span>{profile.name}</span>
                     <span>{profile.id}</span>
                     <span>{profile.email}</span>
