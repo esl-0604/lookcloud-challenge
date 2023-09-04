@@ -21,9 +21,11 @@ export default function InstagramLoginButton() {
     }
 
     return (
-        <Link href={CODE_REQUEST_URL}>
-            <div className="flex justify-center items-center w-[200px] h-[50px] bg-white text-black mt-[50px] cursor-pointer">
-                인스타그램 로그인
+        <Link href={CODE_REQUEST_URL} className="mt-[35px] cursor-pointer">
+            <div className="flex justify-center items-center w-[320px] h-[52px] rounded-[29px] bg-[#D9D9D9]">
+                <div className="flex justify-center items-center w-[316px] h-[48px] rounded-[29px] bg-[#707070] text-white text-[14px] font-mainFont">
+                    SIGN IN WITH INSTAGRAM
+                </div>
             </div>
         </Link>
     );
