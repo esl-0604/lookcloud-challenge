@@ -6,7 +6,7 @@ export default function InstagramLoginButton() {
     const router = useSearchParams();
     const code = router.get("code");
 
-    const CODE_REQUEST_URL = `https://api.instagram.com/oauth/authorize?client_id=${process.env.INSTAGRAM_CLIENT_ID}&redirect_uri=${process.env.INSTAGRAM_REDIRECT_URL}&scope=user_profile,user_media&response_type=code`;
+    const CODE_REQUEST_URL = `https://api.instagram.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_INSTAGRAM_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_INSTAGRAM_REDIRECT_URL}&scope=user_profile,user_media&response_type=code`;
 
     if (code) {
         // 서버에 코드 전달 후 응답 데이터를 렌더링
