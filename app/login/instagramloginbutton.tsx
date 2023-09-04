@@ -15,7 +15,7 @@ export default function InstagramLoginButton() {
 
         return (
             <div className="flex justify-center items-center w-[200px] h-[50px] bg-white text-black mt-[50px] cursor-pointer">
-                로그인 완료!
+                코드 수령 완료! url 확인 바람.
             </div>
         );
     }
