@@ -18,7 +18,8 @@ const config: Config = {
                 deactivate: "#9B9BA1",
             },
             fontFamily: {
-                mainFont: ["Jacques Francois", "serif"],
+                loginBoxFont: ["Jacques Francois", "serif"],
+                textBoxFont: ["IBM Plex Sans KR", "sans-serif"],
             },
         },
     },

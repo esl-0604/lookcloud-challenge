@@ -13,9 +13,15 @@ export default function RootLayout({
 }) {
     return (
         <html>
+            <head>
+                <meta
+                    httpEquiv="Content-Security-Policy"
+                    content="upgrade-insecure-requests"
+                />
+            </head>
             <body>
                 <div className="flex justify-center items-center w-screen h-screen">
-                    <div className="relative w-[100%] h-[100%] max-w-[480px] ">
+                    <div className="relative w-[100%] h-[100%] max-w-[480px]">
                         {children}
                     </div>
                 </div>
