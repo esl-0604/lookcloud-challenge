@@ -1,3 +1,5 @@
+import AutoLogin from "./autologin";
+
 export default function App() {
-    return <></>;
+    return <AutoLogin />;
 }
