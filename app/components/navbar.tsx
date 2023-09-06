@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Trophy from "../../public/trophyicon.svg";
-import Lookbook from "../../public/lookbookicon.svg";
-import Chat from "../../public/chaticon.svg";
+import Trophy from "/public/svg/trophyicon.svg";
+import Lookbook from "../../public/svg/lookbookicon.svg";
+import Chat from "../../public/svg/chaticon.svg";
 import { ReactElement } from "react";
 import NavBarTile from "./navbarTile";
 

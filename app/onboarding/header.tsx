@@ -1,7 +1,7 @@
 "use client";
 
-import HeaderLogo from "../../public/headerlogo.svg";
-import Btn from "../../public/btn.svg";
+import HeaderLogo from "../../public/svg/headerlogo.svg";
+import Btn from "../../public/svg/btn.svg";
 import { useContext } from "react";
 import { StepContext } from "./main";
 

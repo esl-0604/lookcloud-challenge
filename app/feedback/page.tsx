@@ -1,4 +1,4 @@
-import NavBar from "../Components/navbar";
+import NavBar from "../components/navbar";
 
 export default function Feedback() {
     return (

@@ -7,6 +7,7 @@ import OnboardingNameInput from "./nameinput";
 import OnboardingOranizationInput from "./organizationinput";
 import TextBox from "./textbox";
 import ContinueButton from "./continuebutton";
+import { useSearchParams } from "next/navigation";
 
 interface StepType {
     id: "1" | "2" | "3";

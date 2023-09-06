@@ -20,6 +20,7 @@ const config: Config = {
             fontFamily: {
                 loginBoxFont: ["Jacques Francois", "serif"],
                 textBoxFont: ["IBM Plex Sans KR", "sans-serif"],
+                textBoxFont2: ["IBM Plex Sans", "sans-serif"],
             },
         },
     },

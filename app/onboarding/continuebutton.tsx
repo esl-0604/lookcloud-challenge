@@ -2,7 +2,8 @@
 
 import { useContext, useEffect } from "react";
 import { GenderType, OrganType, StepContext } from "./main";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import LocalStorage from "../localstorage";
 
 interface ContinueButtonProps {
     canBeContinued: boolean;
@@ -18,8 +19,7 @@ export default function ContinueButton({
     organ,
 }: ContinueButtonProps) {
     const { step, setStep }: any = useContext(StepContext);
-    const param = useSearchParams();
-    const id = param.get("id");
+    const router = useRouter();
 
     const StepForward = () => {
         if (canBeContinued) {
@@ -33,26 +33,57 @@ export default function ContinueButton({
                 });
                 // 유저 정보 저장 api call
                 registerUserAPIcall();
+                // 유저 정보 저장 성공 시, 로컬 스토리지에서 instagramId 제거
+
+                // // 라우팅 예시 코드 (나중에 제거) ----------------
+                // router.push("./challenge");
+                // // ----------------------------------------
             }
         }
     };
+
     const registerUserAPIcall = async () => {
-        const REGISTER_USER_URL = "http://3.35.90.153/users";
+        const instagramDataJson = LocalStorage.getItem(
+            "lookCloud-instagram-data"
+        );
+        const instagramData = JSON.parse(instagramDataJson || "");
+
+        const REGISTER_USER_URL = "https://external-api.lookcloud.co/users";
         await fetch(REGISTER_USER_URL, {
             method: "POST",
-            mode: "cors", // no-cors, *cors, same-origin
+            mode: "cors",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                instagramLoginId: id,
+                instagramLoginId: instagramData["loginId"],
                 nickName: nickName,
                 gender: gender,
                 organization: organ,
             }),
         })
             .then((res) => res.json())
-            .then((data) => console.log(data));
+            .then(({ status, message, data }) => {
+                // console.log(data);
+                if (data) {
+                    const personalCredit = (
+                        data * Number(process.env.NEXT_PUBLIC_ENCRYPTION_KEY)
+                    ).toString();
+                    LocalStorage.removeItem("lookCloud-userId-data");
+                    LocalStorage.removeItem("lookCloud-instagram-data");
+                    LocalStorage.setItem(
+                        "lookCloud-userId-data",
+                        personalCredit
+                    );
+                    if (LocalStorage.getItem("lookCloud-userId-data")) {
+                        router.push("./challenge");
+                    }
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                router.push("./login");
+            });
     };
     return (
         <div className="flex justify-center items-center w-[100%] py-[16px] ">
