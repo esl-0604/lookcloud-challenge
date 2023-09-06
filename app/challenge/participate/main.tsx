@@ -4,13 +4,26 @@ import { useState } from "react";
 import ChallengeParticipantImageInput from "./imageinput";
 import ChallengeParticipantProductInput from "./productinput";
 import ChallengeParticipantTextInput from "./textinput";
+import { useRouter } from "next/navigation";
+import Backward from "../../../public/svg/backward.svg";
 
 export default function ChallengeParticipantMain() {
     const [lookImage, setLookImage] = useState();
     const [lookDescription, setLookDescription] = useState();
     const [lookProductInfo, setLookProductInfo] = useState();
+
+    const router = useRouter();
+    const GoBackward = () => {
+        router.back();
+    };
     return (
         <div className="flex-1 flex flex-col justify-start items-center w-[100%] font-textBoxFont">
+            <div
+                className="fixed top-[74px] right-[15px] z-10"
+                onClick={GoBackward}
+            >
+                <Backward />
+            </div>
             <div className="flex relative justify-center items-start w-[100%] h-[124px] py-[8px] overflow-hidden">
                 <img
                     src="/image/challenge_thumbnail_1_3.png"
