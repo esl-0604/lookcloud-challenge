@@ -64,14 +64,25 @@ export default function ContinueButton({
         })
             .then((res) => res.json())
             .then(({ status, message, data }) => {
-                console.log(data);
-                LocalStorage.setItem("lookCloud-userId-data", data.toString());
-                LocalStorage.removeItem("lookCloud-instagram-data");
-                if (LocalStorage.getItem("lookCloud-userId-data")) {
-                    router.push("./challenge");
+                // console.log(data);
+                if (data) {
+                    const personalCredit = (
+                        data * Number(process.env.NEXT_PUBLIC_ENCRYPTION_KEY)
+                    ).toString();
+                    LocalStorage.setItem(
+                        "lookCloud-userId-data",
+                        personalCredit
+                    );
+                    LocalStorage.removeItem("lookCloud-instagram-data");
+                    if (LocalStorage.getItem("lookCloud-userId-data")) {
+                        router.push("./challenge");
+                    }
                 }
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                router.push("./login");
+            });
     };
     return (
         <div className="flex justify-center items-center w-[100%] py-[16px] ">
