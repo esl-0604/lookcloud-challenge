@@ -1,4 +1,4 @@
-import TitleIcon from "../../public/LookCloudTitle.svg";
+import TitleIcon from "../../public/svg/LookCloudTitle.svg";
 import FacebookLoginButton from "./facebookloginbutton";
 import InstagramLoginButton from "./instagramloginbutton";
 
