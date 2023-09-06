@@ -55,9 +55,12 @@ export default function AutoLogin() {
                         "lookCloud-userId-data",
                         data["userId"].toString()
                     );
-                    router.push("./challenge");
+                    if (LocalStorage.getItem("lookCloud-userId-data")) {
+                        router.push("./challenge");
+                    }
                 }
-            });
+            })
+            .catch((error) => console.log(error));
     };
     const GetUserInfoAPIcall = async (userId: string) => {
         const GET_USER_INFO_URL =
@@ -74,6 +77,7 @@ export default function AutoLogin() {
                 router.push("./challenge");
             })
             .catch((error) => {
+                console.log(error);
                 router.push("./login");
             });
     };
@@ -82,16 +86,16 @@ export default function AutoLogin() {
         if (code) {
             // case : ./?code
             console.log(code);
-            // RequestUserIDAPIcall();
+            RequestUserIDAPIcall();
 
-            // 라우팅 예시 코드 (나중에 제거) ----------------
-            router.push("./onboarding");
-            // ----------------------------------------
+            // // 라우팅 예시 코드 (나중에 제거) ----------------
+            // router.push("./onboarding");
+            // // ----------------------------------------
         } else {
             // case : ./
             const userId = LocalStorage.getItem("lookCloud-userId-data");
             if (userId) {
-                // GetUserInfoAPIcall(userId);
+                GetUserInfoAPIcall(userId);
             } else {
                 console.log(userId);
                 router.push("./login");

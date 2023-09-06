@@ -32,14 +32,12 @@ export default function ContinueButton({
                     소속: organ,
                 });
                 // 유저 정보 저장 api call
-                // registerUserAPIcall();
+                registerUserAPIcall();
                 // 유저 정보 저장 성공 시, 로컬 스토리지에서 instagramId 제거
 
-                // 라우팅 예시 코드 (나중에 제거) ----------------
-                setTimeout(() => {
-                    router.push("./challenge");
-                }, 500);
-                // ----------------------------------------
+                // // 라우팅 예시 코드 (나중에 제거) ----------------
+                // router.push("./challenge");
+                // // ----------------------------------------
             }
         }
     };
@@ -72,7 +70,8 @@ export default function ContinueButton({
                 if (LocalStorage.getItem("lookCloud-userId-data")) {
                     router.push("./challenge");
                 }
-            });
+            })
+            .catch((error) => console.log(error));
     };
     return (
         <div className="flex justify-center items-center w-[100%] py-[16px] ">
