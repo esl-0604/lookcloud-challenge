@@ -3,6 +3,7 @@
 import { useContext, useEffect } from "react";
 import { GenderType, OrganType, StepContext } from "./main";
 import { useRouter, useSearchParams } from "next/navigation";
+import LocalStorage from "../localstorage";
 
 interface ContinueButtonProps {
     canBeContinued: boolean;
@@ -43,7 +44,7 @@ export default function ContinueButton({
     };
 
     const registerUserAPIcall = async () => {
-        const instagramDataJson = localStorage.getItem(
+        const instagramDataJson = LocalStorage.getItem(
             "lookCloud-instagram-data"
         );
         const instagramData = JSON.parse(instagramDataJson || "");
@@ -65,9 +66,9 @@ export default function ContinueButton({
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
-                localStorage.setItem("lookCloud-userId-data", data.toString());
-                localStorage.removeItem("lookCloud-instagram-data");
-                if (localStorage.getItem("lookCloud-userId-data")) {
+                LocalStorage.setItem("lookCloud-userId-data", data.toString());
+                LocalStorage.removeItem("lookCloud-instagram-data");
+                if (LocalStorage.getItem("lookCloud-userId-data")) {
                     router.push("./challenge");
                 }
             });

@@ -3,6 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import TitleIcon from "../public/svg/LookCloudTitle.svg";
 import { useEffect } from "react";
+import LocalStorage from "./localstorage";
 
 export default function AutoLogin() {
     // User Scenario
@@ -42,15 +43,15 @@ export default function AutoLogin() {
             .then((data) => {
                 console.log(data);
                 if (data["registerStatus"] === "NOT_REGISTERED") {
-                    localStorage.setItem(
+                    LocalStorage.setItem(
                         "lookCloud-instagram-data",
                         JSON.stringify(data["instagram"])
                     );
-                    if (localStorage.getItem("lookCloud-instagram-data")) {
+                    if (LocalStorage.getItem("lookCloud-instagram-data")) {
                         router.push("./onboarding");
                     }
                 } else if (data["registerStatus"] === "REGISTERED") {
-                    localStorage.setItem(
+                    LocalStorage.setItem(
                         "lookCloud-userId-data",
                         data["userId"].toString()
                     );
@@ -80,14 +81,14 @@ export default function AutoLogin() {
     if (code) {
         // case : ./?code
         console.log(code);
-        // RequestUserIDAPIcall();
+        useEffect(() => {
+            // RequestUserIDAPIcall();
+        }, []);
 
         // 라우팅 예시 코드
         useEffect(() => {
-            setTimeout(() => {
-                router.push("./onboarding");
-            }, 500);
-        }, []);
+            router.push("./onboarding");
+        });
 
         return (
             <main className="flex flex-col justify-center items-center w-[100%] h-[100%] bg-white">
@@ -96,17 +97,17 @@ export default function AutoLogin() {
         );
     } else {
         // case : ./
-        const userId = localStorage.getItem("lookCloud-userId-data");
+        const userId = LocalStorage.getItem("lookCloud-userId-data");
         if (userId) {
-            // GetUserInfoAPIcall(userId);
-        } else router.push("./login");
-
-        // 라우팅 예시 코드
-        useEffect(() => {
-            setTimeout(() => {
+            useEffect(() => {
+                // GetUserInfoAPIcall(userId);
+            });
+        } else {
+            console.log(userId);
+            useEffect(() => {
                 router.push("./login");
-            }, 500);
-        }, []);
+            });
+        }
 
         return (
             <main className="flex flex-col justify-center items-center w-[100%] h-[100%] bg-black">
