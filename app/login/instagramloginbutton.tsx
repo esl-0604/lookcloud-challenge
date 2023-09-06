@@ -45,13 +45,13 @@ export default function InstagramLoginButton() {
         // instagramLoginID를 onboarding page로 전달
         const instagramID: number = 1432424;
 
-        // router.push(`./onboarding?id=${instagramID}`);
+        router.push(`./onboarding?id=${instagramID}`);
         return (
             <>
                 {/* <Onboarding code={code} /> */}
-                <div className="flex justify-center items-center w-[200px] h-[50px] bg-white text-black mt-[50px] cursor-pointer">
+                {/* <div className="flex justify-center items-center w-[200px] h-[50px] bg-white text-black mt-[50px] cursor-pointer">
                     코드 수령 완료! url 확인 바람.
-                </div>
+                </div> */}
             </>
         );
     }
