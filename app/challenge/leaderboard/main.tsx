@@ -90,7 +90,11 @@ export default function ChallengeLeaderBoardMain() {
                 </Link>
             </div>
             <div className="flex justify-center items-center w-[100%] mb-[87px]">
-                <LeaderBoard />
+                <img
+                    src="/image/leader_board.png"
+                    alt="leader-board"
+                    className="flex justify-center items-start w-[360px] h-[555px] object-cover"
+                />
             </div>
         </div>
     );
