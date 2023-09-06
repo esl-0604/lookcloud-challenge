@@ -41,26 +41,35 @@ export default function AutoLogin() {
         })
             .then((res) => res.json())
             .then(({ status, message, data }) => {
-                console.log(data);
-                if (data["registerStatus"] === "NOT_REGISTERED") {
-                    LocalStorage.setItem(
-                        "lookCloud-instagram-data",
-                        JSON.stringify(data["instagram"])
-                    );
-                    if (LocalStorage.getItem("lookCloud-instagram-data")) {
-                        router.push("./onboarding");
-                    }
-                } else if (data["registerStatus"] === "REGISTERED") {
-                    LocalStorage.setItem(
-                        "lookCloud-userId-data",
-                        data["userId"].toString()
-                    );
-                    if (LocalStorage.getItem("lookCloud-userId-data")) {
-                        router.push("./challenge");
+                // console.log(data);
+                if (data) {
+                    if (data["registerStatus"] === "NOT_REGISTERED") {
+                        LocalStorage.setItem(
+                            "lookCloud-instagram-data",
+                            JSON.stringify(data["instagram"])
+                        );
+                        if (LocalStorage.getItem("lookCloud-instagram-data")) {
+                            router.push("./onboarding");
+                        }
+                    } else if (data["registerStatus"] === "REGISTERED") {
+                        const personalCredit = (
+                            data["userId"] *
+                            Number(process.env.NEXT_PUBLIC_ENCRYPTION_KEY)
+                        ).toString();
+                        LocalStorage.setItem(
+                            "lookCloud-userId-data",
+                            personalCredit
+                        );
+                        if (LocalStorage.getItem("lookCloud-userId-data")) {
+                            router.push("./challenge");
+                        }
                     }
                 }
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+                router.push("./login");
+            });
     };
     const GetUserInfoAPIcall = async (userId: string) => {
         const GET_USER_INFO_URL =
@@ -73,11 +82,12 @@ export default function AutoLogin() {
         })
             .then((res) => res.json())
             .then(({ status, message, data }) => {
-                console.log(data);
+                // console.log(data);
                 router.push("./challenge");
             })
             .catch((error) => {
                 console.log(error);
+                LocalStorage.removeItem("lookCloud-userId-data");
                 router.push("./login");
             });
     };
@@ -93,11 +103,16 @@ export default function AutoLogin() {
             // // ----------------------------------------
         } else {
             // case : ./
-            const userId = LocalStorage.getItem("lookCloud-userId-data");
-            if (userId) {
+            const localPersonalCredit = LocalStorage.getItem(
+                "lookCloud-userId-data"
+            );
+            if (localPersonalCredit) {
+                const userId = (
+                    Number(localPersonalCredit) /
+                    Number(process.env.NEXT_PUBLIC_ENCRYPTION_KEY)
+                ).toString();
                 GetUserInfoAPIcall(userId);
             } else {
-                console.log(userId);
                 router.push("./login");
             }
         }
