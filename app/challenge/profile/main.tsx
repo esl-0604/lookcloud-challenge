@@ -42,8 +42,8 @@ export default function ChallengeProfileMain() {
                 Number(process.env.NEXT_PUBLIC_ENCRYPTION_KEY)
             ).toString();
             console.log(userId);
+            GetUserInfoAPIcall(userId);
         }
-        GetUserInfoAPIcall("8");
     }, []);
     const [profileData, setProfileData] = useState({
         nickname: "",
@@ -59,7 +59,7 @@ export default function ChallengeProfileMain() {
     return (
         <div className="flex-1 flex flex-col relative justify-start items-center w-[100%] text-white">
             <div
-                className="fixed top-[74px] left-[calc(50%+160px)] transform translate-x-[-50%] z-10"
+                className="absolute top-[74px] right-[15px]"
                 onClick={GoBackward}
             >
                 <Backward />

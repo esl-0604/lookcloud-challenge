@@ -69,11 +69,12 @@ export default function ContinueButton({
                     const personalCredit = (
                         data * Number(process.env.NEXT_PUBLIC_ENCRYPTION_KEY)
                     ).toString();
+                    LocalStorage.removeItem("lookCloud-userId-data");
+                    LocalStorage.removeItem("lookCloud-instagram-data");
                     LocalStorage.setItem(
                         "lookCloud-userId-data",
                         personalCredit
                     );
-                    LocalStorage.removeItem("lookCloud-instagram-data");
                     if (LocalStorage.getItem("lookCloud-userId-data")) {
                         router.push("./challenge");
                     }
