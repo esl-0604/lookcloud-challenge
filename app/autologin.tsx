@@ -40,7 +40,7 @@ export default function AutoLogin() {
             }),
         })
             .then((res) => res.json())
-            .then((data) => {
+            .then(({ status, message, data }) => {
                 console.log(data);
                 if (data["registerStatus"] === "NOT_REGISTERED") {
                     LocalStorage.setItem(
@@ -72,7 +72,7 @@ export default function AutoLogin() {
             },
         })
             .then((res) => res.json())
-            .then((data) => {
+            .then(({ status, message, data }) => {
                 console.log(data);
                 router.push("./challenge");
             })

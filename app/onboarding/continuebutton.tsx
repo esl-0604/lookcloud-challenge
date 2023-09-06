@@ -63,7 +63,7 @@ export default function ContinueButton({
             }),
         })
             .then((res) => res.json())
-            .then((data) => {
+            .then(({ status, message, data }) => {
                 console.log(data);
                 LocalStorage.setItem("lookCloud-userId-data", data.toString());
                 LocalStorage.removeItem("lookCloud-instagram-data");
