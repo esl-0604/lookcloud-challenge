@@ -83,11 +83,12 @@ export default function ChallengeMain() {
                 })}
             </div>
             <div className="flex justify-center items-center w-[100%] mt-[6px] mb-[50px]">
-                <img
+                {/* <img
                     src="/image/comming_soon.png"
                     alt="comming_soon"
                     className="flex justify-center items-start w-[309px] h-[135px] object-cover"
-                />
+                /> */}
+                <CommingSoon />
             </div>
         </div>
     );
