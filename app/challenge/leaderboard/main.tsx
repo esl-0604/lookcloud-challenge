@@ -46,9 +46,9 @@ export default function ChallengeLeaderBoardMain() {
         router.back();
     };
     return (
-        <div className="flex-1 flex flex-col justify-start items-center w-[100%] text-white">
+        <div className="flex-1 flex flex-col relative justify-start items-center w-[100%] text-white">
             <div
-                className="fixed top-[74px] right-[15px] z-10"
+                className="fixed top-[74px] left-[calc(50%+160px)] transform translate-x-[-50%] z-10"
                 onClick={GoBackward}
             >
                 <Backward />
