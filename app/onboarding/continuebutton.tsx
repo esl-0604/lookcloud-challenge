@@ -35,10 +35,11 @@ export default function ContinueButton({
                 // registerUserAPIcall();
                 // 유저 정보 저장 성공 시, 로컬 스토리지에서 instagramId 제거
 
-                // 라우팅 예시 코드
+                // 라우팅 예시 코드 (나중에 제거) ----------------
                 setTimeout(() => {
                     router.push("./challenge");
                 }, 500);
+                // ----------------------------------------
             }
         }
     };

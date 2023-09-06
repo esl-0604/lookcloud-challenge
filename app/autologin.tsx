@@ -78,37 +78,34 @@ export default function AutoLogin() {
             });
     };
 
-    if (code) {
-        // case : ./?code
-        console.log(code);
-        useEffect(() => {
+    useEffect(() => {
+        if (code) {
+            // case : ./?code
+            console.log(code);
             // RequestUserIDAPIcall();
-        }, []);
 
-        // 라우팅 예시 코드
-        useEffect(() => {
+            // 라우팅 예시 코드 (나중에 제거) ----------------
             router.push("./onboarding");
-        });
+            // ----------------------------------------
+        } else {
+            // case : ./
+            const userId = LocalStorage.getItem("lookCloud-userId-data");
+            if (userId) {
+                // GetUserInfoAPIcall(userId);
+            } else {
+                console.log(userId);
+                router.push("./login");
+            }
+        }
+    }, []);
 
+    if (code) {
         return (
             <main className="flex flex-col justify-center items-center w-[100%] h-[100%] bg-white">
                 <TitleIcon width={"310"} height={"47"} color={"black"} />
             </main>
         );
     } else {
-        // case : ./
-        const userId = LocalStorage.getItem("lookCloud-userId-data");
-        if (userId) {
-            useEffect(() => {
-                // GetUserInfoAPIcall(userId);
-            });
-        } else {
-            console.log(userId);
-            useEffect(() => {
-                router.push("./login");
-            });
-        }
-
         return (
             <main className="flex flex-col justify-center items-center w-[100%] h-[100%] bg-black">
                 <TitleIcon width={"310"} height={"47"} color={"white"} />
