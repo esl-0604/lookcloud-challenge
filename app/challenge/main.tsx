@@ -60,6 +60,7 @@ export default function ChallengeMain() {
                 {challengeList.map((challenge, i) => {
                     return (
                         <Link
+                            key={i}
                             className={`${
                                 i !== 0 ? "pointer-events-none" : null
                             }`}
@@ -69,7 +70,6 @@ export default function ChallengeMain() {
                             }}
                         >
                             <ChallengeCategoryBox
-                                key={i}
                                 challengeImg={challenge.challengeImg}
                                 challengTitle={challenge.challengTitle}
                                 challengeComment={challenge.challengeComment}
