@@ -3,6 +3,8 @@
 import LocalStorage from "@/app/localstorage";
 import Profile from "../../../public/svg/profile.svg";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Backward from "../../../public/svg/backward.svg";
 
 export default function ChallengeProfileMain() {
     const GetUserInfoAPIcall = async (userId: string) => {
@@ -49,8 +51,16 @@ export default function ChallengeProfileMain() {
         gender: "",
         organ: "",
     });
+
+    const router = useRouter();
+    const GoBackward = () => {
+        router.back();
+    };
     return (
         <div className="flex-1 flex flex-col justify-start items-center w-[100%] text-white">
+            <div className="fixed top-[74px] right-[15px]" onClick={GoBackward}>
+                <Backward />
+            </div>
             <div className="mt-[86px]">
                 <Profile width={"180"} height={"180"} />
             </div>

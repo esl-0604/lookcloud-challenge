@@ -2,8 +2,10 @@
 
 import ChallengeCategoryBox from "./categorybox";
 import CommingSoon from "../../public/svg/commingsoon.svg";
+import Backward from "../../public/svg/backward.svg";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function ChallengeMain() {
     useEffect(() => {

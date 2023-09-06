@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import LeaderBoard from "../../../public/svg/leaderboard.svg";
+import { useRouter } from "next/navigation";
+import Backward from "../../../public/svg/backward.svg";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -38,8 +40,19 @@ export default function ChallengeLeaderBoardMain() {
     const deadline = new Date("2023-09-09");
     const diffDate = deadline.getTime() - today.getTime();
     const dDay = Math.floor(diffDate / (1000 * 60 * 60 * 24));
+
+    const router = useRouter();
+    const GoBackward = () => {
+        router.back();
+    };
     return (
         <div className="flex-1 flex flex-col justify-start items-center w-[100%] text-white">
+            <div
+                className="fixed top-[74px] right-[15px] z-10"
+                onClick={GoBackward}
+            >
+                <Backward />
+            </div>
             <div className="flex relative justify-center items-start w-[100%] h-[240px] py-[8px] overflow-hidden">
                 <img
                     src="/image/challenge_thumbnail_1_2.png"
