@@ -24,9 +24,6 @@ export default function ChallengeProfileMain() {
         gender: "",
         organ: "",
     });
-    const GoBackward = () => {
-        router.back();
-    };
     const RequestUserIDAPIcall = async (userId: string) => {
         const REQUEST_USER_ID_URL =
             "https://external-api.stage.lookcloud.co/users/" +
@@ -44,7 +41,7 @@ export default function ChallengeProfileMain() {
             .then((res) => res.json())
             .then(({ status, message, data }) => {
                 if (status === 200) {
-                    console.log(data);
+                    // console.log(data);
                     if (data["instagramUserName"]) {
                         GetUserInfoAPIcall(userId);
                         router.push("/challenge/profile");
@@ -71,7 +68,7 @@ export default function ChallengeProfileMain() {
             .then((res) => res.json())
             .then(({ status, message, data }) => {
                 if (status === 200) {
-                    console.log(data);
+                    // console.log(data);
                     let newProfileData = { ...profileData };
                     newProfileData.nickname = '"' + data["nickName"] + '"님';
                     newProfileData.gender =
@@ -99,13 +96,7 @@ export default function ChallengeProfileMain() {
     }, []);
 
     return (
-        <div className="flex-1 flex flex-col relative justify-start items-center w-[100%] text-black">
-            <div
-                className="absolute top-[74px] right-[15px]"
-                onClick={GoBackward}
-            >
-                <Backward />
-            </div>
+        <div className="flex-1 flex flex-col justify-start items-center w-[100%] text-black">
             <div className="mt-[86px]">
                 <Profile width={"180"} height={"180"} />
             </div>
