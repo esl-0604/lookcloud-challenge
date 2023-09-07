@@ -29,7 +29,7 @@ export default function AutoLogin() {
 
     const RequestUserIDAPIcall = async () => {
         const REQUEST_USER_ID_URL =
-            "https://external-api.lookcloud.co/users/login";
+            "https://external-api.stage.lookcloud.co/users/login";
         await fetch(REQUEST_USER_ID_URL, {
             method: "POST",
             headers: {
@@ -75,7 +75,7 @@ export default function AutoLogin() {
     };
     const GetUserInfoAPIcall = async (userId: string) => {
         const GET_USER_INFO_URL =
-            "https://external-api.lookcloud.co/users/" + userId;
+            "https://external-api.stage.lookcloud.co/users/" + userId;
         await fetch(GET_USER_INFO_URL, {
             method: "GET",
             headers: {
