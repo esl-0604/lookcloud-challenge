@@ -12,7 +12,7 @@ export default function SelectButton({
     const unselectedTheme = "text-[#D9D9D9]";
     return (
         <div
-            className={`flex justify-center items-center w-[360px] h-[46px] rounded-[22px] border-2 border-[#D9D9D9] cursor-pointer ${selectedTheme}`}
+            className={`flex justify-center items-center w-[360px] h-[46px] rounded-[22px] border-2 bg-[#D9D9D9] cursor-pointer ${selectedTheme}`}
         >
             {text}
         </div>

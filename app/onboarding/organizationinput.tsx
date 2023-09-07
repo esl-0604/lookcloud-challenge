@@ -13,8 +13,8 @@ export default function OnboardingOranizationInput() {
                     text={"고려대학교"}
                     selectedTheme={
                         organ === "고려대학교"
-                            ? "text-white bg-[#DC2D2D]"
-                            : "text-[#D9D9D9] bg-transparent"
+                            ? "text-[#DC2D2D] border-[#DC2D2D]"
+                            : "text-[#D9D9D9] border-[#D9D9D9]"
                     }
                 />
             </div>
@@ -23,8 +23,8 @@ export default function OnboardingOranizationInput() {
                     text={"연세대학교"}
                     selectedTheme={
                         organ === "연세대학교"
-                            ? "text-white bg-[#0500FF]"
-                            : "text-[#D9D9D9] bg-transparent"
+                            ? "text-[#0500FF] border-[#0500FF]"
+                            : "text-[#D9D9D9] border-[#D9D9D9]"
                     }
                 />
             </div>
@@ -33,8 +33,8 @@ export default function OnboardingOranizationInput() {
                     text={"기타"}
                     selectedTheme={
                         organ === "기타"
-                            ? "text-white bg-[#557AFF]"
-                            : "text-[#D9D9D9] bg-transparent"
+                            ? "text-[#557AFF] border-[#557AFF]"
+                            : "text-[#D9D9D9] border-[#D9D9D9]"
                     }
                 />
             </div>

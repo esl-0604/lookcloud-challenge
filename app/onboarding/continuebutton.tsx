@@ -33,20 +33,40 @@ export default function ContinueButton({
                 });
                 // 유저 정보 저장 api call
                 registerUserAPIcall();
-                // 유저 정보 저장 성공 시, 로컬 스토리지에서 instagramId 제거
-
-                // // 라우팅 예시 코드 (나중에 제거) ----------------
-                // router.push("./challenge");
-                // // ----------------------------------------
             }
         }
     };
+    const GetUserInfoAPIcall = async (userId: string) => {
+        const GET_USER_INFO_URL =
+            "https://external-api.lookcloud.co/users/" + userId;
+        await fetch(GET_USER_INFO_URL, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((res) => res.json())
+            .then(({ status, message, data }) => {
+                if (status === "ILLEGAL_STATE") {
+                    LocalStorage.removeItem("lookCloud-user-Id");
+                    LocalStorage.removeItem("lookCloud-facebook-Id");
+                    router.push("./login");
+                } else if (status === 200) {
+                    LocalStorage.removeItem("lookCloud-user-Id");
+                    LocalStorage.removeItem("lookCloud-facebook-Id");
+                    LocalStorage.setItem("lookCloud-user-Id", userId);
+                    if (LocalStorage.getItem("lookCloud-user-Id")) {
+                        router.push("./challenge");
+                    }
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
     const registerUserAPIcall = async () => {
-        const instagramDataJson = LocalStorage.getItem(
-            "lookCloud-instagram-data"
-        );
-        const instagramData = JSON.parse(instagramDataJson || "");
+        const facebookID = LocalStorage.getItem("lookCloud-facebook-Id");
 
         const REGISTER_USER_URL = "https://external-api.lookcloud.co/users";
         await fetch(REGISTER_USER_URL, {
@@ -56,7 +76,7 @@ export default function ContinueButton({
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                instagramLoginId: instagramData["loginId"],
+                facebookLoginId: Number(facebookID),
                 nickName: nickName,
                 gender: gender,
                 organization: organ,
@@ -64,20 +84,10 @@ export default function ContinueButton({
         })
             .then((res) => res.json())
             .then(({ status, message, data }) => {
-                // console.log(data);
-                if (data) {
-                    const personalCredit = (
-                        data * Number(process.env.NEXT_PUBLIC_ENCRYPTION_KEY)
-                    ).toString();
-                    LocalStorage.removeItem("lookCloud-userId-data");
-                    LocalStorage.removeItem("lookCloud-instagram-data");
-                    LocalStorage.setItem(
-                        "lookCloud-userId-data",
-                        personalCredit
-                    );
-                    if (LocalStorage.getItem("lookCloud-userId-data")) {
-                        router.push("./challenge");
-                    }
+                if (status === 200) {
+                    GetUserInfoAPIcall(data.toString());
+                } else {
+                    console.log(message);
                 }
             })
             .catch((error) => {
