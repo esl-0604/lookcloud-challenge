@@ -1,13 +1,13 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import HeaderLogo from "../../../public/svg/headerlogo.svg";
 import Backward from "../../../public/svg/backward.svg";
 
 export default function ChallengeProfileHeader() {
     const router = useRouter();
     const GoBackward = () => {
-        router.push("/challenge");
+        router.back();
     };
     return (
         <div className="flex flex-row sticky top-0 justify-between items-center w-[100%] h-[56px] px-[16px]">
