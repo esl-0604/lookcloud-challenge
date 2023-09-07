@@ -108,8 +108,8 @@ export default function ChallengeMain() {
 
     useEffect(() => {
         if (instagramCode && profileData.instagram) {
-            router.push("/challenge");
-            router.push("/challenge/profile");
+            router.replace("/challenge");
+            // router.push("/challenge/profile");
         }
     }, [profileData]);
 
