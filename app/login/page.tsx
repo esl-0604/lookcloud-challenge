@@ -1,6 +1,5 @@
 import TitleIcon from "../../public/svg/LookCloudTitle.svg";
 import FacebookLoginButton from "./facebookloginbutton";
-import InstagramLoginButton from "./instagramloginbutton";
 
 export default function Login() {
     return (
