@@ -21,7 +21,7 @@ export default function ChallengeHeader() {
             </Link>
             {path === "/challenge" ? null : (
                 <div
-                    className="absolute top-[74px] right-[15px]"
+                    className="absolute top-[74px] right-[15px] z-10"
                     onClick={GoBackward}
                 >
                     <Backward />

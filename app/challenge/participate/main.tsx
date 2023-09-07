@@ -12,18 +12,8 @@ export default function ChallengeParticipantMain() {
     const [lookDescription, setLookDescription] = useState();
     const [lookProductInfo, setLookProductInfo] = useState();
 
-    const router = useRouter();
-    const GoBackward = () => {
-        router.back();
-    };
     return (
         <div className="flex-1 flex flex-col relative justify-start items-center w-[100%] font-textBoxFont">
-            <div
-                className="fixed top-[74px] left-[calc(50%+160px)] transform translate-x-[-50%] z-10"
-                onClick={GoBackward}
-            >
-                <Backward />
-            </div>
             <div className="flex relative justify-center items-start w-[100%] h-[124px] py-[8px] overflow-hidden">
                 <img
                     src="/image/challenge_thumbnail_1_3.png"
