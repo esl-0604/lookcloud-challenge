@@ -13,8 +13,8 @@ export default function OnboardingGenderInput() {
                     text={"여성"}
                     selectedTheme={
                         gender === "FEMALE"
-                            ? "text-white bg-[#557AFF]"
-                            : "text-[#D9D9D9] bg-transparent"
+                            ? "text-[#557AFF] border-[#557AFF]"
+                            : "text-[#D9D9D9] border-[#D9D9D9]"
                     }
                 />
             </div>
@@ -23,8 +23,8 @@ export default function OnboardingGenderInput() {
                     text={"남성"}
                     selectedTheme={
                         gender === "MALE"
-                            ? "text-white bg-[#557AFF]"
-                            : "text-[#D9D9D9] bg-transparent"
+                            ? "text-[#557AFF] border-[#557AFF]"
+                            : "text-[#D9D9D9] border-[#D9D9D9]"
                     }
                 />
             </div>
