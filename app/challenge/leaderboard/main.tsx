@@ -69,14 +69,14 @@ export default function ChallengeLeaderBoardMain() {
                     </div>
                 </div>
             </div>
-            <div className="flex justify-between items-center w-[360px] h-[90px] py-[10px]">
+            <div className="flex justify-between items-center w-[340px] h-[90px] py-[10px]">
                 <Link
                     href={{
                         pathname: "/challenge/participate",
                         query: { id: id },
                     }}
                 >
-                    <div className="flex justify-center items-center w-[175px] h-[70px] rounded-[20px] border-2 border-white cursor-pointer">
+                    <div className="flex justify-center items-center w-[165px] h-[70px] rounded-[20px] border-2 border-white cursor-pointer">
                         등록하기
                     </div>
                 </Link>
@@ -87,7 +87,7 @@ export default function ChallengeLeaderBoardMain() {
                         query: { id: id },
                     }}
                 >
-                    <div className="flex justify-center items-center w-[175px] h-[70px] rounded-[20px] border-2 border-white cursor-pointer">
+                    <div className="flex justify-center items-center w-[165px] h-[70px] rounded-[20px] border-2 border-white cursor-pointer">
                         평가하기
                     </div>
                 </Link>

@@ -14,7 +14,7 @@ export default function ChallengeHeader() {
         router.back();
     };
     return (
-        <div className="flex flex-row relative justify-between items-center w-[100%] h-[56px] px-[16px]">
+        <div className="flex flex-row sticky top-0 justify-between items-center w-[100%] h-[56px] px-[16px] z-10 bg-black">
             <HeaderLogo width={"126"} height={"32"} color={"white"} />
             <Link href={"/challenge/profile"} className="cursor-pointer">
                 <Profile width={"40"} height={"40"} />
