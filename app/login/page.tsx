@@ -1,6 +1,5 @@
 import TitleIcon from "../../public/svg/LookCloudTitle.svg";
 import FacebookLoginButton from "./facebookloginbutton";
-import InstagramLoginButton from "./instagramloginbutton";
 
 export default function Login() {
     return (
@@ -9,7 +8,6 @@ export default function Login() {
                 <TitleIcon width={"310"} height={"47"} color={"white"} />
             </div>
             <FacebookLoginButton />
-            {/* <InstagramLoginButton /> */}
         </main>
     );
 }

@@ -32,7 +32,19 @@ export default function ContinueButton({
                     소속: organ,
                 });
                 // 유저 정보 저장 api call
-                registerUserAPIcall();
+                const facebookID = LocalStorage.getItem(
+                    "lookCloud-facebook-Id"
+                );
+                if (facebookID) registerUserAPIcall(Number(facebookID));
+                else {
+                    console.log("연결된 facebookId가 없습니다.");
+                    router.push("./login");
+
+                    // 나중에 지워야함.
+                    // setStep({ id: (stepNum + 1).toString() });
+                }
+            } else if (stepNum === 4) {
+                router.push("./challenge");
             }
         }
     };
@@ -56,7 +68,8 @@ export default function ContinueButton({
                     LocalStorage.removeItem("lookCloud-facebook-Id");
                     LocalStorage.setItem("lookCloud-user-Id", userId);
                     if (LocalStorage.getItem("lookCloud-user-Id")) {
-                        router.push("./challenge");
+                        // router.push("./challenge");
+                        setStep({ id: "4" });
                     }
                 }
             })
@@ -65,9 +78,7 @@ export default function ContinueButton({
             });
     };
 
-    const registerUserAPIcall = async () => {
-        const facebookID = LocalStorage.getItem("lookCloud-facebook-Id");
-
+    const registerUserAPIcall = async (facebookId: number) => {
         const REGISTER_USER_URL = "https://external-api.lookcloud.co/users";
         await fetch(REGISTER_USER_URL, {
             method: "POST",
@@ -76,7 +87,7 @@ export default function ContinueButton({
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                facebookLoginId: Number(facebookID),
+                facebookLoginId: facebookId,
                 nickName: nickName,
                 gender: gender,
                 organization: organ,
@@ -88,6 +99,7 @@ export default function ContinueButton({
                     GetUserInfoAPIcall(data.toString());
                 } else {
                     console.log(message);
+                    alert("Done 버튼을 다시 눌러주세요.");
                 }
             })
             .catch((error) => {
@@ -96,7 +108,11 @@ export default function ContinueButton({
             });
     };
     return (
-        <div className="flex justify-center items-center w-[100%] py-[16px] ">
+        <div
+            className={`flex justify-center items-center w-[100%] ${
+                step.id === "4" ? null : "py-[16px]"
+            }`}
+        >
             <div
                 className={`flex justify-center items-center w-[310px] h-[40px] rounded-[20.5px] text-white text-[12px] font-textBoxFont  ${
                     canBeContinued
@@ -105,7 +121,11 @@ export default function ContinueButton({
                 }`}
                 onClick={StepForward}
             >
-                {step.id === "3" ? "DONE" : "CONTINUE"}
+                {step.id === "3"
+                    ? "DONE"
+                    : step.id === "4"
+                    ? "건너뛰기"
+                    : "CONTINUE"}
             </div>
         </div>
     );
