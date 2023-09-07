@@ -29,7 +29,9 @@ export default function ChallengeProfileMain() {
     };
     const RequestUserIDAPIcall = async (userId: string) => {
         const REQUEST_USER_ID_URL =
-            "https://external-api.lookcloud.co/users/" + userId + "/instagram";
+            "https://external-api.stage.lookcloud.co/users/" +
+            userId +
+            "/instagram";
         await fetch(REQUEST_USER_ID_URL, {
             method: "POST",
             headers: {
@@ -59,7 +61,7 @@ export default function ChallengeProfileMain() {
     };
     const GetUserInfoAPIcall = async (userId: string) => {
         const GET_USER_INFO_URL =
-            "https://external-api.lookcloud.co/users/" + userId;
+            "https://external-api.stage.lookcloud.co/users/" + userId;
         await fetch(GET_USER_INFO_URL, {
             method: "GET",
             headers: {

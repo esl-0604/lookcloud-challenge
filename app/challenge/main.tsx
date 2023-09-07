@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 export default function ChallengeMain() {
     useEffect(() => {
         const GET_CHALLENGES_URL =
-            "https://external-api.lookcloud.co/challenges/0";
+            "https://external-api.stage.lookcloud.co/challenges/0";
         fetch(GET_CHALLENGES_URL, {
             method: "GET",
             mode: "cors",

@@ -10,7 +10,8 @@ export default function FacebookLoginButton() {
     const router = useRouter();
     const GetFacebookUserInfoAPIcall = async (facebookId: string) => {
         const GET_FACEBOOK_USER_INFO_URL =
-            "https://external-api.lookcloud.co/users/facebook/" + facebookId;
+            "https://external-api.stage.lookcloud.co/users/facebook/" +
+            facebookId;
         await fetch(GET_FACEBOOK_USER_INFO_URL, {
             method: "GET",
             headers: {
@@ -38,7 +39,7 @@ export default function FacebookLoginButton() {
     };
     const GetUserInfoAPIcall = async (userId: string) => {
         const GET_USER_INFO_URL =
-            "https://external-api.lookcloud.co/users/" + userId;
+            "https://external-api.stage.lookcloud.co/users/" + userId;
         await fetch(GET_USER_INFO_URL, {
             method: "GET",
             headers: {

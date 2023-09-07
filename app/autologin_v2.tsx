@@ -19,7 +19,7 @@ export default function AutoLogin2() {
 
     const GetUserInfoAPIcall = async (userId: string) => {
         const GET_USER_INFO_URL =
-            "https://external-api.lookcloud.co/users/" + userId;
+            "https://external-api.stage.lookcloud.co/users/" + userId;
         await fetch(GET_USER_INFO_URL, {
             method: "GET",
             headers: {
