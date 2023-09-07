@@ -9,7 +9,6 @@ export default function Login() {
                 <TitleIcon width={"310"} height={"47"} color={"white"} />
             </div>
             <FacebookLoginButton />
-            {/* <InstagramLoginButton /> */}
         </main>
     );
 }

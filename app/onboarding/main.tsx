@@ -8,9 +8,10 @@ import OnboardingOranizationInput from "./organizationinput";
 import TextBox from "./textbox";
 import ContinueButton from "./continuebutton";
 import { useSearchParams } from "next/navigation";
+import OnboardingInstagramInput from "./instagraminput";
 
 interface StepType {
-    id: "1" | "2" | "3";
+    id: "1" | "2" | "3" | "4";
 }
 export interface GenderType {
     gender: "MALE" | "FEMALE";
@@ -23,6 +24,7 @@ export const stepText = {
     "1": "이름을 알려주세요.",
     "2": "성별을 알려주세요.",
     "3": "소속을 알려주세요.",
+    "4": "인스타그램을 연동하세요",
 };
 export const StepContext = createContext<any>(null);
 export const NameContext = createContext<any>(null);
@@ -69,10 +71,12 @@ export default function OnboardingMain() {
                         <GenderContext.Provider value={{ gender, setGender }}>
                             <OnboardingGenderInput />
                         </GenderContext.Provider>
-                    ) : (
+                    ) : step.id === "3" ? (
                         <OrganContext.Provider value={{ organ, setOrgan }}>
                             <OnboardingOranizationInput />
                         </OrganContext.Provider>
+                    ) : (
+                        <OnboardingInstagramInput />
                     )}
 
                     <ContinueButton
