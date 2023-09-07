@@ -44,9 +44,7 @@ export default function ChallengeProfileMain() {
                 if (status === 200) {
                     console.log(data);
                     if (data["instagramUserName"]) {
-                        let newProfileData = { ...profileData };
-                        newProfileData.instagram = data["instagramUserName"];
-                        setProfileData(newProfileData);
+                        router.push("./challenge/profile");
                     } else {
                         console.log("인스타그램 ID 정보를 가져올 수 없습니다.");
                     }
