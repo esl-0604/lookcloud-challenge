@@ -16,9 +16,16 @@ export default function ChallengeHeader() {
     return (
         <div className="flex flex-row sticky top-0 justify-between items-center w-[100%] h-[56px] px-[16px] z-10 bg-black">
             <HeaderLogo width={"126"} height={"32"} color={"white"} />
-            <Link href={"/challenge/profile"} className="cursor-pointer">
-                <Profile width={"40"} height={"40"} />
-            </Link>
+            {path === "/challenge/evaluate" ? (
+                <div className="text-right text-[12px] text-white font-textBoxFont">
+                    고연전
+                </div>
+            ) : (
+                <Link href={"/challenge/profile"} className="cursor-pointer">
+                    <Profile width={"40"} height={"40"} />
+                </Link>
+            )}
+
             {path === "/challenge" ? null : (
                 <div
                     className="absolute top-[74px] right-[15px] z-10 cursor-pointer"

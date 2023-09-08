@@ -10,7 +10,7 @@ export default function ThumbsUpBox() {
             />
 
             <img
-                src="/thumbsup.svg"
+                src="/svg/thumbsup.svg"
                 alt="image"
                 style={{
                     position: "absolute",

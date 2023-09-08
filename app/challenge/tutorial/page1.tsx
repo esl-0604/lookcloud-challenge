@@ -21,9 +21,6 @@ export default function Page1() {
                     <div />
                     으로 넘어갑니다
                 </span>
-                <span className="w-[20%] text-right text-xs text-white">
-                    skip tutorial
-                </span>
             </div>
             <div style={{ marginTop: "10px" }}>
                 <TutorialBox />
