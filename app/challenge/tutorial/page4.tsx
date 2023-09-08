@@ -9,7 +9,7 @@ import { inrange } from "@/app/utils";
 import registDragEvent from "@/app/utils/registDragEvent";
 import { useEffect, useRef, useState } from "react";
 import { useContext } from "react";
-import { TutorialPageContext } from "./page";
+import { TutorialPageContext } from "./main";
 
 const BOUNDARY_MARGIN = 0;
 const DEFAULT_W = 300;

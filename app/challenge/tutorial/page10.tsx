@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext } from "react";
-import { TutorialPageContext } from "./page";
+import { TutorialPageContext } from "./main";
 import { useRouter } from "next/navigation";
 
 export default function Page9() {

@@ -2,7 +2,7 @@
 
 import TutorialBox2 from "@/app/components/TutorialBox2";
 import { useContext } from "react";
-import { TutorialPageContext } from "./page";
+import { TutorialPageContext } from "./main";
 
 export default function Page3() {
     const { tutorialPageNum, setTutorialPageNum }: any =
