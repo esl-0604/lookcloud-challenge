@@ -61,6 +61,7 @@ export default function ChallengeMain() {
                 if (status === 200) {
                     // console.log(data);
                     let newProfileData = { ...profileData };
+                    newProfileData.userId = userId;
                     newProfileData.nickname = '"' + data["nickName"] + '"님';
                     newProfileData.gender =
                         data["gender"] === "MALE" ? "남성" : "여성";

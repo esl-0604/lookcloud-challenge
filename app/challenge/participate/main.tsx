@@ -1,16 +1,133 @@
 "use client";
 
-import { useState, createContext } from "react";
+import { useState, createContext, useEffect } from "react";
 import ChallengeParticipantImageInput from "./imageinput";
 import ChallengeParticipantProductInput from "./productinput";
 import ChallengeParticipantTextInput from "./textinput";
+import { userProfileState } from "../../utils/atoms/userprofile";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { userChallengeParticipantInfoState } from "@/app/utils/atoms/userchallengeparticipant";
+import { useParams, useSearchParams } from "next/navigation";
 
 export const ChallengeInfoContext = createContext<any>(null);
 
 export default function ChallengeParticipantMain() {
+    const param = useSearchParams();
+
+    // 전역으로 적용되는 룩정보 -> recoilState로 관리
+    const [profileData, setProfileData] = useRecoilState<any>(userProfileState);
+    const [challengeParticipateData, setChallengeParticipateData] =
+        useRecoilState<any>(userChallengeParticipantInfoState);
+
+    // 임시로 존재하는 룩정보
     const [lookImage, setLookImage] = useState(null);
-    const [lookDescription, setLookDescription] = useState(null);
-    const [lookProductInfo, setLookProductInfo] = useState(null);
+    const [lookImageFile, setLookImageFile] = useState(null);
+    const [lookDescription, setLookDescription] = useState("");
+    const [lookProductInfoTop, setLookProductInfoTop] = useState("");
+    const [lookProductInfoBottom, setLookProductInfoBottom] = useState("");
+    const [lookProductInfoShoes, setLookProductInfoShoes] = useState("");
+
+    // useEffect(() => {
+    //     if (
+    //         lookImage &&
+    //         lookDescription &&
+    //         lookProductInfoTop &&
+    //         lookProductInfoBottom &&
+    //         lookProductInfoShoes
+    //     ) {
+    //         console.log({ lookImage: lookImage });
+    //         console.log({ lookDescription: lookDescription });
+    //         const Top = JSON.parse(lookProductInfoTop);
+    //         const Bottom = JSON.parse(lookProductInfoBottom);
+    //         const Shoes = JSON.parse(lookProductInfoShoes);
+    //         console.log({
+    //             lookProductInfoTop: Top,
+    //         });
+    //         console.log({
+    //             lookProductInfoBottom: Bottom,
+    //         });
+    //         console.log({
+    //             lookProductInfoShoes: Shoes,
+    //         });
+    //     }
+    // }, [
+    //     lookImage,
+    //     lookDescription,
+    //     lookProductInfoTop,
+    //     lookProductInfoBottom,
+    //     lookProductInfoShoes,
+    // ]);
+
+    const PostParticipate = () => {
+        const formDataForSubmit = new FormData();
+        if (lookImageFile) {
+            formDataForSubmit.append("challengeImg", lookImageFile);
+            ImageUpload(formDataForSubmit);
+        } else {
+            console.log("이미지 없음");
+        }
+    };
+
+    const ImageUpload = async (formData: any) => {
+        const IMAGE_UPLOAD_URL =
+            "https://external-api.stage.lookcloud.co/participations/image";
+        await fetch(IMAGE_UPLOAD_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+            body: formData,
+        })
+            .then((res) => res.json())
+            .then(({ status, message, data }) => {
+                if (status === "OK") {
+                    console.log(data);
+                } else {
+                    console.log(message);
+                }
+            })
+
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    const ChallengeUpload = async (imageURL: string) => {
+        const userId = profileData.userId;
+        const challengeId = Number(param.get("id"));
+        const lookObject = {
+            imageUrl: imageURL,
+            description: lookDescription,
+            top: lookProductInfoTop,
+            bottom: lookProductInfoBottom,
+            shoes: lookProductInfoShoes,
+        };
+        const CHALLENGE_UPLOAD_URL =
+            "https://external-api.stage.lookcloud.co/participations";
+        await fetch(CHALLENGE_UPLOAD_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                userId: userId,
+                challengeId: challengeId,
+                look: lookObject,
+            }),
+        })
+            .then((res) => res.json())
+            .then(({ status, message, data }) => {
+                if (status === "OK") {
+                    console.log(data);
+                } else {
+                    console.log(message);
+                }
+            })
+
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
     return (
         <div className="flex-1 flex flex-col relative justify-start items-center w-[100%] font-textBoxFont">
@@ -44,17 +161,26 @@ export default function ChallengeParticipantMain() {
                 value={{
                     lookImage,
                     setLookImage,
+                    lookImageFile,
+                    setLookImageFile,
                     lookDescription,
                     setLookDescription,
-                    lookProductInfo,
-                    setLookProductInfo,
+                    lookProductInfoTop,
+                    setLookProductInfoTop,
+                    lookProductInfoBottom,
+                    setLookProductInfoBottom,
+                    lookProductInfoShoes,
+                    setLookProductInfoShoes,
                 }}
             >
                 <ChallengeParticipantImageInput />
                 <ChallengeParticipantTextInput />
                 <ChallengeParticipantProductInput />
             </ChallengeInfoContext.Provider>
-            <div className="flex justify-center items-center mt-[20px] mb-[100px] w-[310px] h-[50px] rounded-[20.5px] bg-[#344467] text-[24px] font-semibold text-white cursor-pointer">
+            <div
+                className="flex justify-center items-center mt-[20px] mb-[100px] w-[310px] h-[50px] rounded-[20.5px] bg-[#344467] text-[24px] font-semibold text-white cursor-pointer"
+                onClick={PostParticipate}
+            >
                 완료
             </div>
         </div>

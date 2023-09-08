@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import Camera from "../../../public/svg/camera.svg";
 import Gallery from "../../../public/svg/gallery.svg";
 import Instagram from "../../../public/svg/instagram.svg";
@@ -12,7 +12,9 @@ interface ChallengeParticipantUploadButtonProps {
 export default function ChallengeParticipantUploadButton({
     text,
 }: ChallengeParticipantUploadButtonProps) {
-    const { lookImage, setLookImage } = useContext(ChallengeInfoContext);
+    const { lookImage, setLookImage, lookImageFile, setLookImageFile } =
+        useContext(ChallengeInfoContext);
+
     const fileRef = useRef<HTMLInputElement>(null);
     const handleClick = () => {
         if (text === "갤러리에서 가져오기") {
@@ -21,8 +23,15 @@ export default function ChallengeParticipantUploadButton({
     };
     const handleChange = (e: React.ChangeEvent) => {
         if (text === "갤러리에서 가져오기") {
+            const maxSize = 5 * 1024 * 1024;
             const targetFile = (e.target as HTMLInputElement).files as FileList;
             const targetFileArray = Array.from(targetFile);
+            if (targetFileArray[0]?.size > maxSize) {
+                alert("5MB 아래의 이미지를 선택해주세요.");
+                return;
+            }
+            console.log(typeof targetFileArray[0]);
+            setLookImageFile(targetFileArray[0]);
             const selectedFile: string[] = targetFileArray.map((file) => {
                 return URL.createObjectURL(file);
             });
