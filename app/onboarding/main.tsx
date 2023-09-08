@@ -7,7 +7,6 @@ import OnboardingNameInput from "./nameinput";
 import OnboardingOranizationInput from "./organizationinput";
 import TextBox from "./textbox";
 import ContinueButton from "./continuebutton";
-import { useSearchParams } from "next/navigation";
 import OnboardingInstagramInput from "./instagraminput";
 
 interface StepType {

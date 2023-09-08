@@ -9,24 +9,11 @@ import LocalStorage from "../localstorage";
 import { userProfileState } from "../utils/atoms/userprofile";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-interface ProfileType {
-    nickname: string;
-    instagram: string | null;
-    gender: string;
-    organ: string;
-}
-
 export default function ChallengeMain() {
     const router = useRouter();
     const param = useSearchParams();
     const instagramCode = param.get("code");
     const userID = LocalStorage.getItem("lookCloud-user-Id");
-    // const [profileData, setProfileData] = useState<ProfileType>({
-    //     nickname: "",
-    //     instagram: null,
-    //     gender: "",
-    //     organ: "",
-    // });
     const [profileData, setProfileData] = useRecoilState<any>(userProfileState);
 
     const RequestUserIDAPIcall = async (userId: string) => {
@@ -185,11 +172,6 @@ export default function ChallengeMain() {
                 })}
             </div>
             <div className="flex justify-center items-center w-[100%] mt-[6px] mb-[50px]">
-                {/* <img
-                    src="/image/comming_soon.png"
-                    alt="comming_soon"
-                    className="flex justify-center items-start w-[309px] h-[135px] object-cover"
-                /> */}
                 <CommingSoon />
             </div>
         </div>
