@@ -12,21 +12,8 @@ interface ChallengeParticipantUploadButtonProps {
 export default function ChallengeParticipantUploadButton({
     text,
 }: ChallengeParticipantUploadButtonProps) {
-    // const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     // userAgent에 ios // android 가 있는 지 확인해줍니다.
-    //     const iOS = navigator.userAgent.match(/iOS_App/i);
-    //     const Android = navigator.userAgent.match(/Android_App/i);
-    //     // 전역으로 사용할 것이기 때문에 리덕스에 데이터를 보관해주었습니다.
-    //     if (iOS) dispatch(userAgentAction.set("iOS_App"));
-    //     if (Android) dispatch(userAgentAction.set("Android_App"));
-    // }, []);
-
     const { lookImage, setLookImage } = useContext(ChallengeInfoContext);
-    // const [image, setImage] = useState<string[]>([]);
     const fileRef = useRef<HTMLInputElement>(null);
-    // input click method
     const handleClick = () => {
         if (text === "갤러리에서 가져오기") {
             fileRef?.current?.click();
@@ -39,7 +26,6 @@ export default function ChallengeParticipantUploadButton({
             const selectedFile: string[] = targetFileArray.map((file) => {
                 return URL.createObjectURL(file);
             });
-            // console.log(selectedFiles);
             setLookImage(selectedFile[0]);
         }
     };
