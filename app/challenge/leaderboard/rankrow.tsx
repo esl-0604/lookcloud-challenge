@@ -7,6 +7,7 @@ export default function RankRow({ rank }: RankRowProps) {
     <div className="flex flex-row justify-between items-center w-[100%] h-[40px] bg-[#242344] mt-1 rounded-md px-[8px]">
       <div className="flex flex-row">
         <img
+          className="rounded-full"
           src="/svg/sampleProfileImg.svg"
           width="30px"
           height="30px"
