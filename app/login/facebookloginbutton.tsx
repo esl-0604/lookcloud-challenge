@@ -76,7 +76,7 @@ export default function FacebookLoginButton() {
         <>
             <div className="flex justify-center items-center w-[200px] h-[50px] bg-white text-black mt-[50px] cursor-pointer">
                 <FacebookLogin
-                    appId={"657358173031399"}
+                    appId={process.env.NEXT_PUBLIC_FACEBOOK_CLIENT_ID || ""}
                     // onSuccess={(response) => {
                     //     console.log("Login Success!");
                     //     console.log("id: ", response);
