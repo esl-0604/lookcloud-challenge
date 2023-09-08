@@ -1,5 +1,6 @@
 import "./global.css";
 import type { Metadata } from "next";
+import RecoilRootWrapper from "./recoilWrapper";
 
 export const metadata: Metadata = {
     title: "Lookcloud",
@@ -12,20 +13,23 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html>
-            <head>
-                <meta
-                    httpEquiv="Content-Security-Policy"
-                    content="upgrade-insecure-requests"
-                />
-            </head>
-            <body>
-                <div className="flex justify-center items-center w-screen h-screen">
-                    <div className="relative w-[100%] h-[100%] max-w-[480px] select-none">
-                        {children}
+        <RecoilRootWrapper>
+            <html>
+                <head>
+                    <meta
+                        httpEquiv="Content-Security-Policy"
+                        content="upgrade-insecure-requests"
+                    />
+                </head>
+
+                <body>
+                    <div className="flex justify-center items-center w-screen h-screen">
+                        <div className="relative w-[100%] h-[100%] max-w-[480px] select-none">
+                            {children}
+                        </div>
                     </div>
-                </div>
-            </body>
-        </html>
+                </body>
+            </html>
+        </RecoilRootWrapper>
     );
 }

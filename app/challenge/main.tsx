@@ -2,11 +2,12 @@
 
 import ChallengeCategoryBox from "./categorybox";
 import CommingSoon from "../../public/svg/commingsoon.svg";
-import Backward from "../../public/svg/backward.svg";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import LocalStorage from "../localstorage";
+import { userProfileState } from "../utils/atoms/userprofile";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 interface ProfileType {
     nickname: string;
@@ -20,12 +21,13 @@ export default function ChallengeMain() {
     const param = useSearchParams();
     const instagramCode = param.get("code");
     const userID = LocalStorage.getItem("lookCloud-user-Id");
-    const [profileData, setProfileData] = useState<ProfileType>({
-        nickname: "",
-        instagram: null,
-        gender: "",
-        organ: "",
-    });
+    // const [profileData, setProfileData] = useState<ProfileType>({
+    //     nickname: "",
+    //     instagram: null,
+    //     gender: "",
+    //     organ: "",
+    // });
+    const [profileData, setProfileData] = useRecoilState<any>(userProfileState);
 
     const RequestUserIDAPIcall = async (userId: string) => {
         const REQUEST_USER_ID_URL =
@@ -81,12 +83,6 @@ export default function ChallengeMain() {
                             "@" + data["instagram"]["userName"];
                     }
                     setProfileData(newProfileData);
-                    const profileJsonData = JSON.stringify(newProfileData);
-                    LocalStorage.removeItem("lookCloud-user-profile");
-                    LocalStorage.setItem(
-                        "lookCloud-user-profile",
-                        profileJsonData
-                    );
                 }
             })
             .catch((error) => {
