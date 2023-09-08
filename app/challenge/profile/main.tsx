@@ -6,12 +6,6 @@ import InstagramLoginButton from "@/app/instagramloginbutton";
 import { userProfileState } from "../../utils/atoms/userprofile";
 import { useRecoilState, useRecoilValue } from "recoil";
 
-interface ProfileType {
-    nickname: string;
-    instagram: string | null;
-    gender: string;
-    organ: string;
-}
 export default function ChallengeProfileMain() {
     const [profileData, setProfileData] = useRecoilState<any>(userProfileState);
     // console.log(profileData);
