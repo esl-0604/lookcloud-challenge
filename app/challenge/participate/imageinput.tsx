@@ -2,10 +2,14 @@
 
 import { useContext, useEffect } from "react";
 import ChallengeParticipantUploadButton from "./uploadbutton";
+import Cancle from "@/public/svg/cancle.svg";
 import { ChallengeInfoContext } from "./main";
 
 export default function ChallengeParticipantImageInput() {
     const { lookImage, setLookImage } = useContext(ChallengeInfoContext);
+    const CancleLookImage = () => {
+        setLookImage(null);
+    };
     useEffect(() => {
         console.log(lookImage);
     }, [lookImage]);
@@ -15,12 +19,18 @@ export default function ChallengeParticipantImageInput() {
                 사진 등록
             </div>
             {lookImage ? (
-                <div className="flex justify-center items-start w-[100%] mt-[5px] rounded-[10px] overflow-hidden">
+                <div className="flex relative justify-center items-start w-[100%] mt-[5px] rounded-[10px] overflow-hidden">
                     <img
                         src={lookImage}
                         alt="challengeImg"
                         className="flex justify-center items-start w-[100%] object-cover"
                     />
+                    <div
+                        className="flex justify-center items-center absolute top-[15px] right-[15px] cursor-pointer"
+                        onClick={CancleLookImage}
+                    >
+                        <Cancle />
+                    </div>
                 </div>
             ) : (
                 <div className="flex flex-col justify-between items-center w-[100%] h-[170px] font-bold">
