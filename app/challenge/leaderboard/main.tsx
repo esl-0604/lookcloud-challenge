@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import LeaderBoard from "../../../public/svg/leaderboard.svg";
 import { useRouter } from "next/navigation";
 import Backward from "../../../public/svg/backward.svg";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import LeaderBoard from "./leaderboard";
 
 export default function ChallengeLeaderBoardMain() {
     const param = useSearchParams();
@@ -42,7 +42,7 @@ export default function ChallengeLeaderBoardMain() {
     const dDay = Math.floor(diffDate / (1000 * 60 * 60 * 24));
 
     return (
-        <div className="flex-1 flex flex-col relative justify-start items-center w-[100%] text-white">
+        <div className="flex-1 flex flex-col relative justify-start items-center w-[100%] text-white bg-black">
             <div className="flex relative justify-center items-start w-[100%] h-[240px] py-[8px] overflow-hidden">
                 <img
                     src="/image/challenge_thumbnail_1_2.png"
@@ -69,14 +69,14 @@ export default function ChallengeLeaderBoardMain() {
                     </div>
                 </div>
             </div>
-            <div className="flex justify-between items-center w-[360px] h-[90px] py-[10px]">
+            <div className="flex justify-between items-center w-[340px] h-[90px] py-[10px]">
                 <Link
                     href={{
                         pathname: "/challenge/participate",
                         query: { id: id },
                     }}
                 >
-                    <div className="flex justify-center items-center w-[175px] h-[70px] rounded-[20px] border-2 border-white cursor-pointer">
+                    <div className="flex justify-center items-center w-[165px] h-[70px] rounded-[20px] border-2 border-white cursor-pointer">
                         등록하기
                     </div>
                 </Link>
@@ -87,12 +87,17 @@ export default function ChallengeLeaderBoardMain() {
                         query: { id: id },
                     }}
                 >
-                    <div className="flex justify-center items-center w-[175px] h-[70px] rounded-[20px] border-2 border-white cursor-pointer">
+                    <div className="flex justify-center items-center w-[165px] h-[70px] rounded-[20px] border-2 border-white cursor-pointer">
                         평가하기
                     </div>
                 </Link>
             </div>
-            <div className="flex justify-center items-center w-[100%] mb-[87px]">
+            <div className="flex justify-center items-center w-[100%] h-[100%] mb-[87px]">
+                {/* <img
+                    src="/image/leader_board.png"
+                    alt="leader-board"
+                    className="flex justify-center items-start w-[360px] h-[555px] object-cover"
+                /> */}
                 <LeaderBoard />
             </div>
         </div>
