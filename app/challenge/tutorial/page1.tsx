@@ -1,10 +1,10 @@
 "use client";
 
-import TutorialBox2 from "../../../components/TutorialBox2";
+import TutorialBox from "@/app/components/TutorialBox";
 import { useContext } from "react";
 import { TutorialPageContext } from "./page";
 
-export default function Page2() {
+export default function Page1() {
     const { tutorialPageNum, setTutorialPageNum }: any =
         useContext(TutorialPageContext);
     const handleTouch = () => {
@@ -16,7 +16,7 @@ export default function Page2() {
             onTouchStart={handleTouch}
         >
             <div className="flex flex-row w-[100%] items-start">
-                <span className="w-[80%] text-left text-lg text-black">
+                <span className="w-[80%] text-left text-lg text-white">
                     화면을 터치하면 다음 설명
                     <div />
                     으로 넘어갑니다
@@ -26,11 +26,13 @@ export default function Page2() {
                 </span>
             </div>
             <div style={{ marginTop: "10px" }}>
-                <TutorialBox2 />
+                <TutorialBox />
             </div>
             <div className="flex flex-row w-[100%] items-end">
                 <span className="w-[100%] text-left text-lg text-white">
-                    해당 참가자가 등록한 룩에 대<div />한 상세 설명입니다.
+                    평가 첫 화면입니다! <div />
+                    평가 후 다음 사진이 계속해서
+                    <div /> 제공됩니다.
                 </span>
                 <span className="pl-10 text-lg text-white">
                     {tutorialPageNum}/10

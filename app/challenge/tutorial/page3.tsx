@@ -1,6 +1,6 @@
 "use client";
 
-import TutorialBox2 from "../../../components/TutorialBox2";
+import TutorialBox2 from "@/app/components/TutorialBox2";
 import { useContext } from "react";
 import { TutorialPageContext } from "./page";
 
