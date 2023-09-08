@@ -1,16 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, createContext } from "react";
 import ChallengeParticipantImageInput from "./imageinput";
 import ChallengeParticipantProductInput from "./productinput";
 import ChallengeParticipantTextInput from "./textinput";
-import { useRouter } from "next/navigation";
-import Backward from "../../../public/svg/backward.svg";
+
+export const ChallengeInfoContext = createContext<any>(null);
 
 export default function ChallengeParticipantMain() {
-    const [lookImage, setLookImage] = useState();
-    const [lookDescription, setLookDescription] = useState();
-    const [lookProductInfo, setLookProductInfo] = useState();
+    const [lookImage, setLookImage] = useState(null);
+    const [lookDescription, setLookDescription] = useState(null);
+    const [lookProductInfo, setLookProductInfo] = useState(null);
 
     return (
         <div className="flex-1 flex flex-col relative justify-start items-center w-[100%] font-textBoxFont">
@@ -40,10 +40,21 @@ export default function ChallengeParticipantMain() {
                     </div>
                 </div>
             </div>
-            <ChallengeParticipantImageInput />
-            <ChallengeParticipantTextInput />
-            <ChallengeParticipantProductInput />
-            <div className="flex justify-center items-center mt-[20px] w-[310px] h-[50px] rounded-[20.5px] bg-[#344467] text-[24px] font-semibold text-white cursor-pointer">
+            <ChallengeInfoContext.Provider
+                value={{
+                    lookImage,
+                    setLookImage,
+                    lookDescription,
+                    setLookDescription,
+                    lookProductInfo,
+                    setLookProductInfo,
+                }}
+            >
+                <ChallengeParticipantImageInput />
+                <ChallengeParticipantTextInput />
+                <ChallengeParticipantProductInput />
+            </ChallengeInfoContext.Provider>
+            <div className="flex justify-center items-center mt-[20px] mb-[100px] w-[310px] h-[50px] rounded-[20.5px] bg-[#344467] text-[24px] font-semibold text-white cursor-pointer">
                 완료
             </div>
         </div>
