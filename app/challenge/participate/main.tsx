@@ -81,7 +81,8 @@ export default function ChallengeParticipantMain() {
             .then((res) => res.json())
             .then(({ status, message, data }) => {
                 if (status === "OK") {
-                    console.log(data);
+                    // console.log(data);
+                    ChallengeUpload(data);
                 } else {
                     console.log(message);
                 }
