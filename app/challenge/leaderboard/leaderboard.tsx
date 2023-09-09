@@ -39,7 +39,7 @@ export default function LeaderBoard() {
         <div className="flex flex-col justify-center items-center w-[100%] h-[100%] px-[5%]">
             <HighRank />
             {lankingList.map((ranker, i) => {
-                if (i > 2) {
+                if (i > 2 && i < 10) {
                     return <RankRow key={i} rank={i + 1} ranker={ranker} />;
                 }
             })}

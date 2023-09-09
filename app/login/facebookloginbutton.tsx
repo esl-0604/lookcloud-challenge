@@ -25,11 +25,11 @@ export default function FacebookLoginButton() {
                     LocalStorage.removeItem("lookCloud-facebook-Id");
                     LocalStorage.setItem("lookCloud-facebook-Id", facebookID);
                     if (LocalStorage.getItem("lookCloud-facebook-Id")) {
-                        router.push("./onboarding");
+                        router.push("/onboarding");
                     }
                 } else if (status === 200) {
                     // console.log(data);
-                    const userID = data.toString();
+                    const userID = data;
                     GetUserInfoAPIcall(userID);
                 }
             })
@@ -51,13 +51,13 @@ export default function FacebookLoginButton() {
                 if (status === "ILLEGAL_STATE") {
                     LocalStorage.removeItem("lookCloud-user-Id");
                     LocalStorage.removeItem("lookCloud-facebook-Id");
-                    router.push("./login");
+                    router.push("/login");
                 } else if (status === 200) {
                     LocalStorage.removeItem("lookCloud-user-Id");
                     LocalStorage.removeItem("lookCloud-facebook-Id");
                     LocalStorage.setItem("lookCloud-user-Id", userId);
                     if (LocalStorage.getItem("lookCloud-user-Id")) {
-                        router.push("./challenge");
+                        router.push("/challenge");
                     }
                 }
             })

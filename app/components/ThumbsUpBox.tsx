@@ -1,10 +1,21 @@
+"use client";
+
+import { useContext } from "react";
+import { ChallengeImgContext } from "../challenge/evaluate/main";
+
 export default function ThumbsUpBox() {
+    const { challengeImgList, currentImg, currentImgEvaluate } =
+        useContext(ChallengeImgContext);
     return (
         <div className="h-full w-full relative bg-black opacity-75">
             <img
                 width="300"
                 height="450"
-                src="/image/image.png"
+                src={
+                    currentImg > 0
+                        ? challengeImgList[currentImg - 1]["look"]["imageUrl"]
+                        : null
+                }
                 alt="image"
                 style={{ width: "100%", height: "100%" }}
             />
@@ -29,7 +40,11 @@ export default function ThumbsUpBox() {
             >
                 <div className="absolute bottom-3 ml-2">
                     <span className="text-left text-xs text-white">
-                        고연전을 즐기기위한 편한 무지 티를 기반으로 만든 룩
+                        {currentImg > 0
+                            ? challengeImgList[currentImg - 1]["look"][
+                                  "description"
+                              ]
+                            : "고연전을 즐기기위한 편한 무지 티를 기반으로 만든 룩"}
                     </span>
                 </div>
             </div>

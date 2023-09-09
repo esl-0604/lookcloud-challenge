@@ -13,9 +13,15 @@ export default function ChallengeHeader() {
     const GoBackward = () => {
         router.back();
     };
+    const GoHome = () => {
+        router.push("/challenge");
+    };
     return (
         <div className="flex flex-row sticky top-0 justify-between items-center w-[100%] h-[56px] px-[16px] z-10 bg-black">
-            <HeaderLogo width={"126"} height={"32"} color={"white"} />
+            <div className="cursor-pointer" onClick={GoHome}>
+                <HeaderLogo width={"126"} height={"32"} color={"white"} />
+            </div>
+
             {path === "/challenge/evaluate" ? (
                 <div className="text-right text-[12px] text-white font-textBoxFont">
                     고연전
