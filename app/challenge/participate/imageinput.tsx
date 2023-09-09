@@ -23,12 +23,12 @@ export default function ChallengeParticipantImageInput() {
                         alt="challengeImg"
                         className="flex justify-center items-start w-[100%] object-cover"
                     />
-                    <div
+                    {/* <div
                         className="flex justify-center items-center absolute top-[15px] right-[15px] cursor-pointer"
                         onClick={CancleLookImage}
                     >
                         <Cancle />
-                    </div>
+                    </div> */}
                 </div>
             ) : (
                 <div className="flex flex-col justify-between items-center w-[100%] h-[110px] mt-[9px] font-bold">
