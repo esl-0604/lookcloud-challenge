@@ -4,16 +4,33 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Backward from "../../../public/svg/backward.svg";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import LeaderBoard from "./leaderboard";
+import { userProfileState } from "@/app/utils/atoms/userprofile";
+import { useRecoilState } from "recoil";
+
+export const ChallengeDataContext = createContext<any>(null);
 
 export default function ChallengeLeaderBoardMain() {
+    // 전역으로 적용되는 유저정보 -> recoilState로 관리
+    const [profileData, setProfileData] = useRecoilState<any>(userProfileState);
+
+    // 챌린지 리더보드 정보
+    const [challengeData, setChallengeData] = useState({
+        name: profileData.organization === "연세대학교" ? "연고전" : "고연전",
+        participants: {
+            count: 0,
+            users: [],
+        },
+    });
+
     const param = useSearchParams();
     const id = param.get("id");
     console.log(id);
+
     useEffect(() => {
         const GET_CHALLENGES_URL =
-            "https://external-api.stage.lookcloud.co/challenges/0";
+            "https://external-api.stage.lookcloud.co/challenges/" + id;
         fetch(GET_CHALLENGES_URL, {
             method: "GET",
             mode: "cors",
@@ -24,20 +41,19 @@ export default function ChallengeLeaderBoardMain() {
             .then((res) => res.json())
             .then(({ status, message, data }) => {
                 console.log(data);
-                setChallengeData(data);
+                let newChallengeData = { ...data };
+                if (data.name === "고연전") {
+                    if (profileData.organization === "연세대학교") {
+                        newChallengeData.name = "연고전";
+                    }
+                }
+                setChallengeData(newChallengeData);
             })
             .catch((error) => console.log(error));
     }, []);
-    const [challengeData, setChallengeData] = useState({
-        name: "고연전",
-        participants: {
-            count: 2,
-            users: [],
-        },
-    });
 
     const today = new Date();
-    const deadline = new Date("2023-09-09");
+    const deadline = new Date("2023-09-10");
     const diffDate = deadline.getTime() - today.getTime();
     const dDay = Math.floor(diffDate / (1000 * 60 * 60 * 24));
 
@@ -54,8 +70,8 @@ export default function ChallengeLeaderBoardMain() {
                         {challengeData.name}
                     </div>
                     <div className="flex justify-start items-center w-[100%] h-[20px] text-[12px]">
-                        <div className="flex justify-end items-center w-[23px] h-[100%]">
-                            D-{dDay}
+                        <div className="flex justify-end items-center h-[100%]">
+                            D-{dDay === 0 ? "Day" : dDay}
                         </div>
                         <div className="flex justify-end items-center w-[70px] h-[100%]">
                             {challengeData.participants.count}명 참가중
@@ -98,7 +114,11 @@ export default function ChallengeLeaderBoardMain() {
                     alt="leader-board"
                     className="flex justify-center items-start w-[360px] h-[555px] object-cover"
                 /> */}
-                <LeaderBoard />
+                <ChallengeDataContext.Provider
+                    value={{ challengeData, setChallengeData }}
+                >
+                    <LeaderBoard />
+                </ChallengeDataContext.Provider>
             </div>
         </div>
     );
