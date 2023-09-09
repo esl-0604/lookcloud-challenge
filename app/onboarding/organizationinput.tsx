@@ -7,7 +7,7 @@ import { OrganContext } from "./main";
 export default function OnboardingOranizationInput() {
     const { organ, setOrgan }: any = useContext(OrganContext);
     return (
-        <div className="flex flex-col justify-between items-center w-[364px] h-[162px] mb-[24px] text-[24px] font-textBoxFont ">
+        <div className="flex flex-col justify-between items-center w-[364px] h-[104px] mb-[24px] text-[24px] font-textBoxFont ">
             <div onClick={() => setOrgan("고려대학교")}>
                 <SelectButton
                     text={"고려대학교"}
@@ -28,7 +28,7 @@ export default function OnboardingOranizationInput() {
                     }
                 />
             </div>
-            <div onClick={() => setOrgan("기타")}>
+            {/* <div onClick={() => setOrgan("기타")}>
                 <SelectButton
                     text={"기타"}
                     selectedTheme={
@@ -37,7 +37,7 @@ export default function OnboardingOranizationInput() {
                             : "text-[#D9D9D9] border-[#D9D9D9]"
                     }
                 />
-            </div>
+            </div> */}
         </div>
     );
 }
