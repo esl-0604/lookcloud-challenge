@@ -60,7 +60,7 @@ export default function ChallengeLayout({
             .then((res) => res.json())
             .then(({ status, message, data }) => {
                 if (status === 200) {
-                    // console.log(data);
+                    console.log(data);
                     let newProfileData = { ...profileData };
                     newProfileData.userId = userId;
                     newProfileData.nickname = '"' + data["nickName"] + '"님';
@@ -83,10 +83,14 @@ export default function ChallengeLayout({
         if (instagramCode) {
             if (userID) {
                 RequestUserIDAPIcall(userID);
+            } else {
+                router.push("/login");
             }
         } else {
             if (userID) {
                 GetUserInfoAPIcall(userID);
+            } else {
+                router.push("/login");
             }
         }
     }, []);

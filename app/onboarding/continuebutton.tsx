@@ -38,13 +38,13 @@ export default function ContinueButton({
                 if (facebookID) registerUserAPIcall(Number(facebookID));
                 else {
                     console.log("연결된 facebookId가 없습니다.");
-                    router.push("./login");
+                    router.push("/login");
 
                     // 나중에 지워야함.
                     // setStep({ id: (stepNum + 1).toString() });
                 }
             } else if (stepNum === 4) {
-                router.push("./challenge");
+                router.push("/challenge");
             }
         }
     };
@@ -62,7 +62,7 @@ export default function ContinueButton({
                 if (status === "ILLEGAL_STATE") {
                     LocalStorage.removeItem("lookCloud-user-Id");
                     LocalStorage.removeItem("lookCloud-facebook-Id");
-                    router.push("./login");
+                    router.push("/login");
                 } else if (status === 200) {
                     LocalStorage.removeItem("lookCloud-user-Id");
                     LocalStorage.removeItem("lookCloud-facebook-Id");
@@ -97,7 +97,7 @@ export default function ContinueButton({
             .then((res) => res.json())
             .then(({ status, message, data }) => {
                 if (status === 200) {
-                    GetUserInfoAPIcall(data.toString());
+                    GetUserInfoAPIcall(data);
                 } else {
                     console.log(message);
                     alert("Done 버튼을 다시 눌러주세요.");
@@ -105,7 +105,7 @@ export default function ContinueButton({
             })
             .catch((error) => {
                 console.log(error);
-                router.push("./login");
+                router.push("/login");
             });
     };
     return (

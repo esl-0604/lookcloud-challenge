@@ -18,12 +18,15 @@ export default function HighRank() {
         if (challengeData) {
             // console.log(challengeData.participants.users);
             const templankingList = challengeData.participants.users;
-            const arr2 = Array.from({ length: 3 - lankingList.length }, () => ({
-                nickName: "참가자",
-                instagramUserName: "",
-                organization: "고려대학교",
-                lScore: 0,
-            }));
+            const arr2 = Array.from(
+                { length: 3 - templankingList.length },
+                () => ({
+                    nickName: "참가자",
+                    instagramUserName: "",
+                    organization: "고려대학교",
+                    lScore: 0,
+                })
+            );
             const finalLankingList = templankingList.concat(arr2);
             console.log(finalLankingList);
             setLankingList(finalLankingList);

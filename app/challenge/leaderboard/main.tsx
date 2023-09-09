@@ -85,6 +85,7 @@ export default function ChallengeLeaderBoardMain() {
                     </div>
                 </div>
             </div>
+            {}
             <div className="flex justify-between items-center w-[340px] h-[90px] py-[10px]">
                 <Link
                     href={{
@@ -108,12 +109,7 @@ export default function ChallengeLeaderBoardMain() {
                     </div>
                 </Link>
             </div>
-            <div className="flex justify-center items-center w-[100%] h-[100%] mb-[87px]">
-                {/* <img
-                    src="/image/leader_board.png"
-                    alt="leader-board"
-                    className="flex justify-center items-start w-[360px] h-[555px] object-cover"
-                /> */}
+            <div className="flex justify-center items-center w-[100%] mb-[87px]">
                 <ChallengeDataContext.Provider
                     value={{ challengeData, setChallengeData }}
                 >
