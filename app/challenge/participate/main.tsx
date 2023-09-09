@@ -16,8 +16,6 @@ export default function ChallengeParticipantMain() {
 
     // 전역으로 적용되는 룩정보 -> recoilState로 관리
     const [profileData, setProfileData] = useRecoilState<any>(userProfileState);
-    const [challengeParticipateData, setChallengeParticipateData] =
-        useRecoilState<any>(userChallengeParticipantInfoState);
 
     // 임시로 존재하는 룩정보
     const [lookImage, setLookImage] = useState(null);
@@ -63,7 +61,6 @@ export default function ChallengeParticipantMain() {
         if (lookImageFile) {
             formDataForSubmit.append("image", lookImageFile);
             // console.log(formDataForSubmit[0]);
-
             // for (const keyValue of formDataForSubmit) console.log(keyValue);
             ImageUpload(formDataForSubmit);
         } else {
@@ -76,21 +73,17 @@ export default function ChallengeParticipantMain() {
             "https://external-api.stage.lookcloud.co/participations/image";
         await fetch(IMAGE_UPLOAD_URL, {
             method: "POST",
-            headers: {
-                "Content-Type": "multipart/form-data",
-            },
             body: formData,
         })
             .then((res) => res.json())
             .then(({ status, message, data }) => {
                 if (status === "OK") {
                     console.log(data);
-                    // ChallengeUpload(data);
+                    ChallengeUpload(data);
                 } else {
                     console.log(message);
                 }
             })
-
             .catch((error) => {
                 console.log(error);
             });
@@ -133,6 +126,46 @@ export default function ChallengeParticipantMain() {
             });
     };
 
+    // 챌린지 리더보드 정보
+    const [challengeData, setChallengeData] = useState({
+        name: profileData.organization === "연세대학교" ? "연고전" : "고연전",
+        participants: {
+            count: 0,
+            users: [],
+        },
+    });
+
+    const id = param.get("id");
+    // console.log(id);
+    useEffect(() => {
+        const GET_CHALLENGES_URL =
+            "https://external-api.stage.lookcloud.co/challenges/" + id;
+        fetch(GET_CHALLENGES_URL, {
+            method: "GET",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((res) => res.json())
+            .then(({ status, message, data }) => {
+                console.log(data);
+                let newChallengeData = { ...data };
+                if (data.name === "고연전") {
+                    if (profileData.organization === "연세대학교") {
+                        newChallengeData.name = "연고전";
+                    }
+                }
+                setChallengeData(newChallengeData);
+            })
+            .catch((error) => console.log(error));
+    }, []);
+
+    const today = new Date();
+    const deadline = new Date("2023-09-10");
+    const diffDate = deadline.getTime() - today.getTime();
+    const dDay = Math.floor(diffDate / (1000 * 60 * 60 * 24));
+
     return (
         <div className="flex-1 flex flex-col relative justify-start items-center w-[100%] font-textBoxFont">
             <div className="flex relative justify-center items-start w-[100%] h-[124px] py-[8px] overflow-hidden">
@@ -143,14 +176,14 @@ export default function ChallengeParticipantMain() {
                 />
                 <div className="flex flex-col justify-center items-start absolute top-[8px] w-[100%] h-[108px] text-white">
                     <div className="w-[100%] pl-[20px] h-[40px] font-semibold text-[30px]">
-                        고연전
+                        {challengeData.name}
                     </div>
                     <div className="flex justify-start items-center w-[100%] pl-[20px] h-[20px] text-[12px]">
-                        <div className="flex justify-end items-center w-[23px] h-[100%]">
-                            D-1
+                        <div className="flex justify-end items-center h-[100%]">
+                            D-{dDay === 0 ? "Day" : dDay}
                         </div>
                         <div className="flex justify-end items-center w-[70px] h-[100%]">
-                            37명 참가중
+                            {challengeData.participants.count}명 참가중
                         </div>
                     </div>
                     <div className="flex flex-col justify-center items-start w-[100%] pl-[20px] h-[48px] text-[12px]">

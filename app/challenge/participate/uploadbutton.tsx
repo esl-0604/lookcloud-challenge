@@ -40,7 +40,10 @@ export default function ChallengeParticipantUploadButton({
     };
 
     return (
-        <form className="flex justify-center items-center w-[100%] h-[50px]">
+        <form
+            className="flex justify-center items-center w-[100%] h-[50px]"
+            encType="multipart/form-data"
+        >
             <div
                 className="flex relative flex-col justify-center items-center w-[100%] h-[100%] border-2 border-white rounded-[45px] cursor-pointer"
                 onClick={handleClick}
