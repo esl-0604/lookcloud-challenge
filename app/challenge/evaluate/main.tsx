@@ -187,7 +187,7 @@ export default function ChallengeEvaluateMain() {
         <ChallengeImgContext.Provider
             value={{ challengeImgList, currentImg, currentImgEvaluate }}
         >
-            <div className="px-4 w-[100%] h-[100%] flex flex-col items-center">
+            <div className="px-4 w-[100%] h-[100%] flex flex-col items-center relative">
                 {isUp ? (
                     <div>
                         {isInfo && currentImgEvaluate ? (
@@ -271,10 +271,10 @@ export default function ChallengeEvaluateMain() {
                 )}
                 {currentImgEvaluate && currentImg > 0 && canBeNext ? (
                     <div
-                        className="fixed top-[40%] right-[15px] transform-translate-y-[40%] rotate-90"
+                        className="absolute top-[40%] right-[15px] transform-translate-y-[40%] rotate-90"
                         onClick={NextImg}
                     >
-                        <Next color={"white"} />
+                        <Next />
                     </div>
                 ) : null}
             </div>
