@@ -61,7 +61,10 @@ export default function ChallengeParticipantMain() {
     const PostParticipate = () => {
         const formDataForSubmit = new FormData();
         if (lookImageFile) {
-            formDataForSubmit.append("challengeImg", lookImageFile);
+            formDataForSubmit.append("image", lookImageFile);
+            // console.log(formDataForSubmit[0]);
+
+            // for (const keyValue of formDataForSubmit) console.log(keyValue);
             ImageUpload(formDataForSubmit);
         } else {
             console.log("이미지 없음");
@@ -81,8 +84,8 @@ export default function ChallengeParticipantMain() {
             .then((res) => res.json())
             .then(({ status, message, data }) => {
                 if (status === "OK") {
-                    // console.log(data);
-                    ChallengeUpload(data);
+                    console.log(data);
+                    // ChallengeUpload(data);
                 } else {
                     console.log(message);
                 }
