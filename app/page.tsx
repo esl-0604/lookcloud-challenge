@@ -1,5 +1,5 @@
-import AutoLogin2 from "./autologin_v2";
+import AutoLogin2 from "./autologin_v2"
 
 export default function App() {
-    return <AutoLogin2 />;
+	return <AutoLogin2 />
 }

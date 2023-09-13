@@ -1,6 +1,6 @@
-import { atom } from "recoil";
+import { atom } from "recoil"
 
 export const userChallengeParticipantInfoState = atom({
-    key: "userChallengeParticipantInfoState",
-    default: {},
-});
+	key: "userChallengeParticipantInfoState",
+	default: {},
+})

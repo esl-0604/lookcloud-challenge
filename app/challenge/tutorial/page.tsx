@@ -1,5 +1,5 @@
-import TutorialZMain from "./main";
+import TutorialZMain from "./main"
 
 export default function TutorialZ() {
-    return <TutorialZMain />;
+	return <TutorialZMain />
 }

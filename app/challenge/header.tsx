@@ -1,45 +1,45 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import HeaderLogo from "../../public/svg/headerlogo.svg";
-import Profile from "../../public/svg/profile.svg";
-import { useRouter, usePathname } from "next/navigation";
-import Backward from "../../public/svg/backward.svg";
+import Link from "next/link"
+import HeaderLogo from "../../public/svg/headerlogo.svg"
+import Profile from "../../public/svg/profile.svg"
+import { useRouter, usePathname } from "next/navigation"
+import Backward from "../../public/svg/backward.svg"
 
 export default function ChallengeHeader() {
-    const router = useRouter();
-    const path = usePathname();
-    // console.log(path);
-    const GoBackward = () => {
-        router.back();
-    };
-    const GoHome = () => {
-        router.push("/challenge");
-    };
-    return (
-        <div className="flex flex-row sticky top-0 justify-between items-center w-[100%] h-[56px] px-[16px] z-10 bg-black">
-            <div className="cursor-pointer" onClick={GoHome}>
-                <HeaderLogo width={"126"} height={"32"} color={"white"} />
-            </div>
+	const router = useRouter()
+	const path = usePathname()
+	// console.log(path);
+	const GoBackward = () => {
+		router.back()
+	}
+	const GoHome = () => {
+		router.push("/challenge")
+	}
+	return (
+		<div className="flex flex-row sticky top-0 justify-between items-center w-[100%] h-[56px] px-[16px] z-10 bg-black">
+			<div className="cursor-pointer" onClick={GoHome}>
+				<HeaderLogo width={"126"} height={"32"} color={"white"} />
+			</div>
 
-            {path === "/challenge/evaluate" ? (
-                <div className="text-right text-[12px] text-white font-textBoxFont">
-                    고연전
-                </div>
-            ) : (
-                <Link href={"/challenge/profile"} className="cursor-pointer">
-                    <Profile width={"40"} height={"40"} />
-                </Link>
-            )}
+			{path === "/challenge/evaluate" ? (
+				<div className="text-right text-[12px] text-white font-textBoxFont">
+					고연전
+				</div>
+			) : (
+				<Link href={"/challenge/profile"} className="cursor-pointer">
+					<Profile width={"40"} height={"40"} />
+				</Link>
+			)}
 
-            {path === "/challenge" ? null : (
-                <div
-                    className="absolute top-[74px] right-[15px] z-10 cursor-pointer"
-                    onClick={GoBackward}
-                >
-                    <Backward />
-                </div>
-            )}
-        </div>
-    );
+			{path === "/challenge" ? null : (
+				<div
+					className="absolute top-[74px] right-[15px] z-10 cursor-pointer"
+					onClick={GoBackward}
+				>
+					<Backward />
+				</div>
+			)}
+		</div>
+	)
 }
