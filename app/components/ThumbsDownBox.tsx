@@ -7,7 +7,7 @@ export default function ThumbsDownBox() {
 	const { challengeImgList, currentImg, currentImgEvaluate } =
 		useContext(ChallengeImgContext)
 	return (
-		<div className="h-full w-full relative">
+		<div className="h-full w-full relative bg-black opacity-75">
 			<img
 				width="300"
 				height="450"
