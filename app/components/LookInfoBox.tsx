@@ -3,9 +3,23 @@
 import { useContext } from "react"
 import { ChallengeImgContext } from "../challenge/evaluate/main"
 
+interface itemProps {
+	part: string
+	brand: string
+	name: string
+}
 export default function LookInfoBox() {
 	const { challengeImgList, currentImg, currentImgEvaluate } =
 		useContext(ChallengeImgContext)
+	const data =
+		currentImg > 0
+			? JSON.parse(challengeImgList[currentImg - 1]["look"]["parts"])
+			: null
+
+	// 변환된 데이터를 원하는 형식으로 가공
+	const formattedData: string[] = data.map((item: itemProps) => {
+		return `${item.part} - ${item.brand} ${item.name}`
+	})
 
 	return (
 		<div className="flex flex-col h-full w-full">
@@ -68,24 +82,11 @@ export default function LookInfoBox() {
 					</span>
 				</div>
 				<div className="flex flex-col mt-[12px]">
-					<span className="text-white text-[12px]">
-						상의 -{" "}
-						{currentImg > 0
-							? challengeImgList[currentImg - 1]["look"]["top"]
-							: null}
-					</span>
-					<span className="text-white text-[12px]">
-						하의 -{" "}
-						{currentImg > 0
-							? challengeImgList[currentImg - 1]["look"]["bottom"]
-							: null}
-					</span>
-					<span className="text-white text-[12px]">
-						신발 -{" "}
-						{currentImg > 0
-							? challengeImgList[currentImg - 1]["look"]["shoes"]
-							: null}
-					</span>
+					{formattedData.map((formattedItem: string, index: number) => (
+						<span key={index} className="text-white text-[12px]">
+							{formattedItem}
+						</span>
+					))}
 				</div>
 			</div>
 		</div>

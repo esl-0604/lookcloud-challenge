@@ -70,7 +70,7 @@ export default function ChallengeEvaluateMain() {
 
 			// 평가 코드 --------------------------------
 			setCurrentImgEvaluate(true)
-			// EvaluateImg(userId, evaluate, participationId);
+			EvaluateImg(userId, evaluate, participationId)
 			// --------------------------------------------
 		} else setShowThumbs(false)
 	}, [isUp, isDown])
@@ -169,6 +169,21 @@ export default function ChallengeEvaluateMain() {
 
 	useEffect(() => {}, [challengeImgList, currentImg, currentImgEvaluate])
 
+	const [imageLoaded, setImageLoaded] = useState<boolean>(false)
+	const [imageUrl, setImageUrl] = useState<string>("")
+	useEffect(() => {
+		if (currentImg > 0) {
+			const imageUrl = challengeImgList[currentImg - 1]?.look?.imageUrl
+			if (imageUrl) {
+				const img = new Image()
+				img.src = imageUrl
+				img.onload = () => {
+					setImageUrl(imageUrl)
+					setImageLoaded(true)
+				}
+			}
+		}
+	}, [currentImg, challengeImgList])
 	const NextImg = () => {
 		setCurrentImgEvaluate(false)
 		setCurrentImg((prev) => prev + 1)
@@ -195,12 +210,13 @@ export default function ChallengeEvaluateMain() {
 							</div>
 						) : (
 							<div
-								className="absolute top-[52px]"
 								style={{
+									position: "absolute",
 									left: "50%",
 									transform: "translate(-50%, 0)",
 									width: 300,
 									height: 450,
+									top: 0,
 								}}
 							>
 								<ThumbsUpBox />
@@ -215,19 +231,20 @@ export default function ChallengeEvaluateMain() {
 							</div>
 						) : (
 							<div
-								className="absolute top-[132px]"
 								style={{
+									position: "absolute",
 									left: "50%",
 									transform: "translate(-50%, 0)",
 									width: 300,
 									height: 450,
+									top: 80,
 								}}
 							>
 								<ThumbsDownBox />
 							</div>
 						)}
 					</div>
-				) : (
+				) : imageLoaded ? (
 					<Boundary ref={boundaryRef} style={{ width: 300, height: "100%" }}>
 						<div
 							style={{
@@ -259,6 +276,27 @@ export default function ChallengeEvaluateMain() {
 							<Box />
 						</div>
 					</Boundary>
+				) : (
+					<div style={{ width: 300, height: 450 }}>
+						<div className="h-full w-full relative">
+							<div className="w-full h-full bg-black flex items-center justify-center">
+								<img src="/svg/spinner.svg" alt="image" />
+							</div>
+							<div
+								className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-[#333333] to-[#333333]"
+								style={{
+									zIndex: 10,
+									height: "15%",
+								}}
+							>
+								<div className="absolute bottom-3 ml-2">
+									<span className="text-left text-xs text-white">
+										이미지를 불러오는 중입니다, 잠시만 기다려주세요
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
 				)}
 				{currentImgEvaluate && currentImg > 0 && canBeNext ? (
 					<div
