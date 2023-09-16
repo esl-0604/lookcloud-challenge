@@ -1,6 +1,6 @@
 import "./global.css"
 import type { Metadata } from "next"
-import RecoilRootWrapper from "./recoilWrapper"
+import RecoilRootWrapper from "@/app/recoilWrapper"
 
 export const metadata: Metadata = {
 	title: "Lookcloud",

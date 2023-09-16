@@ -1,5 +1,8 @@
-import React, { useContext, useEffect, useState } from "react"
-import { ChallengeImgContext } from "../challenge/evaluate/main"
+"use client"
+
+import React from "react"
+import { useContext } from "react"
+import { ChallengeImgContext } from "@/app/service/challenge/evaluate/main"
 
 export default React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
 	function Box(props, ref) {
