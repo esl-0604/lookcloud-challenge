@@ -12,29 +12,27 @@ export default function Page3() {
 	}
 	return (
 		<div
-			className="p-4 w-[100%] h-[100%] flex flex-col items-center"
+			className="pl-4 pr-4 w-[100%] h-[100%] flex flex-col items-center"
 			onTouchStart={handleTouch}
 		>
-			<div className="flex flex-col w-[100%] justify-start">
-				<span className="w-[100%] text-right text-xs text-white">
-					skip tutorial
+			<div className="flex flex-row w-[100%] items-center justify-center">
+				<img className="w-50 pr-5" src="/svg/swipeup.svg" alt="image" />
+				<span className="text-xs text-white">
+					사진이 마음에 들면 위로 스와이프해주세요
 				</span>
-				<div className="flex flex-row w-[100%] items-center justify-center">
-					<img className="w-50" src="/svg/swipeup.svg" alt="image" />
-					<span className="w-[100%] text-left text-xs text-white">
-						사진이 마음에 들면 위로 스와이프해주세요
-					</span>
-				</div>
 			</div>
-			<div style={{ marginTop: "10px" }}>
+
+			<div style={{ marginTop: "10px", marginBottom: "10px" }}>
 				<TutorialBox2 />
 			</div>
 			<div className="flex flex-row w-[100%] items-center justify-center">
-				<img className="w-50" src="/svg/swipedown.svg" alt="image" />
-				<span className="w-[100%] text-left text-xs text-white">
+				<img className="w-50 pr-5" src="/svg/swipedown.svg" alt="image" />
+				<span className="text-xs text-white">
 					사진이 아쉬우면 아래로 스와이프해주세요
 				</span>
-				<span className="pl-10 text-lg text-white">{tutorialPageNum}/10</span>
+				<span className="absolute top-[620px] w-full text-right pr-5 text-[24px] text-white">
+					{tutorialPageNum}/10
+				</span>
 			</div>
 		</div>
 	)

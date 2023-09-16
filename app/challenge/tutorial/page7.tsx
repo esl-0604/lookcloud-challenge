@@ -74,10 +74,7 @@ export default function Page7() {
 	}, [y])
 
 	return (
-		<div className="p-4 w-[100%] h-[100%] flex flex-col items-center">
-			<span className="w-[100%] text-right text-xs text-white">
-				skip tutorial
-			</span>
+		<div className="pl-4 pr-4 w-[100%] h-[100%] flex flex-col items-center">
 			{isDown ? (
 				<div>
 					{isInfo ? (
@@ -86,12 +83,13 @@ export default function Page7() {
 						</div>
 					) : (
 						<div
-							className="absolute top-[152px]"
 							style={{
+								position: "absolute",
 								left: "50%",
 								transform: "translate(-50%, 0)",
 								width: 300,
 								height: 450,
+								top: 80,
 							}}
 						>
 							<ThumbsDownBox />
@@ -99,7 +97,7 @@ export default function Page7() {
 					)}
 				</div>
 			) : (
-				<Boundary ref={boundaryRef} style={{ width: 300, height: "100%" }}>
+				<Boundary ref={boundaryRef} style={{ width: 300, height: 550 }}>
 					<div
 						style={{
 							left: x,
@@ -131,12 +129,13 @@ export default function Page7() {
 					</div>
 				</Boundary>
 			)}
-			<div className="flex flex-row w-[100%] items-center justify-center">
-				<span className="w-[100%] text-left text-xs text-white">
-					아래로 스와이프 해보세요!
-				</span>
-				<span className="pl-10 text-lg text-white">{tutorialPageNum}/10</span>
-			</div>
+
+			<span className="absolute top-[620px] w-full text-left pl-10 text-lg text-white">
+				아래로 스와이프 해보세요!
+			</span>
+			<span className="absolute top-[620px] w-full text-right pr-5 text-[24px] text-white">
+				{tutorialPageNum}/10
+			</span>
 		</div>
 	)
 }

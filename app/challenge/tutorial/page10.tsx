@@ -12,15 +12,24 @@ export default function Page9() {
 		router.push("/challenge/evaluate")
 	}
 	return (
-		<div className="p-4 w-[100%] h-[100%] flex flex-col items-center">
+		<div className="pl-4 pr-4 w-[100%] h-[100%] flex flex-col items-center">
 			<div>
-				<div className="h-full w-full relative">
+				<div className="h-full w-full relative bg-black opacity-75">
 					<img
 						src="/image/image.png"
 						alt="image"
 						style={{ width: "300px", height: "450px" }}
 					/>
-
+					<img
+						src="/svg/thumbsdown.svg"
+						alt="image"
+						style={{
+							position: "absolute",
+							top: "80%",
+							left: "15%",
+							transform: "translate(-50%, -50%)",
+						}}
+					/>
 					<div
 						className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-[#333333] to-[#333333]"
 						style={{
@@ -35,12 +44,43 @@ export default function Page9() {
 						</div>
 					</div>
 				</div>
+				<div className="absolute w-[300px] flex flex-col mt-[12px]">
+					<div className="flex flex-row justify-between items-center w-full h-[40px] bg-black mt-1 rounded-md">
+						<div className="flex flex-row">
+							<img
+								className="rounded-full"
+								src="/svg/sampleProfileImg.svg"
+								width="50px"
+								height="50px"
+								style={{ marginRight: 4 }}
+							/>
+							<div className="flex flex-col py-[8px]">
+								<div className="flex flex-row">
+									<span className="text-white text-[8px]">나는야이은상</span>
+								</div>
+								<span className="text-white text-[8px] leading-[8px]">
+									@eslee850
+								</span>
+							</div>
+						</div>
+						<span className="text-white text-[24px]">870</span>
+					</div>
+					<div className="flex flex-col mt-[12px]">
+						<span className="text-white text-[12px]">
+							상의 - musinsa standard basic cotton t-shirts
+						</span>
+						<span className="text-white text-[12px]">
+							하의 - musinsa standard banding chino pants
+						</span>
+						<span className="text-white text-[12px]">신발 - 정보 없음</span>
+					</div>
+				</div>
 			</div>
-			<span className="w-[100%] text-right pl-10 text-lg text-white">
+			<span className="absolute top-[620px] w-full text-right pr-5 text-[24px] text-white">
 				{tutorialPageNum}/10
 			</span>
 			<div
-				className="flex items-center justify-center w-[240px] h-[60px] bg-gray-500 rounded-full ring-1 ring-white"
+				className="fixed left-[50px] top-[600px] flex items-center justify-center w-[200px] h-[50px] bg-gray-500 rounded-full ring-1 ring-white"
 				onTouchStart={handleTouch}
 			>
 				<span className="text-xl text-white">시작하기</span>
