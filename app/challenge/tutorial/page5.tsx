@@ -8,14 +8,15 @@ export default function Page5() {
 	const { tutorialPageNum, setTutorialPageNum }: any =
 		useContext(TutorialPageContext)
 	return (
-		<div className="p-4 w-[100%] h-[100%] flex flex-col items-center">
+		<div className="pl-4 pr-4 w-[100%] h-[100%] flex flex-col items-center">
 			<div
-				className="absolute top-[72px]"
 				style={{
+					position: "absolute",
 					left: "50%",
 					transform: "translate(-50%, 0)",
 					width: 300,
 					height: 450,
+					top: 56,
 				}}
 			>
 				<div className="h-full w-full relative bg-black opacity-75">
@@ -52,10 +53,10 @@ export default function Page5() {
 						</div>
 					</div>
 				</div>
-				<span className="w-[100%] text-right pl-10 text-lg text-white">
-					{tutorialPageNum}/10
-				</span>
 			</div>
+			<span className="absolute top-[620px] w-full text-right pr-5 text-[24px] text-white">
+				{tutorialPageNum}/10
+			</span>
 		</div>
 	)
 }

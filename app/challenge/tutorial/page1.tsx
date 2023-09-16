@@ -12,11 +12,11 @@ export default function Page1() {
 	}
 	return (
 		<div
-			className="p-4 w-[100%] h-[100%] flex flex-col items-center"
+			className="pl-4 pr-4 w-[100%] h-[100%] flex flex-col items-center"
 			onTouchStart={handleTouch}
 		>
 			<div className="flex flex-row w-[100%] items-start">
-				<span className="w-[80%] text-left text-lg text-white">
+				<span className="w-[80%] text-left pl-5 text-lg text-white">
 					화면을 터치하면 다음 설명
 					<div />
 					으로 넘어갑니다
@@ -26,13 +26,15 @@ export default function Page1() {
 				<TutorialBox />
 			</div>
 			<div className="flex flex-row w-[100%] items-end">
-				<span className="w-[100%] text-left text-lg text-white">
+				<span className="w-[100%] text-left pl-5 text-lg text-white">
 					평가 첫 화면입니다! <div />
 					평가 후 다음 사진이 계속해서
 					<div /> 제공됩니다.
 				</span>
-				<span className="pl-10 text-lg text-white">{tutorialPageNum}/10</span>
 			</div>
+			<span className="absolute top-[620px] w-full text-right pr-5 text-[24px] text-white">
+				{tutorialPageNum}/10
+			</span>
 		</div>
 	)
 }

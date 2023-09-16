@@ -8,7 +8,7 @@ export default function Page8() {
 		useContext(TutorialPageContext)
 
 	return (
-		<div className="p-4 w-[100%] h-[100%] flex flex-col items-center">
+		<div className="pl-4 pr-4 w-[100%] h-[100%] flex flex-col items-center">
 			<div
 				className="absolute top-[152px]"
 				style={{
@@ -52,10 +52,10 @@ export default function Page8() {
 						</div>
 					</div>
 				</div>
-				<span className="w-[100%] text-right pl-10 text-lg text-white">
-					{tutorialPageNum}/10
-				</span>
 			</div>
+			<span className="absolute top-[620px] w-full text-right pr-5 text-[24px] text-white">
+				{tutorialPageNum}/10
+			</span>
 		</div>
 	)
 }
