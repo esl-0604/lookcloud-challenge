@@ -1,6 +1,6 @@
 "use client"
 
-import HeaderLogo from "@/../public/svg/headerlogo.svg"
+import HeaderLogo from "@/public/svg/headerlogo.svg"
 import { useRouter } from "next/navigation"
 
 export default function TutorialHeader() {
