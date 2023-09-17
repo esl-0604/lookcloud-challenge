@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter, useSearchParams } from "next/navigation"
-import LocalStorage from "../../utils/localstorage"
+
 import { useRecoilState } from "recoil"
 import {
 	challengeParticipantsInfo,
@@ -9,6 +9,7 @@ import {
 	userChallengeParticipateInfo,
 	userChallengeParticipateType,
 	userProfileState,
+	userProfileType,
 } from "@/app/utils/atoms/serviceGlobalState"
 import { useEffect } from "react"
 
@@ -21,16 +22,8 @@ export default function ChallengeLayout({
 	const param = useSearchParams()
 	const challengeId = Number(param.get("id"))
 
-	const [profileData, setProfileData] = useRecoilState<any>(userProfileState)
 	const [challengeParticipantsData, setChallengeParticipantsData] =
 		useRecoilState<challengeParticipantsType>(challengeParticipantsInfo)
-
-	useEffect(() => {
-		if (challengeId) {
-			console.log(challengeId)
-			// GetChallengeParticipantsInfo(challengeId)
-		}
-	}, [])
 
 	const GetChallengeParticipantsInfo = async (challengeId: number) => {
 		const GET_CHALLENGE_PARTICIPANTS_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/challenges/${challengeId}`
@@ -53,6 +46,8 @@ export default function ChallengeLayout({
 			.catch((error) => console.log(error))
 	}
 	// --------------------------------------------------------------------------------
+	const [profileData, setProfileData] =
+		useRecoilState<userProfileType>(userProfileState)
 
 	const [userChallengeParticipateData, setUserChallengeParticipateData] =
 		useRecoilState<userChallengeParticipateType>(userChallengeParticipateInfo)
@@ -80,6 +75,16 @@ export default function ChallengeLayout({
 			})
 			.catch((error) => console.log(error))
 	}
+
+	// --------------------------------------------------------------------------------
+
+	useEffect(() => {
+		if (profileData.userToken && challengeId) {
+			console.log(challengeId)
+			// GetChallengeParticipantsInfo(challengeId)
+			// GetUserChallengeParticipateInfo(profileData.userToken, challengeId)
+		}
+	}, [])
 
 	return <>{children}</>
 }
