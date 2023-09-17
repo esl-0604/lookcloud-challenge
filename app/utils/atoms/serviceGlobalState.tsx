@@ -111,30 +111,30 @@ export interface userChallengeParticipateType {
 export const userChallengeParticipateInfo = atom<userChallengeParticipateType>({
 	key: "userChallengeParticipantInfoState",
 	default: {
-		0: {
-			participationId: 0,
-			lScore: 100,
-			ranking: 1,
-			imageUrl: "/image/challenge_participate_img.png",
-			thumbnailUrl: "/image/challenge_participate_thumbnail.png",
-			description: "멋진 옷을 입었어요.",
-			parts: `[
-				{
-				  "part": "상의",
-				  "name": "여름 청 반팔 셔츠",
-				  "brand": "무신사스탠다드"
-				},
-				{
-				  "part": "하의",
-				  "name": "여름 청 반팔 셔츠",
-				  "brand": "무신사스탠다드"
-				},
-				{
-				  "part": "겉옷",
-				  "name": "여름 청 반팔 셔츠",
-				  "brand": "무신사스탠다드"
-				}
-			  ]`,
-		},
+		// 0: {
+		// 	participationId: 0,
+		// 	lScore: 100,
+		// 	ranking: 1,
+		// 	imageUrl: "/image/challenge_participate_img.png",
+		// 	thumbnailUrl: "/image/challenge_participate_thumbnail.png",
+		// 	description: "멋진 옷을 입었어요.",
+		// 	parts: `[
+		// 		{
+		// 		  "part": "상의",
+		// 		  "name": "여름 청 반팔 셔츠",
+		// 		  "brand": "무신사스탠다드"
+		// 		},
+		// 		{
+		// 		  "part": "하의",
+		// 		  "name": "여름 청 반팔 셔츠",
+		// 		  "brand": "무신사스탠다드"
+		// 		},
+		// 		{
+		// 		  "part": "겉옷",
+		// 		  "name": "여름 청 반팔 셔츠",
+		// 		  "brand": "무신사스탠다드"
+		// 		}
+		// 	  ]`,
+		// },
 	},
 })

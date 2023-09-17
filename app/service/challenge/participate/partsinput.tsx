@@ -2,11 +2,28 @@
 
 import ProductInfoBox from "./partsinfobox"
 import Add from "@/public/svg/add.svg"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { ChallengeInfoContext, PartType } from "./page"
 
 export default function PartsInput() {
 	const { lookParts, setLookParts } = useContext(ChallengeInfoContext)
+	useEffect(() => {
+		if (lookParts.length === 0) {
+			const newLookPart = [
+				{
+					part: "상의",
+					brand: "",
+					name: "",
+				},
+				{
+					part: "하의",
+					brand: "",
+					name: "",
+				},
+			]
+			setLookParts(lookParts.concat(newLookPart))
+		}
+	}, [])
 	const AddParts = () => {
 		const newLookPart = {
 			part: "",
