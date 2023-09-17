@@ -1,11 +1,4 @@
-"use client"
-
-import { useEffect } from "react"
-import { useRecoilState } from "recoil"
-import {
-	challengeInfoType,
-	userProfileState,
-} from "@/app/utils/atoms/serviceGlobalState"
+import { challengeInfoType } from "@/app/utils/atoms/serviceGlobalState"
 
 export default function ChallengeCategoryBox({
 	challengeId,
@@ -19,7 +12,7 @@ export default function ChallengeCategoryBox({
 }: challengeInfoType) {
 	return (
 		<div
-			className={`flex justify-center items-center relative w-[100%] h-[350px] mb-[24px] ${
+			className={`flex justify-center items-center relative w-[100%] h-[350px] mb-[24px] rounded-[20px] overflow-hidden ${
 				state >= 0 ? "cursor-pointer" : null
 			}`}
 		>

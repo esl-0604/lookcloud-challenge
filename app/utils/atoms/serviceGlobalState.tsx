@@ -40,7 +40,7 @@ export const challengeInfoList = atom<challengeInfoType[]>({
 			thumbnail: "/image/challenge_thumbnail_1_1.png",
 			comment:
 				"고연전을 최대로 즐기기 위해 준비한 오늘의 스타일로 고연전 패션왕에 도전하세요!",
-			participantsNum: 0,
+			participantsNum: 7,
 		},
 		{
 			challengeId: 1,
@@ -78,7 +78,7 @@ export const challengeParticipantsInfo = atom<challengeParticipantsType>({
 	key: "challengeParticipantsInfo",
 	default: {
 		0: {
-			totalCount: 0,
+			totalCount: 7,
 			users: [],
 			updateTime: new Date("2023-09-17T12:00:00"),
 		},
@@ -103,5 +103,14 @@ export interface userChallengeParticipateType {
 
 export const userChallengeParticipateInfo = atom<userChallengeParticipateType>({
 	key: "userChallengeParticipantInfoState",
-	default: {},
+	default: {
+		0: {
+			participationId: 0,
+			lScore: 100,
+			ranking: 1,
+			imageUrl: "/image/challenge_participate_thumbnail.png",
+			// description:
+			// look: []
+		},
+	},
 })
