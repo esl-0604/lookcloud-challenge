@@ -10,7 +10,7 @@ import {
 } from "@/app/utils/atoms/serviceGlobalState"
 import { useRecoilState } from "recoil"
 
-export default function LeaderBoardThumbnail() {
+export default function ParticipateThumbnail() {
 	const param = useSearchParams()
 	const challengeId = Number(param.get("id"))
 
@@ -41,17 +41,17 @@ export default function LeaderBoardThumbnail() {
 	}, [challengeDataList])
 
 	return (
-		<div className="flex relative justify-center items-start w-[100%] h-[240px] py-[8px] overflow-hidden">
+		<div className="flex relative justify-center items-start w-[100%] h-[124px] py-[8px] overflow-hidden">
 			<img
-				src={challengeParticipantsData[challengeId].thumbnail_1}
+				src={challengeParticipantsData[challengeId].thumbnail_2}
 				alt="challengeImg"
 				className="flex justify-center items-start w-[100%] h-[100%] object-cover"
 			/>
-			<div className="flex flex-col justify-center items-start absolute bottom-[10px] w-[100%] px-[15px] h-[108px] text-white font-normal">
-				<div className="w-[100%] h-[40px] font-semibold text-[30px]">
+			<div className="flex flex-col justify-center items-start absolute top-[8px] w-[100%] h-[108px] text-white">
+				<div className="w-[100%] pl-[20px] h-[40px] font-semibold text-[30px]">
 					{currentChallengeData.challengeName}
 				</div>
-				<div className="flex justify-start items-center w-[100%] h-[20px] text-[12px]">
+				<div className="flex justify-start items-center w-[100%] pl-[20px] h-[20px] text-[12px]">
 					<div className="flex justify-end items-center h-[100%]">
 						D-
 						{currentChallengeData.state === 0
@@ -62,7 +62,7 @@ export default function LeaderBoardThumbnail() {
 						{currentChallengeData.participantsNum}명 참가중
 					</div>
 				</div>
-				<div className="flex flex-col justify-center items-start w-[100%] h-[48px] text-[12px]">
+				<div className="flex flex-col justify-center items-start w-[100%] pl-[20px] h-[48px] text-[12px]">
 					{currentChallengeData.comment}
 				</div>
 			</div>

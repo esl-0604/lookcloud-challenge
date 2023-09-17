@@ -70,6 +70,10 @@ export default function ChallengeLayout({
 					console.log(data)
 					let newUserChallengeObj = { ...userChallengeParticipateData }
 					newUserChallengeObj[challengeId] = data
+					if (!newUserChallengeObj[challengeId]["description"])
+						newUserChallengeObj[challengeId]["description"] = ""
+					if (!newUserChallengeObj[challengeId]["parts"])
+						newUserChallengeObj[challengeId]["parts"] = `[]`
 					setUserChallengeParticipateData(newUserChallengeObj)
 				} else console.log(message)
 			})

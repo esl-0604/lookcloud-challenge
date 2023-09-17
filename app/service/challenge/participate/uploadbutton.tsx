@@ -4,7 +4,7 @@ import { useContext, useRef } from "react"
 import Camera from "@/public/svg/camera.svg"
 import Gallery from "@/public/svg/gallery.svg"
 import Instagram from "@/public/svg/instagram.svg"
-import { ChallengeInfoContext } from "./main"
+import { ChallengeInfoContext } from "./page"
 
 interface ChallengeParticipantUploadButtonProps {
 	text: string
@@ -12,8 +12,7 @@ interface ChallengeParticipantUploadButtonProps {
 export default function ChallengeParticipantUploadButton({
 	text,
 }: ChallengeParticipantUploadButtonProps) {
-	const { lookImage, setLookImage, lookImageFile, setLookImageFile } =
-		useContext(ChallengeInfoContext)
+	const { setLookImage, setLookImageFile } = useContext(ChallengeInfoContext)
 
 	const fileRef = useRef<HTMLInputElement>(null)
 	const handleClick = () => {
