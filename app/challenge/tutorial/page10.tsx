@@ -4,7 +4,7 @@ import { useContext } from "react"
 import { TutorialPageContext } from "./main"
 import { useRouter } from "next/navigation"
 
-export default function Page9() {
+export default function Page10() {
 	const { tutorialPageNum, setTutorialPageNum }: any =
 		useContext(TutorialPageContext)
 	const router = useRouter()
@@ -44,43 +44,43 @@ export default function Page9() {
 						</div>
 					</div>
 				</div>
-				<div className="absolute w-[300px] flex flex-col mt-[12px]">
-					<div className="flex flex-row justify-between items-center w-full h-[40px] bg-black mt-1 rounded-md">
-						<div className="flex flex-row">
-							<img
-								className="rounded-full"
-								src="/svg/sampleProfileImg.svg"
-								width="50px"
-								height="50px"
-								style={{ marginRight: 4 }}
-							/>
-							<div className="flex flex-col py-[8px]">
-								<div className="flex flex-row">
-									<span className="text-white text-[8px]">나는야이은상</span>
-								</div>
-								<span className="text-white text-[8px] leading-[8px]">
-									@eslee850
-								</span>
+			</div>
+			<div className="absolute top-[510px] w-[80%] flex flex-col">
+				<div className="flex flex-row justify-between items-center w-full h-[40px] bg-black mt-1 rounded-md">
+					<div className="flex flex-row">
+						<img
+							className="rounded-full"
+							src="/svg/sampleProfileImg.svg"
+							width="50px"
+							height="50px"
+							style={{ marginRight: 4 }}
+						/>
+						<div className="flex flex-col py-[8px]">
+							<div className="flex flex-row">
+								<span className="text-white text-[8px]">나는야이은상</span>
 							</div>
+							<span className="text-white text-[8px] leading-[8px]">
+								@eslee850
+							</span>
 						</div>
-						<span className="text-white text-[24px]">870</span>
 					</div>
-					<div className="flex flex-col mt-[12px]">
-						<span className="text-white text-[12px]">
-							상의 - musinsa standard basic cotton t-shirts
-						</span>
-						<span className="text-white text-[12px]">
-							하의 - musinsa standard banding chino pants
-						</span>
-						<span className="text-white text-[12px]">신발 - 정보 없음</span>
-					</div>
+					<span className="text-white text-[24px]">870</span>
+				</div>
+				<div className="flex flex-col mt-[12px]">
+					<span className="text-white text-[12px]">
+						상의 - musinsa standard basic cotton t-shirts
+					</span>
+					<span className="text-white text-[12px]">
+						하의 - musinsa standard banding chino pants
+					</span>
+					<span className="text-white text-[12px]">신발 - 정보 없음</span>
 				</div>
 			</div>
 			<span className="absolute top-[620px] w-full text-right pr-5 text-[24px] text-white">
 				{tutorialPageNum}/10
 			</span>
 			<div
-				className="fixed left-[50px] top-[600px] flex items-center justify-center w-[200px] h-[50px] bg-gray-500 rounded-full ring-1 ring-white"
+				className="absolute left-[50px] top-[600px] flex items-center justify-center w-[50%] h-[50px] bg-gray-500 rounded-full ring-1 ring-white"
 				onTouchStart={handleTouch}
 			>
 				<span className="text-xl text-white">시작하기</span>
