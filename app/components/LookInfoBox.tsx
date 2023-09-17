@@ -1,7 +1,7 @@
 "use client"
 
 import { useContext } from "react"
-import { ChallengeImgContext } from "../challenge/evaluate/main"
+import { ChallengeImgContext } from "../service/challenge/evaluate/main"
 
 interface itemProps {
 	part: string
