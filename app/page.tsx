@@ -11,8 +11,7 @@ export default function App() {
 
 	// 올바른 유저토큰인지 확인하는 API call
 	const GetUserInfoAPIcall = async (userToken: string) => {
-		const GET_USER_INFO_URL =
-			"https://external-api.stage.lookcloud.co/users/" + userToken
+		const GET_USER_INFO_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/users/${userToken}`
 		await fetch(GET_USER_INFO_URL, {
 			method: "GET",
 			headers: {

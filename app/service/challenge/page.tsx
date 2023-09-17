@@ -31,10 +31,12 @@ export default function Challenge() {
 						return (
 							<Link
 								key={i}
-								className={`${i !== 0 ? "pointer-events-none" : null}`}
+								className={`${
+									challenge.state < 0 ? "pointer-events-none" : null
+								}`}
 								href={{
-									pathname: "/challenge/leaderboard",
-									query: { id: i },
+									pathname: "/service/challenge/leaderboard",
+									query: { id: challenge.challengeId },
 								}}
 							>
 								<ChallengeCategoryBox
@@ -42,6 +44,7 @@ export default function Challenge() {
 									challengeName={challenge.challengeName}
 									startDate={challenge.startDate}
 									endDate={challenge.endDate}
+									state={challenge.state}
 									thumbnail={challenge.thumbnail}
 									comment={challenge.comment}
 									participantsNum={challenge.participantsNum}

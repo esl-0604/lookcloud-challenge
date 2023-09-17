@@ -3,7 +3,7 @@
 import LocalStorage from "@/app/utils/localstorage"
 import Profile from "@/public/svg/profile.svg"
 import InstagramLoginButton from "@/app/init/login/instagramloginbutton"
-import { userProfileState } from "@/app/utils/atoms/userprofile"
+import { userProfileState } from "@/app/utils/atoms/serviceGlobalState"
 import { useRecoilState, useRecoilValue } from "recoil"
 
 export default function ChallengeProfileMain() {

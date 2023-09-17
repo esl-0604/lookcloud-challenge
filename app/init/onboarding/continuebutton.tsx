@@ -47,8 +47,7 @@ export default function ContinueButton({
 		}
 	}
 	const GetUserInfoAPIcall = async (userId: string) => {
-		const GET_USER_INFO_URL =
-			"https://external-api.stage.lookcloud.co/users/" + userId
+		const GET_USER_INFO_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/users/${userId}`
 		await fetch(GET_USER_INFO_URL, {
 			method: "GET",
 			headers: {
@@ -77,7 +76,7 @@ export default function ContinueButton({
 	}
 
 	const registerUserAPIcall = async (facebookId: number) => {
-		const REGISTER_USER_URL = "https://external-api.stage.lookcloud.co/users"
+		const REGISTER_USER_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/users`
 		await fetch(REGISTER_USER_URL, {
 			method: "POST",
 			mode: "cors",

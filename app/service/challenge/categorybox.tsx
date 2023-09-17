@@ -12,29 +12,15 @@ export default function ChallengeCategoryBox({
 	challengeName,
 	startDate,
 	endDate,
+	state,
 	thumbnail,
 	comment,
 	participantsNum,
 }: challengeInfoType) {
-	// const [profileData, setProfileData] = useRecoilState<any>(userProfileState)
-	// let Title = challengTitle
-	// if (challengTitle === "고연전" && profileData.organization === "연세대학교") {
-	// 	Title = "연고전"
-	// }
-
-	const today: Date = new Date()
-	const hasDday: boolean = startDate
-		? startDate.getTime() <= today.getTime()
-			? true
-			: false
-		: false
-	const diffDate: number = endDate ? endDate.getTime() - today.getTime() : -1
-	const dDay: number = Math.floor(diffDate / (1000 * 60 * 60 * 24))
-
 	return (
 		<div
 			className={`flex justify-center items-center relative w-[100%] h-[350px] mb-[24px] ${
-				dDay ? "cursor-pointer" : null
+				state >= 0 ? "cursor-pointer" : null
 			}`}
 		>
 			<img
@@ -47,10 +33,10 @@ export default function ChallengeCategoryBox({
 					{challengeName}
 				</div>
 				<div className="flex justify-start items-center w-[100%] px-[12px] h-[20px] text-[12px]">
-					{hasDday ? (
+					{state >= 0 ? (
 						<>
 							<div className="flex justify-end items-center h-[100%]">
-								D-{dDay === 0 ? "Day" : dDay}
+								D-{state === 0 ? "Day" : state}
 							</div>
 							<div className="flex justify-end items-center w-[70px] h-[100%]">
 								{participantsNum}명 참가중
@@ -58,7 +44,7 @@ export default function ChallengeCategoryBox({
 						</>
 					) : (
 						<div className="flex justify-start items-center w-[100%] h-[100%] font-textBoxFont2">
-							comming soon
+							{state === -1 ? "comming soon" : "already end"}
 						</div>
 					)}
 				</div>

@@ -94,7 +94,7 @@ export default function ChallengeEvaluateMain() {
 	const [canBeNext, setCanBeNext] = useState<boolean>(false)
 
 	const GetChallengeImgs = async (userId: string) => {
-		const GET_CHALLENGEIMAGES_URL = `https://external-api.stage.lookcloud.co/challenges/${challengeId}/participations-to-evaluate?userId=${userId}&pageSize=5`
+		const GET_CHALLENGEIMAGES_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/challenges/${challengeId}/participations-to-evaluate?userId=${userId}&pageSize=5`
 		await fetch(GET_CHALLENGEIMAGES_URL, {
 			method: "GET",
 			headers: {
@@ -129,7 +129,7 @@ export default function ChallengeEvaluateMain() {
 		rating: number,
 		participationId: string,
 	) => {
-		const POST_EVALUATEIMAGE_URL = `https://external-api.stage.lookcloud.co/challenges/${challengeId}/evaluate`
+		const POST_EVALUATEIMAGE_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/challenges/${challengeId}/evaluate`
 		await fetch(POST_EVALUATEIMAGE_URL, {
 			method: "POST",
 			headers: {

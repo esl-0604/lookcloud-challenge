@@ -1,9 +1,11 @@
 "use client"
+
+import { challengeRankerType } from "@/app/utils/atoms/serviceGlobalState"
+
 interface RankRowProps {
-	rank: number
-	ranker: any
+	ranker: challengeRankerType
 }
-export default function RankRow({ rank, ranker }: RankRowProps) {
+export default function RankRow({ ranker }: RankRowProps) {
 	return (
 		<div className="flex flex-row justify-between items-center w-[100%] h-[40px] bg-[#242344] mt-1 rounded-md px-[8px]">
 			<div className="flex flex-row">
@@ -16,7 +18,7 @@ export default function RankRow({ rank, ranker }: RankRowProps) {
 				/>
 				<div className="flex flex-col py-[8px]">
 					<div className="flex flex-row">
-						<img
+						{/* <img
 							src={
 								ranker?.organization === "고려대학교"
 									? "/svg/KU.svg"
@@ -27,15 +29,15 @@ export default function RankRow({ rank, ranker }: RankRowProps) {
 							width="7.91px"
 							height="10px"
 							style={{ marginRight: 2.09 }}
-						/>
+						/> */}
 						<span className="text-[8px]">{ranker?.nickName}</span>
 					</div>
 					<span className="text-[8px] leading-[8px]">
-						@{ranker?.instagramUserName}
+						{ranker ? "@" + ranker.instagram.userName : ""}
 					</span>
 				</div>
 			</div>
-			<span>{ranker?.lScore}</span>
+			<span>{ranker ? ranker.lScore : 0}</span>
 		</div>
 	)
 }

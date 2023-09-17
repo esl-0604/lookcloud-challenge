@@ -14,7 +14,7 @@ export default function ChallengeHeader() {
 		router.back()
 	}
 	const GoHome = () => {
-		router.push("/challenge")
+		router.push("/service/challenge")
 	}
 	return (
 		<div className="flex flex-row sticky top-0 justify-between items-center w-[100%] h-[56px] px-[16px] z-10 bg-black">
@@ -22,17 +22,17 @@ export default function ChallengeHeader() {
 				<HeaderLogo width={"126"} height={"32"} color={"white"} />
 			</div>
 
-			{path === "/challenge/evaluate" ? (
+			{path === "service/challenge/evaluate" ? (
 				<div className="text-right text-[12px] text-white font-textBoxFont">
 					고연전
 				</div>
 			) : (
-				<Link href={"/profile"} className="cursor-pointer">
+				<Link href={"/service/profile"} className="cursor-pointer">
 					<Profile width={"40"} height={"40"} />
 				</Link>
 			)}
 
-			{path === "/challenge" ? null : (
+			{path === "/service/challenge" ? null : (
 				<div
 					className="absolute top-[74px] right-[15px] z-10 cursor-pointer"
 					onClick={GoBackward}

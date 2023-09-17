@@ -1,7 +1,7 @@
 "use client"
 
 import { useContext, useEffect, useState } from "react"
-import Clothes from "../../../public/svg/clothes.svg"
+import Clothes from "@/public/svg/clothes.svg"
 import { ChallengeInfoContext } from "./main"
 
 interface ChallengeParticipantProductInfoBoxProps {

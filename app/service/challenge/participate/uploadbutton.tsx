@@ -1,9 +1,9 @@
 "use client"
 
 import { useContext, useRef } from "react"
-import Camera from "../../../public/svg/camera.svg"
-import Gallery from "../../../public/svg/gallery.svg"
-import Instagram from "../../../public/svg/instagram.svg"
+import Camera from "@/public/svg/camera.svg"
+import Gallery from "@/public/svg/gallery.svg"
+import Instagram from "@/public/svg/instagram.svg"
 import { ChallengeInfoContext } from "./main"
 
 interface ChallengeParticipantUploadButtonProps {

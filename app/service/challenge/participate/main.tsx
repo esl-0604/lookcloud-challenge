@@ -4,9 +4,9 @@ import { useState, createContext, useEffect } from "react"
 import ChallengeParticipantImageInput from "./imageinput"
 import ChallengeParticipantProductInput from "./productinput"
 import ChallengeParticipantTextInput from "./textinput"
-import { userProfileState } from "../../../utils/atoms/userprofile"
+import { userProfileState } from "@/app/utils/atoms/serviceGlobalState"
 import { useRecoilState, useRecoilValue } from "recoil"
-import { userChallengeParticipantInfoState } from "@/app/utils/atoms/userchallengeparticipant"
+// import { userChallengeParticipantInfoState } from "@/app/utils/atoms/serviceGlobalState"
 import { useParams, useSearchParams } from "next/navigation"
 
 export const ChallengeInfoContext = createContext<any>(null)
@@ -69,8 +69,7 @@ export default function ChallengeParticipantMain() {
 	}
 
 	const ImageUpload = async (formData: any) => {
-		const IMAGE_UPLOAD_URL =
-			"https://external-api.stage.lookcloud.co/participations/image"
+		const IMAGE_UPLOAD_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/participations/image`
 		await fetch(IMAGE_UPLOAD_URL, {
 			method: "POST",
 			body: formData,
@@ -99,8 +98,7 @@ export default function ChallengeParticipantMain() {
 			bottom: lookProductInfoBottom,
 			shoes: lookProductInfoShoes,
 		}
-		const CHALLENGE_UPLOAD_URL =
-			"https://external-api.stage.lookcloud.co/participations"
+		const CHALLENGE_UPLOAD_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/participations`
 		await fetch(CHALLENGE_UPLOAD_URL, {
 			method: "POST",
 			headers: {
@@ -136,30 +134,7 @@ export default function ChallengeParticipantMain() {
 	})
 
 	const id = param.get("id")
-	// console.log(id);
-	useEffect(() => {
-		const GET_CHALLENGES_URL =
-			"https://external-api.stage.lookcloud.co/challenges/" + id
-		fetch(GET_CHALLENGES_URL, {
-			method: "GET",
-			mode: "cors",
-			headers: {
-				"Content-Type": "application/json",
-			},
-		})
-			.then((res) => res.json())
-			.then(({ status, message, data }) => {
-				console.log(data)
-				let newChallengeData = { ...data }
-				if (data.name === "고연전") {
-					if (profileData.organization === "연세대학교") {
-						newChallengeData.name = "연고전"
-					}
-				}
-				setChallengeData(newChallengeData)
-			})
-			.catch((error) => console.log(error))
-	}, [])
+	// console.log(id)
 
 	const today = new Date()
 	const deadline = new Date("2023-09-10")
