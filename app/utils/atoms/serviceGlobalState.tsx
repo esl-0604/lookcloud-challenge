@@ -4,7 +4,7 @@ export interface userProfileType {
 	userToken: string | null
 	nickname: string
 	gender: string
-	instagram: string | null
+	instagramUserName: string | null
 }
 
 export const userProfileState = atom<userProfileType>({
@@ -13,7 +13,7 @@ export const userProfileState = atom<userProfileType>({
 		userToken: null,
 		nickname: "",
 		gender: "",
-		instagram: null,
+		instagramUserName: null,
 	},
 })
 

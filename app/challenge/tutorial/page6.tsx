@@ -2,17 +2,19 @@
 
 import { useContext } from "react"
 import { TutorialPageContext } from "./main"
-import { useRouter } from "next/navigation"
 
-export default function Page10() {
+export default function Page6() {
 	const { tutorialPageNum, setTutorialPageNum }: any =
 		useContext(TutorialPageContext)
-	const router = useRouter()
+
 	const handleTouch = () => {
-		router.push("/service/challenge/evaluate")
+		setTutorialPageNum((prevPageNum: any) => prevPageNum + 1)
 	}
 	return (
-		<div className="pl-4 pr-4 w-[100%] h-[100%] flex flex-col items-center">
+		<div
+			className="pl-4 pr-4 w-[100%] h-[100%] flex flex-col items-center"
+			onTouchStart={handleTouch}
+		>
 			<div>
 				<div className="h-full w-full relative bg-black opacity-75">
 					<img
@@ -21,7 +23,7 @@ export default function Page10() {
 						style={{ width: "300px", height: "450px" }}
 					/>
 					<img
-						src="/svg/thumbsdown.svg"
+						src="/svg/thumbsup.svg"
 						alt="image"
 						style={{
 							position: "absolute",
@@ -45,9 +47,18 @@ export default function Page10() {
 					</div>
 				</div>
 			</div>
+			<span className="absolute top-[490px] w-[80%] text-left text-white text-[8px]">
+				해당 참여자의 프로필 개요입니다.
+			</span>
+			<span className="absolute z-10 top-[555px] w-[80%] pl-[180px] text-right text-white text-[8px]">
+				해당 룩의 현재L.Score 입니다.
+			</span>
+			<span className="absolute z-10 top-[570px] w-[80%] text-left text-white text-[8px]">
+				해당 참여자가 등록한 룩을 구성한 제품 정보입니다.
+			</span>
 			<div className="absolute top-[510px] w-[80%] flex flex-col">
 				<div className="flex flex-row justify-between items-center w-full h-[40px] bg-black mt-1 rounded-md">
-					<div className="flex flex-row">
+					<div className="flex flex-row ring-1 ring-gray-200 px-2 py-1">
 						<img
 							className="rounded-full"
 							src="/svg/sampleProfileImg.svg"
@@ -64,9 +75,11 @@ export default function Page10() {
 							</span>
 						</div>
 					</div>
-					<span className="text-white text-[24px]">870</span>
+					<span className="text-white text-[24px] ring-1 ring-gray-200 px-2">
+						870
+					</span>
 				</div>
-				<div className="flex flex-col mt-[12px]">
+				<div className="w-[85%] flex flex-col mt-[35px] ring-1 ring-gray-200">
 					<span className="text-white text-[12px]">
 						상의 - musinsa standard basic cotton t-shirts
 					</span>
@@ -79,13 +92,6 @@ export default function Page10() {
 			<span className="absolute top-[620px] w-full text-right pr-5 text-[24px] text-white">
 				{tutorialPageNum}/10
 			</span>
-			<div
-				className="absolute left-[50px] top-[600px] flex items-center justify-center w-[50%] h-[50px] bg-gray-500 rounded-full ring-1 ring-white"
-				onTouchStart={handleTouch}
-				onClick={handleTouch}
-			>
-				<span className="text-xl text-white">시작하기</span>
-			</div>
 		</div>
 	)
 }

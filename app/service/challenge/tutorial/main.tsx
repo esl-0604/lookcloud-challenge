@@ -16,7 +16,7 @@ import TutorialHeader from "./header"
 export const TutorialPageContext = createContext<any>(null)
 
 export default function TutorialZMain() {
-	const [tutorialPageNum, setTutorialPageNum] = useState(1)
+	const [tutorialPageNum, setTutorialPageNum] = useState<number>(1)
 
 	useEffect(() => {
 		if (tutorialPageNum == 5) {
