@@ -2,7 +2,7 @@
 
 import SelectButton from "@/app/init/onboarding/selectbutton"
 import { useContext } from "react"
-import { OrganContext } from "@/app/init/onboarding/page"
+import { OrganContext } from "./context"
 
 export default function OnboardingOranizationInput() {
 	const { organ, setOrgan }: any = useContext(OrganContext)

@@ -4,7 +4,7 @@ import { useContext, useRef } from "react"
 import Camera from "@/public/svg/camera.svg"
 import Gallery from "@/public/svg/gallery.svg"
 import Instagram from "@/public/svg/instagram.svg"
-import { ChallengeInfoContext } from "./page"
+import { ChallengeInfoContext } from "./context"
 
 interface ChallengeParticipantUploadButtonProps {
 	text: string

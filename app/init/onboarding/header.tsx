@@ -3,7 +3,7 @@
 import HeaderLogo from "@/public/svg/headerlogo.svg"
 import Btn from "@/public/svg/btn.svg"
 import { useContext } from "react"
-import { StepContext } from "@/app/init/onboarding/page"
+import { StepContext } from "./context"
 
 export default function OnboardingHeader() {
 	const { step, setStep }: any = useContext(StepContext)

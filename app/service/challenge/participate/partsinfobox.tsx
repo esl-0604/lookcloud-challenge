@@ -2,9 +2,9 @@
 
 import { useContext, useEffect, useState } from "react"
 import Clothes from "@/public/svg/clothes.svg"
-import { ChallengeInfoContext } from "./page"
 import Cancle from "@/public/svg/cancle.svg"
 import { partType } from "@/app/utils/atoms/serviceGlobalState"
+import { ChallengeInfoContext } from "./context"
 
 interface ChallengeParticipantProductInfoBoxProps {
 	partIndex: number

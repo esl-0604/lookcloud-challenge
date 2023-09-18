@@ -1,13 +1,19 @@
 "use client"
 
-import { useState, createContext, useEffect } from "react"
+import { useState, useEffect } from "react"
 import OnboardingGenderInput from "@/app/init/onboarding/genderinput"
 import OnboardingHeader from "@/app/init/onboarding/header"
 import OnboardingNameInput from "@/app/init/onboarding/nameinput"
-import OnboardingOranizationInput from "@/app/init/onboarding/organizationinput"
+// import OnboardingOranizationInput from "@/app/init/onboarding/organizationinput"
 import TextBox from "@/app/init/onboarding/textbox"
 import ContinueButton from "@/app/init/onboarding/continuebutton"
 import OnboardingInstagramInput from "@/app/init/onboarding/instagraminput"
+import {
+	GenderContext,
+	InstagramContext,
+	NameContext,
+	StepContext,
+} from "./context"
 
 interface StepType {
 	id: "1" | "2" | "3"
@@ -18,12 +24,6 @@ export interface GenderType {
 // export interface OrganType {
 // 	organ: "고려대학교" | "연세대학교" | "기타"
 // }
-
-export const StepContext = createContext<any>(null)
-export const NameContext = createContext<any>(null)
-export const GenderContext = createContext<any>(null)
-export const OrganContext = createContext<any>(null)
-export const InstagramContext = createContext<any>(null)
 
 export default function Onboarding() {
 	const [step, setStep] = useState<StepType>({ id: "1" })

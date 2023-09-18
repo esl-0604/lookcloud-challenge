@@ -1,7 +1,7 @@
 "use client"
 
 import { useContext } from "react"
-import { ChallengeInfoContext } from "./page"
+import { ChallengeInfoContext } from "./context"
 
 export default function DescriptionInput() {
 	const { isAlreadyPosted, lookDescription, setLookDescription } =

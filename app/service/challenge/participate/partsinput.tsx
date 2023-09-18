@@ -3,8 +3,8 @@
 import ProductInfoBox from "./partsinfobox"
 import Add from "@/public/svg/add.svg"
 import { useContext, useEffect } from "react"
-import { ChallengeInfoContext } from "./page"
 import { partType } from "@/app/utils/atoms/serviceGlobalState"
+import { ChallengeInfoContext } from "./context"
 
 export default function PartsInput() {
 	const { lookParts, setLookParts } = useContext(ChallengeInfoContext)

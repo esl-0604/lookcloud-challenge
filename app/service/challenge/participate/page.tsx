@@ -1,7 +1,7 @@
 "use client"
 
 import ChallengeHeader from "../header"
-import { useState, createContext, useEffect } from "react"
+import { useState, useEffect } from "react"
 import ImageInput from "./imageinput"
 import DescriptionInput from "./descriptioninput"
 import PartsInput from "./partsinput"
@@ -16,8 +16,7 @@ import { userChallengeParticipateInfo } from "@/app/utils/atoms/serviceGlobalSta
 import { useRouter, useSearchParams } from "next/navigation"
 import ParticipateThumbnail from "./thumbnail"
 import AlertBox from "@/app/components/AlertBox"
-
-export const ChallengeInfoContext = createContext<any>(null)
+import { ChallengeInfoContext } from "./context"
 
 export default function Participate() {
 	const router = useRouter()

@@ -1,7 +1,7 @@
 "use client"
 
 import { useContext, useState } from "react"
-import { InstagramContext } from "@/app/init/onboarding/page"
+import { InstagramContext } from "./context"
 
 interface NoticeTextType {
 	text: string

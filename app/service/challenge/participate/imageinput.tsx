@@ -3,7 +3,7 @@
 import { useContext, useEffect } from "react"
 import ChallengeParticipantUploadButton from "./uploadbutton"
 import Cancle from "@/public/svg/cancle.svg"
-import { ChallengeInfoContext } from "./page"
+import { ChallengeInfoContext } from "./context"
 
 export default function ImageInput() {
 	const { isAlreadyPosted, lookImage, setLookImage } =

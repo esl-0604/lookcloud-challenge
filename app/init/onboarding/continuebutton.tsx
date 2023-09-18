@@ -1,9 +1,10 @@
 "use client"
 
 import { useContext } from "react"
-import { GenderType, StepContext } from "@/app/init/onboarding/page"
+import { GenderType } from "@/app/init/onboarding/page"
 import { useRouter } from "next/navigation"
 import LocalStorage from "@/app/utils/localstorage"
+import { StepContext } from "./context"
 
 interface ContinueButtonProps {
 	canBeContinued: boolean
