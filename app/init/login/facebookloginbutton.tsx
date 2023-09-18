@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation"
 export default function FacebookLoginButton() {
 	const [facebookID, setFacebookID] = useState<any>(null)
 	const router = useRouter()
+
 	const GetFacebookUserInfoAPIcall = async (facebookId: string) => {
 		const GET_FACEBOOK_USER_INFO_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/users/facebook/${facebookId}`
 		await fetch(GET_FACEBOOK_USER_INFO_URL, {
@@ -19,24 +20,25 @@ export default function FacebookLoginButton() {
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
 				// console.log(status);
-				if (status === "ILLEGAL_STATE") {
+				if (status === "NOT_FOUND") {
 					LocalStorage.removeItem("lookCloud-facebook-Id")
 					LocalStorage.setItem("lookCloud-facebook-Id", facebookID)
 					if (LocalStorage.getItem("lookCloud-facebook-Id")) {
 						router.push("/init/onboarding")
 					}
-				} else if (status === 200) {
+				} else {
 					// console.log(data);
-					const userID = data
-					GetUserInfoAPIcall(userID)
+					const userToken = data
+					GetUserInfoAPIcall(userToken)
 				}
 			})
 			.catch((error) => {
 				console.log(error)
 			})
 	}
-	const GetUserInfoAPIcall = async (userId: string) => {
-		const GET_USER_INFO_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/users/${userId}`
+
+	const GetUserInfoAPIcall = async (userToken: string) => {
+		const GET_USER_INFO_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/users/${userToken}`
 		await fetch(GET_USER_INFO_URL, {
 			method: "GET",
 			headers: {
@@ -45,14 +47,14 @@ export default function FacebookLoginButton() {
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
-				if (status === "ILLEGAL_STATE") {
+				if (status === "NOT_FOUND") {
 					LocalStorage.removeItem("lookCloud-user-token")
 					LocalStorage.removeItem("lookCloud-facebook-Id")
 					router.push("/init/login")
-				} else if (status === 200) {
+				} else {
 					LocalStorage.removeItem("lookCloud-user-token")
 					LocalStorage.removeItem("lookCloud-facebook-Id")
-					LocalStorage.setItem("lookCloud-user-token", userId)
+					LocalStorage.setItem("lookCloud-user-token", userToken)
 					if (LocalStorage.getItem("lookCloud-user-token")) {
 						router.push("/service/challenge")
 					}
@@ -89,7 +91,6 @@ export default function FacebookLoginButton() {
 					}}
 					render={({ onClick }) => (
 						<div onClick={onClick}>
-							{/* render prop을 사용할 땐 반드시 onClick을 사용해주세요! */}
 							<div className="flex justify-center items-center w-[320px] h-[52px] rounded-[29px] bg-[#D9D9D9]">
 								<div className="flex justify-center items-center w-[316px] h-[48px] rounded-[29px] bg-[#707070] text-white text-[14px] font-loginBoxFont">
 									SIGN IN WITH FACEBOOK

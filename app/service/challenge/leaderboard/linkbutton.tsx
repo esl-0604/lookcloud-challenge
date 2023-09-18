@@ -51,7 +51,7 @@ export default function LinkButton() {
 						<div className="flex flex-row relative justify-start items-start w-full h-[100px]">
 							<div className="flex justify-center items-center w-[100px] h-full rounded-[10px] overflow-hidden">
 								<img
-									src={userChallengeParticipateData[challengeId].imageUrl}
+									src={userChallengeParticipateData[challengeId].thumbnailUrl}
 									alt="myChallenge"
 									className="flex justify-center items-center w-full h-full object-cover"
 								/>
