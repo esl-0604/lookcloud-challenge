@@ -1,7 +1,7 @@
 "use client"
 
 import { useContext } from "react"
-import { GenderType, OrganType, StepContext } from "@/app/init/onboarding/page"
+import { GenderType, StepContext } from "@/app/init/onboarding/page"
 import { useRouter } from "next/navigation"
 import LocalStorage from "@/app/utils/localstorage"
 
@@ -9,14 +9,16 @@ interface ContinueButtonProps {
 	canBeContinued: boolean
 	nickName: string
 	gender: GenderType | null
-	organ: OrganType | null
+	// organ: OrganType | null
+	instagramId: string
 }
 
 export default function ContinueButton({
 	canBeContinued,
 	nickName,
 	gender,
-	organ,
+	// organ,
+	instagramId,
 }: ContinueButtonProps) {
 	const { step, setStep }: any = useContext(StepContext)
 	const router = useRouter()
@@ -29,21 +31,19 @@ export default function ContinueButton({
 				console.log({
 					닉네임: nickName,
 					성별: gender,
-					소속: organ,
+					인스타그램ID: instagramId,
 				})
 				// 유저 정보 저장 api call
 				const facebookID = LocalStorage.getItem("lookCloud-facebook-Id")
 				if (facebookID) registerUserAPIcall(Number(facebookID))
 				else {
 					console.log("연결된 facebookId가 없습니다.")
-					router.push("/login")
-
-					// 나중에 지워야함.
-					// setStep({ id: (stepNum + 1).toString() });
+					router.push("/init/login")
 				}
-			} else if (stepNum === 4) {
-				router.push("/challenge")
 			}
+			// else if (stepNum === 4) {
+			// 	router.push("/service/challenge")
+			// }
 		}
 	}
 	const GetUserInfoAPIcall = async (userId: string) => {
@@ -59,14 +59,14 @@ export default function ContinueButton({
 				if (status === "ILLEGAL_STATE") {
 					LocalStorage.removeItem("lookCloud-user-Id")
 					LocalStorage.removeItem("lookCloud-facebook-Id")
-					router.push("/login")
-				} else if (status === 200) {
+					router.push("/init/login")
+				} else {
 					LocalStorage.removeItem("lookCloud-user-Id")
 					LocalStorage.removeItem("lookCloud-facebook-Id")
 					LocalStorage.setItem("lookCloud-user-Id", userId)
 					if (LocalStorage.getItem("lookCloud-user-Id")) {
-						// router.push("./challenge");
-						setStep({ id: "4" })
+						router.replace("/service/challenge")
+						// setStep({ id: "4" })
 					}
 				}
 			})
@@ -87,21 +87,22 @@ export default function ContinueButton({
 				facebookLoginId: facebookId,
 				nickName: nickName,
 				gender: gender,
-				organization: organ,
+				instagramUserName: instagramId,
 			}),
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
-				if (status === 200) {
-					GetUserInfoAPIcall(data)
-				} else {
+				if (status === "ILLEGAL_STATE") {
 					console.log(message)
-					alert("Done 버튼을 다시 눌러주세요.")
+					router.replace("/init/login")
+					// alert("Done 버튼을 다시 눌러주세요.")
+				} else {
+					GetUserInfoAPIcall(data)
 				}
 			})
 			.catch((error) => {
 				console.log(error)
-				router.push("/login")
+				router.replace("/init/login")
 			})
 	}
 	return (

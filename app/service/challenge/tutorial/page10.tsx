@@ -9,7 +9,7 @@ export default function Page10() {
 		useContext(TutorialPageContext)
 	const router = useRouter()
 	const handleTouch = () => {
-		router.push("/challenge/evaluate")
+		router.push("/service/challenge/evaluate")
 	}
 	return (
 		<div className="pl-4 pr-4 w-[100%] h-[100%] flex flex-col items-center">
@@ -82,6 +82,7 @@ export default function Page10() {
 			<div
 				className="absolute left-[50px] top-[600px] flex items-center justify-center w-[50%] h-[50px] bg-gray-500 rounded-full ring-1 ring-white"
 				onTouchStart={handleTouch}
+				onClick={handleTouch}
 			>
 				<span className="text-xl text-white">시작하기</span>
 			</div>

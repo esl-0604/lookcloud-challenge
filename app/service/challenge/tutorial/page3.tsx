@@ -14,6 +14,7 @@ export default function Page3() {
 		<div
 			className="pl-4 pr-4 w-[100%] h-[100%] flex flex-col items-center"
 			onTouchStart={handleTouch}
+			onClick={handleTouch}
 		>
 			<div className="flex flex-row w-[100%] items-center justify-center">
 				<img className="w-50 pr-5" src="/svg/swipeup.svg" alt="image" />

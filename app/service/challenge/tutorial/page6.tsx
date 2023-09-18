@@ -14,6 +14,7 @@ export default function Page6() {
 		<div
 			className="pl-4 pr-4 w-[100%] h-[100%] flex flex-col items-center"
 			onTouchStart={handleTouch}
+			onClick={handleTouch}
 		>
 			<div>
 				<div className="h-full w-full relative bg-black opacity-75">

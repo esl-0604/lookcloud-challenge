@@ -1,7 +1,7 @@
 "use client"
 
 import LocalStorage from "@/app/utils/localstorage"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { useRecoilState } from "recoil"
 import {
 	challengeInfoList,
@@ -43,18 +43,19 @@ export default function ServiceLayout({
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
-				if (status === "OK") {
+				if (status === "NOT_FOUND") {
+					console.log(message)
+					router.replace("/init/login")
+				} else {
 					console.log(data)
 					let newProfileData = { ...profileData }
 					newProfileData.userToken = userToken
 					newProfileData.nickname = '"' + data["nickName"] + '"님'
 					newProfileData.gender = data["gender"] === "MALE" ? "남성" : "여성"
 					if (data["instagramUserName"]) {
-						newProfileData.instagram = "@" + data["instagramUserName"]
+						newProfileData.instagramUserName = "@" + data["instagramUserName"]
 					}
 					setProfileData(newProfileData)
-				} else {
-					router.replace("/init/login")
 				}
 			})
 			.catch((error) => {

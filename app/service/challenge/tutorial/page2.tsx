@@ -14,6 +14,7 @@ export default function Page2() {
 		<div
 			className="pl-4 pr-4 w-[100%] h-[100%] flex flex-col items-center"
 			onTouchStart={handleTouch}
+			onClick={handleTouch}
 		>
 			<div className="flex flex-row w-[100%] items-start">
 				<span className="w-[80%] text-left pl-5 text-lg text-black">

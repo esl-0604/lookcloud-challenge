@@ -10,32 +10,34 @@ import ContinueButton from "@/app/init/onboarding/continuebutton"
 import OnboardingInstagramInput from "@/app/init/onboarding/instagraminput"
 
 interface StepType {
-	id: "1" | "2" | "3" | "4"
+	id: "1" | "2" | "3"
 }
 export interface GenderType {
 	gender: "MALE" | "FEMALE"
 }
-export interface OrganType {
-	organ: "고려대학교" | "연세대학교" | "기타"
-}
+// export interface OrganType {
+// 	organ: "고려대학교" | "연세대학교" | "기타"
+// }
 
 export const StepContext = createContext<any>(null)
 export const NameContext = createContext<any>(null)
 export const GenderContext = createContext<any>(null)
 export const OrganContext = createContext<any>(null)
+export const InstagramContext = createContext<any>(null)
 
 export default function Onboarding() {
 	const [step, setStep] = useState<StepType>({ id: "1" })
 	const [nickName, setNickName] = useState<string>("")
 	const [gender, setGender] = useState<GenderType | null>(null)
-	const [organ, setOrgan] = useState<OrganType | null>(null)
+	// const [organ, setOrgan] = useState<OrganType | null>(null)
+	const [instagramId, setInstagramId] = useState<string>("")
 	const [canBeContinued, setCanBeContinued] = useState<boolean>(false)
 
 	const stepText = {
 		"1": "이름을 알려주세요.",
 		"2": "성별을 알려주세요.",
-		"3": "소속을 알려주세요.",
-		"4": "인스타그램을 연동하세요",
+		// "3": "소속을 알려주세요.",
+		"3": "인스타그램 ID를 알려주세요",
 	}
 
 	useEffect(() => {
@@ -49,13 +51,14 @@ export default function Onboarding() {
 				else setCanBeContinued(false)
 				break
 			case "3":
-				if (organ) setCanBeContinued(true)
+				if (instagramId) setCanBeContinued(true)
 				else setCanBeContinued(false)
 				break
 			default:
 				break
 		}
-	}, [step, nickName, gender, organ])
+	}, [step, nickName, gender, instagramId])
+
 	return (
 		<main className="flex flex-col justify-start items-center w-[100%] h-[100%]">
 			<StepContext.Provider value={{ step, setStep }}>
@@ -72,18 +75,21 @@ export default function Onboarding() {
 								<OnboardingGenderInput />
 							</GenderContext.Provider>
 						) : step.id === "3" ? (
-							<OrganContext.Provider value={{ organ, setOrgan }}>
-								<OnboardingOranizationInput />
-							</OrganContext.Provider>
-						) : (
-							<OnboardingInstagramInput />
-						)}
+							<InstagramContext.Provider
+								value={{ instagramId, setInstagramId }}
+							>
+								<OnboardingInstagramInput />
+							</InstagramContext.Provider>
+						) : // <OrganContext.Provider value={{ organ, setOrgan }}>
+						// 	<OnboardingOranizationInput />
+						// </OrganContext.Provider>
+						null}
 
 						<ContinueButton
 							canBeContinued={canBeContinued}
 							nickName={nickName}
 							gender={gender}
-							organ={organ}
+							instagramId={instagramId}
 						/>
 					</div>
 				</div>
