@@ -4,7 +4,7 @@ export default function Loading() {
 	return (
 		<main className="flex flex-col justify-center items-center w-[100%] h-[100%] bg-black">
 			<TitleIcon width={"310"} height={"47"} color={"white"} />
-			<div className="text-white">loading.tsx</div>
+			{/* <div className="text-white">loading.tsx</div> */}
 		</main>
 	)
 }

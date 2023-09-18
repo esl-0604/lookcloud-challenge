@@ -16,7 +16,7 @@ export default function OnboardingInstagramInput() {
 	})
 
 	const SettingInstagramId = (instagramId: string) => {
-		setInstagramId(instagramId)
+		setInstagramId(instagramId.replace(/@/g, ""))
 	}
 	return (
 		<div className="flex flex-col justify-between items-center w-[320px] h-[48px] text-[12px]">

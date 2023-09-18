@@ -6,8 +6,15 @@ import LocalStorage from "@/app/utils/localstorage"
 import { useRouter } from "next/navigation"
 
 export default function FacebookLoginButton() {
-	const [facebookID, setFacebookID] = useState<any>(null)
+	const [facebookID, setFacebookID] = useState<string>("")
 	const router = useRouter()
+
+	useEffect(() => {
+		if (facebookID) {
+			// console.log(typeof facebookID)
+			GetFacebookUserInfoAPIcall(facebookID)
+		}
+	}, [facebookID])
 
 	const GetFacebookUserInfoAPIcall = async (facebookId: string) => {
 		const GET_FACEBOOK_USER_INFO_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/users/facebook/${facebookId}`
@@ -19,16 +26,18 @@ export default function FacebookLoginButton() {
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
-				// console.log(status);
+				// 페이스북 계정으로 유저 조회 실패
 				if (status === "NOT_FOUND") {
 					LocalStorage.removeItem("lookCloud-facebook-Id")
-					LocalStorage.setItem("lookCloud-facebook-Id", facebookID)
+					LocalStorage.setItem("lookCloud-facebook-Id", facebookId)
 					if (LocalStorage.getItem("lookCloud-facebook-Id")) {
 						router.push("/init/onboarding")
 					}
-				} else {
+				}
+				// 페이스북 계정으로 유저 조회 성공
+				else {
 					// console.log(data);
-					const userToken = data
+					const userToken: string = data
 					GetUserInfoAPIcall(userToken)
 				}
 			})
@@ -47,16 +56,19 @@ export default function FacebookLoginButton() {
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
+				// 유저 토큰으로 유저 조회 실패
 				if (status === "NOT_FOUND") {
 					LocalStorage.removeItem("lookCloud-user-token")
 					LocalStorage.removeItem("lookCloud-facebook-Id")
-					router.push("/init/login")
-				} else {
+					router.replace("/init/login")
+				}
+				// 유저 토큰으로 유저 조회 성공
+				else {
 					LocalStorage.removeItem("lookCloud-user-token")
 					LocalStorage.removeItem("lookCloud-facebook-Id")
 					LocalStorage.setItem("lookCloud-user-token", userToken)
 					if (LocalStorage.getItem("lookCloud-user-token")) {
-						router.push("/service/challenge")
+						router.replace("/service/challenge")
 					}
 				}
 			})
@@ -64,12 +76,6 @@ export default function FacebookLoginButton() {
 				console.log(error)
 			})
 	}
-	useEffect(() => {
-		if (facebookID) {
-			// console.log(facebookID);
-			GetFacebookUserInfoAPIcall(facebookID)
-		}
-	}, [facebookID])
 
 	return (
 		<>
@@ -87,7 +93,7 @@ export default function FacebookLoginButton() {
 					onProfileSuccess={(response) => {
 						// console.log("Get Profile Success!");
 						// console.log(response);
-						setFacebookID(response["id"])
+						if (response["id"]) setFacebookID(response["id"])
 					}}
 					render={({ onClick }) => (
 						<div onClick={onClick}>

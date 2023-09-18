@@ -24,11 +24,11 @@ export default function App() {
 				if (status === "NOT_FOUND") {
 					LocalStorage.removeItem("lookCloud-user-token")
 					LocalStorage.removeItem("lookCloud-facebook-Id")
-					router.push("/init/login")
+					router.replace("/init/login")
 
 					// 올바른 유저 토큰인 경우, 자동 로그인 성공.
 				} else {
-					router.push("/service/challenge")
+					router.replace("/service/challenge")
 				}
 			})
 			.catch((error) => {

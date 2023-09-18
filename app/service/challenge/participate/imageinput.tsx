@@ -6,7 +6,8 @@ import Cancle from "@/public/svg/cancle.svg"
 import { ChallengeInfoContext } from "./page"
 
 export default function ImageInput() {
-	const { lookImage, setLookImage } = useContext(ChallengeInfoContext)
+	const { isAlreadyPosted, lookImage, setLookImage } =
+		useContext(ChallengeInfoContext)
 	const CancleLookImage = () => {
 		setLookImage(null)
 	}
@@ -23,16 +24,18 @@ export default function ImageInput() {
 						alt="challengeImg"
 						className="flex justify-center items-start w-full object-cover"
 					/>
-					<div
-						className="flex justify-center items-center absolute top-[15px] right-[15px] cursor-pointer"
-						onClick={CancleLookImage}
-					>
-						<Cancle width={20} height={20} />
-					</div>
+					{isAlreadyPosted ? null : (
+						<div
+							className="flex justify-center items-center absolute top-[15px] right-[15px] cursor-pointer"
+							onClick={CancleLookImage}
+						>
+							<Cancle width={20} height={20} />
+						</div>
+					)}
 				</div>
 			) : (
 				<div className="flex flex-col justify-between items-center w-full h-[110px] mt-[9px] font-bold">
-					{/* <ChallengeParticipantUploadButton text="직접 촬영하기" /> */}
+					<ChallengeParticipantUploadButton text="직접 촬영하기" />
 					<ChallengeParticipantUploadButton text="갤러리에서 가져오기" />
 					{/* <ChallengeParticipantUploadButton text="인스타그램에서 가져오기" /> */}
 				</div>

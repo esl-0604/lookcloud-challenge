@@ -17,7 +17,7 @@ export default function ChallengeHeader() {
 		router.push("/service/challenge")
 	}
 	return (
-		<div className="flex flex-row sticky top-0 justify-between items-center w-[100%] h-[56px] px-[16px] z-10 bg-black">
+		<div className="flex flex-row sticky top-0 justify-between items-center w-[100%] h-[56px] px-[16px] z-30 bg-black">
 			<div className="cursor-pointer" onClick={GoHome}>
 				<HeaderLogo width={"126"} height={"32"} color={"white"} />
 			</div>

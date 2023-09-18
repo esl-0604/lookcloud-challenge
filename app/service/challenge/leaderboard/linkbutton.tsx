@@ -51,27 +51,29 @@ export default function LinkButton() {
 						<div className="flex flex-row relative justify-start items-start w-full h-[100px]">
 							<div className="flex justify-center items-center w-[100px] h-full rounded-[10px] overflow-hidden">
 								<img
-									src={userChallengeParticipateData[challengeId].thumbnailUrl}
+									src={
+										userChallengeParticipateData[challengeId]?.look?.imageUrl
+									}
 									alt="myChallenge"
 									className="flex justify-center items-center w-full h-full object-cover"
 								/>
 							</div>
 							<div className="flex flex-col justify-between items-start w-[200px] h-[80px] ml-[9px]">
 								<div className="flex flex-row justify-start items-center w-full h-[32px] text-[12px]">
-									{profileData.nickname}은 현재
+									{profileData?.nickname}은 현재
 								</div>
 								<div className="flex flex-col justify-between items-start w-full h-[48px] text-[24px]">
 									<div className="flex flex-row justify-start items-center w-full h-[20px]">
-										{userChallengeParticipateData[challengeId].ranking}등 (상위
+										{userChallengeParticipateData[challengeId]?.ranking}등 (상위
 										{Math.floor(
-											(userChallengeParticipateData[challengeId].ranking /
-												challengeParticipantsData[challengeId].totalCount) *
+											(userChallengeParticipateData[challengeId]?.ranking /
+												challengeParticipantsData[challengeId]?.totalCount) *
 												100,
 										)}
 										%)
 									</div>
 									<div className="flex flex-row justify-start items-center w-full h-[20px]">
-										{userChallengeParticipateData[challengeId].lScore} 점
+										{userChallengeParticipateData[challengeId]?.lScore} 점
 									</div>
 								</div>
 							</div>

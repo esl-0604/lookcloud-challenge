@@ -42,12 +42,12 @@ export default function Challenge() {
 								<ChallengeCategoryBox
 									challengeId={challenge.challengeId}
 									challengeName={challenge.challengeName}
-									startDate={challenge.startDate}
-									endDate={challenge.endDate}
+									startedAt={challenge.startedAt}
+									endedAt={challenge.endedAt}
 									state={challenge.state}
-									thumbnail={challenge.thumbnail}
+									thumbnailUrl={challenge.thumbnailUrl}
 									comment={challenge.comment}
-									participantsNum={challenge.participantsNum}
+									totalCount={challenge.totalCount}
 								/>
 							</Link>
 						)

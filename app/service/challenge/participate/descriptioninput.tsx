@@ -4,7 +4,7 @@ import { useContext } from "react"
 import { ChallengeInfoContext } from "./page"
 
 export default function DescriptionInput() {
-	const { lookDescription, setLookDescription } =
+	const { isAlreadyPosted, lookDescription, setLookDescription } =
 		useContext(ChallengeInfoContext)
 
 	return (
@@ -14,6 +14,7 @@ export default function DescriptionInput() {
 			</div>
 			<div className="flex flex-col justify-between items-center w-full h-[105px] font-bold relative">
 				<textarea
+					readOnly={isAlreadyPosted}
 					rows={3}
 					maxLength={105}
 					className="w-full h-[100%] bg-transparent focus: outline-none placeholder-[#959595] leading-[36px] overflow-hidden "
