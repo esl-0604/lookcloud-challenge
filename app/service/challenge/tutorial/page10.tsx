@@ -1,7 +1,7 @@
 "use client"
 
 import Page10Main from "@/app/components/page10Main"
-import Page10Button from "@/app/components/page10Main"
+import Page10Button from "@/app/components/page10Button"
 
 export default function Page10() {
 	return (
