@@ -43,15 +43,15 @@ export default function ServiceLayout({
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
-				if (status === 200) {
+				if (status === "OK") {
 					console.log(data)
 					let newProfileData = { ...profileData }
 					newProfileData.userToken = userToken
 					newProfileData.nickname = '"' + data["nickName"] + '"님'
 					newProfileData.gender = data["gender"] === "MALE" ? "남성" : "여성"
-					// if (data["instagram"] && data["instagram"]["userName"]) {
-					// 	newProfileData.instagram = "@" + data["instagram"]["userName"]
-					// }
+					if (data["instagramUserName"]) {
+						newProfileData.instagram = "@" + data["instagramUserName"]
+					}
 					setProfileData(newProfileData)
 				} else {
 					router.replace("/init/login")

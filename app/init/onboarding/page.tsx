@@ -19,12 +19,6 @@ export interface OrganType {
 	organ: "고려대학교" | "연세대학교" | "기타"
 }
 
-export const stepText = {
-	"1": "이름을 알려주세요.",
-	"2": "성별을 알려주세요.",
-	"3": "소속을 알려주세요.",
-	"4": "인스타그램을 연동하세요",
-}
 export const StepContext = createContext<any>(null)
 export const NameContext = createContext<any>(null)
 export const GenderContext = createContext<any>(null)
@@ -36,6 +30,13 @@ export default function Onboarding() {
 	const [gender, setGender] = useState<GenderType | null>(null)
 	const [organ, setOrgan] = useState<OrganType | null>(null)
 	const [canBeContinued, setCanBeContinued] = useState<boolean>(false)
+
+	const stepText = {
+		"1": "이름을 알려주세요.",
+		"2": "성별을 알려주세요.",
+		"3": "소속을 알려주세요.",
+		"4": "인스타그램을 연동하세요",
+	}
 
 	useEffect(() => {
 		switch (step.id) {

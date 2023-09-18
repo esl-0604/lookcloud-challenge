@@ -21,13 +21,13 @@ export default function App() {
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
 				// 올바르지 않은 유저 토큰인 경우, 쿠키 초기화 & 자동 로그인 실패.
-				if (status === "ILLEGAL_STATE") {
+				if (status === "NOT_FOUND") {
 					LocalStorage.removeItem("lookCloud-user-token")
 					LocalStorage.removeItem("lookCloud-facebook-Id")
 					router.push("/init/login")
 
 					// 올바른 유저 토큰인 경우, 자동 로그인 성공.
-				} else if (status === 200) {
+				} else {
 					router.push("/service/challenge")
 				}
 			})
