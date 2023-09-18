@@ -19,7 +19,7 @@ export default function FacebookLoginButton() {
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
-				// console.log(status);
+				console.log(status)
 				if (status === "NOT_FOUND") {
 					LocalStorage.removeItem("lookCloud-facebook-Id")
 					LocalStorage.setItem("lookCloud-facebook-Id", facebookID)
@@ -27,7 +27,7 @@ export default function FacebookLoginButton() {
 						router.push("/init/onboarding")
 					}
 				} else {
-					// console.log(data);
+					console.log(data)
 					const userToken = data
 					GetUserInfoAPIcall(userToken)
 				}
