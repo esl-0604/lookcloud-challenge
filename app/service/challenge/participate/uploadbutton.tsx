@@ -63,7 +63,7 @@ export default function ChallengeParticipantUploadButton({
 				className="hidden"
 				type="file"
 				accept="image/*"
-				capture={true}
+				capture={text === "직접 촬영하기" ? "environment" : false}
 				onChange={handleChange}
 			/>
 		</form>
