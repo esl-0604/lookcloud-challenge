@@ -1,7 +1,6 @@
 "use client"
 
-import FacebookLogin from "@greatsumini/react-facebook-login"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import LocalStorage from "@/app/utils/localstorage"
 import { useRouter, useSearchParams } from "next/navigation"
 import Link from "next/link"
@@ -25,9 +24,7 @@ export default function KaKaoLoginButton() {
 			headers: {
 				"Content-type": "application/x-www-form-urlencoded;charset=utf-8",
 			},
-			body:
-				"grant_type=authorization_code&client_id=33895ce051fc6d0a517591f219408901&redirect_uri=https://localhost:3001/init/login&code=" +
-				kakaoCode,
+			body: `grant_type=authorization_code&client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&code=${kakaoCode}`,
 		})
 			.then((res) => res.json())
 			.then((data) => {
