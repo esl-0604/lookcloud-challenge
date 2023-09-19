@@ -88,7 +88,7 @@ export default function ServiceLayout({
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
 				if (data) {
-					console.log(data)
+					// console.log(data)
 					const newChallengeDateList = data.map(
 						(challenge: challengeInfoType, i: number) => {
 							const today: Date = new Date()

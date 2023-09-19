@@ -53,13 +53,16 @@ export default function ContinueButton({
 	}
 
 	const validateNickName = async () => {
-		const REGISTER_USER_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/users/nickName${nickName}`
+		const REGISTER_USER_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/users/nickName`
 		await fetch(REGISTER_USER_URL, {
-			method: "GET",
+			method: "POST",
 			mode: "cors",
 			headers: {
 				"Content-Type": "application/json",
 			},
+			body: JSON.stringify({
+				nickName: nickName,
+			}),
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {

@@ -1,8 +1,18 @@
+"use client"
+
 import { useRouter } from "next/navigation"
+import {
+	userTutorial,
+	userTutorialType,
+} from "../utils/atoms/serviceGlobalState"
+import { useRecoilState } from "recoil"
 
 export default function Page10Button() {
 	const router = useRouter()
+	const [userTutorialData, setUserTutorialData] =
+		useRecoilState<userTutorialType>(userTutorial)
 	const handleTouch = () => {
+		setUserTutorialData({ complete: true })
 		router.replace("/service/challenge/evaluate")
 	}
 

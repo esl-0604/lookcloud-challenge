@@ -23,7 +23,9 @@ export default function OnboardingNameInput() {
 				theme: "text-[#DC2D2D]",
 			})
 			setNickName("")
-			setValidateNickName(true)
+			setTimeout(() => {
+				setValidateNickName(true)
+			}, 1200)
 		} else {
 			setNoticeText({
 				text: "LookCloud에서 보이게될 이름입니다. 나중에 바꿀 수 있습니다.",

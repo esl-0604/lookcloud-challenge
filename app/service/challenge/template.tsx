@@ -34,7 +34,7 @@ export default function ChallengeLayout({
 			challengeId
 			// !Object.keys(challengeParticipantsData).includes(challengeId)
 		) {
-			console.log("현재 챌린지 세부 정보 불러오기! : " + challengeId)
+			setChallengeParticipantsData({})
 			GetChallengeParticipantsInfo(challengeId)
 		}
 	}, [profileData, challengeId])
@@ -51,10 +51,10 @@ export default function ChallengeLayout({
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
 				if (data) {
-					// console.log(data)
+					console.log(data)
 					let newChallengeRankerObj = { ...challengeParticipantsData }
 					newChallengeRankerObj[challengeId] = data["participants"]
-					console.log(newChallengeRankerObj)
+					// console.log(newChallengeRankerObj)
 					setChallengeParticipantsData(newChallengeRankerObj)
 				} else console.log(message)
 			})
@@ -69,9 +69,7 @@ export default function ChallengeLayout({
 			challengeId
 			// !Object.keys(userChallengeParticipateData).includes(challengeId)
 		) {
-			console.log(
-				"현재 사용자의 현재 챌린지 참여 정보 불러오기! : " + challengeId,
-			)
+			setUserChallengeParticipateData({})
 			GetUserChallengeParticipateInfo(profileData.userToken, challengeId)
 		}
 	}, [profileData, challengeId])
@@ -98,7 +96,7 @@ export default function ChallengeLayout({
 					console.log(message)
 					let newUserChallengeObj = { ...userChallengeParticipateData }
 					delete newUserChallengeObj[challengeId]
-					console.log(newUserChallengeObj)
+					// console.log(newUserChallengeObj)
 				} else {
 					console.log(data)
 					let newUserChallengeObj = { ...userChallengeParticipateData }

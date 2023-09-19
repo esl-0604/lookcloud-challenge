@@ -1,9 +1,20 @@
+interface CancelFuncType {
+	(id: string): Promise<void>
+}
+
 interface AlertBoxProps {
 	text: string
 	setDeleteModal: React.Dispatch<React.SetStateAction<boolean>>
+	CancelChallenge: CancelFuncType
+	participationId: string
 }
 
-export default function AlertBox({ text, setDeleteModal }: AlertBoxProps) {
+export default function AlertBox({
+	text,
+	setDeleteModal,
+	CancelChallenge,
+	participationId,
+}: AlertBoxProps) {
 	if (text === "등록 취소")
 		return (
 			<>
@@ -21,7 +32,10 @@ export default function AlertBox({ text, setDeleteModal }: AlertBoxProps) {
 					</div>
 
 					<div className="flex flex-row justify-center items-center w-full h-[70px] bg-[#474747] border-t-[3px] border-[#AEAEAE] text-[24px] ">
-						<div className="flex justify-center items-center w-[50%] h-full border-r-[1px] border-[#AEAEAE] text-[#FF7C7C] cursor-pointer">
+						<div
+							className="flex justify-center items-center w-[50%] h-full border-r-[1px] border-[#AEAEAE] text-[#FF7C7C] cursor-pointer"
+							onClick={() => CancelChallenge(participationId)}
+						>
 							삭제
 						</div>
 						<div

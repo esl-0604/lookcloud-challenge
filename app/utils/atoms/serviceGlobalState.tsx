@@ -21,6 +21,19 @@ export const userProfileState = atom<userProfileType>({
 
 // ---------------------------------------------------------------------------
 
+export interface userTutorialType {
+	complete: boolean
+}
+
+export const userTutorial = atom<userTutorialType>({
+	key: "userTutorial",
+	default: {
+		complete: false,
+	},
+})
+
+// ---------------------------------------------------------------------------
+
 export interface challengeInfoType {
 	challengeId: number
 	challengeName: string
@@ -119,7 +132,7 @@ export interface partType {
 }
 export interface userChallengeParticipateType {
 	[challengeId: string]: {
-		participationId: number
+		participationId: string
 		lScore: number
 		ranking: number
 		look: {

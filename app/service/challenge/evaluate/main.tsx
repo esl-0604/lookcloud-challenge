@@ -6,7 +6,10 @@ import LookInfoBox from "@/app/components/LookInfoBox"
 import ThumbsDownBox from "@/app/components/ThumbsDownBox"
 import ThumbsUpBox from "@/app/components/ThumbsUpBox"
 import { inrange } from "@/app/utils"
-import { userProfileState } from "@/app/utils/atoms/serviceGlobalState"
+import {
+	userProfileState,
+	userProfileType,
+} from "@/app/utils/atoms/serviceGlobalState"
 import registDragEvent from "@/app/utils/registDragEvent"
 import { useSearchParams } from "next/navigation"
 import { createContext, useEffect, useRef, useState } from "react"
@@ -26,7 +29,6 @@ export const ChallengeImgContext = createContext<any>(null)
 
 export default function ChallengeEvaluateMain() {
 	const boundaryRef = useRef<HTMLDivElement>(null)
-
 	const [{ x, y }, setConfig] = useState<ConfigState>({
 		x: 0,
 		y: 40,
@@ -43,37 +45,47 @@ export default function ChallengeEvaluateMain() {
 		}
 	}, [])
 
+	const param = useSearchParams()
+	const challengeId = param.get("id")
+	const [profileData, setProfileData] =
+		useRecoilState<userProfileType>(userProfileState)
+
 	const [isUp, setIsUp] = useState<boolean>(false)
 	const [isDown, setIsDown] = useState<boolean>(false)
 	const [showThumbs, setShowThumbs] = useState<boolean>(false)
 	const [isInfo, setIsInfo] = useState<boolean>(false)
+
+	const [challengeImgList, setChallengeImgList] = useState<any[]>([])
+	const [currentImg, setCurrentImg] = useState<number>(0)
+	const [currentImgEvaluate, setCurrentImgEvaluate] = useState<boolean>(true)
+	const [canBeNext, setCanBeNext] = useState<boolean>(false)
 
 	useEffect(() => {
 		if (showThumbs) {
 			const timer = setTimeout(() => {
 				setShowThumbs(false)
 				setIsInfo(true)
-			}, 1000)
+			}, 300)
 			return () => clearTimeout(timer) // 타이머 해제
 		}
 	}, [showThumbs])
 
 	useEffect(() => {
-		if (isUp || isDown) {
+		if ((isUp || isDown) && profileData.userToken) {
 			setShowThumbs(true)
 			const evaluate = isUp ? 1 : 0
-			console.log(evaluate)
-			const userId = profileData.userId
-			console.log(userId)
+			// console.log(evaluate)
+			const userId = profileData.userToken
+			// console.log(userId)
 			const participationId = challengeImgList[currentImg - 1]?.participationId
-			console.log(participationId)
+			// console.log(participationId)
 
 			// 평가 코드 --------------------------------
-			setCurrentImgEvaluate(true)
+			// setCurrentImgEvaluate(true)
 			EvaluateImg(userId, evaluate, participationId)
 			// --------------------------------------------
 		} else setShowThumbs(false)
-	}, [isUp, isDown])
+	}, [isUp, isDown, profileData])
 
 	useEffect(() => {
 		if (Math.floor(y) <= 0) setIsUp(true)
@@ -84,17 +96,33 @@ export default function ChallengeEvaluateMain() {
 		}
 	}, [y])
 
-	//----------------------------------------------------------------------------
-	const param = useSearchParams()
-	const challengeId = param.get("id")
-	const [profileData, setProfileData] = useRecoilState<any>(userProfileState)
-	const [challengeImgList, setChallengeImgList] = useState<any[]>([])
-	const [currentImg, setCurrentImg] = useState<number>(0)
-	const [currentImgEvaluate, setCurrentImgEvaluate] = useState<boolean>(true)
-	const [canBeNext, setCanBeNext] = useState<boolean>(false)
+	useEffect(() => {
+		// console.log(challengeId)
+		// console.log(profileData.userToken)
+		// console.log(currentImgEvaluate)
+		console.log({ "현재 위치 : ": currentImg })
+		console.log({ "현재 위치 평가 : ": currentImgEvaluate })
+		console.log({ "총 길이 : ": challengeImgList.length })
+		if (challengeId && profileData.userToken && currentImgEvaluate) {
+			if (challengeImgList.length === currentImg) {
+				setCanBeNext(false)
+				GetChallengeImgs(profileData.userToken)
+			} else if (challengeImgList.length > currentImg) {
+				setCanBeNext(true)
+			}
+		}
+	}, [
+		challengeId,
+		challengeImgList,
+		profileData,
+		currentImg,
+		currentImgEvaluate,
+	])
 
-	const GetChallengeImgs = async (userId: string) => {
-		const GET_CHALLENGEIMAGES_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/challenges/${challengeId}/participations-to-evaluate?userId=${userId}&pageSize=5`
+	//----------------------------------------------------------------------------
+
+	const GetChallengeImgs = async (userToken: string) => {
+		const GET_CHALLENGEIMAGES_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/challenges/${challengeId}/participations-to-evaluate?userId=${userToken}&pageSize=5`
 		await fetch(GET_CHALLENGEIMAGES_URL, {
 			method: "GET",
 			headers: {
@@ -103,22 +131,23 @@ export default function ChallengeEvaluateMain() {
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
-				if (status === "OK") {
+				if (data) {
 					console.log(data)
 					if (data.length > 0) {
-						const newList = challengeImgList.concat(data)
+						const tempList = [...challengeImgList]
+						const newList = tempList.concat(data)
 						setChallengeImgList(newList)
 						setCurrentImgEvaluate(false)
-						setCurrentImg((prev) => prev + 1)
-					}
+						if (currentImg === 0) setCurrentImg((prev) => prev + 1)
+					} else console.log("평가할 룩이 더이상 없습니다.")
 				} else {
 					console.log(message)
-					const newList = challengeImgList.concat(dummyList)
-					setChallengeImgList(newList)
-					if (currentImg === 0) {
-						setCurrentImg((prev) => prev + 1)
-						setCurrentImgEvaluate(false)
-					}
+					// const newList = challengeImgList.concat(dummyList)
+					// setChallengeImgList(newList)
+					// if (currentImg === 0) {
+					// 	setCurrentImg((prev) => prev + 1)
+					// 	setCurrentImgEvaluate(false)
+					// }
 				}
 			})
 			.catch((error) => console.log(error))
@@ -146,31 +175,21 @@ export default function ChallengeEvaluateMain() {
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
-				if (status === "OK") {
-					console.log(data)
-					setCurrentImgEvaluate(true)
-				} else console.log(message)
+				if (
+					status === "ILLEGAL_ARGUMENT" ||
+					status === "NOT_FOUND" ||
+					status === "BAD_REQUEST"
+				) {
+					console.log(message)
+					setCurrentImgEvaluate(false)
+				} else setCurrentImgEvaluate(true)
 			})
 			.catch((error) => console.log(error))
 	}
 
-	useEffect(() => {
-		if (
-			profileData.userId &&
-			challengeImgList.length === currentImg &&
-			currentImgEvaluate
-		) {
-			setCanBeNext(false)
-			GetChallengeImgs(profileData.userId)
-		} else if (challengeImgList.length > currentImg) {
-			setCanBeNext(true)
-		}
-	}, [challengeImgList, profileData, currentImg, currentImgEvaluate])
-
-	useEffect(() => {}, [challengeImgList, currentImg, currentImgEvaluate])
-
 	const [imageLoaded, setImageLoaded] = useState<boolean>(false)
 	const [imageUrl, setImageUrl] = useState<string>("")
+
 	useEffect(() => {
 		if (currentImg > 0) {
 			const imageUrl = challengeImgList[currentImg - 1]?.look?.imageUrl
@@ -184,6 +203,7 @@ export default function ChallengeEvaluateMain() {
 			}
 		}
 	}, [currentImg, challengeImgList])
+
 	const NextImg = () => {
 		setCurrentImgEvaluate(false)
 		setCurrentImg((prev) => prev + 1)

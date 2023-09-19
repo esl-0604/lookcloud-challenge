@@ -57,7 +57,7 @@ export default function Participate() {
 			)
 			setLookParts(sortedParts)
 		}
-	}, [])
+	}, [challengeId, userChallengeParticipateData])
 
 	// ---------------------------------------------------------------------
 	const PostParticipate = (buttonType: string) => {
@@ -72,7 +72,6 @@ export default function Participate() {
 			}
 		} else if (buttonType === "Delete") {
 			// 게시물 삭제 api 요청
-			console.log("삭제!")
 			setDeleteModal(true)
 		} else {
 			// 평가 이력이 있을 경우에는 수정 불가. 삭제만 가능.
@@ -142,11 +141,35 @@ export default function Participate() {
 			.then(({ status, message, data }) => {
 				if (data) {
 					console.log("등록 성공!")
-					console.log(data)
-					// 페이지 리로드
-					router.replace("/service/challenge/leaderboard")
+					router.replace("/service/challenge/leaderboard?id=" + challengeId)
 				} else {
 					console.log(message)
+				}
+			})
+			.catch((error) => {
+				console.log(error)
+			})
+	}
+
+	const CancelChallenge = async (participationId: string) => {
+		const IMAGE_UPLOAD_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/participations/cancel`
+		await fetch(IMAGE_UPLOAD_URL, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				participationId: participationId,
+			}),
+		})
+			.then((res) => res.json())
+			.then(({ status, message, data }) => {
+				if (status === "ILLEGAL_STATE" || status === "NOT_FOUND") {
+					console.log(message)
+					setDeleteModal(false)
+				} else {
+					console.log("삭제!")
+					router.replace("/service/challenge/leaderboard?id=" + challengeId)
 				}
 			})
 			.catch((error) => {
@@ -157,7 +180,16 @@ export default function Participate() {
 	return (
 		<main className="flex flex-col justify-center items-center absolute w-[100%] min-h-[100%] bg-black">
 			{deleteModal ? (
-				<AlertBox text="등록 취소" setDeleteModal={setDeleteModal} />
+				<AlertBox
+					text="등록 취소"
+					setDeleteModal={setDeleteModal}
+					CancelChallenge={CancelChallenge}
+					participationId={
+						challengeId
+							? userChallengeParticipateData[challengeId].participationId
+							: ""
+					}
+				/>
 			) : null}
 			<ChallengeHeader />
 			<div className="flex-1 flex flex-col relative justify-start items-center w-[100%] font-textBoxFont">

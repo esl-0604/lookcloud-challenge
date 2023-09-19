@@ -12,9 +12,7 @@ export default function LookInfoBox() {
 	const { challengeImgList, currentImg, currentImgEvaluate } =
 		useContext(ChallengeImgContext)
 	const data =
-		currentImg > 0
-			? JSON.parse(challengeImgList[currentImg - 1]["look"]["parts"])
-			: null
+		currentImg > 0 ? challengeImgList[currentImg - 1]["look"]["parts"] : null
 
 	// 변환된 데이터를 원하는 형식으로 가공
 	const formattedData: string[] = data.map((item: itemProps) => {
