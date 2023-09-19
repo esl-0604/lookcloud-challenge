@@ -54,13 +54,6 @@ export default function ChallengeLayout({
 					// console.log(data)
 					let newChallengeRankerObj = { ...challengeParticipantsData }
 					newChallengeRankerObj[challengeId] = data["participants"]
-
-					// 챌린지 썸네일 이미지 small / middle 하드 코딩 부분 -> 추후 삭제
-					newChallengeRankerObj[challengeId].middleThumbnailUrl =
-						"/image/challenge_thumbnail_1_2.png"
-					newChallengeRankerObj[challengeId].smallThumbnailUrl =
-						"/image/challenge_thumbnail_1_3.png"
-					// -----------------------------------------------------
 					console.log(newChallengeRankerObj)
 					setChallengeParticipantsData(newChallengeRankerObj)
 				} else console.log(message)

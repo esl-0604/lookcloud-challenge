@@ -46,6 +46,8 @@ export default function Challenge() {
 									endedAt={challenge.endedAt}
 									state={challenge.state}
 									thumbnailUrl={challenge.thumbnailUrl}
+									middleThumbnailUrl={challenge.middleThumbnailUrl}
+									smallThumbnailUrl={challenge.smallThumbnailUrl}
 									comment={challenge.comment}
 									totalCount={challenge.totalCount}
 								/>

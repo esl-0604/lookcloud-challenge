@@ -116,6 +116,13 @@ export default function ServiceLayout({
 							}
 							let newChallengeData = { ...challenge }
 							newChallengeData.state = state
+
+							// 현재는 프런트에서 하드코딩 추후에 api에서 직접 올라올 예정 ------------------
+							newChallengeData.middleThumbnailUrl =
+								"/image/challenge_thumbnail_1_2.png"
+							newChallengeData.smallThumbnailUrl =
+								"/image/challenge_thumbnail_1_3.png"
+							// ----------------------------------------------------------------
 							return newChallengeData
 						},
 					)
