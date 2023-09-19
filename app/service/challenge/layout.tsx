@@ -50,7 +50,7 @@ export default function ChallengeLayout({
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
-				if (status === 200) {
+				if (data) {
 					// console.log(data)
 					let newChallengeRankerObj = { ...challengeParticipantsData }
 					newChallengeRankerObj[challengeId] = data["participants"]
