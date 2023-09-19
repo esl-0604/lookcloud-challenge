@@ -8,7 +8,7 @@ export default function Login() {
 			<div className="mt-[35px]">
 				<TitleIcon width={"310"} height={"47"} color={"white"} />
 			</div>
-			<FacebookLoginButton />
+			{/* <FacebookLoginButton /> */}
 			<KaKaoLoginButton />
 		</main>
 	)

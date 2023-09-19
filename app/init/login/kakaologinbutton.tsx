@@ -29,7 +29,7 @@ export default function KaKaoLoginButton() {
 			.then((res) => res.json())
 			.then((data) => {
 				if (data) {
-					console.log(data)
+					// console.log(data)
 					getUsetKaKaoId(data.access_token)
 				}
 			})
@@ -50,7 +50,7 @@ export default function KaKaoLoginButton() {
 			.then((res) => res.json())
 			.then((data) => {
 				if (data) {
-					console.log(data)
+					// console.log(data)
 
 					const kakaoId: number = data.id
 					const kakaoProfileUrl: string | null = data.properties?.profile_image
