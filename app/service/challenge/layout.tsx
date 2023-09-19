@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 
 import { useRecoilState } from "recoil"
 import {
@@ -18,14 +18,28 @@ export default function ChallengeLayout({
 }: {
 	children: React.ReactNode
 }) {
-	const router = useRouter()
 	const param = useSearchParams()
-	const challengeId = Number(param.get("id"))
+	const challengeId = param.get("id")
+	const [profileData, setProfileData] =
+		useRecoilState<userProfileType>(userProfileState)
 
+	// 현재 챌린지 세부 정보 및 참여자 정보 저장 ------------------------------------------------------------
 	const [challengeParticipantsData, setChallengeParticipantsData] =
 		useRecoilState<challengeParticipantsType>(challengeParticipantsInfo)
 
-	const GetChallengeParticipantsInfo = async (challengeId: number) => {
+	useEffect(() => {
+		// 현재 챌린지 세부 정보가 저장되어 있지 않을 경우, 불러오기.
+		if (
+			profileData.userToken &&
+			challengeId
+			// !Object.keys(challengeParticipantsData).includes(challengeId)
+		) {
+			console.log("현재 챌린지 세부 정보 불러오기! : " + challengeId)
+			GetChallengeParticipantsInfo(challengeId)
+		}
+	}, [profileData, challengeId])
+
+	const GetChallengeParticipantsInfo = async (challengeId: string) => {
 		const GET_CHALLENGE_PARTICIPANTS_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/challenges/${challengeId}`
 		await fetch(GET_CHALLENGE_PARTICIPANTS_URL, {
 			method: "GET",
@@ -36,25 +50,45 @@ export default function ChallengeLayout({
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
-				if (status === "OK") {
-					console.log(data)
+				if (status === 200) {
+					// console.log(data)
 					let newChallengeRankerObj = { ...challengeParticipantsData }
 					newChallengeRankerObj[challengeId] = data["participants"]
+
+					// 챌린지 썸네일 이미지 small / middle 하드 코딩 부분 -> 추후 삭제
+					newChallengeRankerObj[challengeId].middleThumbnailUrl =
+						"/image/challenge_thumbnail_1_2.png"
+					newChallengeRankerObj[challengeId].smallThumbnailUrl =
+						"/image/challenge_thumbnail_1_3.png"
+					// -----------------------------------------------------
+					console.log(newChallengeRankerObj)
 					setChallengeParticipantsData(newChallengeRankerObj)
 				} else console.log(message)
 			})
 			.catch((error) => console.log(error))
 	}
-	// --------------------------------------------------------------------------------
-	const [profileData, setProfileData] =
-		useRecoilState<userProfileType>(userProfileState)
+
+	// 현재 유저의 현재 챌린지 참여 정보 저장 ------------------------------------------------------------
+	useEffect(() => {
+		// 현재 유저의 현재 챌린지 참여 정보가 저장되어 있지않다면, 불러오기.
+		if (
+			profileData.userToken &&
+			challengeId
+			// !Object.keys(userChallengeParticipateData).includes(challengeId)
+		) {
+			console.log(
+				"현재 사용자의 현재 챌린지 참여 정보 불러오기! : " + challengeId,
+			)
+			GetUserChallengeParticipateInfo(profileData.userToken, challengeId)
+		}
+	}, [profileData, challengeId])
 
 	const [userChallengeParticipateData, setUserChallengeParticipateData] =
 		useRecoilState<userChallengeParticipateType>(userChallengeParticipateInfo)
 
 	const GetUserChallengeParticipateInfo = async (
 		userToken: string,
-		challengeId: number,
+		challengeId: string,
 	) => {
 		const GET_USER_CHALLENGE_PARTICIPATE_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/users/${userToken}/challenges/${challengeId}`
 		await fetch(GET_USER_CHALLENGE_PARTICIPATE_URL, {
@@ -66,29 +100,23 @@ export default function ChallengeLayout({
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
-				if (status === "OK") {
+				// 참여 챌린지 정보가 없는 경우
+				if (status === "NOT_FOUND") {
+					console.log(message)
+					let newUserChallengeObj = { ...userChallengeParticipateData }
+					delete newUserChallengeObj[challengeId]
+					console.log(newUserChallengeObj)
+				} else {
 					console.log(data)
 					let newUserChallengeObj = { ...userChallengeParticipateData }
 					newUserChallengeObj[challengeId] = data
-					if (!newUserChallengeObj[challengeId]["description"])
-						newUserChallengeObj[challengeId]["description"] = ""
-					if (!newUserChallengeObj[challengeId]["parts"])
-						newUserChallengeObj[challengeId]["parts"] = `[]`
 					setUserChallengeParticipateData(newUserChallengeObj)
-				} else console.log(message)
+				}
 			})
 			.catch((error) => console.log(error))
 	}
 
 	// --------------------------------------------------------------------------------
-
-	useEffect(() => {
-		if (profileData.userToken && challengeId) {
-			console.log(challengeId)
-			// GetChallengeParticipantsInfo(challengeId)
-			// GetUserChallengeParticipateInfo(profileData.userToken, challengeId)
-		}
-	}, [])
 
 	return <>{children}</>
 }

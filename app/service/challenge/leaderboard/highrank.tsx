@@ -15,17 +15,17 @@ export default function HighRank() {
 	const [challengeParticipantsData, setChallengeParticipantsData] =
 		useRecoilState<challengeParticipantsType>(challengeParticipantsInfo)
 
-	const ranker3 = challengeParticipantsData[challengeId].users.find(
+	const ranker3 = challengeParticipantsData[challengeId]?.users.find(
 		(ranker) => {
 			if (ranker.ranking === 3) return true
 		},
 	)
-	const ranker2 = challengeParticipantsData[challengeId].users.find(
+	const ranker2 = challengeParticipantsData[challengeId]?.users.find(
 		(ranker) => {
 			if (ranker.ranking === 2) return true
 		},
 	)
-	const ranker1 = challengeParticipantsData[challengeId].users.find(
+	const ranker1 = challengeParticipantsData[challengeId]?.users.find(
 		(ranker) => {
 			if (ranker.ranking === 1) return true
 		},
@@ -48,11 +48,11 @@ export default function HighRank() {
 				</div>
 				<div className="flex flex-col items-center pt-[45px] h-[140px] w-[100%] bg-gradient-to-b from-[#1C3A74] to-[#0C1A34] rounded-t-[10px] rounded-l-[10px]">
 					<span className="text-[24px] leading-[36px]">
-						{ranker3 ? ranker3.lScore : 0}
+						{ranker3 ? ranker3?.lScore : 0}
 					</span>
 					<span className="text-[12px]">{ranker3?.nickName}</span>
 					<span className="text-[12px]">
-						{ranker3 ? "@" + ranker3.instagram.userName : ""}
+						{ranker3 ? "@" + ranker3?.instagramUserName : ""}
 					</span>
 				</div>
 			</div>
@@ -78,11 +78,11 @@ export default function HighRank() {
 				</div>
 				<div className="flex flex-col items-center pt-[56px] h-[180px] w-[100%] bg-gradient-to-b from-[#154FBE] to-[#0F0D76] rounded-t-[10px]">
 					<span className="text-[24px] leading-[36px]">
-						{ranker1 ? ranker1.lScore : 0}
+						{ranker1 ? ranker1?.lScore : 0}
 					</span>
 					<span className="text-[12px]">{ranker1?.nickName}</span>
 					<span className="text-[12px]">
-						{ranker1 ? "@" + ranker1.instagram.userName : ""}
+						{ranker1 ? "@" + ranker1?.instagramUserName : ""}
 					</span>
 				</div>
 			</div>
@@ -108,11 +108,11 @@ export default function HighRank() {
 				</div>
 				<div className="flex flex-col items-center pt-[25px] h-[100px] w-[100%] bg-gradient-to-b from-[#1C3A74] to-[#0C1A34] rounded-t-[10px] rounded-r-[10px]">
 					<span className="text-[24px] leading-[36px]">
-						{ranker2 ? ranker2.lScore : 0}
+						{ranker2 ? ranker2?.lScore : 0}
 					</span>
 					<span className="text-[12px]">{ranker2?.nickName}</span>
 					<span className="text-[12px]">
-						{ranker2 ? "@" + ranker2.instagram.userName : ""}
+						{ranker2 ? "@" + ranker2?.instagramUserName : ""}
 					</span>
 				</div>
 			</div>

@@ -18,7 +18,7 @@ export default function ServiceLayout({
 }) {
 	const router = useRouter()
 
-	// 유저 정보 저장
+	// 유저 정보 저장 ------------------------------------------------------------
 	const userToken = LocalStorage.getItem("lookCloud-user-token")
 	const [profileData, setProfileData] =
 		useRecoilState<userProfileType>(userProfileState)
@@ -29,7 +29,7 @@ export default function ServiceLayout({
 				GetUserInfo(userToken)
 			}
 		} else {
-			router.replace("/init/login")
+			router.replace("/")
 		}
 	}, [])
 
@@ -43,11 +43,14 @@ export default function ServiceLayout({
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
+				// 유저 조회 실패
 				if (status === "NOT_FOUND") {
 					console.log(message)
-					router.replace("/init/login")
-				} else {
-					console.log(data)
+					router.replace("/")
+				}
+				// 유저 조회 성공
+				else {
+					// console.log(data)
 					let newProfileData = { ...profileData }
 					newProfileData.userToken = userToken
 					newProfileData.nickname = '"' + data["nickName"] + '"님'
@@ -60,24 +63,22 @@ export default function ServiceLayout({
 			})
 			.catch((error) => {
 				console.log(error)
-				router.replace("/init/login")
+				router.replace("/")
 			})
 	}
 
-	// ------------------------------------------------------------
-
-	// 챌린지 정보 저장
+	// 챌린지 정보 저장 ------------------------------------------------------------
 	const [challengeDataList, setChallengeDataList] =
 		useRecoilState<challengeInfoType[]>(challengeInfoList)
 
 	useEffect(() => {
-		// GetChallengeInfo()
+		GetChallengeInfo()
 	}, [])
 
-	const GetChallengeInfo = () => {
+	const GetChallengeInfo = async () => {
 		const GET_CHALLENGES_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/challenges`
 
-		fetch(GET_CHALLENGES_URL, {
+		await fetch(GET_CHALLENGES_URL, {
 			method: "GET",
 			mode: "cors",
 			headers: {
@@ -86,25 +87,25 @@ export default function ServiceLayout({
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
-				console.log(data)
 				if (status === "OK") {
+					console.log(data)
 					const newChallengeDateList = data.map(
 						(challenge: challengeInfoType, i: number) => {
 							const today: Date = new Date()
 							let state: number = 0
 
-							if (challenge.startDate && challenge.endDate) {
+							if (challenge.startedAt && challenge.endedAt) {
 								// state === -1
-								if (today < challenge.startDate) {
+								if (today < challenge.startedAt) {
 									state = -1
 								}
 								// state === 0 이상의 정수
 								else if (
-									challenge.startDate <= today &&
-									today <= challenge.endDate
+									challenge.startedAt <= today &&
+									today <= challenge.endedAt
 								) {
 									const dTime: number =
-										challenge.endDate.getTime() - today.getTime()
+										challenge.endedAt.getTime() - today.getTime()
 									const dDay: number = Math.ceil(dTime / (1000 * 60 * 60 * 24))
 									state = dDay
 								}

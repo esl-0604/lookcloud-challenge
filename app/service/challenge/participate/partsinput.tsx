@@ -2,20 +2,23 @@
 
 import ProductInfoBox from "./partsinfobox"
 import Add from "@/public/svg/add.svg"
-import { useContext, useEffect, useState } from "react"
-import { ChallengeInfoContext, PartType } from "./page"
+import { useContext, useEffect } from "react"
+import { partType } from "@/app/utils/atoms/serviceGlobalState"
+import { ChallengeInfoContext } from "./context"
 
 export default function PartsInput() {
 	const { lookParts, setLookParts } = useContext(ChallengeInfoContext)
 	useEffect(() => {
 		if (lookParts.length === 0) {
-			const newLookPart = [
+			const newLookPart: partType[] = [
 				{
+					index: 0,
 					part: "상의",
 					brand: "",
 					name: "",
 				},
 				{
+					index: 1,
 					part: "하의",
 					brand: "",
 					name: "",
@@ -25,7 +28,8 @@ export default function PartsInput() {
 		}
 	}, [])
 	const AddParts = () => {
-		const newLookPart = {
+		const newLookPart: partType = {
+			index: lookParts.length,
 			part: "",
 			brand: "",
 			name: "",
@@ -38,9 +42,7 @@ export default function PartsInput() {
 				제품 정보
 			</div>
 			<div className="flex flex-col justify-between items-center w-full font-bold">
-				{/* <ProductInfoBox type={"상의"} />
-				<ProductInfoBox type={"하의"} /> */}
-				{lookParts?.map((part: PartType, i: number) => {
+				{lookParts?.map((part: partType, i: number) => {
 					return <ProductInfoBox key={i} partIndex={i} />
 				})}
 				<div

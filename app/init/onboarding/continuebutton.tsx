@@ -1,9 +1,10 @@
 "use client"
 
 import { useContext } from "react"
-import { GenderType, StepContext } from "@/app/init/onboarding/page"
+import { GenderType } from "@/app/init/onboarding/page"
 import { useRouter } from "next/navigation"
 import LocalStorage from "@/app/utils/localstorage"
+import { StepContext } from "./context"
 
 interface ContinueButtonProps {
 	canBeContinued: boolean
@@ -33,6 +34,7 @@ export default function ContinueButton({
 					성별: gender,
 					인스타그램ID: instagramId,
 				})
+
 				// 유저 정보 저장 api call
 				const facebookID = LocalStorage.getItem("lookCloud-facebook-Id")
 				if (facebookID) registerUserAPIcall(Number(facebookID))
@@ -45,34 +47,6 @@ export default function ContinueButton({
 			// 	router.push("/service/challenge")
 			// }
 		}
-	}
-	const GetUserInfoAPIcall = async (userId: string) => {
-		const GET_USER_INFO_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/users/${userId}`
-		await fetch(GET_USER_INFO_URL, {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-			},
-		})
-			.then((res) => res.json())
-			.then(({ status, message, data }) => {
-				if (status === "ILLEGAL_STATE") {
-					LocalStorage.removeItem("lookCloud-user-Id")
-					LocalStorage.removeItem("lookCloud-facebook-Id")
-					router.push("/init/login")
-				} else {
-					LocalStorage.removeItem("lookCloud-user-Id")
-					LocalStorage.removeItem("lookCloud-facebook-Id")
-					LocalStorage.setItem("lookCloud-user-Id", userId)
-					if (LocalStorage.getItem("lookCloud-user-Id")) {
-						router.replace("/service/challenge")
-						// setStep({ id: "4" })
-					}
-				}
-			})
-			.catch((error) => {
-				console.log(error)
-			})
 	}
 
 	const registerUserAPIcall = async (facebookId: number) => {
@@ -92,19 +66,57 @@ export default function ContinueButton({
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
+				// 이미 가입한 사용자
 				if (status === "ILLEGAL_STATE") {
 					console.log(message)
 					router.replace("/init/login")
 					// alert("Done 버튼을 다시 눌러주세요.")
-				} else {
-					GetUserInfoAPIcall(data)
+				}
+				// 회원가입 성공
+				else {
+					const userToken: string = data
+					GetUserInfoAPIcall(userToken)
 				}
 			})
+			// 회원가입 실패
 			.catch((error) => {
 				console.log(error)
 				router.replace("/init/login")
 			})
 	}
+
+	const GetUserInfoAPIcall = async (userToken: string) => {
+		const GET_USER_INFO_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/users/${userToken}`
+		await fetch(GET_USER_INFO_URL, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then((res) => res.json())
+			.then(({ status, message, data }) => {
+				// 가입하지 않은 사용자 입니다.
+				if (status === "NOT_FOUND") {
+					LocalStorage.removeItem("lookCloud-user-token")
+					LocalStorage.removeItem("lookCloud-facebook-Id")
+					router.replace("/init/login")
+				}
+				// 유저 조회 성공
+				else {
+					LocalStorage.removeItem("lookCloud-user-token")
+					LocalStorage.removeItem("lookCloud-facebook-Id")
+					LocalStorage.setItem("lookCloud-user-token", userToken)
+					if (LocalStorage.getItem("lookCloud-user-token")) {
+						router.replace("/service/challenge")
+						// setStep({ id: "4" })
+					}
+				}
+			})
+			.catch((error) => {
+				console.log(error)
+			})
+	}
+
 	return (
 		<div
 			className={`flex justify-center items-center w-[100%] ${

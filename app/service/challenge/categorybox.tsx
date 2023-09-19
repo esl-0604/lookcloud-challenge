@@ -3,12 +3,12 @@ import { challengeInfoType } from "@/app/utils/atoms/serviceGlobalState"
 export default function ChallengeCategoryBox({
 	challengeId,
 	challengeName,
-	startDate,
-	endDate,
+	startedAt,
+	endedAt,
 	state,
-	thumbnail,
+	thumbnailUrl,
 	comment,
-	participantsNum,
+	totalCount,
 }: challengeInfoType) {
 	return (
 		<div
@@ -17,7 +17,7 @@ export default function ChallengeCategoryBox({
 			}`}
 		>
 			<img
-				src={thumbnail}
+				src={thumbnailUrl}
 				alt="challengeImg"
 				className="flex justify-center items-center w-[100%] h-[100%] object-cover"
 			/>
@@ -32,7 +32,7 @@ export default function ChallengeCategoryBox({
 								D-{state === 0 ? "Day" : state}
 							</div>
 							<div className="flex justify-end items-center w-[70px] h-[100%]">
-								{participantsNum}명 참가중
+								{totalCount}명 참가중
 							</div>
 						</>
 					) : (

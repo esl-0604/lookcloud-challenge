@@ -2,7 +2,7 @@
 
 import SelectButton from "@/app/init/onboarding/selectbutton"
 import { useContext } from "react"
-import { GenderContext } from "@/app/init/onboarding/page"
+import { GenderContext } from "./context"
 
 export default function OnboardingGenderInput() {
 	const { gender, setGender }: any = useContext(GenderContext)

@@ -2,8 +2,9 @@
 
 import { useContext, useEffect, useState } from "react"
 import Clothes from "@/public/svg/clothes.svg"
-import { ChallengeInfoContext, PartType } from "./page"
 import Cancle from "@/public/svg/cancle.svg"
+import { partType } from "@/app/utils/atoms/serviceGlobalState"
+import { ChallengeInfoContext } from "./context"
 
 interface ChallengeParticipantProductInfoBoxProps {
 	partIndex: number
@@ -12,7 +13,8 @@ interface ChallengeParticipantProductInfoBoxProps {
 export default function PartsInfoBox({
 	partIndex,
 }: ChallengeParticipantProductInfoBoxProps) {
-	const { lookParts, setLookParts } = useContext(ChallengeInfoContext)
+	const { isAlreadyPosted, lookParts, setLookParts } =
+		useContext(ChallengeInfoContext)
 	const [isHover, setIsHover] = useState<boolean>(false)
 
 	useEffect(() => {
@@ -26,7 +28,7 @@ export default function PartsInfoBox({
 	}
 
 	const RemovePart = () => {
-		const newLookParts = lookParts.filter((part: PartType, i: number) => {
+		const newLookParts = lookParts.filter((part: partType, i: number) => {
 			return i !== partIndex
 		})
 		setLookParts(newLookParts)
@@ -41,6 +43,7 @@ export default function PartsInfoBox({
 			<div className="flex flex-col justify-between items-center w-[60px] h-[100%] pt-[10px] pb-[5px]">
 				<Clothes />
 				<input
+					readOnly={isAlreadyPosted}
 					type="text"
 					placeholder="구분"
 					className="flex justify-center items-center w-[calc(100%-20px)] mx-[10px] h-[15px] bg-transparent focus: outline-none text-center "
@@ -50,6 +53,7 @@ export default function PartsInfoBox({
 			</div>
 			<div className="flex-1 flex flex-col justify-center items-center h-[100%] bg-white">
 				<input
+					readOnly={isAlreadyPosted}
 					type="text"
 					placeholder="브랜드"
 					className="w-[calc(100%-38px)] mx-[19px] h-[29px] focus: outline-none placeholder-[#959595]"
@@ -58,6 +62,7 @@ export default function PartsInfoBox({
 				/>
 				<div className="w-[calc(100%-8px)] h-[2px] bg-[#D9D9D9]" />
 				<input
+					readOnly={isAlreadyPosted}
 					type="text"
 					placeholder="제품명"
 					className=" w-[calc(100%-38px)] mx-[19px] h-[29px] focus: outline-none placeholder-[#959595]"
