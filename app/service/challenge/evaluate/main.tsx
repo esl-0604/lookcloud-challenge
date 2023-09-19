@@ -236,10 +236,10 @@ export default function ChallengeEvaluateMain() {
 								style={{
 									position: "absolute",
 									left: "50%",
-									transform: "translate(-50%, 0)",
+									transform: "translate(-50%, -50%)",
 									width: 300,
 									height: 450,
-									top: 0,
+									top: "calc(50% - 50px)",
 								}}
 							>
 								<ThumbsUpBox />
@@ -257,10 +257,10 @@ export default function ChallengeEvaluateMain() {
 								style={{
 									position: "absolute",
 									left: "50%",
-									transform: "translate(-50%, 0)",
+									transform: "translate(-50%, -50%)",
 									width: 300,
 									height: 450,
-									top: 80,
+									top: "calc(50% + 30px)",
 								}}
 							>
 								<ThumbsDownBox />
@@ -268,7 +268,17 @@ export default function ChallengeEvaluateMain() {
 						)}
 					</div>
 				) : imageLoaded ? (
-					<Boundary ref={boundaryRef} style={{ width: 300, height: "100%" }}>
+					<Boundary
+						ref={boundaryRef}
+						style={{
+							width: 300,
+							height: 550,
+							position: "absolute",
+							top: "50%",
+							left: "50%",
+							transform: "translate(-50%, -50%)",
+						}}
+					>
 						<div
 							style={{
 								left: x,
