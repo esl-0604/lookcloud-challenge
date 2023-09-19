@@ -1,6 +1,6 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import {
 	userTutorial,
 	userTutorialType,
@@ -9,11 +9,13 @@ import { useRecoilState } from "recoil"
 
 export default function Page10Button() {
 	const router = useRouter()
+	const param = useSearchParams()
+	const challengeId = param.get("id")
 	const [userTutorialData, setUserTutorialData] =
 		useRecoilState<userTutorialType>(userTutorial)
 	const handleTouch = () => {
 		setUserTutorialData({ complete: true })
-		router.replace("/service/challenge/evaluate")
+		router.replace("/service/challenge/evaluate?id=" + challengeId)
 	}
 
 	return (
