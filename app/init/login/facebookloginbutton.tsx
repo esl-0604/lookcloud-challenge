@@ -87,6 +87,8 @@ export default function FacebookLoginButton() {
 					//     console.log("Login Success!");
 					//     console.log("id: ", response);
 					// }}
+					scope={""}
+					fields={"id"}
 					onFail={(error) => {
 						console.log("Login Failed!")
 						console.log("status: ", error)

@@ -15,7 +15,7 @@ export default function TutorialHeader() {
 			<div className="flex flex-row justify-between items-center w-[100%] h-[56px] px-[16px]">
 				<HeaderLogo width={"126"} height={"32"} color={"white"} />
 				<div
-					className="w-[20%] text-right text-xs text-white cursor-pointer"
+					className="w-[30%] text-right text-xs text-white cursor-pointer"
 					onClick={SkipTutorial}
 				>
 					skip tutorial
