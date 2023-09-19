@@ -16,8 +16,6 @@ export default function ParticipateThumbnail() {
 
 	const [challengeDataList, setChallengeDataList] =
 		useRecoilState<challengeInfoType[]>(challengeInfoList)
-	const [challengeParticipantsData, setChallengeParticipantsData] =
-		useRecoilState<challengeParticipantsType>(challengeParticipantsInfo)
 
 	const [currentChallengeData, setCurrentChallengeData] =
 		useState<challengeInfoType>({
@@ -27,6 +25,8 @@ export default function ParticipateThumbnail() {
 			endedAt: null,
 			state: -2,
 			thumbnailUrl: "",
+			middleThumbnailUrl: "",
+			smallThumbnailUrl: "",
 			comment: "",
 			totalCount: 0,
 		})
@@ -43,7 +43,7 @@ export default function ParticipateThumbnail() {
 	return (
 		<div className="flex relative justify-center items-start w-[100%] h-[124px] py-[8px] overflow-hidden">
 			<img
-				src={challengeParticipantsData[challengeId]?.smallThumbnailUrl}
+				src={currentChallengeData?.smallThumbnailUrl}
 				alt="challengeImg"
 				className="flex justify-center items-start w-[100%] h-[100%] object-cover"
 			/>

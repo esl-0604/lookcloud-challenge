@@ -7,6 +7,8 @@ export default function ChallengeCategoryBox({
 	endedAt,
 	state,
 	thumbnailUrl,
+	middleThumbnailUrl,
+	smallThumbnailUrl,
 	comment,
 	totalCount,
 }: challengeInfoType) {

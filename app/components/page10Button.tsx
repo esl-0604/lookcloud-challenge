@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation"
 export default function Page10Button() {
 	const router = useRouter()
 	const handleTouch = () => {
-		router.push("/service/challenge/evaluate")
+		router.replace("/service/challenge/evaluate")
 	}
 
 	return (

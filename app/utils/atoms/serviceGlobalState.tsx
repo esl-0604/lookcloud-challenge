@@ -28,6 +28,8 @@ export interface challengeInfoType {
 	endedAt: Date | null
 	state: number
 	thumbnailUrl: string
+	middleThumbnailUrl: string
+	smallThumbnailUrl: string
 	comment: string
 	totalCount: number
 }
@@ -42,6 +44,8 @@ export const challengeInfoList = atom<challengeInfoType[]>({
 			endedAt: new Date("2023-09-20"),
 			state: 3,
 			thumbnailUrl: "/image/challenge_thumbnail_1_1.png",
+			middleThumbnailUrl: "/image/challenge_thumbnail_1_2.png",
+			smallThumbnailUrl: "/image/challenge_thumbnail_1_3.png",
 			comment:
 				"고연전을 최대로 즐기기 위해 준비한 오늘의 스타일로 고연전 패션왕에 도전하세요!",
 			totalCount: 7,
@@ -53,6 +57,8 @@ export const challengeInfoList = atom<challengeInfoType[]>({
 			endedAt: new Date("2023-10-20"),
 			state: -1,
 			thumbnailUrl: "/image/challenge_thumbnail_2_1.png",
+			middleThumbnailUrl: "/image/challenge_thumbnail_1_2.png",
+			smallThumbnailUrl: "/image/challenge_thumbnail_1_3.png",
 			comment:
 				"소개팅에서 가장 좋은 첫 인상을 남길 수 있는 스타일을 보여주세요!",
 			totalCount: 0,
@@ -72,8 +78,6 @@ export interface challengeRankerType {
 }
 export interface challengeParticipantsType {
 	[challengeId: string]: {
-		middleThumbnailUrl: string
-		smallThumbnailUrl: string
 		totalCount: number
 		users: challengeRankerType[]
 		// updateTime: Date
@@ -84,8 +88,6 @@ export const challengeParticipantsInfo = atom<challengeParticipantsType>({
 	key: "challengeParticipantsInfo",
 	default: {
 		// "0": {
-		// 	middleThumbnailUrl: "/image/challenge_thumbnail_1_2.png",
-		// 	smallThumbnailUrl: "/image/challenge_thumbnail_1_3.png",
 		// 	totalCount: 7,
 		// 	users: [
 		// 		// {
@@ -101,8 +103,6 @@ export const challengeParticipantsInfo = atom<challengeParticipantsType>({
 		// 	// updateTime: new Date("2023-09-17T12:00:00"),
 		// },
 		// "1": {
-		// 	middleThumbnailUrl: "",
-		// 	smallThumbnailUrl: "",
 		// 	totalCount: 0,
 		// 	users: [],
 		// 	// updateTime: new Date("2023-09-17T12:00:00"),
