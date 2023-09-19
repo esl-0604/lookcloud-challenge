@@ -3,7 +3,6 @@
 import Boundary from "@/app/components/Boundary"
 import TutorialMovingBox from "@/app/components/TutorialMovingBox"
 import LookInfoBox from "@/app/components/LookInfoBox"
-import ThumbsDownBox from "@/app/components/ThumbsDownBox"
 import ThumbsUpBox from "@/app/components/ThumbsUpBox"
 import { inrange } from "@/app/utils"
 import registDragEvent from "@/app/utils/registDragEvent"
