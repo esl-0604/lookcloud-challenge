@@ -16,8 +16,8 @@ export default function Page1() {
 			onTouchStart={handleTouch}
 			onClick={handleTouch}
 		>
-			<div className="flex flex-row w-[100%] items-start">
-				<span className="w-[80%] text-left pl-5 text-lg text-white">
+			<div className="flex flex-row w-full items-start">
+				<span className="w-full text-left pl-5 text-lg text-white">
 					화면을 터치하면 다음 설명
 					<div />
 					으로 넘어갑니다
@@ -26,7 +26,7 @@ export default function Page1() {
 			<div style={{ marginTop: "10px" }}>
 				<TutorialBox />
 			</div>
-			<div className="flex flex-row w-[100%] items-end">
+			<div className="flex flex-row w-full items-end">
 				<span className="w-[100%] text-left pl-5 text-lg text-white">
 					평가 첫 화면입니다! <div />
 					평가 후 다음 사진이 계속해서
