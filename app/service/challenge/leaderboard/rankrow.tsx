@@ -8,16 +8,12 @@ interface RankRowProps {
 export default function RankRow({ ranker }: RankRowProps) {
 	return (
 		<div className="flex flex-row justify-between items-center w-[100%] h-[40px] bg-[#242344] mt-1 rounded-md px-[8px]">
-			<div className="flex flex-row">
-				<img
-					className="rounded-full"
-					src="/svg/sampleProfileImg.svg"
-					width="30px"
-					height="30px"
-					style={{ marginRight: 4 }}
-				/>
+			<div className="flex flex-row items-center">
+				<div className="flex justify-center items-center w-[30px] h-[30px] rounded-full overflow-hidden mr-[4px]">
+					<img className="object-cover" src={ranker?.imageUrl} />
+				</div>
 				<div className="flex flex-col py-[8px]">
-					<div className="flex flex-row">
+					<div className="flex flex-row items-center">
 						{/* <img
 							src={
 								ranker?.organization === "고려대학교"

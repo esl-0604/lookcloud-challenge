@@ -22,12 +22,12 @@ export default function OnboardingHeader() {
 				<div
 					className={`${
 						step.id === "1"
-							? "w-1/4"
+							? "w-1/3"
 							: step.id === "2"
-							? "w-2/4"
+							? "w-2/3"
 							: step.id === "3"
-							? "w-3/4"
-							: "w-[100%]"
+							? "w-full"
+							: "w-full"
 					} h-[100%] bg-[#535353] transition-width duration-500`}
 				></div>
 			</div>

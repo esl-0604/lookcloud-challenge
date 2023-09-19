@@ -5,11 +5,13 @@ import HeaderLogo from "@/public/svg/headerlogo.svg"
 import Profile from "@/public/svg/profile.svg"
 import { useRouter, usePathname } from "next/navigation"
 import Backward from "@/public/svg/backward.svg"
+import LocalStorage from "@/app/utils/localstorage"
 
 export default function ChallengeHeader() {
 	const router = useRouter()
 	const path = usePathname()
 	// console.log(path);
+	const userProfile = LocalStorage.getItem("lookCloud-kakao-profile")
 	const GoBackward = () => {
 		router.back()
 	}
@@ -28,7 +30,13 @@ export default function ChallengeHeader() {
 				</div>
 			) : (
 				<Link href={"/service/profile"} className="cursor-pointer">
-					<Profile width={"40"} height={"40"} />
+					{userProfile ? (
+						<div className="flex justify-center items-center w-[40px] h-[40px] rounded-full overflow-hidden">
+							<img className="object-cover" src={userProfile} alt="myProfile" />
+						</div>
+					) : (
+						<Profile width={"40"} height={"40"} />
+					)}
 				</Link>
 			)}
 

@@ -34,12 +34,8 @@ export default function HighRank() {
 	return (
 		<div className="flex flex-row items-end w-[100%] h-[227px]">
 			<div className="flex flex-col items-center w-1/3">
-				<div className="flex flex-col items-center absolute z-10 transform -translate-y-1/2">
-					<img
-						src="/svg/sampleProfileImg.svg"
-						width="70px"
-						height="70px rounded-full"
-					/>
+				<div className="flex flex-col w-[70px] h-[70px] items-center absolute z-10 transform -translate-y-1/2 rounded-full overflow-hidden">
+					<img src={ranker3?.imageUrl} className="object-cover" />
 					{/* <img
 						className="absolute z-20 transform translate-y-[60px]"
 						src={}
@@ -58,12 +54,8 @@ export default function HighRank() {
 			</div>
 
 			<div className="flex flex-col items-center w-1/3">
-				<div className="flex flex-col items-center absolute z-10 transform -translate-y-1/2">
-					<img
-						src="/svg/sampleProfileImg.svg"
-						width="90px"
-						height="90px rounded-full"
-					/>
+				<div className="flex flex-col w-[90px] h-[90px] items-center absolute z-10 transform -translate-y-1/2 rounded-full overflow-hidden">
+					<img src={ranker1?.imageUrl} className="object-cover" />
 					{/* <img
 						className="absolute z-20 transform translate-y-[78px]"
 						src={
@@ -88,12 +80,8 @@ export default function HighRank() {
 			</div>
 
 			<div className="flex flex-col items-center w-1/3">
-				<div className="flex flex-col items-center absolute z-10 transform -translate-y-1/2">
-					<img
-						src="/svg/sampleProfileImg.svg"
-						width="50px"
-						height="50px rounded-full"
-					/>
+				<div className="flex flex-col items-center w-[50px] h-[50px] absolute z-10 transform -translate-y-1/2 rounded-full overflow-hidden">
+					<img src={ranker2?.imageUrl} className="object-cover" />
 					{/* <img
 						className="absolute z-20 transform translate-y-[45px]"
 						src={

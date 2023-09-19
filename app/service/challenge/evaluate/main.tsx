@@ -137,8 +137,11 @@ export default function ChallengeEvaluateMain() {
 						const tempList = [...challengeImgList]
 						const newList = tempList.concat(data)
 						setChallengeImgList(newList)
-						setCurrentImgEvaluate(false)
-						if (currentImg === 0) setCurrentImg((prev) => prev + 1)
+
+						if (currentImg === 0) {
+							setCurrentImg((prev) => prev + 1)
+							setCurrentImgEvaluate(false)
+						}
 					} else console.log("평가할 룩이 더이상 없습니다.")
 				} else {
 					console.log(message)
