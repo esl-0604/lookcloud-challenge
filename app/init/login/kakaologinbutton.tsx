@@ -12,7 +12,7 @@ export default function KaKaoLoginButton() {
 
 	useEffect(() => {
 		if (kakaoCode) {
-			console.log(kakaoCode)
+			// console.log(kakaoCode)
 			getUserToken()
 		}
 	}, [kakaoCode])
