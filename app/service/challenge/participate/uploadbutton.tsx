@@ -16,26 +16,23 @@ export default function ChallengeParticipantUploadButton({
 
 	const fileRef = useRef<HTMLInputElement>(null)
 	const handleClick = () => {
-		if (text === "갤러리에서 가져오기") {
-			fileRef?.current?.click()
-		}
+		fileRef?.current?.click()
 	}
+
 	const handleChange = (e: React.ChangeEvent) => {
-		if (text === "갤러리에서 가져오기") {
-			const maxSize = 5 * 1024 * 1024
-			const targetFile = (e.target as HTMLInputElement).files as FileList
-			const targetFileArray = Array.from(targetFile)
-			if (targetFileArray[0]?.size > maxSize) {
-				alert("5MB 아래의 이미지를 선택해주세요.")
-				return
-			}
-			console.log(typeof targetFileArray[0])
-			setLookImageFile(targetFileArray[0])
-			const selectedFile: string[] = targetFileArray.map((file) => {
-				return URL.createObjectURL(file)
-			})
-			setLookImage(selectedFile[0])
+		const maxSize = 5 * 1024 * 1024
+		const targetFile = (e.target as HTMLInputElement).files as FileList
+		const targetFileArray = Array.from(targetFile)
+		if (targetFileArray[0]?.size > maxSize) {
+			alert("5MB 아래의 이미지를 선택해주세요.")
+			return
 		}
+		console.log(typeof targetFileArray[0])
+		setLookImageFile(targetFileArray[0])
+		const selectedFile: string[] = targetFileArray.map((file) => {
+			return URL.createObjectURL(file)
+		})
+		setLookImage(selectedFile[0])
 	}
 
 	return (
@@ -63,7 +60,7 @@ export default function ChallengeParticipantUploadButton({
 				className="hidden"
 				type="file"
 				accept="image/*"
-				capture={true}
+				capture={text === "직접 촬영하기" ? "environment" : false}
 				onChange={handleChange}
 			/>
 		</form>
