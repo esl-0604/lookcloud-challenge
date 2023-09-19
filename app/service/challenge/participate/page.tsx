@@ -144,12 +144,11 @@ export default function Participate() {
 					console.log("등록 성공!")
 					console.log(data)
 					// 페이지 리로드
-					router.refresh()
+					router.replace("/service/challenge/leaderboard")
 				} else {
 					console.log(message)
 				}
 			})
-
 			.catch((error) => {
 				console.log(error)
 			})

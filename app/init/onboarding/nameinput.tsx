@@ -1,6 +1,6 @@
 "use client"
 
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { NameContext } from "./context"
 
 interface NoticeTextType {
@@ -9,11 +9,28 @@ interface NoticeTextType {
 }
 
 export default function OnboardingNameInput() {
-	const { nickName, setNickName }: any = useContext(NameContext)
+	const { nickName, setNickName, validateNickName, setValidateNickName }: any =
+		useContext(NameContext)
 	const [noticeText, setNoticeText] = useState<NoticeTextType>({
 		text: "LookCloud에서 보이게될 이름입니다. 나중에 바꿀 수 있습니다.",
 		theme: "text-[#9C9C9C]",
 	})
+
+	useEffect(() => {
+		if (!validateNickName) {
+			setNoticeText({
+				text: "이미 사용 중인 이름입니다. 다시 입력해주세요",
+				theme: "text-[#DC2D2D]",
+			})
+			setNickName("")
+			setValidateNickName(true)
+		} else {
+			setNoticeText({
+				text: "LookCloud에서 보이게될 이름입니다. 나중에 바꿀 수 있습니다.",
+				theme: "text-[#9C9C9C]",
+			})
+		}
+	}, [validateNickName])
 
 	const SettingNickName = (name: string) => {
 		if (name.length < 9) {

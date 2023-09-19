@@ -11,7 +11,7 @@ import { useRecoilState } from "recoil"
 export default function Profile() {
 	const [profileData, setProfileData] =
 		useRecoilState<userProfileType>(userProfileState)
-	// console.log(profileData)
+	console.log(profileData)
 
 	return (
 		<main className="flex flex-col justify-start items-center absolute w-[100%] min-h-[100%] bg-[#F5F5F5]">

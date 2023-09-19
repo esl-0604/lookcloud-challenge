@@ -94,18 +94,21 @@ export default function ServiceLayout({
 							const today: Date = new Date()
 							let state: number = 0
 
-							if (challenge.startedAt && challenge.endedAt) {
+							const endDate: Date = challenge.endedAt
+								? new Date(challenge.endedAt)
+								: new Date()
+							const startDate: Date = challenge.startedAt
+								? new Date(challenge.startedAt)
+								: new Date()
+
+							if (startDate && endDate) {
 								// state === -1
-								if (today < challenge.startedAt) {
+								if (today < startDate) {
 									state = -1
 								}
 								// state === 0 이상의 정수
-								else if (
-									challenge.startedAt <= today &&
-									today <= challenge.endedAt
-								) {
-									const dTime: number =
-										challenge.endedAt.getTime() - today.getTime()
+								else if (startDate <= today && today <= endDate) {
+									const dTime: number = endDate.getTime() - today.getTime()
 									const dDay: number = Math.ceil(dTime / (1000 * 60 * 60 * 24))
 									state = dDay
 								}
@@ -126,7 +129,7 @@ export default function ServiceLayout({
 							return newChallengeData
 						},
 					)
-					console.log(newChallengeDateList)
+					// console.log(newChallengeDateList)
 					setChallengeDataList(newChallengeDateList)
 				}
 			})

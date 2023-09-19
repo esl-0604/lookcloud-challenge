@@ -28,6 +28,7 @@ export interface GenderType {
 export default function Onboarding() {
 	const [step, setStep] = useState<StepType>({ id: "1" })
 	const [nickName, setNickName] = useState<string>("")
+	const [validateNickName, setValidateNickName] = useState<boolean>(true)
 	const [gender, setGender] = useState<GenderType | null>(null)
 	// const [organ, setOrgan] = useState<OrganType | null>(null)
 	const [instagramId, setInstagramId] = useState<string>("")
