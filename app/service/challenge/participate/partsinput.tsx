@@ -7,7 +7,8 @@ import { partType } from "@/app/utils/atoms/serviceGlobalState"
 import { ChallengeInfoContext } from "./context"
 
 export default function PartsInput() {
-	const { lookParts, setLookParts } = useContext(ChallengeInfoContext)
+	const { isAlreadyPosted, lookParts, setLookParts } =
+		useContext(ChallengeInfoContext)
 	useEffect(() => {
 		if (lookParts.length === 0) {
 			const newLookPart: partType[] = [
@@ -45,15 +46,17 @@ export default function PartsInput() {
 				{lookParts?.map((part: partType, i: number) => {
 					return <ProductInfoBox key={i} partIndex={i} />
 				})}
-				<div
-					className="flex justify-between items-center w-[120px] h-[20px] cursor-pointer"
-					onClick={AddParts}
-				>
-					<Add />
-					<div className="flex justify-center items-center h-full">
-						다른 제품 추가하기
+				{isAlreadyPosted ? null : (
+					<div
+						className="flex justify-between items-center w-[120px] h-[20px] cursor-pointer"
+						onClick={AddParts}
+					>
+						<Add />
+						<div className="flex justify-center items-center h-full">
+							다른 제품 추가하기
+						</div>
 					</div>
-				</div>
+				)}
 			</div>
 		</div>
 	)

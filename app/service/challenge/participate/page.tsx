@@ -108,7 +108,7 @@ export default function Participate() {
 		const userToken = profileData.userToken
 		// 룩 정보 중에서 parts 부분에 빈배열을 확인하고, 빈배열인 부분은 제거한 뒤, 재인덱스 작업 후 포스팅한다.
 		let tempLookParts: partType[] = lookParts.filter(
-			(part: partType, i: number) => part.part && part.brand && part.name,
+			(part: partType, i: number) => part.part && (part.brand || part.name),
 		)
 		const newLookParts = tempLookParts.map((part: partType, i: number) => {
 			const newPart: partType = {
@@ -234,8 +234,14 @@ export default function Participate() {
 					</div>
 				) : (
 					<div
-						className="flex justify-center items-center mt-[20px] mb-[100px] w-[70%] max-w-[310px] h-[50px] rounded-[20.5px] bg-[#344467] text-[24px] font-semibold text-white cursor-pointer"
-						onClick={() => PostParticipate("Post")}
+						className={`flex justify-center items-center mt-[20px] mb-[100px] w-[70%] max-w-[310px] h-[50px] rounded-[20.5px]  text-[24px] font-semibold  ${
+							lookImage
+								? "bg-[#344467] text-white cursor-pointer"
+								: "bg-[#878787] text-[#B7B7B7]"
+						}`}
+						onClick={() => {
+							if (lookImage) PostParticipate("Post")
+						}}
 					>
 						완료
 					</div>
