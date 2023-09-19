@@ -63,6 +63,7 @@ export default function ChallengeParticipantUploadButton({
 				className="hidden"
 				type="file"
 				accept="image/*"
+				capture="camera"
 				onChange={handleChange}
 			/>
 		</form>
