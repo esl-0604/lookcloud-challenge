@@ -18,7 +18,7 @@ export default function PartsInfoBox({
 	const [isHover, setIsHover] = useState<boolean>(false)
 
 	useEffect(() => {
-		console.log(lookParts)
+		// console.log(lookParts)
 	}, [lookParts])
 
 	const UpdateParts = (type: string, value: string) => {

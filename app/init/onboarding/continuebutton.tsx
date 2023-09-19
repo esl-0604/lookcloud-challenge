@@ -12,6 +12,7 @@ interface ContinueButtonProps {
 	gender: GenderType | null
 	// organ: OrganType | null
 	instagramId: string
+	setValidateNickName: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function ContinueButton({
@@ -20,6 +21,7 @@ export default function ContinueButton({
 	gender,
 	// organ,
 	instagramId,
+	setValidateNickName,
 }: ContinueButtonProps) {
 	const { step, setStep }: any = useContext(StepContext)
 	const router = useRouter()
@@ -27,7 +29,8 @@ export default function ContinueButton({
 	const StepForward = () => {
 		if (canBeContinued) {
 			const stepNum = Number(step.id)
-			if (stepNum < 3) setStep({ id: (stepNum + 1).toString() })
+			if (stepNum === 1) validateNickName()
+			else if (stepNum === 2) setStep({ id: (stepNum + 1).toString() })
 			else if (stepNum === 3) {
 				console.log({
 					닉네임: nickName,
@@ -47,6 +50,40 @@ export default function ContinueButton({
 			// 	router.push("/service/challenge")
 			// }
 		}
+	}
+
+	const validateNickName = async () => {
+		const REGISTER_USER_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/users/nickName`
+		await fetch(REGISTER_USER_URL, {
+			method: "POST",
+			mode: "cors",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				nickName: nickName,
+			}),
+		})
+			.then((res) => res.json())
+			.then(({ status, message, data }) => {
+				if (data) {
+					// 중복된 닉네임이 있는 경우
+					if (data === "EXISTS") {
+						setValidateNickName(false)
+					}
+
+					// 중복된 닉네임이 없는 경우
+					else {
+						const stepNum = Number(step.id)
+						setStep({ id: (stepNum + 1).toString() })
+					}
+				} else {
+					console.log(message)
+				}
+			})
+			.catch((error) => {
+				console.log(error)
+			})
 	}
 
 	const registerUserAPIcall = async (facebookId: number) => {

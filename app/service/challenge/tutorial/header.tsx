@@ -1,12 +1,14 @@
 "use client"
 
 import HeaderLogo from "@/public/svg/headerlogo.svg"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 
 export default function TutorialHeader() {
 	const router = useRouter()
+	const param = useSearchParams()
+	const challengeId = param.get("id")
 	const SkipTutorial = () => {
-		router.replace("/service/challenge/evaluate")
+		router.replace("/service/challenge/evaluate?id=" + challengeId)
 	}
 	return (
 		<div className="flex flex-col justify-start items-center w-[100%]">

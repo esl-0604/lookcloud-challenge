@@ -9,6 +9,8 @@ import {
 	userChallengeParticipateType,
 	userProfileState,
 	userProfileType,
+	userTutorial,
+	userTutorialType,
 } from "@/app/utils/atoms/serviceGlobalState"
 import { useRecoilState } from "recoil"
 import { useEffect, useState } from "react"
@@ -24,6 +26,8 @@ export default function LinkButton() {
 		useRecoilState<challengeParticipantsType>(challengeParticipantsInfo)
 	const [userChallengeParticipateData, setUserChallengeParticipateData] =
 		useRecoilState<userChallengeParticipateType>(userChallengeParticipateInfo)
+	const [userTutorialData, setUserTutorialData] =
+		useRecoilState<userTutorialType>(userTutorial)
 
 	const [isParticipate, setIsparticipate] = useState<boolean>(false)
 
@@ -33,8 +37,10 @@ export default function LinkButton() {
 			userChallengeParticipateData[challengeId]
 		) {
 			setIsparticipate(true)
+		} else {
+			setIsparticipate(false)
 		}
-	}, [])
+	}, [challengeParticipantsData, userChallengeParticipateData])
 
 	return (
 		<div
@@ -112,7 +118,9 @@ export default function LinkButton() {
 					<Link
 						className="flex justify-center items-center w-[48%] h-[70px] rounded-[20px] border-2 border-white cursor-pointer"
 						href={{
-							pathname: "/service/challenge/evaluate",
+							pathname: userTutorialData.complete
+								? "/service/challenge/evaluate"
+								: "/service/challenge/tutorial",
 							query: { id: challengeId },
 						}}
 					>

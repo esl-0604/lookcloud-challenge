@@ -28,6 +28,7 @@ export interface GenderType {
 export default function Onboarding() {
 	const [step, setStep] = useState<StepType>({ id: "1" })
 	const [nickName, setNickName] = useState<string>("")
+	const [validateNickName, setValidateNickName] = useState<boolean>(true)
 	const [gender, setGender] = useState<GenderType | null>(null)
 	// const [organ, setOrgan] = useState<OrganType | null>(null)
 	const [instagramId, setInstagramId] = useState<string>("")
@@ -67,7 +68,14 @@ export default function Onboarding() {
 					<div className="flex-1 flex flex-col justify-start items-center w-[100%]">
 						<TextBox text={stepText[step.id]} />
 						{step.id === "1" ? (
-							<NameContext.Provider value={{ nickName, setNickName }}>
+							<NameContext.Provider
+								value={{
+									nickName,
+									setNickName,
+									validateNickName,
+									setValidateNickName,
+								}}
+							>
 								<OnboardingNameInput />
 							</NameContext.Provider>
 						) : step.id === "2" ? (
@@ -90,6 +98,7 @@ export default function Onboarding() {
 							nickName={nickName}
 							gender={gender}
 							instagramId={instagramId}
+							setValidateNickName={setValidateNickName}
 						/>
 					</div>
 				</div>
