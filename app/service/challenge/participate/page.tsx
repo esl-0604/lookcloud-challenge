@@ -93,7 +93,7 @@ export default function Participate() {
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
-				if (status === "OK") {
+				if (data) {
 					console.log(data)
 					ChallengeUpload(data)
 				} else {
@@ -140,7 +140,7 @@ export default function Participate() {
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
-				if (status === "OK") {
+				if (data) {
 					console.log("등록 성공!")
 					console.log(data)
 					// 페이지 리로드

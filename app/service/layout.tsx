@@ -87,7 +87,7 @@ export default function ServiceLayout({
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
-				if (status === "OK") {
+				if (data) {
 					console.log(data)
 					const newChallengeDateList = data.map(
 						(challenge: challengeInfoType, i: number) => {
@@ -128,7 +128,7 @@ export default function ServiceLayout({
 					)
 					console.log(newChallengeDateList)
 					setChallengeDataList(newChallengeDateList)
-				} else console.log(message)
+				}
 			})
 			.catch((error) => console.log(error))
 	}
