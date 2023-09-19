@@ -26,24 +26,18 @@ export default function FacebookLoginButton() {
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
-<<<<<<< HEAD
-				// console.log(status)
-=======
 				// 페이스북 계정으로 유저 조회 실패
->>>>>>> 62fb41e (API 검토 1차 완료)
 				if (status === "NOT_FOUND") {
 					LocalStorage.removeItem("lookCloud-facebook-Id")
 					LocalStorage.setItem("lookCloud-facebook-Id", facebookId)
 					if (LocalStorage.getItem("lookCloud-facebook-Id")) {
 						router.push("/init/onboarding")
 					}
-<<<<<<< 
 				}
 				// 페이스북 계정으로 유저 조회 성공
 				else {
 					// console.log(data);
 					const userToken: string = data
->>>>>>> 62fb41e (API 검토 1차 완료)
 					GetUserInfoAPIcall(userToken)
 				}
 			})
