@@ -74,6 +74,7 @@ export default function FacebookLoginButton() {
 			})
 			.catch((error) => {
 				console.log(error)
+				router.replace("/init/login")
 			})
 	}
 
@@ -92,7 +93,7 @@ export default function FacebookLoginButton() {
 					}}
 					onProfileSuccess={(response) => {
 						// console.log("Get Profile Success!");
-						// console.log(response);
+						console.log(response)
 						if (response["id"]) setFacebookID(response["id"])
 					}}
 					render={({ onClick }) => (
