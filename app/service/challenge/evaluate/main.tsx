@@ -228,7 +228,7 @@ export default function ChallengeEvaluateMain() {
 				{isUp ? (
 					<div>
 						{isInfo && currentImgEvaluate ? (
-							<div>
+							<div className="flex">
 								<LookInfoBox />
 							</div>
 						) : (
@@ -249,7 +249,7 @@ export default function ChallengeEvaluateMain() {
 				) : isDown ? (
 					<div>
 						{isInfo && currentImgEvaluate ? (
-							<div>
+							<div className="flex">
 								<LookInfoBox />
 							</div>
 						) : (
