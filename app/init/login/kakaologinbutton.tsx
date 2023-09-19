@@ -53,8 +53,7 @@ export default function KaKaoLoginButton() {
 					console.log(data)
 
 					const kakaoId: number = data.id
-					const kakaoProfileUrl: string | null =
-						data.properties?.thumbnail_image
+					const kakaoProfileUrl: string | null = data.properties?.profile_image
 
 					GetKakaoUserInfoAPIcall(kakaoId, kakaoProfileUrl)
 				}
