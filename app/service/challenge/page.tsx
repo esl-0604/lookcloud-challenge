@@ -18,7 +18,7 @@ export default function Challenge() {
 		<main className="flex flex-col justify-start items-center absolute w-[100%] min-h-[100%] bg-black">
 			<ChallengeHeader />
 			<div className="flex-1 flex flex-col justify-start items-center w-[100%] px-[20px] text-white">
-				<div className="flex flex-col justify-center items-start w-[100%] h-[64px] text-[12px] font-textBoxFont leading-[20px] font-normal">
+				<div className="flex flex-col justify-center items-start w-[100%] py-[10px] text-[12px] font-textBoxFont leading-[20px] font-normal">
 					<span>
 						나만의 스타일링을 선보일 수 있는 다양한 챌린지에 참여해보세요!
 					</span>

@@ -7,10 +7,12 @@ import {
 	userProfileType,
 } from "@/app/utils/atoms/serviceGlobalState"
 import { useRecoilState } from "recoil"
+import LocalStorage from "@/app/utils/localstorage"
 
 export default function Profile() {
 	const [profileData, setProfileData] =
 		useRecoilState<userProfileType>(userProfileState)
+	const userProfile = LocalStorage.getItem("lookCloud-kakao-profile")
 	console.log(profileData)
 
 	return (
@@ -18,7 +20,13 @@ export default function Profile() {
 			<ChallengeProfileHeader />
 			<div className="flex-1 flex flex-col justify-start items-center w-[100%] text-black">
 				<div className="mt-[86px]">
-					<ProfileImg width={"180"} height={"180"} />
+					{userProfile ? (
+						<div className="flex justify-center items-center w-[180px] h-[180px] rounded-full overflow-hidden">
+							<img className="object-cover" src={userProfile} alt="myProfile" />
+						</div>
+					) : (
+						<ProfileImg width={"180"} height={"180"} />
+					)}
 				</div>
 				<div className="flex justify-center items-center w-[100%] h-[52px] mt-[30px] text-[24px] font-textBoxFont">
 					{profileData.nickname}

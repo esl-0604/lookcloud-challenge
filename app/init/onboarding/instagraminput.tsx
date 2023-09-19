@@ -19,11 +19,11 @@ export default function OnboardingInstagramInput() {
 		setInstagramId(instagramId.replace(/@/g, ""))
 	}
 	return (
-		<div className="flex flex-col justify-between items-center w-[320px] h-[48px] text-[12px]">
+		<div className="flex flex-col justify-between items-center w-[84%] max-w-[320px] text-[12px]">
 			<input
 				type="text"
 				placeholder="ex) eslee850"
-				className="w-[100%] bg-transparent focus: outline-none placeholder-[#9C9C9C]"
+				className="w-full bg-transparent focus: outline-none placeholder-[#9C9C9C]"
 				value={instagramId}
 				onChange={(e) => {
 					SettingInstagramId(e.target.value)

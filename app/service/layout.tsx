@@ -53,6 +53,7 @@ export default function ServiceLayout({
 					// console.log(data)
 					let newProfileData = { ...profileData }
 					newProfileData.userToken = userToken
+					newProfileData
 					newProfileData.nickname = '"' + data["nickName"] + '"님'
 					newProfileData.gender = data["gender"] === "MALE" ? "남성" : "여성"
 					if (data["instagramUserName"]) {
