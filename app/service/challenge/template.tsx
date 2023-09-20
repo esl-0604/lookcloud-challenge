@@ -10,6 +10,8 @@ import {
 	userChallengeParticipateType,
 	userProfileState,
 	userProfileType,
+	userTutorial,
+	userTutorialType,
 } from "@/app/utils/atoms/serviceGlobalState"
 import { useEffect } from "react"
 

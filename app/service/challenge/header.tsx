@@ -10,7 +10,7 @@ import LocalStorage from "@/app/utils/localstorage"
 export default function ChallengeHeader() {
 	const router = useRouter()
 	const path = usePathname()
-	// console.log(path);
+	console.log(path)
 	const userProfile = LocalStorage.getItem("lookCloud-kakao-profile")
 	const GoBackward = () => {
 		router.back()
@@ -19,35 +19,26 @@ export default function ChallengeHeader() {
 		router.push("/service/challenge")
 	}
 	return (
-		<div className="flex flex-row sticky top-0 justify-between items-center w-[100%] h-[56px] px-[16px] z-30 bg-black">
-			<div className="cursor-pointer" onClick={GoHome}>
-				<HeaderLogo width={"126"} height={"32"} color={"white"} />
-			</div>
-
-			{path === "service/challenge/evaluate" ? (
-				<div className="text-right text-[12px] text-white font-textBoxFont">
-					고연전
+		<div className="flex flex-row sticky top-0 justify-between items-center w-[100%] h-[56px] px-[10px] z-30 bg-black">
+			{path === "/service/challenge" ? (
+				<div className="pl-[6px] cursor-pointer" onClick={GoHome}>
+					<HeaderLogo width={"126"} height={"32"} color={"white"} />
 				</div>
 			) : (
-				<Link href={"/service/profile"} className="cursor-pointer">
-					{userProfile ? (
-						<div className="flex justify-center items-center w-[40px] h-[40px] rounded-full overflow-hidden">
-							<img className="object-cover" src={userProfile} alt="myProfile" />
-						</div>
-					) : (
-						<Profile width={"40"} height={"40"} />
-					)}
-				</Link>
-			)}
-
-			{path === "/service/challenge" ? null : (
-				<div
-					className="absolute top-[74px] right-[15px] z-10 cursor-pointer"
-					onClick={GoBackward}
-				>
+				<div className="cursor-pointer" onClick={GoBackward}>
 					<Backward />
 				</div>
 			)}
+
+			<Link href={"/service/profile"} className="cursor-pointer pr-[6px]">
+				{userProfile ? (
+					<div className="flex justify-center items-center w-[40px] h-[40px] rounded-full overflow-hidden">
+						<img className="object-cover" src={userProfile} alt="myProfile" />
+					</div>
+				) : (
+					<Profile width={"40"} height={"40"} />
+				)}
+			</Link>
 		</div>
 	)
 }

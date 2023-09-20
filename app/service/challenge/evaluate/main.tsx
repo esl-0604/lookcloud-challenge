@@ -16,6 +16,7 @@ import { createContext, useEffect, useRef, useState } from "react"
 import { useRecoilState } from "recoil"
 import { dummyList } from "./lookImgDummy"
 import Next from "@/public/svg/swipeup.svg"
+import CheckBox from "./checkbox"
 
 const BOUNDARY_MARGIN = 0
 const DEFAULT_W = 300
@@ -28,11 +29,28 @@ interface ConfigState {
 export const ChallengeImgContext = createContext<any>(null)
 
 export default function ChallengeEvaluateMain() {
+	const param = useSearchParams()
+	const challengeId = param.get("id")
 	const boundaryRef = useRef<HTMLDivElement>(null)
+
+	const [profileData, setProfileData] =
+		useRecoilState<userProfileType>(userProfileState)
+
 	const [{ x, y }, setConfig] = useState<ConfigState>({
 		x: 0,
 		y: 40,
 	})
+	const [isUp, setIsUp] = useState<boolean>(false)
+	const [isDown, setIsDown] = useState<boolean>(false)
+	const [showThumbs, setShowThumbs] = useState<boolean>(false)
+	const [isInfo, setIsInfo] = useState<boolean>(false)
+	const [challengeImgList, setChallengeImgList] = useState<any[]>([])
+	const [currentImg, setCurrentImg] = useState<number>(0)
+	const [currentImgEvaluate, setCurrentImgEvaluate] = useState<boolean>(true)
+	const [canBeNext, setCanBeNext] = useState<boolean>(false)
+	const [isNoMoreLook, setIsNoMoreLook] = useState<boolean>(false)
+	const [imageLoaded, setImageLoaded] = useState<boolean>(false)
+	const [imageUrl, setImageUrl] = useState<string>("")
 
 	useEffect(() => {
 		const boundary = boundaryRef.current?.getBoundingClientRect()
@@ -44,21 +62,6 @@ export default function ChallengeEvaluateMain() {
 			})
 		}
 	}, [])
-
-	const param = useSearchParams()
-	const challengeId = param.get("id")
-	const [profileData, setProfileData] =
-		useRecoilState<userProfileType>(userProfileState)
-
-	const [isUp, setIsUp] = useState<boolean>(false)
-	const [isDown, setIsDown] = useState<boolean>(false)
-	const [showThumbs, setShowThumbs] = useState<boolean>(false)
-	const [isInfo, setIsInfo] = useState<boolean>(false)
-
-	const [challengeImgList, setChallengeImgList] = useState<any[]>([])
-	const [currentImg, setCurrentImg] = useState<number>(0)
-	const [currentImgEvaluate, setCurrentImgEvaluate] = useState<boolean>(true)
-	const [canBeNext, setCanBeNext] = useState<boolean>(false)
 
 	useEffect(() => {
 		if (showThumbs) {
@@ -97,9 +100,6 @@ export default function ChallengeEvaluateMain() {
 	}, [y])
 
 	useEffect(() => {
-		// console.log(challengeId)
-		// console.log(profileData.userToken)
-		// console.log(currentImgEvaluate)
 		console.log({ "현재 위치 : ": currentImg })
 		console.log({ "현재 위치 평가 : ": currentImgEvaluate })
 		console.log({ "총 길이 : ": challengeImgList.length })
@@ -119,6 +119,20 @@ export default function ChallengeEvaluateMain() {
 		currentImgEvaluate,
 	])
 
+	useEffect(() => {
+		if (currentImg > 0) {
+			const imageUrl = challengeImgList[currentImg - 1]?.look?.imageUrl
+			if (imageUrl) {
+				const img = new Image()
+				img.src = imageUrl
+				img.onload = () => {
+					setImageUrl(imageUrl)
+					setImageLoaded(true)
+				}
+			}
+		}
+	}, [currentImg, challengeImgList])
+
 	//----------------------------------------------------------------------------
 
 	const GetChallengeImgs = async (userToken: string) => {
@@ -134,6 +148,7 @@ export default function ChallengeEvaluateMain() {
 				if (data) {
 					console.log(data)
 					if (data.length > 0) {
+						setIsNoMoreLook(false)
 						const tempList = [...challengeImgList]
 						const newList = tempList.concat(data)
 						setChallengeImgList(newList)
@@ -142,7 +157,10 @@ export default function ChallengeEvaluateMain() {
 							setCurrentImg((prev) => prev + 1)
 							setCurrentImgEvaluate(false)
 						}
-					} else console.log("평가할 룩이 더이상 없습니다.")
+					} else {
+						console.log("평가할 룩이 더이상 없습니다.")
+						setIsNoMoreLook(true)
+					}
 				} else {
 					console.log(message)
 					// const newList = challengeImgList.concat(dummyList)
@@ -190,23 +208,6 @@ export default function ChallengeEvaluateMain() {
 			.catch((error) => console.log(error))
 	}
 
-	const [imageLoaded, setImageLoaded] = useState<boolean>(false)
-	const [imageUrl, setImageUrl] = useState<string>("")
-
-	useEffect(() => {
-		if (currentImg > 0) {
-			const imageUrl = challengeImgList[currentImg - 1]?.look?.imageUrl
-			if (imageUrl) {
-				const img = new Image()
-				img.src = imageUrl
-				img.onload = () => {
-					setImageUrl(imageUrl)
-					setImageLoaded(true)
-				}
-			}
-		}
-	}, [currentImg, challengeImgList])
-
 	const NextImg = () => {
 		setCurrentImgEvaluate(false)
 		setCurrentImg((prev) => prev + 1)
@@ -224,7 +225,8 @@ export default function ChallengeEvaluateMain() {
 		<ChallengeImgContext.Provider
 			value={{ challengeImgList, currentImg, currentImgEvaluate }}
 		>
-			<div className="px-4 w-[100%] h-[100%] flex flex-col items-center relative">
+			<div className="flex flex-col items-center relative w-full h-full px-4 ">
+				{isNoMoreLook ? <CheckBox /> : null}
 				{isUp ? (
 					<div>
 						{isInfo && currentImgEvaluate ? (
@@ -232,16 +234,7 @@ export default function ChallengeEvaluateMain() {
 								<LookInfoBox />
 							</div>
 						) : (
-							<div
-								style={{
-									position: "absolute",
-									left: "50%",
-									transform: "translate(-50%, -50%)",
-									width: 300,
-									height: 450,
-									top: "calc(50% - 50px)",
-								}}
-							>
+							<div className="absolute left-1/2 top-[calc(50%-50px)] -translate-x-1/2 -translate-y-1/2 w-[300px] h-[450px]">
 								<ThumbsUpBox />
 							</div>
 						)}
@@ -253,16 +246,7 @@ export default function ChallengeEvaluateMain() {
 								<LookInfoBox />
 							</div>
 						) : (
-							<div
-								style={{
-									position: "absolute",
-									left: "50%",
-									transform: "translate(-50%, -50%)",
-									width: 300,
-									height: 450,
-									top: "calc(50% + 30px)",
-								}}
-							>
+							<div className="absolute left-1/2 top-[calc(50%+50px)] -translate-x-1/2 -translate-y-1/2 w-[300px] h-[450px]">
 								<ThumbsDownBox />
 							</div>
 						)}
@@ -309,7 +293,7 @@ export default function ChallengeEvaluateMain() {
 							<Box />
 						</div>
 					</Boundary>
-				) : (
+				) : isNoMoreLook ? null : (
 					<div style={{ width: 300, height: 450 }}>
 						<div className="h-full w-full relative">
 							<div className="w-full h-full bg-black flex items-center justify-center">
