@@ -48,11 +48,11 @@ export default function PartsInput() {
 				})}
 				{isAlreadyPosted ? null : (
 					<div
-						className="flex justify-between items-center w-[120px] h-[20px] cursor-pointer"
+						className="flex flex-row flex-nowrap justify-between items-center w-[120px] h-[20px] cursor-pointer"
 						onClick={AddParts}
 					>
 						<Add />
-						<div className="flex justify-center items-center h-full">
+						<div className="flex justify-center items-center w-[100px] h-full whitespace-nowrap">
 							다른 제품 추가하기
 						</div>
 					</div>
