@@ -6,9 +6,12 @@ import { useRecoilState } from "recoil"
 import {
 	challengeInfoList,
 	challengeInfoType,
+	userTutorial,
+	userTutorialType,
 } from "@/app/utils/atoms/serviceGlobalState"
 import ChallengeCategoryBox from "@/app/service/challenge/categorybox"
 import CommingSoon from "@/public/svg/commingsoon.svg"
+import { useEffect } from "react"
 
 export default function Challenge() {
 	const [challengeDataList, setChallengeDataList] =
