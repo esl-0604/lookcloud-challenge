@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const withPWA = require("next-pwa")
+
+const config = {
 	webpack(config) {
 		config.module.rules.push({
 			test: /\.svg$/,
@@ -9,5 +11,11 @@ const nextConfig = {
 		return config
 	},
 }
+
+const nextConfig = withPWA({
+	dest: "public",
+	disable: false,
+	runtimeCaching: [],
+})(config)
 
 module.exports = nextConfig
