@@ -65,7 +65,7 @@ export default function Onboarding() {
 			<StepContext.Provider value={{ step, setStep }}>
 				<div className="flex flex-col justify-start items-center w-[100%] h-[100%] bg-[#F5F5F5]">
 					<OnboardingHeader />
-					<div className="flex-1 flex flex-col justify-start items-center w-[100%]">
+					<div className="flex-1 flex flex-col justify-start items-center w-[100%] relative">
 						<TextBox text={stepText[step.id]} />
 						{step.id === "1" ? (
 							<NameContext.Provider

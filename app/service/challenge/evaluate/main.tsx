@@ -17,6 +17,7 @@ import { useRecoilState } from "recoil"
 import { dummyList } from "./lookImgDummy"
 import Next from "@/public/svg/swipeup.svg"
 import CheckBox from "./checkbox"
+import SpinnerBox from "@/app/components/spinner"
 
 const BOUNDARY_MARGIN = 0
 const DEFAULT_W = 300
@@ -294,26 +295,25 @@ export default function ChallengeEvaluateMain() {
 						</div>
 					</Boundary>
 				) : isNoMoreLook ? null : (
-					<div style={{ width: 300, height: 450 }}>
-						<div className="h-full w-full relative">
-							<div className="w-full h-full bg-black flex items-center justify-center">
-								<img src="/svg/spinner.svg" alt="image" />
-							</div>
-							<div
-								className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-[#333333] to-[#333333]"
-								style={{
-									zIndex: 10,
-									height: "15%",
-								}}
-							>
-								<div className="absolute bottom-3 ml-2">
-									<span className="text-left text-xs text-white">
-										이미지를 불러오는 중입니다, 잠시만 기다려주세요
-									</span>
-								</div>
-							</div>
-						</div>
-					</div>
+					<SpinnerBox text="이미지를 불러오는 중입니다, 잠시만 기다려주세요" />
+					// <div className="flex flex-col justify-center items-center w-full h-full relative">
+					// 	<div className="w-full h-full bg-black flex items-center justify-center">
+					// 		<img src="/svg/spinner.svg" alt="image" />
+					// 	</div>
+					// 	<div
+					// 		className="absolute bottom-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-[#333333] to-[#333333]"
+					// 		style={{
+					// 			zIndex: 10,
+					// 			height: "15%",
+					// 		}}
+					// 	>
+					// 		<div className="absolute bottom-3 ml-2">
+					// 			<span className="text-left text-xs text-white">
+					// 				이미지를 불러오는 중입니다, 잠시만 기다려주세요
+					// 			</span>
+					// 		</div>
+					// 	</div>
+					// </div>
 				)}
 				{currentImgEvaluate && currentImg > 0 && canBeNext ? (
 					<div

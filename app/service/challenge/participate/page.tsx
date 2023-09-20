@@ -17,6 +17,7 @@ import { useRouter, useSearchParams } from "next/navigation"
 import ParticipateThumbnail from "./thumbnail"
 import AlertBox from "@/app/components/AlertBox"
 import { ChallengeInfoContext } from "./context"
+import SpinnerBox from "@/app/components/spinner"
 
 export default function Participate() {
 	const router = useRouter()
@@ -31,6 +32,7 @@ export default function Participate() {
 	// 로컬 State
 	const [deleteModal, setDeleteModal] = useState<boolean>(false)
 	const [isAlreadyPosted, setIsAlreadyPosted] = useState<boolean>(false)
+	const [apiWaiting, setApiWaiting] = useState<boolean>(false)
 	// const [canBeUpdate, setCanBeUpdate] = useState<boolean>(true)
 	// 임시로 존재하는 룩 정보
 	const [lookImage, setLookImage] = useState<string | null>(null)
@@ -85,6 +87,7 @@ export default function Participate() {
 	}
 
 	const ImageUpload = async (formData: any) => {
+		setApiWaiting(true)
 		const IMAGE_UPLOAD_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/participations/image`
 		await fetch(IMAGE_UPLOAD_URL, {
 			method: "POST",
@@ -139,6 +142,7 @@ export default function Participate() {
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
+				setApiWaiting(false)
 				if (data) {
 					console.log("등록 성공!")
 					router.replace("/service/challenge/leaderboard?id=" + challengeId)
@@ -147,11 +151,14 @@ export default function Participate() {
 				}
 			})
 			.catch((error) => {
+				setApiWaiting(false)
 				console.log(error)
 			})
 	}
 
 	const CancelChallenge = async (participationId: string) => {
+		setDeleteModal(false)
+		setApiWaiting(true)
 		const IMAGE_UPLOAD_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/participations/cancel`
 		await fetch(IMAGE_UPLOAD_URL, {
 			method: "POST",
@@ -164,15 +171,16 @@ export default function Participate() {
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
+				setApiWaiting(false)
 				if (status === "ILLEGAL_STATE" || status === "NOT_FOUND") {
 					console.log(message)
-					setDeleteModal(false)
 				} else {
 					console.log("삭제!")
 					router.replace("/service/challenge/leaderboard?id=" + challengeId)
 				}
 			})
 			.catch((error) => {
+				setApiWaiting(false)
 				console.log(error)
 			})
 	}
@@ -193,6 +201,7 @@ export default function Participate() {
 			) : null}
 			<ChallengeHeader />
 			<div className="flex-1 flex flex-col relative justify-start items-center w-[100%] font-textBoxFont">
+				{apiWaiting ? <SpinnerBox /> : null}
 				<ParticipateThumbnail />
 				<ChallengeInfoContext.Provider
 					value={{

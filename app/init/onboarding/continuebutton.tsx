@@ -1,10 +1,11 @@
 "use client"
 
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { GenderType } from "@/app/init/onboarding/page"
 import { useRouter } from "next/navigation"
 import LocalStorage from "@/app/utils/localstorage"
 import { StepContext } from "./context"
+import SpinnerBox from "@/app/components/spinner"
 
 interface ContinueButtonProps {
 	canBeContinued: boolean
@@ -24,6 +25,7 @@ export default function ContinueButton({
 	setValidateNickName,
 }: ContinueButtonProps) {
 	const { step, setStep }: any = useContext(StepContext)
+	const [apiWaiting, setApiWaiting] = useState<boolean>(false)
 	const router = useRouter()
 
 	const StepForward = () => {
@@ -61,6 +63,7 @@ export default function ContinueButton({
 	}
 
 	const validateNickName = async () => {
+		setApiWaiting(true)
 		const REGISTER_USER_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/users/nickName`
 		await fetch(REGISTER_USER_URL, {
 			method: "POST",
@@ -74,6 +77,7 @@ export default function ContinueButton({
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
+				setApiWaiting(false)
 				if (data) {
 					// 중복된 닉네임이 있는 경우
 					if (data === "EXISTS") {
@@ -90,11 +94,13 @@ export default function ContinueButton({
 				}
 			})
 			.catch((error) => {
+				setApiWaiting(false)
 				console.log(error)
 			})
 	}
 
 	const registerUserAPIcall = async (kakaoId: number) => {
+		setApiWaiting(true)
 		const REGISTER_USER_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/users`
 		await fetch(REGISTER_USER_URL, {
 			method: "POST",
@@ -140,6 +146,7 @@ export default function ContinueButton({
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
+				setApiWaiting(false)
 				// 가입하지 않은 사용자 입니다.
 				if (status === "NOT_FOUND") {
 					LocalStorage.removeItem("lookCloud-user-token")
@@ -159,23 +166,21 @@ export default function ContinueButton({
 				}
 			})
 			.catch((error) => {
+				setApiWaiting(false)
 				console.log(error)
 			})
 	}
 
 	return (
-		<div
-			className={`flex justify-center items-center w-[100%] ${
-				step.id === "4" ? null : "py-[16px]"
-			}`}
-		>
+		<div className="flex justify-center items-center w-[100%]">
+			{apiWaiting ? <SpinnerBox /> : null}
 			<div
 				className={`flex justify-center items-center w-[65%] max-w-[310px] h-[40px] rounded-[20.5px] text-white text-[12px] font-textBoxFont  ${
 					canBeContinued ? "bg-[#344467] cursor-pointer" : "bg-[#D9D9D9]"
 				}`}
 				onClick={StepForward}
 			>
-				{step.id === "3" ? "DONE" : step.id === "4" ? "건너뛰기" : "CONTINUE"}
+				{step.id === "3" ? "DONE" : "CONTINUE"}
 			</div>
 		</div>
 	)

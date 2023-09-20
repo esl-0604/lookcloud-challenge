@@ -19,7 +19,7 @@ export default function OnboardingInstagramInput() {
 		setInstagramId(instagramId.replace(/@/g, ""))
 	}
 	return (
-		<div className="flex flex-col justify-between items-center w-[84%] max-w-[320px] text-[12px]">
+		<div className="flex flex-col justify-between items-center w-[84%] max-w-[320px] mb-[16px] text-[12px]">
 			<input
 				type="text"
 				placeholder="ex) eslee850"
