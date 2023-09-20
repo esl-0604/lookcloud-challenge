@@ -20,7 +20,7 @@ export default function LookInfoBox() {
 	})
 
 	return (
-		<div className="flex flex-col h-full w-full">
+		<div className="flex flex-col w-full h-full ">
 			<div className="h-full w-full relative">
 				<img
 					src={
