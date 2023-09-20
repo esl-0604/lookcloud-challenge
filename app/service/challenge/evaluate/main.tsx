@@ -225,7 +225,7 @@ export default function ChallengeEvaluateMain() {
 		<ChallengeImgContext.Provider
 			value={{ challengeImgList, currentImg, currentImgEvaluate }}
 		>
-			<div className="flex flex-col items-center relative w-full h-full px-4 ">
+			<div className="flex flex-col justify-center items-center relative w-full h-full px-4 ">
 				{isNoMoreLook ? <CheckBox /> : null}
 				{isUp ? (
 					<div>
