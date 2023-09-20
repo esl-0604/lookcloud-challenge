@@ -20,6 +20,7 @@ export default function RootLayout({
 						httpEquiv="Content-Security-Policy"
 						content="upgrade-insecure-requests"
 					/>
+					<link rel="manifest" href="/manifest.json" />
 				</head>
 
 				<body className="overscroll-y-none">
