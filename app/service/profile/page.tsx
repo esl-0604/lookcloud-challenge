@@ -8,12 +8,28 @@ import {
 } from "@/app/utils/atoms/serviceGlobalState"
 import { useRecoilState } from "recoil"
 import LocalStorage from "@/app/utils/localstorage"
+import KaKaoLoginButton from "@/app/init/login/kakaologinbutton"
+import { useRouter } from "next/navigation"
 
 export default function Profile() {
+	const router = useRouter()
 	const [profileData, setProfileData] =
 		useRecoilState<userProfileType>(userProfileState)
 	const userProfile = LocalStorage.getItem("lookCloud-kakao-profile")
-	// console.log(profileData)
+	// console.log(profileData)\
+
+	const Logout = () => {
+		LocalStorage.removeItem("lookCloud-user-token")
+		LocalStorage.removeItem("lookCloud-kakao-Id")
+		LocalStorage.removeItem("lookCloud-kakao-profile")
+		setProfileData({
+			userToken: null,
+			nickname: "",
+			gender: "",
+			instagramUserName: null,
+		})
+		router.push("/")
+	}
 
 	return (
 		<main className="flex flex-col justify-start items-center absolute w-[100%] min-h-[100%] bg-[#F5F5F5]">
@@ -61,11 +77,17 @@ export default function Profile() {
 					{profileData.organ}
 				</div>
 			</div> */}
-				{/* {profileData.instagram ? null : (
-				<div className="flex justify-center items-center w-[100%] my-[30px]">
-					<InstagramLoginButton />
+
+				<div className="flex justify-center items-center w-[100%] my-[20px]">
+					<div className="flex justify-center items-center w-[70%] max-w-[320px] cursor-pointer">
+						<div
+							className="flex justify-center items-center w-full h-[52px] rounded-[29px] bg-[#707070] text-white text-[14px] font-loginBoxFont border-[2px] border-[#D9D9D9]"
+							onClick={Logout}
+						>
+							LOGOUT
+						</div>
+					</div>
 				</div>
-			)} */}
 			</div>
 		</main>
 	)

@@ -1,11 +1,13 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import LocalStorage from "@/app/utils/localstorage"
 import { useRouter, useSearchParams } from "next/navigation"
 import Link from "next/link"
+import SpinnerBox from "@/app/components/spinner"
 
 export default function KaKaoLoginButton() {
+	const [apiWaiting, setApiWaiting] = useState<boolean>(false)
 	const router = useRouter()
 	const param = useSearchParams()
 	const kakaoCode = param.get("code")
@@ -18,6 +20,7 @@ export default function KaKaoLoginButton() {
 	}, [kakaoCode])
 
 	const getUserToken = async () => {
+		setApiWaiting(true)
 		const USER_TOKEN_URL = "https://kauth.kakao.com/oauth/token"
 		await fetch(USER_TOKEN_URL, {
 			method: "POST",
@@ -31,9 +34,12 @@ export default function KaKaoLoginButton() {
 				if (data) {
 					// console.log(data)
 					getUsetKaKaoId(data.access_token)
+				} else {
+					setApiWaiting(false)
 				}
 			})
 			.catch((error) => {
+				setApiWaiting(false)
 				console.log(error)
 			})
 	}
@@ -56,9 +62,12 @@ export default function KaKaoLoginButton() {
 					const kakaoProfileUrl: string | null = data.properties?.profile_image
 
 					GetKakaoUserInfoAPIcall(kakaoId, kakaoProfileUrl)
+				} else {
+					setApiWaiting(false)
 				}
 			})
 			.catch((error) => {
+				setApiWaiting(false)
 				console.log(error)
 			})
 	}
@@ -78,6 +87,7 @@ export default function KaKaoLoginButton() {
 			.then(({ status, message, data }) => {
 				// 카카오 계정으로 유저 조회 실패
 				if (status === "NOT_FOUND") {
+					setApiWaiting(false)
 					LocalStorage.removeItem("lookCloud-kakao-Id")
 					LocalStorage.removeItem("lookCloud-kakao-profile")
 					LocalStorage.setItem("lookCloud-kakao-Id", kakaoId.toString())
@@ -95,6 +105,7 @@ export default function KaKaoLoginButton() {
 				}
 			})
 			.catch((error) => {
+				setApiWaiting(false)
 				console.log(error)
 			})
 	}
@@ -112,6 +123,7 @@ export default function KaKaoLoginButton() {
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
+				setApiWaiting(false)
 				// 유저 토큰으로 유저 조회 실패
 				if (status === "NOT_FOUND") {
 					LocalStorage.removeItem("lookCloud-user-token")
@@ -133,6 +145,7 @@ export default function KaKaoLoginButton() {
 				}
 			})
 			.catch((error) => {
+				setApiWaiting(false)
 				console.log(error)
 				router.replace("/init/login")
 			})
@@ -140,6 +153,7 @@ export default function KaKaoLoginButton() {
 
 	return (
 		<div className="flex justify-center items-center mt-[50px] w-full">
+			{apiWaiting ? <SpinnerBox /> : null}
 			<Link
 				href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&response_type=code&scope=account_email profile_image`}
 				className="flex justify-center items-center w-[70%] max-w-[320px] cursor-pointer"

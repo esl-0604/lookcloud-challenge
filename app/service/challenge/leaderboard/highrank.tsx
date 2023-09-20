@@ -1,5 +1,6 @@
 "use client"
 
+import Spinner from "@/public/svg/spinner.svg"
 import {
 	challengeParticipantsInfo,
 	challengeParticipantsType,
@@ -34,74 +35,74 @@ export default function HighRank() {
 	return (
 		<div className="flex flex-row items-end w-[100%] h-[227px]">
 			<div className="flex flex-col items-center w-1/3">
-				<div className="flex flex-col w-[70px] h-[70px] items-center absolute z-10 transform -translate-y-1/2 rounded-full overflow-hidden">
-					<img src={ranker3?.imageUrl} className="object-cover" />
-					{/* <img
-						className="absolute z-20 transform translate-y-[60px]"
-						src={}
-						width="20px"
-					/> */}
+				<div className="flex flex-col w-[70px] h-[70px] items-center absolute z-10 transform -translate-y-1/2 rounded-full overflow-hidden border-[4px] border-[#A3A3A3]">
+					<img
+						src={ranker2 ? ranker2.imageUrl : "/svg/profile.svg"}
+						className="object-cover"
+					/>
 				</div>
 				<div className="flex flex-col items-center pt-[45px] h-[140px] w-[100%] bg-gradient-to-b from-[#1C3A74] to-[#0C1A34] rounded-t-[10px] rounded-l-[10px]">
-					<span className="text-[24px] leading-[36px]">
-						{ranker3 ? ranker3?.lScore : 0}
-					</span>
-					<span className="text-[12px]">{ranker3?.nickName}</span>
-					<span className="text-[12px]">
-						{ranker3 ? "@" + ranker3?.instagramUserName : ""}
-					</span>
+					{ranker2 ? (
+						<>
+							<span className="text-[24px] leading-[36px]">
+								{ranker2.lScore}
+							</span>
+							<span className="text-[12px]">{ranker2.nickName}</span>
+							<span className="text-[12px]">
+								{"@" + ranker2.instagramUserName}
+							</span>
+						</>
+					) : (
+						<Spinner />
+					)}
 				</div>
 			</div>
 
 			<div className="flex flex-col items-center w-1/3">
-				<div className="flex flex-col w-[90px] h-[90px] items-center absolute z-10 transform -translate-y-1/2 rounded-full overflow-hidden">
-					<img src={ranker1?.imageUrl} className="object-cover" />
-					{/* <img
-						className="absolute z-20 transform translate-y-[78px]"
-						src={
-							lankingList[0]?.organization === "고려대학교"
-								? "/svg/KU.svg"
-								: lankingList[0]?.organization === "연세대학교"
-								? "/svg/YU.svg"
-								: "/svg/KU.svg"
-						}
-						width="23px"
-					/> */}
+				<div className="flex flex-col w-[90px] h-[90px] items-center absolute z-10 transform -translate-y-1/2 rounded-full overflow-hidden border-[4px] border-[#FFBB5C]">
+					<img
+						src={ranker1 ? ranker1.imageUrl : "/svg/profile.svg"}
+						className="object-cover"
+					/>
 				</div>
 				<div className="flex flex-col items-center pt-[56px] h-[180px] w-[100%] bg-gradient-to-b from-[#154FBE] to-[#0F0D76] rounded-t-[10px]">
-					<span className="text-[24px] leading-[36px]">
-						{ranker1 ? ranker1?.lScore : 0}
-					</span>
-					<span className="text-[12px]">{ranker1?.nickName}</span>
-					<span className="text-[12px]">
-						{ranker1 ? "@" + ranker1?.instagramUserName : ""}
-					</span>
+					{ranker1 ? (
+						<>
+							<span className="text-[24px] leading-[36px]">
+								{ranker1.lScore}
+							</span>
+							<span className="text-[12px]">{ranker1.nickName}</span>
+							<span className="text-[12px]">
+								{"@" + ranker1.instagramUserName}
+							</span>
+						</>
+					) : (
+						<Spinner />
+					)}
 				</div>
 			</div>
 
 			<div className="flex flex-col items-center w-1/3">
-				<div className="flex flex-col items-center w-[50px] h-[50px] absolute z-10 transform -translate-y-1/2 rounded-full overflow-hidden">
-					<img src={ranker2?.imageUrl} className="object-cover" />
-					{/* <img
-						className="absolute z-20 transform translate-y-[45px]"
-						src={
-							lankingList[2]?.organization === "고려대학교"
-								? "/svg/KU.svg"
-								: lankingList[2]?.organization === "연세대학교"
-								? "/svg/YU.svg"
-								: "/svg/KU.svg"
-						}
-						width="10px"
-					/> */}
+				<div className="flex flex-col items-center w-[50px] h-[50px] absolute z-10 transform -translate-y-1/2 rounded-full overflow-hidden border-[3px] border-[#CD7F32]">
+					<img
+						src={ranker3 ? ranker3.imageUrl : "/svg/profile.svg"}
+						className="object-cover"
+					/>
 				</div>
 				<div className="flex flex-col items-center pt-[25px] h-[100px] w-[100%] bg-gradient-to-b from-[#1C3A74] to-[#0C1A34] rounded-t-[10px] rounded-r-[10px]">
-					<span className="text-[24px] leading-[36px]">
-						{ranker2 ? ranker2?.lScore : 0}
-					</span>
-					<span className="text-[12px]">{ranker2?.nickName}</span>
-					<span className="text-[12px]">
-						{ranker2 ? "@" + ranker2?.instagramUserName : ""}
-					</span>
+					{ranker3 ? (
+						<>
+							<span className="text-[24px] leading-[36px]">
+								{ranker3.lScore}
+							</span>
+							<span className="text-[12px]">{ranker3.nickName}</span>
+							<span className="text-[12px]">
+								{"@" + ranker3.instagramUserName}
+							</span>
+						</>
+					) : (
+						<Spinner />
+					)}
 				</div>
 			</div>
 		</div>
