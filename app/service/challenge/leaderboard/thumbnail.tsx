@@ -47,7 +47,7 @@ export default function LeaderBoardThumbnail() {
 				alt="challengeImg"
 				className="flex justify-center items-start w-[100%] h-[100%] object-cover"
 			/>
-			<div className="flex flex-col justify-center items-start absolute bottom-[10px] w-[100%] px-[15px] h-[108px] text-white font-normal">
+			<div className="flex flex-col justify-end items-start absolute bottom-[10px] w-[100%] px-[15px] py-[8px] h-[108px] text-white font-normal">
 				<div className="w-[100%] h-[40px] font-semibold text-[30px]">
 					{currentChallengeData?.challengeName}
 				</div>
@@ -65,9 +65,9 @@ export default function LeaderBoardThumbnail() {
 						총 상금 100,000원
 					</div>
 				</div>
-				<div className="flex flex-col justify-center items-start w-[100%] h-[48px] text-[12px]">
+				{/* <div className="flex flex-col justify-center items-start w-[100%] h-[48px] text-[12px]">
 					{currentChallengeData?.comment}
-				</div>
+				</div> */}
 			</div>
 		</div>
 	)

@@ -47,7 +47,7 @@ export default function ParticipateThumbnail() {
 				alt="challengeImg"
 				className="flex justify-center items-start w-[100%] h-[100%] object-cover"
 			/>
-			<div className="flex flex-col justify-center items-start absolute top-[8px] w-[100%] h-[108px] text-white">
+			<div className="flex flex-col justify-end items-start absolute top-[8px] w-[100%] h-[108px] py-[8px] text-white">
 				<div className="w-[100%] pl-[20px] h-[40px] font-semibold text-[30px]">
 					{currentChallengeData?.challengeName}
 				</div>
@@ -65,9 +65,9 @@ export default function ParticipateThumbnail() {
 						총 상금 100,000원
 					</div>
 				</div>
-				<div className="flex flex-col justify-center items-start w-[100%] pl-[20px] h-[48px] text-[12px]">
+				{/* <div className="flex flex-col justify-center items-start w-[100%] pl-[20px] h-[48px] text-[12px]">
 					{currentChallengeData?.comment}
-				</div>
+				</div> */}
 			</div>
 		</div>
 	)
