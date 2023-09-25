@@ -1,6 +1,6 @@
 "use client"
 
-import { useSearchParams } from "next/navigation"
+import { usePathname, useSearchParams } from "next/navigation"
 
 import { useRecoilState } from "recoil"
 import {
@@ -14,12 +14,14 @@ import {
 	userTutorialType,
 } from "@/app/utils/atoms/serviceGlobalState"
 import { useEffect } from "react"
+import NavBar from "@/app/components/navbar"
 
 export default function ChallengeLayout({
 	children,
 }: {
 	children: React.ReactNode
 }) {
+	const path = usePathname()
 	const param = useSearchParams()
 	const challengeId = param.get("id")
 	const [profileData, setProfileData] =
@@ -111,5 +113,12 @@ export default function ChallengeLayout({
 
 	// --------------------------------------------------------------------------------
 
-	return <>{children}</>
+	return (
+		<>
+			{children}
+			{path === "/service/challenge/evaluate" ? null : (
+				<NavBar page="challenge" />
+			)}
+		</>
+	)
 }

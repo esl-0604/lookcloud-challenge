@@ -29,7 +29,9 @@ export default function RankRow({ ranker }: RankRowProps) {
 						<span className="text-[8px]">{ranker?.nickName}</span>
 					</div>
 					<span className="text-[8px] leading-[8px]">
-						{ranker ? "@" + ranker?.instagramUserName : ""}
+						{ranker && ranker.instagramUserName
+							? "@" + ranker?.instagramUserName
+							: ""}
 					</span>
 				</div>
 			</div>

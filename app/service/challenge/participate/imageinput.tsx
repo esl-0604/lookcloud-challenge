@@ -13,7 +13,7 @@ export default function ImageInput() {
 	}
 
 	return (
-		<div className="flex flex-col justify-between items-center w-full px-[5%] text-white text-[12px] font-textBoxFont">
+		<div className="flex flex-col justify-between items-center w-full px-[4%] text-white text-[12px] font-textBoxFont">
 			<div className="flex justify-start items-center w-full h-[20px] font-semibold">
 				사진 등록
 			</div>
@@ -29,7 +29,7 @@ export default function ImageInput() {
 							className="flex justify-center items-center absolute top-[15px] right-[15px] cursor-pointer"
 							onClick={CancleLookImage}
 						>
-							<Cancle width={20} height={20} />
+							<Cancle width={20} height={20} color={"white"} />
 						</div>
 					)}
 				</div>

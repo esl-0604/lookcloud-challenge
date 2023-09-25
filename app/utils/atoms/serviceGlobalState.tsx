@@ -2,6 +2,13 @@ import { atom } from "recoil"
 
 // ---------------------------------------------------------------------------
 
+export const previousPath = atom<string>({
+	key: "previousPath",
+	default: "",
+})
+
+// ---------------------------------------------------------------------------
+
 export interface userProfileType {
 	userToken: string | null
 	nickname: string
@@ -177,6 +184,415 @@ export const userChallengeParticipateInfo = atom<userChallengeParticipateType>({
 		// 		],
 		// 	},
 		// },
+	},
+})
+
+// ---------------------------------------------------------------------------
+
+export interface lookbookInfoType {
+	[lookbookId: string]: {
+		title: string
+		publicState: boolean
+		thumbnailList: string[]
+	}
+}
+
+export const lookbookList = atom<lookbookInfoType>({
+	key: "lookbookList",
+	default: {
+		"0": {
+			title: "내가 평가한 룩",
+			publicState: false,
+			thumbnailList: [],
+		},
+
+		"1": {
+			title: "저장한 룩",
+			publicState: false,
+			thumbnailList: [
+				"/image/participation_sample_img3.jpg",
+				"/image/participation_sample_img2.jpg",
+				"/image/participation_sample_img1.jpg",
+				"/image/participation_sample_img3.jpg",
+			],
+		},
+	},
+})
+
+// ---------------------------------------------------------------------------
+
+export interface lookbookImgType {
+	participationId: string
+	lScore: number
+	rating: number
+	user: {
+		nickName: string
+		instagramUserName: string
+	}
+	look: {
+		imageUrl: string
+		description: string
+		parts: partType[]
+	}
+}
+
+export interface lookbookImgListType {
+	[lookbookId: string]: {
+		title: string
+		comment: string
+		publicState: boolean
+		imgList: lookbookImgType[]
+	}
+}
+
+export const lookbookImgList = atom<lookbookImgListType>({
+	key: "lookbookImgList",
+	default: {
+		"0": {
+			title: "내가 평가한 룩",
+			comment: "챌린지에서 평가했던 룩들을 다시 볼 수 있습니다.",
+			publicState: false,
+			imgList: [
+				// {
+				// 	participationId: "1234567890abcdefg",
+				// 	user: {
+				// 		nickName: "룩클라우드",
+				// 		instagramUserName: "lookcloud_official",
+				// 	},
+				// 	look: {
+				// 		imageUrl: "/image/lookbookExampleImg.png",
+				// 		description: "룩 설명",
+				// 		parts: [
+				// 			{
+				// 				part: "상의",
+				// 				name: "블랙 티셔츠",
+				// 				brand: "무신사",
+				// 				index: 0,
+				// 			},
+				// 			{
+				// 				part: "상의",
+				// 				name: "블랙 티셔츠",
+				// 				brand: "무신사",
+				// 				index: 0,
+				// 			},
+				// 			{
+				// 				part: "상의",
+				// 				name: "블랙 티셔츠",
+				// 				brand: "무신사",
+				// 				index: 0,
+				// 			},
+				// 		],
+				// 	},
+				// 	lScore: 123,
+				// 	rating: 1,
+				// },
+				// {
+				// 	participationId: "1234567890abcdefg",
+				// 	user: {
+				// 		userId: "1234567890abcdefg",
+				// 		nickName: "룩클라우드",
+				// 		instagramUserName: "lookcloud_official",
+				// 		gender: "FEMALE",
+				// 	},
+				// 	look: {
+				// 		imageUrl: "/image/image.png",
+				// 		description: "룩 설명",
+				// 		parts: [
+				// 			{
+				// 				part: "상의",
+				// 				name: "블랙 티셔츠",
+				// 				brand: "무신사",
+				// 				index: 0,
+				// 			},
+				// 		],
+				// 	},
+				// 	likes: 123,
+				// 	dislikes: 123,
+				// 	lScore: 123,
+				// 	rating: 1,
+				// },
+				// {
+				// 	participationId: "1234567890abcdefg",
+				// 	user: {
+				// 		userId: "1234567890abcdefg",
+				// 		nickName: "룩클라우드",
+				// 		instagramUserName: "lookcloud_official",
+				// 		gender: "FEMALE",
+				// 	},
+				// 	look: {
+				// 		imageUrl: "/image/lookbookExampleImg.png",
+				// 		description: "룩 설명",
+				// 		parts: [
+				// 			{
+				// 				part: "상의",
+				// 				name: "블랙 티셔츠",
+				// 				brand: "무신사",
+				// 				index: 0,
+				// 			},
+				// 		],
+				// 	},
+				// 	likes: 123,
+				// 	dislikes: 123,
+				// 	lScore: 123,
+				// 	rating: 0,
+				// },
+				// {
+				// 	participationId: "1234567890abcdefg",
+				// 	user: {
+				// 		userId: "1234567890abcdefg",
+				// 		nickName: "룩클라우드",
+				// 		instagramUserName: "lookcloud_official",
+				// 		gender: "FEMALE",
+				// 	},
+				// 	look: {
+				// 		imageUrl: "/image/lookbookExampleImg.png",
+				// 		description: "룩 설명",
+				// 		parts: [
+				// 			{
+				// 				part: "상의",
+				// 				name: "블랙 티셔츠",
+				// 				brand: "무신사",
+				// 				index: 0,
+				// 			},
+				// 		],
+				// 	},
+				// 	likes: 123,
+				// 	dislikes: 123,
+				// 	lScore: 123,
+				// 	rating: 1,
+				// },
+				// {
+				// 	participationId: "1234567890abcdefg",
+				// 	user: {
+				// 		userId: "1234567890abcdefg",
+				// 		nickName: "룩클라우드",
+				// 		instagramUserName: "lookcloud_official",
+				// 		gender: "FEMALE",
+				// 	},
+				// 	look: {
+				// 		imageUrl: "/image/lookbookExampleImg.png",
+				// 		description: "룩 설명",
+				// 		parts: [
+				// 			{
+				// 				part: "상의",
+				// 				name: "블랙 티셔츠",
+				// 				brand: "무신사",
+				// 				index: 0,
+				// 			},
+				// 		],
+				// 	},
+				// 	likes: 123,
+				// 	dislikes: 123,
+				// 	lScore: 123,
+				// 	rating: 0,
+				// },
+			],
+		},
+		"1": {
+			title: "저장한 룩",
+			comment: "내가 저장한 룩들을 다시 볼 수 있습니다. ",
+			publicState: false,
+			imgList: [
+				{
+					participationId: "1234567890abcdefg",
+					user: {
+						nickName: "룩클라우드",
+						instagramUserName: "lookcloud_official",
+					},
+					look: {
+						imageUrl: "/image/participation_sample_img1.jpg",
+						description: "룩 설명",
+						parts: [
+							{
+								part: "상의",
+								name: "블랙 티셔츠",
+								brand: "무신사",
+								index: 0,
+							},
+							{
+								part: "상의",
+								name: "블랙 티셔츠",
+								brand: "무신사",
+								index: 0,
+							},
+							{
+								part: "상의",
+								name: "블랙 티셔츠",
+								brand: "무신사",
+								index: 0,
+							},
+						],
+					},
+					lScore: 123,
+					rating: 1,
+				},
+				{
+					participationId: "1234567890abcdefg",
+					user: {
+						nickName: "룩클라우드",
+						instagramUserName: "lookcloud_official",
+					},
+					look: {
+						imageUrl: "/image/participation_sample_img2.jpg",
+						description: "룩 설명",
+						parts: [
+							{
+								part: "상의",
+								name: "블랙 티셔츠",
+								brand: "무신사",
+								index: 0,
+							},
+							{
+								part: "상의",
+								name: "블랙 티셔츠",
+								brand: "무신사",
+								index: 0,
+							},
+							{
+								part: "상의",
+								name: "블랙 티셔츠",
+								brand: "무신사",
+								index: 0,
+							},
+						],
+					},
+					lScore: 123,
+					rating: 1,
+				},
+				{
+					participationId: "1234567890abcdefg",
+					user: {
+						nickName: "룩클라우드",
+						instagramUserName: "lookcloud_official",
+					},
+					look: {
+						imageUrl: "/image/participation_sample_img3.jpg",
+						description: "룩 설명",
+						parts: [
+							{
+								part: "상의",
+								name: "블랙 티셔츠",
+								brand: "무신사",
+								index: 0,
+							},
+							{
+								part: "상의",
+								name: "블랙 티셔츠",
+								brand: "무신사",
+								index: 0,
+							},
+							{
+								part: "상의",
+								name: "블랙 티셔츠",
+								brand: "무신사",
+								index: 0,
+							},
+						],
+					},
+					lScore: 123,
+					rating: 1,
+				},
+				{
+					participationId: "1234567890abcdefg",
+					user: {
+						nickName: "룩클라우드",
+						instagramUserName: "lookcloud_official",
+					},
+					look: {
+						imageUrl: "/image/participation_sample_img1.jpg",
+						description: "룩 설명",
+						parts: [
+							{
+								part: "상의",
+								name: "블랙 티셔츠",
+								brand: "무신사",
+								index: 0,
+							},
+							{
+								part: "상의",
+								name: "블랙 티셔츠",
+								brand: "무신사",
+								index: 0,
+							},
+							{
+								part: "상의",
+								name: "블랙 티셔츠",
+								brand: "무신사",
+								index: 0,
+							},
+						],
+					},
+					lScore: 123,
+					rating: 1,
+				},
+				{
+					participationId: "1234567890abcdefg",
+					user: {
+						nickName: "룩클라우드",
+						instagramUserName: "lookcloud_official",
+					},
+					look: {
+						imageUrl: "/image/participation_sample_img2.jpg",
+						description: "룩 설명",
+						parts: [
+							{
+								part: "상의",
+								name: "블랙 티셔츠",
+								brand: "무신사",
+								index: 0,
+							},
+							{
+								part: "상의",
+								name: "블랙 티셔츠",
+								brand: "무신사",
+								index: 0,
+							},
+							{
+								part: "상의",
+								name: "블랙 티셔츠",
+								brand: "무신사",
+								index: 0,
+							},
+						],
+					},
+					lScore: 123,
+					rating: 1,
+				},
+				{
+					participationId: "1234567890abcdefg",
+					user: {
+						nickName: "룩클라우드",
+						instagramUserName: "lookcloud_official",
+					},
+					look: {
+						imageUrl: "/image/participation_sample_img3.jpg",
+						description: "룩 설명",
+						parts: [
+							{
+								part: "상의",
+								name: "블랙 티셔츠",
+								brand: "무신사",
+								index: 0,
+							},
+							{
+								part: "상의",
+								name: "블랙 티셔츠",
+								brand: "무신사",
+								index: 0,
+							},
+							{
+								part: "상의",
+								name: "블랙 티셔츠",
+								brand: "무신사",
+								index: 0,
+							},
+						],
+					},
+					lScore: 123,
+					rating: 1,
+				},
+			],
+		},
 	},
 })
 
