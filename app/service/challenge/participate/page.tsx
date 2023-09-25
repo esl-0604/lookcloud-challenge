@@ -176,6 +176,7 @@ export default function Participate() {
 					console.log(message)
 				} else {
 					console.log("삭제!")
+					setUserChallengeParticipateData({})
 					router.replace("/service/challenge/leaderboard?id=" + challengeId)
 				}
 			})
