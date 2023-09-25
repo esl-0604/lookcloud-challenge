@@ -16,12 +16,12 @@ export default function Lookbook() {
 	return (
 		<main className="flex flex-col justify-start items-center w-full min-h-[100%] bg-black text-white">
 			<LookbookHeader />
-			<div className="flex flex-row justify-between items-start w-full h-full px-[5%]">
+			<div className="flex flex-row justify-between items-start w-full h-full px-[5px]">
 				{LookbookList.map((lookbook: lookbookInfoType, i: number) => {
 					return (
 						<Link
 							key={i}
-							className="flex justify-center items-center w-[calc(50%-9px)]"
+							className="flex justify-center items-center w-[50%] m-[5px]"
 							href={{
 								pathname: "/service/lookbook/folder",
 								query: { id: lookbook.lookbookId },

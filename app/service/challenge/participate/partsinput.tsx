@@ -38,7 +38,7 @@ export default function PartsInput() {
 		setLookParts(lookParts.concat(newLookPart))
 	}
 	return (
-		<div className="flex flex-col justify-between items-center w-full px-[5%] text-white text-[12px] font-textBoxFont">
+		<div className="flex flex-col justify-between items-center w-full px-[4%] text-white text-[12px] font-textBoxFont">
 			<div className="flex justify-start items-center w-full h-[20px] mb-[10px] font-semibold">
 				제품 정보
 			</div>

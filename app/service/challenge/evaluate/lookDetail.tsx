@@ -15,7 +15,7 @@ export default function ChallengeEvaluateLookDetail() {
 	const [bookMark, setBookMark] = useState<Boolean>(false)
 
 	return (
-		<div className="flex-1 flex flex-col justify-center items-center w-full px-[5%] bg-black">
+		<div className="flex-1 flex flex-col justify-center items-center w-full px-[4%] bg-black">
 			<div className="flex flex-col justify-center items-center w-full relative">
 				<img
 					src={challengeImgList[currentImg - 1]?.look?.imageUrl}
@@ -76,30 +76,29 @@ export default function ChallengeEvaluateLookDetail() {
 					</div>
 				</div>
 
-				<div className="flex flex-col justify-start items-start w-full mt-[12px] text-white text-[12px] font-textBoxFont">
-					{challengeImgList[currentImg - 1]?.look?.parts.map(
-						(formattedItem: any, index: number) => (
-							<div
-								key={index}
-								className="flex flex-row justify-start items-center h-[20px]"
-							>
-								{formattedItem.part +
-									" - " +
-									formattedItem.brand +
-									" " +
-									formattedItem.name}
-							</div>
-						),
-					)}
-				</div>
-				{canBeNext ? (
-					<div
-						className="flex justify-center items-center absolute top-[114px] right-0"
-						onClick={NextImg}
-					>
-						<NextBtn className="cursor-pointer" />
+				<div className="flex flex-row justify-between items-center w-full mt-[12px]">
+					<div className="flex flex-col justify-start items-start text-white text-[12px] font-textBoxFont">
+						{challengeImgList[currentImg - 1]?.look?.parts.map(
+							(formattedItem: any, index: number) => (
+								<div
+									key={index}
+									className="flex flex-row justify-start items-center h-[20px]"
+								>
+									{formattedItem.part +
+										" - " +
+										formattedItem.brand +
+										" " +
+										formattedItem.name}
+								</div>
+							),
+						)}
 					</div>
-				) : null}
+					{canBeNext ? (
+						<div className="flex justify-center items-center">
+							<NextBtn className="cursor-pointer" onClick={NextImg} />
+						</div>
+					) : null}
+				</div>
 			</div>
 		</div>
 	)

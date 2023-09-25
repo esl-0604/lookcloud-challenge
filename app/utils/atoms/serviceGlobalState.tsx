@@ -277,7 +277,7 @@ export const lookbookImgList = atom<lookbookImgListType>({
 						gender: "FEMALE",
 					},
 					look: {
-						imageUrl: "/image/lookbookExampleImg.png",
+						imageUrl: "/image/image.png",
 						description: "룩 설명",
 						parts: [
 							{
@@ -369,6 +369,12 @@ export const lookbookImgList = atom<lookbookImgListType>({
 					rating: 0,
 				},
 			],
+		},
+		"1": {
+			title: "저장한 룩",
+			comment: "내가 저장한 룩들을 다시 볼 수 있습니다. ",
+			publicState: false,
+			imgList: [],
 		},
 	},
 })

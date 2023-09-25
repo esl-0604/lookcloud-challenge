@@ -8,7 +8,7 @@ export default function DescriptionInput() {
 		useContext(ChallengeInfoContext)
 
 	return (
-		<div className="flex flex-col justify-between items-center w-full h-[155px] px-[5%] py-[15px] text-white text-[12px] font-textBoxFont">
+		<div className="flex flex-col justify-between items-center w-full h-[155px] px-[4%] py-[15px] text-white text-[12px] font-textBoxFont">
 			<div className="flex justify-start items-center w-[100%] h-[20px] font-semibold">
 				룩에 대한 설명
 			</div>

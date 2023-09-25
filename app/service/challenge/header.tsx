@@ -27,7 +27,7 @@ export default function ChallengeHeader() {
 		router.push("/service/challenge")
 	}
 	return (
-		<div className="flex flex-row sticky top-0 justify-between items-center w-[100%] h-[56px] px-[5%] z-30 bg-black">
+		<div className="flex flex-row sticky top-0 justify-between items-center w-[100%] h-[56px] px-[4%] z-30 bg-black">
 			{path === "/service/challenge" ? (
 				<HeaderLogo
 					width={"126"}

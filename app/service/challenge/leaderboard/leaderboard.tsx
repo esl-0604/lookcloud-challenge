@@ -35,7 +35,7 @@ export default function LeaderBoard() {
 	// }, [challengeParticipantsData])
 
 	return (
-		<div className="flex flex-col justify-center items-center w-full h-full px-[5%]">
+		<div className="flex flex-col justify-center items-center w-full h-full px-[4%]">
 			<HighRank />
 			{challengeParticipantsData[challengeId]?.users.map((ranker, i) => {
 				if (ranker?.ranking > 3 && ranker?.ranking <= 10) {

@@ -165,7 +165,7 @@ export default function ChallengeEvaluateMainNoSwipe() {
 			}}
 		>
 			{loading ? (
-				<div className="flex-1 flex flex-col justify-center items-center w-full px-[5%] bg-black">
+				<div className="flex-1 flex flex-col justify-center items-center w-full px-[4%] bg-black">
 					{isNoMoreLook ? (
 						<CheckBox />
 					) : (
@@ -178,7 +178,7 @@ export default function ChallengeEvaluateMainNoSwipe() {
 					{currentImgEvaluate ? (
 						<ChallengeEvaluateLookDetail />
 					) : (
-						<div className="flex-1 flex flex-col justify-center items-center w-full px-[5%] bg-black">
+						<div className="flex-1 flex flex-col justify-center items-center w-full px-[4%] bg-black">
 							<div className="flex justify-center items-center w-full relative">
 								<img
 									src={challengeImgList[currentImg - 1]?.look?.imageUrl}

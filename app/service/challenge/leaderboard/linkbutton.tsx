@@ -44,7 +44,7 @@ export default function LinkButton() {
 
 	return (
 		<div
-			className={`flex justify-between items-center w-full px-[5%] py-[10px] ${
+			className={`flex justify-between items-center w-full px-[4%] py-[10px] ${
 				isParticipate ? "h-[220px]" : "h-[90px]"
 			} `}
 		>

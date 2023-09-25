@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation"
 import LookbookHeader from "../header"
-import { useEffect } from "react"
+import CommingSoon from "@/public/svg/lookbookCommingsoon.svg"
 import {
 	lookbookImgList,
 	lookbookImgListType,
@@ -31,19 +31,27 @@ export default function LookbookFolder() {
 				</div>
 			</div>
 			<div className="flex flex-wrap flex-row justify-start items-start w-full h-full px-[2px] pb-[100px]">
-				{lookbookId
-					? LookbookImgList[lookbookId].imgList.map(
-							(img: lookbookImgType, i: number) => {
-								return (
-									<LookbookImgBox
-										img={img}
-										imgUrl={img.look.imageUrl}
-										rating={img.rating}
-									/>
-								)
-							},
-					  )
-					: null}
+				{lookbookId === "0" ? (
+					LookbookImgList[lookbookId].imgList.map(
+						(img: lookbookImgType, i: number) => {
+							return (
+								<LookbookImgBox
+									key={i}
+									img={img}
+									imgUrl={img.look.imageUrl}
+									rating={img.rating}
+								/>
+							)
+						},
+					)
+				) : (
+					<>
+						<div className="fixed top-[110px] left-0 bottom-[56px] right-0 flex bg-black opacity-[0.6] z-10"></div>
+						<div className="fixed top-[110px] left-0 bottom-[56px] right-0 flex justify-center items-center z-20">
+							<CommingSoon />
+						</div>
+					</>
+				)}
 			</div>
 			<NavBar page={"lookbook"} />
 		</main>

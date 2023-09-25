@@ -13,7 +13,7 @@ export default function ImageInput() {
 	}
 
 	return (
-		<div className="flex flex-col justify-between items-center w-full px-[5%] text-white text-[12px] font-textBoxFont">
+		<div className="flex flex-col justify-between items-center w-full px-[4%] text-white text-[12px] font-textBoxFont">
 			<div className="flex justify-start items-center w-full h-[20px] font-semibold">
 				사진 등록
 			</div>
