@@ -29,7 +29,7 @@ export default function ChallengeEvaluateLookDetail() {
 				/>
 				<div className="absolute bottom-0 left-0 flex flex-row justify-center items-end w-full h-[177px] px-[10px] py-[25px] bg-gradient-to-b from-transparent to-black text-white text-[12px] font-textBoxFont">
 					<div className="flex flex-row justify-between items-center w-full h-[70px]">
-						{challengeImgList[currentImg - 1]?.look?.description}
+						<div>{challengeImgList[currentImg - 1]?.look?.description}</div>
 						{/* 고연전을 즐기기위한 편한 무지 티를 기반으로 만든 룩 */}
 						<div className="flex justify-center items-center">
 							{like ? (
