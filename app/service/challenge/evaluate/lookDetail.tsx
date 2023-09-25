@@ -5,19 +5,73 @@ import BookMarkOn from "@/public/svg/bookmarkOn.svg"
 import NextBtn from "@/public/svg/next.svg"
 import Good from "@/public/svg/thumbsup.svg"
 import Bad from "@/public/svg/thumbsdown.svg"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { ChallengeImgContext } from "./mainNoswipe"
-import { partType } from "@/app/utils/atoms/serviceGlobalState"
+import {
+	partType,
+	userProfileState,
+	userProfileType,
+} from "@/app/utils/atoms/serviceGlobalState"
+import { useRecoilState } from "recoil"
 
 export default function ChallengeEvaluateLookDetail() {
 	const { challengeImgList, currentImg, like, canBeNext, NextImg } =
 		useContext(ChallengeImgContext)
+
 	let tempList = [...challengeImgList[currentImg - 1]?.look?.parts]
 	const partsData: partType[] = tempList.sort(
 		(a: partType, b: partType) => a.index - b.index,
 	)
+	const [profileData, setProfileData] =
+		useRecoilState<userProfileType>(userProfileState)
 
 	const [bookMark, setBookMark] = useState<Boolean>(false)
+	const [sendStatistic, setSendStatistic] = useState<boolean>(false)
+
+	useEffect(() => {
+		console.log(profileData.userToken)
+		console.log(challengeImgList[currentImg - 1]?.participationId)
+		if (
+			profileData.userToken &&
+			challengeImgList[currentImg - 1]?.participationId &&
+			bookMark &&
+			!sendStatistic
+		) {
+			Statistic(
+				profileData.userToken,
+				challengeImgList[currentImg - 1]?.participationId,
+			)
+		}
+	}, [bookMark, sendStatistic, profileData, challengeImgList, currentImg])
+
+	const Statistic = async (userToken: string, participationId: string) => {
+		const STATISTIC_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/statistics/saving`
+		await fetch(STATISTIC_URL, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+
+			body: JSON.stringify({
+				userId: userToken,
+				participationId: participationId,
+			}),
+		})
+			.then((res) => res.json())
+			.then(({ status, message, data }) => {
+				if (
+					status === "ILLEGAL_ARGUMENT" ||
+					status === "NOT_FOUND" ||
+					status === "BAD_REQUEST"
+				) {
+					console.log(message)
+				} else {
+					// console.log(data)
+					setSendStatistic(true)
+				}
+			})
+			.catch((error) => console.log(error))
+	}
 
 	return (
 		<div className="flex-1 flex flex-col justify-center items-center w-full px-[4%] bg-black">

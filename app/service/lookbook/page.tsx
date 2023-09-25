@@ -57,6 +57,33 @@ export default function Lookbook() {
 				}
 			})
 	}
+	const Statistic = async (userToken: string, lookbookId: number) => {
+		const STATISTIC_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/statistics/lookbook`
+		await fetch(STATISTIC_URL, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+
+			body: JSON.stringify({
+				userId: userToken,
+				lookbookId: lookbookId,
+			}),
+		})
+			.then((res) => res.json())
+			.then(({ status, message, data }) => {
+				if (
+					status === "ILLEGAL_ARGUMENT" ||
+					status === "NOT_FOUND" ||
+					status === "BAD_REQUEST"
+				) {
+					console.log(message)
+				} else {
+					// console.log(data)
+				}
+			})
+			.catch((error) => console.log(error))
+	}
 	return (
 		<main className="flex flex-col justify-start items-center w-full min-h-[100%] bg-black text-white">
 			<LookbookHeader />
@@ -66,6 +93,10 @@ export default function Lookbook() {
 						<Link
 							key={i}
 							className="flex justify-center items-center w-[50%] m-[5px]"
+							onClick={() => {
+								if (userProfile.userToken)
+									Statistic(userProfile.userToken, Number(lookbookIndex))
+							}}
 							href={{
 								pathname: "/service/lookbook/folder",
 								query: { id: lookbookIndex },

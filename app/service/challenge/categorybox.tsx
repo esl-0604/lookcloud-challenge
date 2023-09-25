@@ -23,6 +23,7 @@ export default function ChallengeCategoryBox({
 				alt="challengeImg"
 				className="flex justify-center items-center w-[100%] h-[100%] object-cover"
 			/>
+			<div className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-b from-transparent via-black to-black" />
 			<div className="flex flex-col justify-center items-start absolute bottom-[4px] w-[100%] h-[106px] text-white font-normal">
 				<div className="w-[100%] px-[12px] h-[40px] font-semibold text-[30px]">
 					{challengeName}
@@ -35,6 +36,9 @@ export default function ChallengeCategoryBox({
 							</div>
 							<div className="flex justify-end items-center w-[70px] h-[100%]">
 								{totalCount}명 참가중
+							</div>
+							<div className="flex justify-end items-center w-[110px] h-[100%]">
+								총 상금 100,000원
 							</div>
 						</>
 					) : (

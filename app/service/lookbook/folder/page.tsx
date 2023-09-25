@@ -15,6 +15,9 @@ import LookbookImgBox from "./imagebox"
 import NavBar from "@/app/components/navbar"
 import { useEffect, useState } from "react"
 import SpinnerBox from "@/app/components/spinner"
+// import ModalBox from "@/app/components/Modal/ModalBox"
+// import FilterModal from "@/app/components/Modal/FilterModal"
+// import SortModal from "@/app/components/Modal/SortModal"
 
 export default function LookbookFolder() {
 	const param = useSearchParams()
@@ -26,9 +29,14 @@ export default function LookbookFolder() {
 		useRecoilState<userProfileType>(userProfileState)
 
 	const [isLoading, setIsLoading] = useState<boolean>(true)
+	// const [isEtcOn, setIsEtcOn] = useState<boolean>(false)
+	// const [sortModalOn, setSortModalOn] = useState<boolean>(false)
+	// const [filterModalOn, setFilerModalOn] = useState<boolean>(false)
 
 	useEffect(() => {
-		if (userProfile.userToken && lookbookId) getImgList(userProfile.userToken)
+		if (userProfile.userToken && lookbookId) {
+			getImgList(userProfile.userToken)
+		}
 	}, [userProfile])
 
 	const getImgList = async (userToken: string) => {
@@ -67,14 +75,32 @@ export default function LookbookFolder() {
 	return (
 		<main className="flex flex-col justify-start items-center w-full h-full bg-black text-white relative">
 			<LookbookHeader />
-			<div className="flex flex-col justify-between items-start w-full h-[50px] px-[8px] font-textBoxFont z-30">
+
+			<div className="flex flex-col justify-between items-start w-full h-[50px] px-[8px] font-textBoxFont z-30 relative">
 				<div className="flex flex-row justify-start items-center w-full h-[30px] text-[24px] font-semibold">
 					{lookbookId ? LookbookImgList[lookbookId].title : null}
 				</div>
 				<div className="flex flex-row justify-start items-center w-full h-[20px] text-[12px] font-normal">
 					{lookbookId ? LookbookImgList[lookbookId].comment : null}
 				</div>
+				<div
+					className="absolute bottom-[4px] right-[8px] flex justify-center items-center cursor-pointer"
+					// onClick={() => setIsEtcOn(true)}
+				>
+					<img src="/svg/etc.svg" alt="etc" />
+				</div>
+				{/* {isEtcOn ? (
+					<ModalBox
+						setIsEtcOn={setIsEtcOn}
+						setSortModalOn={setSortModalOn}
+						setFilerModalOn={setFilerModalOn}
+					/>
+				) : null} */}
 			</div>
+
+			{/* {sortModalOn ? <SortModal setSortModalOn={setSortModalOn} /> : null}
+			{filterModalOn ? <></> : null} */}
+
 			<div
 				className={`flex flex-wrap flex-row justify-start items-start w-full miin-h-full px-[2px] pb-[60px] ${
 					lookbookId === "1" ? "overflow-hidden" : "overflow-scroll"
@@ -87,6 +113,7 @@ export default function LookbookFolder() {
 				) : lookbookId ? (
 					LookbookImgList[lookbookId].imgList.map(
 						(img: lookbookImgType, i: number) => {
+							// 빈 look을 가지는 객체 필터링
 							if (Object.keys(img?.look).length !== 0) {
 								return (
 									<LookbookImgBox
@@ -109,6 +136,7 @@ export default function LookbookFolder() {
 					</>
 				) : null}
 			</div>
+
 			<NavBar page={"lookbook"} />
 		</main>
 	)

@@ -1,23 +1,12 @@
 "use client"
 
-import Boundary from "@/app/components/Boundary"
-import Box from "@/app/components/Box"
-import LookInfoBox from "@/app/components/LookInfoBox"
-import ThumbsDownBox from "@/app/components/ThumbsDownBox"
-import ThumbsUpBox from "@/app/components/ThumbsUpBox"
-import Good from "@/public/svg/thumbsup.svg"
-import Bad from "@/public/svg/thumbsdown.svg"
-import { inrange } from "@/app/utils"
 import {
 	userProfileState,
 	userProfileType,
 } from "@/app/utils/atoms/serviceGlobalState"
-import registDragEvent from "@/app/utils/registDragEvent"
 import { useSearchParams } from "next/navigation"
-import { createContext, useEffect, useRef, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 import { useRecoilState } from "recoil"
-import { dummyList } from "./lookImgDummy"
-import Next from "@/public/svg/swipeup.svg"
 import CheckBox from "./checkbox"
 import SpinnerBox from "@/app/components/spinner"
 import ChallengeEvaluateLookDetail from "./lookDetail"
