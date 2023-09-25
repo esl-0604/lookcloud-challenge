@@ -80,7 +80,7 @@ export default function ChallengeEvaluateMainNoSwipe() {
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
 				if (data) {
-					// console.log(data)
+					console.log(data)
 					if (data.length > 0) {
 						setIsNoMoreLook(false)
 						const tempList = [...challengeImgList]

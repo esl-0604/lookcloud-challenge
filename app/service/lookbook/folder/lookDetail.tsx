@@ -6,7 +6,7 @@ import BookMarkOn from "@/public/svg/bookmarkOn.svg"
 import Good from "@/public/svg/thumbsup.svg"
 import Bad from "@/public/svg/thumbsdown.svg"
 import { useState } from "react"
-import { lookbookImgType } from "@/app/utils/atoms/serviceGlobalState"
+import { lookbookImgType, partType } from "@/app/utils/atoms/serviceGlobalState"
 
 interface LookDetailProps {
 	img: lookbookImgType
@@ -20,6 +20,11 @@ export default function LookDetail({
 	setLookDetail,
 }: LookDetailProps) {
 	const [bookMark, setBookMark] = useState<Boolean>(false)
+	let tempList = [...img?.look?.parts]
+	const partsList: partType[] = tempList.sort(
+		(a: partType, b: partType) => a.index - b.index,
+	)
+	console.log(img?.look?.parts)
 
 	return (
 		<div className="fixed top-0 flex flex-col justify-start items-center w-screen max-w-[480px] h-screen px-[4%] bg-black z-30">
@@ -80,7 +85,7 @@ export default function LookDetail({
 
 					<div className="flex flex-row justify-between items-center w-full mt-[12px]">
 						<div className="flex flex-col justify-start items-start text-white text-[12px] font-textBoxFont">
-							{img?.look?.parts.map((formattedItem: any, index: number) => (
+							{partsList.map((formattedItem: any, index: number) => (
 								<div
 									key={index}
 									className="flex flex-row justify-start items-center h-[20px]"

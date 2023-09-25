@@ -17,7 +17,7 @@ export default function CheckBox() {
 				className="flex flex-col justify-center items-center pb-[20px] font-textBoxFontr text-white bg-transparent z-30"
 				onClick={backToLeaderboard}
 			>
-				<Check />
+				<Check className="cursor-pointer" />
 				<div className="flex justify-center items-center text-[24px]">
 					모두 평가했습니다!
 				</div>

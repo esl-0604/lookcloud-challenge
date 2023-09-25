@@ -7,10 +7,15 @@ import Good from "@/public/svg/thumbsup.svg"
 import Bad from "@/public/svg/thumbsdown.svg"
 import { useContext, useState } from "react"
 import { ChallengeImgContext } from "./mainNoswipe"
+import { partType } from "@/app/utils/atoms/serviceGlobalState"
 
 export default function ChallengeEvaluateLookDetail() {
 	const { challengeImgList, currentImg, like, canBeNext, NextImg } =
 		useContext(ChallengeImgContext)
+	let tempList = [...challengeImgList[currentImg - 1]?.look?.parts]
+	const partsData: partType[] = tempList.sort(
+		(a: partType, b: partType) => a.index - b.index,
+	)
 
 	const [bookMark, setBookMark] = useState<Boolean>(false)
 
@@ -54,10 +59,11 @@ export default function ChallengeEvaluateLookDetail() {
 									: null}
 							</div>
 							<div className="h-[20px]">
-								{currentImg > 0
+								{currentImg > 0 &&
+								challengeImgList[currentImg - 1]?.user?.instagramUserName
 									? "@" +
 									  challengeImgList[currentImg - 1]?.user?.instagramUserName
-									: null}
+									: ""}
 							</div>
 						</div>
 					</div>
@@ -78,20 +84,18 @@ export default function ChallengeEvaluateLookDetail() {
 
 				<div className="flex flex-row justify-between items-center w-full mt-[12px]">
 					<div className="flex flex-col justify-start items-start text-white text-[12px] font-textBoxFont">
-						{challengeImgList[currentImg - 1]?.look?.parts.map(
-							(formattedItem: any, index: number) => (
-								<div
-									key={index}
-									className="flex flex-row justify-start items-center h-[20px]"
-								>
-									{formattedItem.part +
-										" - " +
-										formattedItem.brand +
-										" " +
-										formattedItem.name}
-								</div>
-							),
-						)}
+						{partsData.map((formattedItem: any, index: number) => (
+							<div
+								key={index}
+								className="flex flex-row justify-start items-center h-[20px]"
+							>
+								{formattedItem.part +
+									" - " +
+									formattedItem.brand +
+									" " +
+									formattedItem.name}
+							</div>
+						))}
 					</div>
 					{canBeNext ? (
 						<div className="flex justify-center items-center">

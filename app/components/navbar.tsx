@@ -1,7 +1,7 @@
 import Trophy from "/public/svg/trophyicon.svg"
 import Lookbook from "../../public/svg/lookbookicon.svg"
 import Chat from "../../public/svg/chaticon.svg"
-import { ReactElement } from "react"
+import { ReactElement, useEffect } from "react"
 import NavBarTile from "./navbarTile"
 import { previousPath } from "../utils/atoms/serviceGlobalState"
 import { useRecoilState } from "recoil"
@@ -37,6 +37,15 @@ export default function NavBar({ page }: NavBarProps) {
 	const currentId = param.get("id")
 	const router = useRouter()
 
+	useEffect(() => {
+		if (PreviousPath === "") {
+			if (currentPath === "/service/challenge")
+				setPreviousPath("/service/lookbook")
+			else if (currentPath === "/service/lookbook")
+				setPreviousPath("/service/challenge")
+		}
+	}, [PreviousPath, currentPath])
+
 	const navigate = (url: string) => {
 		let currentURL = currentPath
 		if (currentId) currentURL += "?id=" + currentId
@@ -44,7 +53,7 @@ export default function NavBar({ page }: NavBarProps) {
 		router.push(url)
 	}
 	return (
-		<div className="fixed bottom-0 flex justify-around items-center w-full max-w-[480px] h-[56px] bg-black">
+		<div className="fixed bottom-0 flex justify-around items-center w-full max-w-[480px] h-[56px] bg-black z-20">
 			{navigateList.map((tile: Tile) => {
 				return (
 					<div

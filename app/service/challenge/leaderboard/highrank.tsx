@@ -49,7 +49,9 @@ export default function HighRank() {
 							</span>
 							<span className="text-[12px]">{ranker2.nickName}</span>
 							<span className="text-[12px]">
-								{"@" + ranker2.instagramUserName}
+								{ranker2.instagramUserName
+									? "@" + ranker2.instagramUserName
+									: ""}
 							</span>
 						</>
 					) : (
@@ -73,7 +75,9 @@ export default function HighRank() {
 							</span>
 							<span className="text-[12px]">{ranker1.nickName}</span>
 							<span className="text-[12px]">
-								{"@" + ranker1.instagramUserName}
+								{ranker1.instagramUserName
+									? "@" + ranker1.instagramUserName
+									: ""}
 							</span>
 						</>
 					) : (
@@ -97,7 +101,9 @@ export default function HighRank() {
 							</span>
 							<span className="text-[12px]">{ranker3.nickName}</span>
 							<span className="text-[12px]">
-								{"@" + ranker3.instagramUserName}
+								{ranker3.instagramUserName
+									? "@" + ranker3.instagramUserName
+									: ""}
 							</span>
 						</>
 					) : (
