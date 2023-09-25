@@ -76,7 +76,7 @@ export default function LookbookFolder() {
 				</div>
 			</div>
 			<div
-				className={`flex flex-wrap flex-row justify-start items-start w-full miin-h-full px-[2px] pb-[100px] ${
+				className={`flex flex-wrap flex-row justify-start items-start w-full miin-h-full px-[2px] pb-[60px] ${
 					lookbookId === "1" ? "overflow-hidden" : "overflow-scroll"
 				}`}
 			>
