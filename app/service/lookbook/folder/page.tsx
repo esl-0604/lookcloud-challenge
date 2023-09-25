@@ -87,14 +87,16 @@ export default function LookbookFolder() {
 				) : lookbookId ? (
 					LookbookImgList[lookbookId].imgList.map(
 						(img: lookbookImgType, i: number) => {
-							return (
-								<LookbookImgBox
-									key={i}
-									img={img}
-									imgUrl={img.look.imageUrl}
-									rating={img.rating}
-								/>
-							)
+							if (Object.keys(img?.look).length !== 0) {
+								return (
+									<LookbookImgBox
+										key={i}
+										img={img}
+										imgUrl={img.look.imageUrl}
+										rating={img.rating}
+									/>
+								)
+							}
 						},
 					)
 				) : null}
