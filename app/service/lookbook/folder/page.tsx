@@ -45,7 +45,7 @@ export default function LookbookFolder() {
 				.then(({ status, message, data }) => {
 					setIsLoading(false)
 					if (data) {
-						// console.log(data)
+						console.log(data)
 						let newImgList: lookbookImgListType = { ...LookbookImgList }
 						newImgList[lookbookId] = {
 							title: "내가 평가한 룩",
@@ -80,7 +80,9 @@ export default function LookbookFolder() {
 					lookbookId === "1" ? "overflow-hidden" : "overflow-scroll"
 				}`}
 			>
-				{isLoading ? (
+				{isLoading &&
+				lookbookId &&
+				LookbookImgList[lookbookId].imgList.length === 0 ? (
 					<SpinnerBox />
 				) : lookbookId ? (
 					LookbookImgList[lookbookId].imgList.map(
