@@ -98,10 +98,18 @@ export default function ChallengeEvaluateLookDetail() {
 						))}
 					</div>
 					{canBeNext ? (
-						<div className="flex justify-center items-center">
-							<NextBtn className="cursor-pointer" onClick={NextImg} />
-						</div>
-					) : null}
+						<NextBtn
+							className="cursor-pointer"
+							color={"white"}
+							onClick={NextImg}
+						/>
+					) : (
+						<NextBtn
+							className="cursor-pointer"
+							color={"#D4D4D4"}
+							onClick={NextImg}
+						/>
+					)}
 				</div>
 			</div>
 		</div>
