@@ -10,6 +10,7 @@ import {
 	userProfileType,
 } from "@/app/utils/atoms/serviceGlobalState"
 import { useEffect } from "react"
+import NavBar from "../components/navbar"
 
 export default function ServiceLayout({
 	children,

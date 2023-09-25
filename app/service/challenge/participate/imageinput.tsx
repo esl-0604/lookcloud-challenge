@@ -29,7 +29,7 @@ export default function ImageInput() {
 							className="flex justify-center items-center absolute top-[15px] right-[15px] cursor-pointer"
 							onClick={CancleLookImage}
 						>
-							<Cancle width={20} height={20} />
+							<Cancle width={20} height={20} color={"white"} />
 						</div>
 					)}
 				</div>

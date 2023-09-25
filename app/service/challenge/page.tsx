@@ -12,6 +12,7 @@ import {
 import ChallengeCategoryBox from "@/app/service/challenge/categorybox"
 import CommingSoon from "@/public/svg/commingsoon.svg"
 import { useEffect } from "react"
+import NavBar from "@/app/components/navbar"
 
 export default function Challenge() {
 	const [challengeDataList, setChallengeDataList] =
@@ -62,6 +63,7 @@ export default function Challenge() {
 					<CommingSoon />
 				</div>
 			</div>
+			<NavBar page="challenge" />
 		</main>
 	)
 }

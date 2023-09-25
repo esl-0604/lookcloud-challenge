@@ -19,7 +19,7 @@ export default function NavBarTile({ type, activate }: NavBarButtonProps) {
 	return (
 		<span
 			className={`text-[12px] font-bold ${
-				activate ? "text-activate" : "text-deactivate"
+				activate ? "text-white" : "text-deactivate"
 			}`}
 		>
 			{title()}

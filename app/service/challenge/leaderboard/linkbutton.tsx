@@ -120,7 +120,8 @@ export default function LinkButton() {
 						href={{
 							pathname: userTutorialData.complete
 								? "/service/challenge/evaluate"
-								: "/service/challenge/tutorial",
+								: "/service/challenge/evaluate",
+							// : "/service/challenge/tutorial",
 							query: { id: challengeId },
 						}}
 					>

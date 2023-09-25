@@ -23,9 +23,9 @@ export default function RootLayout({
 					<link rel="manifest" href="/manifest.json" />
 				</head>
 
-				<body className="overscroll-y-none overscroll-x-none">
+				<body className="overscroll-y-none">
 					<div className="flex justify-center items-center w-screen h-screen">
-						<div className="relative w-[100%] h-[100%] max-w-[480px] select-none">
+						<div className="relative w-full h-full max-w-[480px] select-none">
 							{children}
 						</div>
 					</div>

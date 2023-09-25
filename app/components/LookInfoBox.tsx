@@ -12,7 +12,9 @@ export default function LookInfoBox() {
 	const { challengeImgList, currentImg, currentImgEvaluate } =
 		useContext(ChallengeImgContext)
 	const data =
-		currentImg > 0 ? challengeImgList[currentImg - 1]["look"]["parts"] : null
+		currentImg > 0 && challengeImgList.length > 0
+			? challengeImgList[currentImg - 1]["look"]["parts"]
+			: null
 
 	// 변환된 데이터를 원하는 형식으로 가공
 	const formattedData: string[] = data.map((item: itemProps) => {
@@ -24,7 +26,7 @@ export default function LookInfoBox() {
 			<div className="h-full w-full relative">
 				<img
 					src={
-						currentImg > 0
+						currentImg > 0 && challengeImgList.length > 0
 							? challengeImgList[currentImg - 1]["look"]["imageUrl"]
 							: null
 					}
@@ -60,14 +62,14 @@ export default function LookInfoBox() {
 						<div className="flex flex-col py-[8px]">
 							<div className="flex flex-row">
 								<span className="text-white text-[8px]">
-									{currentImg > 0
+									{currentImg > 0 && challengeImgList.length > 0
 										? challengeImgList[currentImg - 1]["user"]["nickName"]
 										: null}
 								</span>
 							</div>
 							<span className="text-white text-[8px] leading-[8px]">
 								@
-								{currentImg > 0
+								{currentImg > 0 && challengeImgList.length > 0
 									? challengeImgList[currentImg - 1]["user"][
 											"instagramUserName"
 									  ]
@@ -76,7 +78,9 @@ export default function LookInfoBox() {
 						</div>
 					</div>
 					<span className="text-white text-[24px]">
-						{currentImg > 0 ? challengeImgList[currentImg - 1]["lScore"] : null}
+						{currentImg > 0 && challengeImgList.length > 0
+							? challengeImgList[currentImg - 1]["lScore"]
+							: null}
 					</span>
 				</div>
 				<div className="flex flex-col mt-[12px]">

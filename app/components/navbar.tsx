@@ -16,30 +16,28 @@ interface Tile {
 export default function NavBar({ page }: NavBarProps) {
 	const navigateList: Array<Tile> = [
 		{
-			icon: <Trophy color={page === "challenge" ? "#3E3AFF" : "#9B9BA1"} />,
+			icon: <Trophy color={page === "challenge" ? "#FFFFFF" : "#9B9BA1"} />,
 			title: "challenge",
 		},
 		{
-			icon: <Lookbook color={page === "lookbook" ? "#3E3AFF" : "#9B9BA1"} />,
+			icon: <Lookbook color={page === "lookbook" ? "#FFFFFF" : "#9B9BA1"} />,
 			title: "lookbook",
 		},
-		{
-			icon: <Chat color={page === "feedback" ? "#3E3AFF" : "#9B9BA1"} />,
-			title: "feedback",
-		},
-		{
-			icon: <Trophy color={page === "login" ? "#3E3AFF" : "#9B9BA1"} />,
-			title: "login",
-		},
+		// {
+		// 	icon: <Chat color={page === "feedback" ? "#FFFFFF" : "#9B9BA1"} />,
+		// 	title: "feedback",
+		// },
 	]
 	return (
-		<div className="absolute bottom-0 flex justify-around items-center w-[100%] h-[50px] bg-white">
+		<div className="fixed bottom-0 flex justify-around items-center w-full max-w-[480px] h-[56px] bg-black">
 			{navigateList.map((tile: Tile) => {
 				return (
 					<Link
 						key={tile.title}
-						href={"/" + tile.title}
-						className="flex flex-col justify-around items-center h-[42px]"
+						href={"/service/" + tile.title}
+						className={`flex flex-col justify-around items-center h-[42px] ${
+							tile.title === "feedback" ? "pointer-events-none" : null
+						} `}
 					>
 						{tile.icon}
 						<NavBarTile type={tile.title} activate={page === tile.title} />

@@ -14,6 +14,7 @@ import {
 	userTutorialType,
 } from "@/app/utils/atoms/serviceGlobalState"
 import { useEffect } from "react"
+import NavBar from "@/app/components/navbar"
 
 export default function ChallengeLayout({
 	children,
@@ -111,5 +112,10 @@ export default function ChallengeLayout({
 
 	// --------------------------------------------------------------------------------
 
-	return <>{children}</>
+	return (
+		<>
+			{children}
+			<NavBar page="challenge" />
+		</>
+	)
 }
