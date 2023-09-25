@@ -1,9 +1,11 @@
-import Link from "next/link"
 import Trophy from "/public/svg/trophyicon.svg"
 import Lookbook from "../../public/svg/lookbookicon.svg"
 import Chat from "../../public/svg/chaticon.svg"
 import { ReactElement } from "react"
 import NavBarTile from "./navbarTile"
+import { previousPath } from "../utils/atoms/serviceGlobalState"
+import { useRecoilState } from "recoil"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 interface NavBarProps {
 	page: string
@@ -28,20 +30,33 @@ export default function NavBar({ page }: NavBarProps) {
 		// 	title: "feedback",
 		// },
 	]
+
+	const [PreviousPath, setPreviousPath] = useRecoilState<string>(previousPath)
+	const currentPath = usePathname()
+	const param = useSearchParams()
+	const currentId = param.get("id")
+	const router = useRouter()
+
+	const navigate = (url: string) => {
+		let currentURL = currentPath
+		if (currentId) currentURL += "?id=" + currentId
+		setPreviousPath(currentURL)
+		router.push(url)
+	}
 	return (
 		<div className="fixed bottom-0 flex justify-around items-center w-full max-w-[480px] h-[56px] bg-black">
 			{navigateList.map((tile: Tile) => {
 				return (
-					<Link
+					<div
 						key={tile.title}
-						href={"/service/" + tile.title}
-						className={`flex flex-col justify-around items-center h-[42px] ${
-							tile.title === "feedback" ? "pointer-events-none" : null
-						} `}
+						onClick={() => {
+							if (page !== tile.title) navigate(PreviousPath)
+						}}
+						className="flex flex-col justify-around items-center h-[42px]"
 					>
 						{tile.icon}
 						<NavBarTile type={tile.title} activate={page === tile.title} />
-					</Link>
+					</div>
 				)
 			})}
 		</div>

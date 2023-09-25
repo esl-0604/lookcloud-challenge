@@ -30,6 +30,7 @@ export default function Lookbook() {
 							<LookbookCategoryBox
 								title={lookbook.title}
 								publicState={lookbook.publicState}
+								lookbookId={lookbook.lookbookId}
 							/>
 						</Link>
 					)

@@ -13,7 +13,7 @@ export default function LookbookHeader() {
 	console.log(path)
 	const userProfile = LocalStorage.getItem("lookCloud-kakao-profile")
 	const GoBackward = () => {
-		router.back()
+		router.replace("/service/lookbook")
 	}
 	const GoHome = () => {
 		router.push("/service/lookbook")
