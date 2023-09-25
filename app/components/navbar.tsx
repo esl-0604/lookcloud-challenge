@@ -3,7 +3,10 @@ import Lookbook from "../../public/svg/lookbookicon.svg"
 import Chat from "../../public/svg/chaticon.svg"
 import { ReactElement, useEffect } from "react"
 import NavBarTile from "./navbarTile"
-import { previousPath } from "../utils/atoms/serviceGlobalState"
+import {
+	previousPath,
+	previousPathType,
+} from "../utils/atoms/serviceGlobalState"
 import { useRecoilState } from "recoil"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
@@ -31,25 +34,27 @@ export default function NavBar({ page }: NavBarProps) {
 		// },
 	]
 
-	const [PreviousPath, setPreviousPath] = useRecoilState<string>(previousPath)
+	const [PreviousPath, setPreviousPath] =
+		useRecoilState<previousPathType>(previousPath)
 	const currentPath = usePathname()
 	const param = useSearchParams()
 	const currentId = param.get("id")
 	const router = useRouter()
 
 	useEffect(() => {
-		if (PreviousPath === "") {
-			if (currentPath === "/service/challenge")
-				setPreviousPath("/service/lookbook")
-			else if (currentPath === "/service/lookbook")
-				setPreviousPath("/service/challenge")
+		let newUpdatePath = { ...PreviousPath }
+		newUpdatePath[page] = currentPath
+		if (currentId) {
+			newUpdatePath[page] += "?id=" + currentId
 		}
-	}, [PreviousPath, currentPath])
+		setPreviousPath(newUpdatePath)
+	}, [currentPath])
+
+	// useEffect(() => {
+	// 	console.log(PreviousPath)
+	// }, [PreviousPath])
 
 	const navigate = (url: string) => {
-		let currentURL = currentPath
-		if (currentId) currentURL += "?id=" + currentId
-		setPreviousPath(currentURL)
 		router.push(url)
 	}
 	return (
@@ -59,7 +64,7 @@ export default function NavBar({ page }: NavBarProps) {
 					<div
 						key={tile.title}
 						onClick={() => {
-							if (page !== tile.title) navigate(PreviousPath)
+							if (page !== tile.title) navigate(PreviousPath[tile.title])
 						}}
 						className="flex flex-col justify-around items-center h-[42px] cursor-pointer"
 					>
