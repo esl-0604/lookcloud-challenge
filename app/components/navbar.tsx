@@ -52,7 +52,7 @@ export default function NavBar({ page }: NavBarProps) {
 						onClick={() => {
 							if (page !== tile.title) navigate(PreviousPath)
 						}}
-						className="flex flex-col justify-around items-center h-[42px]"
+						className="flex flex-col justify-around items-center h-[42px] cursor-pointer"
 					>
 						{tile.icon}
 						<NavBarTile type={tile.title} activate={page === tile.title} />

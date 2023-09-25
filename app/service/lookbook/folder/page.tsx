@@ -20,7 +20,7 @@ export default function LookbookFolder() {
 		useRecoilState<lookbookImgListType>(lookbookImgList)
 
 	return (
-		<main className="flex flex-col justify-start items-center w-full min-h-full overflow-scroll bg-black text-white">
+		<main className="flex flex-col justify-start items-center w-full min-h-full overflow-scroll bg-black text-white relative">
 			<LookbookHeader />
 			<div className="flex flex-col justify-between items-start w-full h-[50px] px-[8px] font-textBoxFont">
 				<div className="flex flex-row justify-start items-center w-full h-[30px] text-[24px] font-semibold">
@@ -46,8 +46,8 @@ export default function LookbookFolder() {
 					)
 				) : (
 					<>
-						<div className="fixed top-[110px] left-0 bottom-[56px] right-0 flex bg-black opacity-[0.6] z-10"></div>
-						<div className="fixed top-[110px] left-0 bottom-[56px] right-0 flex justify-center items-center z-20">
+						<div className="fixed top-[110px] bottom-[56px] w-screen max-w-[480px] flex bg-black opacity-[0.6] z-10"></div>
+						<div className="fixed top-[110px] bottom-[56px] w-screen max-w-[480px] flex justify-center items-center z-20">
 							<CommingSoon />
 						</div>
 					</>
