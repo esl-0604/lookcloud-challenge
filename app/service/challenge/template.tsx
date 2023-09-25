@@ -38,7 +38,7 @@ export default function ChallengeLayout({
 			challengeId
 			// !Object.keys(challengeParticipantsData).includes(challengeId)
 		) {
-			setChallengeParticipantsData({})
+			// setChallengeParticipantsData({})
 			GetChallengeParticipantsInfo(challengeId)
 		}
 	}, [profileData, challengeId])
@@ -73,7 +73,7 @@ export default function ChallengeLayout({
 			challengeId
 			// !Object.keys(userChallengeParticipateData).includes(challengeId)
 		) {
-			setUserChallengeParticipateData({})
+			// setUserChallengeParticipateData({})
 			GetUserChallengeParticipateInfo(profileData.userToken, challengeId)
 		}
 	}, [profileData, challengeId])

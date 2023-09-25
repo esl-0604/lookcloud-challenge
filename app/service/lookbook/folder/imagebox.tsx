@@ -1,8 +1,13 @@
 "use client"
 
 import { useState } from "react"
-import { lookbookImgType } from "@/app/utils/atoms/serviceGlobalState"
-import LookDetail from "./lookDetail"
+import {
+	currentDetailImageState,
+	lookbookImgType,
+} from "@/app/utils/atoms/serviceGlobalState"
+// import LookDetail from "./lookDetail"
+import { useRouter, useSearchParams } from "next/navigation"
+import { useRecoilState } from "recoil"
 
 interface LookbookFolderProps {
 	img: lookbookImgType
@@ -15,15 +20,25 @@ export default function LookbookImgBox({
 	imgUrl,
 	rating,
 }: LookbookFolderProps) {
-	const [lookDetail, setLookDetail] = useState<boolean>(false)
+	// const [lookDetail, setLookDetail] = useState<boolean>(false)
+	const router = useRouter()
+	const param = useSearchParams()
+	const lookbookId = param.get("id")
+	const [currentDetailImage, setCurrentDetailImage] =
+		useRecoilState<lookbookImgType>(currentDetailImageState)
+
+	const viewDetail = () => {
+		setCurrentDetailImage(img)
+		router.push("/service/lookbook/detail?id=" + lookbookId)
+	}
 	return (
 		<>
-			{lookDetail ? (
+			{/* {lookDetail ? (
 				<LookDetail img={img} rating={rating} setLookDetail={setLookDetail} />
-			) : null}
+			) : null} */}
 			<div
 				className="flex justify-center items-center relative w-[calc(50%-4px)] after:pb-[100%] bg-black m-[2px] cursor-pointer"
-				onClick={() => setLookDetail(true)}
+				onClick={viewDetail}
 			>
 				<div className="flex justify-start items-start absolute w-full h-full overflow-hidden">
 					<img className="w-full h-full object-cover" src={imgUrl} alt="img" />

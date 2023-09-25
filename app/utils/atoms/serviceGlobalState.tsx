@@ -234,6 +234,7 @@ export interface lookbookImgType {
 	user: {
 		nickName: string
 		instagramUserName: string
+		gender: string
 	}
 	look: {
 		imageUrl: string
@@ -404,6 +405,7 @@ export const lookbookImgList = atom<lookbookImgListType>({
 					user: {
 						nickName: "룩클라우드",
 						instagramUserName: "lookcloud_official",
+						gender: "MALE",
 					},
 					look: {
 						imageUrl: "/image/participation_sample_img1.jpg",
@@ -437,6 +439,7 @@ export const lookbookImgList = atom<lookbookImgListType>({
 					user: {
 						nickName: "룩클라우드",
 						instagramUserName: "lookcloud_official",
+						gender: "MALE",
 					},
 					look: {
 						imageUrl: "/image/participation_sample_img2.jpg",
@@ -470,6 +473,7 @@ export const lookbookImgList = atom<lookbookImgListType>({
 					user: {
 						nickName: "룩클라우드",
 						instagramUserName: "lookcloud_official",
+						gender: "MALE",
 					},
 					look: {
 						imageUrl: "/image/participation_sample_img3.jpg",
@@ -503,6 +507,7 @@ export const lookbookImgList = atom<lookbookImgListType>({
 					user: {
 						nickName: "룩클라우드",
 						instagramUserName: "lookcloud_official",
+						gender: "MALE",
 					},
 					look: {
 						imageUrl: "/image/participation_sample_img1.jpg",
@@ -536,6 +541,7 @@ export const lookbookImgList = atom<lookbookImgListType>({
 					user: {
 						nickName: "룩클라우드",
 						instagramUserName: "lookcloud_official",
+						gender: "MALE",
 					},
 					look: {
 						imageUrl: "/image/participation_sample_img2.jpg",
@@ -569,6 +575,7 @@ export const lookbookImgList = atom<lookbookImgListType>({
 					user: {
 						nickName: "룩클라우드",
 						instagramUserName: "lookcloud_official",
+						gender: "MALE",
 					},
 					look: {
 						imageUrl: "/image/participation_sample_img3.jpg",
@@ -603,3 +610,41 @@ export const lookbookImgList = atom<lookbookImgListType>({
 })
 
 // ---------------------------------------------------------------------------
+
+export const currentDetailImageState = atom<lookbookImgType>({
+	key: "currentDetailImageState",
+	default: {
+		participationId: "1234567890abcdefg",
+		user: {
+			nickName: "룩클라우드",
+			instagramUserName: "lookcloud_official",
+			gender: "MALE",
+		},
+		look: {
+			imageUrl: "/image/participation_sample_img3.jpg",
+			description: "룩 설명",
+			parts: [
+				{
+					part: "상의",
+					name: "블랙 티셔츠",
+					brand: "무신사",
+					index: 0,
+				},
+				{
+					part: "상의",
+					name: "블랙 티셔츠",
+					brand: "무신사",
+					index: 0,
+				},
+				{
+					part: "상의",
+					name: "블랙 티셔츠",
+					brand: "무신사",
+					index: 0,
+				},
+			],
+		},
+		lScore: 123,
+		rating: 1,
+	},
+})

@@ -19,7 +19,7 @@ export default function LookbookHeader() {
 		router.push("/service/lookbook")
 	}
 	return (
-		<div className="flex flex-row sticky top-0 justify-between items-center w-[100%] h-[56px] px-[10px] z-30 bg-black">
+		<div className="flex-none flex flex-row sticky top-0 justify-between items-center w-[100%] h-[56px] px-[10px] z-30 bg-black">
 			{path === "/service/lookbook" ? (
 				<div className="pl-[6px] cursor-pointer" onClick={GoHome}>
 					<HeaderLogo width={"126"} height={"32"} color={"white"} />
