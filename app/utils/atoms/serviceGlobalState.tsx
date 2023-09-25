@@ -1,10 +1,16 @@
 import { atom } from "recoil"
 
 // ---------------------------------------------------------------------------
+export interface previousPathType {
+	[key: string]: string
+}
 
-export const previousPath = atom<string>({
+export const previousPath = atom<previousPathType>({
 	key: "previousPath",
-	default: "",
+	default: {
+		challenge: "/service/challenge",
+		lookbook: "/service/lookbook",
+	},
 })
 
 // ---------------------------------------------------------------------------

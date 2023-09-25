@@ -11,7 +11,7 @@ interface NoticeTextType {
 export default function OnboardingInstagramInput() {
 	const { instagramId, setInstagramId }: any = useContext(InstagramContext)
 	const [noticeText, setNoticeText] = useState<NoticeTextType>({
-		text: "인스타그렘 ID을 입력해주세요. 맨 앞에 @없이 입력해주세요.",
+		text: "인스타그램 ID을 입력해주세요. 맨 앞에 @없이 입력해주세요.",
 		theme: "text-[#9C9C9C]",
 	})
 
