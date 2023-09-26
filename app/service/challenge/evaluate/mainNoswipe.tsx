@@ -33,6 +33,10 @@ export default function ChallengeEvaluateMainNoSwipe() {
 		if (showThumbs > -1 && profileData.userToken) {
 			const participationId = challengeImgList[currentImg - 1]?.participationId
 			EvaluateImg(profileData.userToken, showThumbs, participationId)
+			setTimeout(() => {
+				setCurrentImgEvaluate(true)
+				setShowThumbs(-1)
+			}, 500)
 		}
 	}, [showThumbs])
 
@@ -129,8 +133,9 @@ export default function ChallengeEvaluateMainNoSwipe() {
 					console.log(message)
 					setCurrentImgEvaluate(false)
 				} else {
-					setCurrentImgEvaluate(true)
-					setShowThumbs(-1)
+					// setCurrentImgEvaluate(true)
+					// setShowThumbs(-1)
+					console.log(data)
 				}
 			})
 			.catch((error) => console.log(error))
