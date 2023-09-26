@@ -238,7 +238,13 @@ export default function Participate() {
 					// </div>
 					<div
 						className="flex justify-center items-center mt-[20px] mb-[100px] w-[70%] max-w-[310px] h-[50px] rounded-[20.5px] bg-[#AB022B] text-[24px] font-semibold text-white cursor-pointer"
-						onClick={() => PostParticipate("Delete")}
+						onClick={() => {
+							if (
+								challengeId &&
+								userChallengeParticipateData[challengeId].participationId
+							)
+								PostParticipate("Delete")
+						}}
 					>
 						등록 취소
 					</div>
