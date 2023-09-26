@@ -16,7 +16,6 @@ export default function LeaderBoardThumbnail() {
 
 	const [challengeDataList, setChallengeDataList] =
 		useRecoilState<challengeInfoType[]>(challengeInfoList)
-
 	const [currentChallengeData, setCurrentChallengeData] =
 		useState<challengeInfoType>({
 			challengeId: 0,
@@ -30,6 +29,7 @@ export default function LeaderBoardThumbnail() {
 			comment: "",
 			totalCount: 0,
 		})
+	const [showDetail, setShowDetail] = useState<boolean>(false)
 
 	useEffect(() => {
 		challengeDataList.forEach((challenge, i) => {
@@ -41,13 +41,32 @@ export default function LeaderBoardThumbnail() {
 	}, [challengeDataList])
 
 	return (
-		<div className="flex relative justify-center items-start w-[100%] h-[240px] py-[8px] overflow-hidden">
-			<img
-				src={currentChallengeData?.middleThumbnailUrl}
-				alt="challengeImg"
-				className="flex justify-center items-start w-[100%] h-[100%] object-cover"
-			/>
-			<div className="flex flex-col justify-end items-start absolute bottom-[10px] w-[100%] px-[15px] py-[8px] h-[108px] text-white font-normal">
+		<div
+			className={`flex flex-col relative justify-start items-center w-[100%] py-[8px] overflow-hidden transition-height duration-500 cursor-pointer ${
+				showDetail ? "h-[640px]" : "h-[240px]"
+			}`}
+			onClick={() => setShowDetail(!showDetail)}
+		>
+			<div className="absolute w-full">
+				<div
+					className={`absolute w-full bg-gradient-to-t from-[rgb(0,0,0,0.5)] to-[rgb(217,217,217,0)] h-[350px]`}
+				/>
+				<img
+					src={currentChallengeData?.thumbnailUrl}
+					alt="challengeImg"
+					className="w-full h-[350px] object-cover"
+				/>
+
+				<div className="flex flex-col justify-start items-start w-full px-[4%] py-[10px] text-white">
+					챌린지 세부 정보
+				</div>
+			</div>
+
+			<div
+				className={`flex flex-col justify-end items-start absolute bottom-[10px] w-[100%] px-[15px] py-[8px] h-[108px] text-white font-normal transition-bottom duration-500 ${
+					showDetail ? "top-[250px]" : "top-[130px]"
+				}`}
+			>
 				<div className="w-[100%] h-[40px] font-semibold text-[30px]">
 					{currentChallengeData?.challengeName}
 				</div>

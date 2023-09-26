@@ -16,6 +16,8 @@ export default function HighRank() {
 	const [challengeParticipantsData, setChallengeParticipantsData] =
 		useRecoilState<challengeParticipantsType>(challengeParticipantsInfo)
 
+	const [stopLoading, setStopLoading] = useState<boolean>(false)
+
 	const ranker3 = challengeParticipantsData[challengeId]?.users.find(
 		(ranker) => {
 			if (ranker.ranking === 3) return true
@@ -31,6 +33,14 @@ export default function HighRank() {
 			if (ranker.ranking === 1) return true
 		},
 	)
+
+	useEffect(() => {
+		setTimeout(() => {
+			if (!ranker1 || !ranker2 || !ranker3) {
+				setStopLoading(true)
+			}
+		}, 3000)
+	}, [])
 
 	return (
 		<div className="flex flex-row items-end w-[100%] h-[227px]">
@@ -54,7 +64,7 @@ export default function HighRank() {
 									: ""}
 							</span>
 						</>
-					) : (
+					) : stopLoading ? null : (
 						<Spinner />
 					)}
 				</div>
@@ -80,7 +90,7 @@ export default function HighRank() {
 									: ""}
 							</span>
 						</>
-					) : (
+					) : stopLoading ? null : (
 						<Spinner />
 					)}
 				</div>
@@ -106,7 +116,7 @@ export default function HighRank() {
 									: ""}
 							</span>
 						</>
-					) : (
+					) : stopLoading ? null : (
 						<Spinner />
 					)}
 				</div>
