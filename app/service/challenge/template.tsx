@@ -55,7 +55,7 @@ export default function ChallengeLayout({
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
 				if (data) {
-					console.log(data)
+					// console.log(data)
 					let newChallengeRankerObj = { ...challengeParticipantsData }
 					newChallengeRankerObj[challengeId] = data["participants"]
 					// console.log(newChallengeRankerObj)
@@ -73,7 +73,7 @@ export default function ChallengeLayout({
 			challengeId
 			// !Object.keys(userChallengeParticipateData).includes(challengeId)
 		) {
-			setUserChallengeParticipateData({})
+			// setUserChallengeParticipateData({})
 			GetUserChallengeParticipateInfo(profileData.userToken, challengeId)
 		}
 	}, [profileData, challengeId])

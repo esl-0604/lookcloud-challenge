@@ -50,8 +50,8 @@ export const userTutorial = atom<userTutorialType>({
 export interface challengeInfoType {
 	challengeId: number
 	challengeName: string
-	startedAt: Date | null
-	endedAt: Date | null
+	startedAt: string | null
+	endedAt: string | null
 	state: number
 	thumbnailUrl: string
 	middleThumbnailUrl: string

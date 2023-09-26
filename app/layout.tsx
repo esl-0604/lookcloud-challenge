@@ -21,6 +21,10 @@ export default function RootLayout({
 						content="upgrade-insecure-requests"
 					/>
 					<link rel="manifest" href="/manifest.json" />
+					<link
+						href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600&family=IBM+Plex+Sans:wght@100&family=Jacques+Francois&display=swap"
+						rel="stylesheet"
+					></link>
 				</head>
 
 				<body className="overscroll-y-none">
