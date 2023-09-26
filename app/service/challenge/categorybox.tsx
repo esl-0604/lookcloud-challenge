@@ -14,7 +14,7 @@ export default function ChallengeCategoryBox({
 }: challengeInfoType) {
 	return (
 		<div
-			className={`flex justify-center items-center relative w-[100%] h-[350px] mb-[24px] rounded-[20px] overflow-hidden ${
+			className={`flex justify-center items-center relative w-[100%] max-w-[350px] h-[350px] mb-[24px] rounded-[20px] overflow-hidden ${
 				state >= 0 ? "cursor-pointer" : null
 			}`}
 		>
@@ -23,7 +23,7 @@ export default function ChallengeCategoryBox({
 				alt="challengeImg"
 				className="flex justify-center items-center w-[100%] h-[100%] object-cover"
 			/>
-			<div className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-b from-transparent via-black to-black" />
+			<div className="absolute bottom-0 left-0 right-0 h-[40%] bg-gradient-to-b from-[rgb(217,217,217,0)] via-[rgb(0,0,0,0.5)] to-[rgb(0,0,0,0.5)]" />
 			<div className="flex flex-col justify-center items-start absolute bottom-[4px] w-[100%] h-[106px] text-white font-normal">
 				<div className="w-[100%] px-[12px] h-[40px] font-semibold text-[30px]">
 					{challengeName}
