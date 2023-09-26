@@ -100,8 +100,8 @@ export default function LeaderBoardThumbnail() {
 							챌린지 참여 정보
 						</div>
 						<div className="flex flex-row justify-start items-center w-full">
-							아래 ‘등록하기' 버튼을 통해 참여를 희망하는 이미지를 선택하여
-							참여가능
+							{`아래 ‘등록하기' 버튼을 통해 참여를 희망하는 이미지를 선택하여
+							참여가능`}
 						</div>
 					</div>
 
@@ -110,8 +110,8 @@ export default function LeaderBoardThumbnail() {
 							챌린지 평가 방법
 						</div>
 						<div className="flex flex-row justify-start items-center w-full">
-							‘평가하기'를 통해 다른 사람들의 참여 룩을 ‘좋아요', ‘싫어요'로
-							평가
+							{`‘평가하기'를 통해 다른 사람들의 참여 룩을 ‘좋아요', ‘싫어요'로
+							평가`}
 						</div>
 					</div>
 
@@ -120,7 +120,7 @@ export default function LeaderBoardThumbnail() {
 							챌린지 순위 결정 기준
 						</div>
 						<div className="flex flex-row justify-start items-center w-full">
-							다른 사람들이 평가한 기록을 바탕으로 ‘상대적인' 순위 책정
+							{`다른 사람들이 평가한 기록을 바탕으로 ‘상대적인' 순위 책정`}
 						</div>
 					</div>
 				</div>
