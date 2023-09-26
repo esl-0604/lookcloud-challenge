@@ -72,6 +72,13 @@ export default function LookbookFolder() {
 		}
 	}
 
+	useEffect(() => {
+		setTimeout(() => {
+			if (lookbookId && LookbookImgList[lookbookId].imgList.length === 0)
+				setIsLoading(false)
+		}, 3000)
+	}, [])
+
 	return (
 		<main className="flex flex-col justify-start items-center w-full h-full bg-black text-white relative">
 			<LookbookHeader />
@@ -83,12 +90,13 @@ export default function LookbookFolder() {
 				<div className="flex flex-row justify-start items-center w-full h-[20px] text-[12px] font-normal">
 					{lookbookId ? LookbookImgList[lookbookId].comment : null}
 				</div>
-				<div
+
+				{/* <div
 					className="absolute bottom-[4px] right-[8px] flex justify-center items-center cursor-pointer"
 					// onClick={() => setIsEtcOn(true)}
 				>
 					<img src="/svg/etc.svg" alt="etc" />
-				</div>
+				</div> */}
 				{/* {isEtcOn ? (
 					<ModalBox
 						setIsEtcOn={setIsEtcOn}
@@ -102,29 +110,44 @@ export default function LookbookFolder() {
 			{filterModalOn ? <></> : null} */}
 
 			<div
-				className={`flex flex-wrap flex-row justify-start items-start w-full miin-h-full px-[2px] pb-[60px] ${
+				className={`flex flex-wrap flex-row justify-start items-start w-full px-[2px] pb-[60px] ${
 					lookbookId === "1" ? "overflow-hidden" : "overflow-scroll"
+				} ${
+					lookbookId && LookbookImgList[lookbookId].imgList.length === 0
+						? "h-full"
+						: "miin-h-full"
 				}`}
 			>
-				{isLoading &&
-				lookbookId &&
-				LookbookImgList[lookbookId].imgList.length === 0 ? (
-					<SpinnerBox />
-				) : lookbookId ? (
-					LookbookImgList[lookbookId].imgList.map(
-						(img: lookbookImgType, i: number) => {
-							// 빈 look을 가지는 객체 필터링
-							if (Object.keys(img?.look).length !== 0) {
-								return (
-									<LookbookImgBox
-										key={i}
-										img={img}
-										imgUrl={img.look.imageUrl}
-										rating={img.rating}
-									/>
-								)
-							}
-						},
+				{lookbookId ? (
+					LookbookImgList[lookbookId].imgList.length === 0 ? (
+						isLoading ? (
+							<SpinnerBox />
+						) : (
+							<div className="flex flex-col justify-center items-center w-full h-full font-textBoxFont font-normal">
+								<div className="flex justify-center items-center h-[52px] text-[24px]">
+									평가 기록이 없습니다!
+								</div>
+								<div className="flex justify-center items-center h-[83px] text-[12px]">
+									챌린지에서 다른 사람들의 룩을 평가해주세요!
+								</div>
+							</div>
+						)
+					) : (
+						LookbookImgList[lookbookId].imgList.map(
+							(img: lookbookImgType, i: number) => {
+								// 빈 look을 가지는 객체 필터링
+								if (Object.keys(img?.look).length !== 0) {
+									return (
+										<LookbookImgBox
+											key={i}
+											img={img}
+											imgUrl={img.look.imageUrl}
+											rating={img.rating}
+										/>
+									)
+								}
+							},
+						)
 					)
 				) : null}
 				{lookbookId === "1" ? (
