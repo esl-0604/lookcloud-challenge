@@ -209,7 +209,7 @@ export const lookbookList = atom<lookbookInfoType>({
 		"0": {
 			title: "내가 평가한 룩",
 			publicState: false,
-			thumbnailList: [],
+			thumbnailList: [""],
 		},
 
 		"1": {
