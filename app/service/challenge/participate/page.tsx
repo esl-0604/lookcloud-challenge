@@ -256,7 +256,8 @@ export default function Participate() {
 								: "bg-[#878787] text-[#B7B7B7]"
 						}`}
 						onClick={() => {
-							if (lookImage) PostParticipate("Post")
+							if (profileData.userToken && challengeId && lookImage)
+								PostParticipate("Post")
 						}}
 					>
 						완료
