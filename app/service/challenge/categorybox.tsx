@@ -12,6 +12,11 @@ export default function ChallengeCategoryBox({
 	comment,
 	totalCount,
 }: challengeInfoType) {
+	const today: Date = new Date()
+	const dTime: number = startedAt
+		? new Date(startedAt).getTime() - today.getTime()
+		: 0
+	const dDay: number = Math.ceil(dTime / (1000 * 60 * 60 * 24))
 	return (
 		<div
 			className={`flex justify-center items-center relative w-[100%] max-w-[350px] h-[350px] mb-[24px] rounded-[20px] overflow-hidden ${
@@ -31,24 +36,27 @@ export default function ChallengeCategoryBox({
 				<div className="flex justify-start items-center w-[100%] px-[12px] h-[20px] text-[12px]">
 					{state >= 0 ? (
 						<>
-							<div className="flex justify-end items-center h-[100%]">
+							{/* <div className="flex justify-end items-center h-[100%]">
 								D-{state === 0 ? "Day" : state}
-							</div>
-							<div className="flex justify-end items-center w-[70px] h-[100%]">
+							</div> */}
+							<div className="flex justify-start items-center pl-[5px] h-[100%]">
 								{totalCount}명 참가중
 							</div>
-							<div className="flex justify-end items-center w-[110px] h-[100%]">
+							<div className="flex justify-start items-center pl-[15px] h-[100%]">
 								총 상금 100,000원
 							</div>
 						</>
 					) : (
-						<div className="flex justify-start items-center w-[100%] h-[100%] font-textBoxFont2">
+						<div className="flex justify-start items-center w-[100%] h-[100%] pl-[5px] font-textBoxFont2">
 							{state === -1 ? "comming soon" : "already end"}
+							<div className="flex justify-start items-center pl-[10px] h-[100%]">
+								D-{dDay}
+							</div>
 						</div>
 					)}
 				</div>
-				<div className="flex justify-start items-center w-[100%] h-[36px] px-[12px] text-[12px]">
-					<div>{comment}</div>
+				<div className="flex justify-start items-center w-[100%] px-[12px] py-[7px] text-[12px]">
+					<div className="pl-[5px]">{comment}</div>
 				</div>
 			</div>
 		</div>

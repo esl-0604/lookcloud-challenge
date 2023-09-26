@@ -91,7 +91,7 @@ export default function ServiceLayout({
 			.then(({ status, message, data }) => {
 				if (data) {
 					// console.log(data)
-					const newChallengeDateList = data.map(
+					let newChallengeDateList = data.map(
 						(challenge: challengeInfoType, i: number) => {
 							const today: Date = new Date()
 							let state: number = 0
@@ -104,17 +104,17 @@ export default function ServiceLayout({
 								: new Date()
 
 							if (startDate && endDate) {
-								// state === -1
+								// state === -1 : 아직 시작안한 애들
 								if (today < startDate) {
 									state = -1
 								}
-								// state === 0 이상의 정수
+								// state === 0 이상의 정수 : 진행 중인 애들
 								else if (startDate <= today && today <= endDate) {
 									const dTime: number = endDate.getTime() - today.getTime()
 									const dDay: number = Math.ceil(dTime / (1000 * 60 * 60 * 24))
 									state = dDay
 								}
-								// state === -2
+								// state === -2 : 이미 끝난 애들
 								else {
 									state = -2
 								}
@@ -131,7 +131,22 @@ export default function ServiceLayout({
 							return newChallengeData
 						},
 					)
-					// console.log(newChallengeDateList)
+					newChallengeDateList = newChallengeDateList.sort(
+						(a: challengeInfoType, b: challengeInfoType) => {
+							return b.state - a.state
+						},
+					)
+					newChallengeDateList = newChallengeDateList.sort(
+						(a: challengeInfoType, b: challengeInfoType) => {
+							const AendDate: Date = a.endedAt
+								? new Date(a.endedAt)
+								: new Date()
+							const BendDate: Date = b.endedAt
+								? new Date(b.endedAt)
+								: new Date()
+							return AendDate.getTime() - BendDate.getTime()
+						},
+					)
 					setChallengeDataList(newChallengeDateList)
 				}
 			})

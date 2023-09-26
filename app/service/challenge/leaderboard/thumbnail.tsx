@@ -71,13 +71,13 @@ export default function LeaderBoardThumbnail() {
 					{currentChallengeData?.challengeName}
 				</div>
 				<div className="flex justify-start items-center w-[100%] h-[20px] text-[12px]">
-					<div className="flex justify-end items-center h-[100%]">
+					{/* <div className="flex justify-end items-center h-[100%]">
 						D-
 						{currentChallengeData?.state === 0
 							? "Day"
 							: currentChallengeData?.state}
-					</div>
-					<div className="flex justify-end items-center w-[70px] h-[100%]">
+					</div> */}
+					<div className="flex justify-start items-center w-[70px] pl-[5px] h-[100%]">
 						{currentChallengeData?.totalCount}명 참가중
 					</div>
 					<div className="flex justify-end items-center w-[110px] h-[100%]">
