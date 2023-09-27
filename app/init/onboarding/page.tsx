@@ -52,8 +52,9 @@ export default function Onboarding() {
 				else setCanBeContinued(false)
 				break
 			case "3":
-				if (instagramId) setCanBeContinued(true)
-				else setCanBeContinued(false)
+				setCanBeContinued(true)
+				// if (instagramId) setCanBeContinued(true)
+				// else setCanBeContinued(false)
 				break
 			default:
 				break
