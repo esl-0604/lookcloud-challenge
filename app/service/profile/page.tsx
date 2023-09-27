@@ -16,7 +16,7 @@ export default function Profile() {
 	const [profileData, setProfileData] =
 		useRecoilState<userProfileType>(userProfileState)
 	const userProfile = LocalStorage.getItem("lookCloud-kakao-profile")
-	// console.log(profileData)\
+	// console.log(profileData)
 
 	const Logout = () => {
 		LocalStorage.removeItem("lookCloud-user-token")

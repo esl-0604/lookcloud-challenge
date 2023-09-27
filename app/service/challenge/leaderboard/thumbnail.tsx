@@ -29,8 +29,6 @@ export default function LeaderBoardThumbnail() {
 			comment: "",
 			totalCount: 0,
 		})
-	const [showDetail, setShowDetail] = useState<boolean>(false)
-
 	useEffect(() => {
 		challengeDataList.forEach((challenge, i) => {
 			if (challengeId === challenge.challengeId) {
@@ -39,6 +37,9 @@ export default function LeaderBoardThumbnail() {
 			}
 		})
 	}, [challengeDataList])
+
+	// --------------------------------------------------------------
+	const [showDetail, setShowDetail] = useState<boolean>(false)
 
 	return (
 		<div
