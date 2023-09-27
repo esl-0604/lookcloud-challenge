@@ -15,11 +15,11 @@ export default function KaKaoLoginButton() {
 	useEffect(() => {
 		if (kakaoCode) {
 			// console.log(kakaoCode)
-			getUserToken()
+			getKakaoUserToken()
 		}
 	}, [kakaoCode])
 
-	const getUserToken = async () => {
+	const getKakaoUserToken = async () => {
 		setApiWaiting(true)
 		const USER_TOKEN_URL = "https://kauth.kakao.com/oauth/token"
 		await fetch(USER_TOKEN_URL, {
@@ -33,7 +33,7 @@ export default function KaKaoLoginButton() {
 			.then((data) => {
 				if (data) {
 					// console.log(data)
-					getUsetKaKaoId(data.access_token)
+					getKaKaoUserId(data.access_token)
 				} else {
 					setApiWaiting(false)
 				}
@@ -44,7 +44,7 @@ export default function KaKaoLoginButton() {
 			})
 	}
 
-	const getUsetKaKaoId = async (ACCESS_TOKEN: string) => {
+	const getKaKaoUserId = async (ACCESS_TOKEN: string) => {
 		const USER_TOKEN_URL = "https://kapi.kakao.com/v2/user/me"
 		await fetch(USER_TOKEN_URL, {
 			method: "POST",
@@ -85,23 +85,23 @@ export default function KaKaoLoginButton() {
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
+				// 카카오 계정으로 유저 조회 성공
+				if (data) {
+					// console.log(data);
+					const userToken: string = data
+					GetUserInfoAPIcall(userToken, kakaoProfileUrl)
+				}
+
 				// 카카오 계정으로 유저 조회 실패
-				if (status === "NOT_FOUND") {
+				else {
 					setApiWaiting(false)
 					LocalStorage.removeItem("lookCloud-kakao-Id")
 					LocalStorage.removeItem("lookCloud-kakao-profile")
 					LocalStorage.setItem("lookCloud-kakao-Id", kakaoId.toString())
 					if (kakaoProfileUrl)
 						LocalStorage.setItem("lookCloud-kakao-profile", kakaoProfileUrl)
-					if (LocalStorage.getItem("lookCloud-kakao-Id")) {
+					if (LocalStorage.getItem("lookCloud-kakao-Id"))
 						router.push("/init/onboarding")
-					}
-				}
-				// 카카오 계정으로 유저 조회 성공
-				else {
-					// console.log(data);
-					const userToken: string = data
-					GetUserInfoAPIcall(userToken, kakaoProfileUrl)
 				}
 			})
 			.catch((error) => {
@@ -124,15 +124,9 @@ export default function KaKaoLoginButton() {
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
 				setApiWaiting(false)
-				// 유저 토큰으로 유저 조회 실패
-				if (status === "NOT_FOUND") {
-					LocalStorage.removeItem("lookCloud-user-token")
-					LocalStorage.removeItem("lookCloud-kakao-Id")
-					LocalStorage.removeItem("lookCloud-kakao-profile")
-					router.replace("/init/login")
-				}
+
 				// 유저 토큰으로 유저 조회 성공
-				else {
+				if (data) {
 					LocalStorage.removeItem("lookCloud-user-token")
 					LocalStorage.removeItem("lookCloud-kakao-Id")
 					LocalStorage.removeItem("lookCloud-kakao-profile")
@@ -143,10 +137,21 @@ export default function KaKaoLoginButton() {
 						router.replace("/service/challenge")
 					}
 				}
+
+				// 유저 토큰으로 유저 조회 실패
+				else {
+					LocalStorage.removeItem("lookCloud-user-token")
+					LocalStorage.removeItem("lookCloud-kakao-Id")
+					LocalStorage.removeItem("lookCloud-kakao-profile")
+					router.replace("/init/login")
+				}
 			})
 			.catch((error) => {
 				setApiWaiting(false)
 				console.log(error)
+				LocalStorage.removeItem("lookCloud-user-token")
+				LocalStorage.removeItem("lookCloud-kakao-Id")
+				LocalStorage.removeItem("lookCloud-kakao-profile")
 				router.replace("/init/login")
 			})
 	}

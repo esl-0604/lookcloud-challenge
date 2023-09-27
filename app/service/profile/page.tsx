@@ -28,7 +28,7 @@ export default function Profile() {
 			gender: "",
 			instagramUserName: null,
 		})
-		router.push("/")
+		router.replace("/")
 	}
 
 	return (
