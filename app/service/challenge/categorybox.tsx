@@ -43,7 +43,9 @@ export default function ChallengeCategoryBox({
 								{totalCount}명 참가중
 							</div>
 							<div className="flex justify-start items-center pl-[15px] h-[100%]">
-								총 상금 100,000원
+								{challengeName === "페스티벌 룩"
+									? "총 상금 180,000원"
+									: "총 상금 100,000원"}
 							</div>
 						</>
 					) : (

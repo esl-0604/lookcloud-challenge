@@ -8,3 +8,7 @@ img {
 	-moz-user-drag: none;
 	-o-user-drag: none;
 }
+
+html {
+	-webkit-tap-highlight-color: transparent !important;
+}
