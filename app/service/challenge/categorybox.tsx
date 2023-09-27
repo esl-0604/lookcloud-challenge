@@ -51,8 +51,13 @@ export default function ChallengeCategoryBox({
 					) : (
 						<div className="flex justify-start items-center w-[100%] h-[100%] pl-[5px] font-textBoxFont2">
 							{state === -1 ? "comming soon" : "already end"}
-							<div className="flex justify-start items-center pl-[10px] h-[100%]">
+							<div className="flex justify-start items-center pl-[15px] h-[100%]">
 								D-{dDay}
+							</div>
+							<div className="flex justify-start items-center pl-[15px] h-[100%]">
+								{challengeName === "페스티벌 룩"
+									? "총 상금 180,000원"
+									: "총 상금 100,000원"}
 							</div>
 						</div>
 					)}
