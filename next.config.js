@@ -1,13 +1,21 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-    webpack(config) {
-        config.module.rules.push({
-            test: /\.svg$/,
-            use: ["@svgr/webpack"],
-        });
+const withPWA = require("next-pwa")
 
-        return config;
-    },
-};
+const config = {
+	webpack(config) {
+		config.module.rules.push({
+			test: /\.svg$/,
+			use: ["@svgr/webpack"],
+		})
 
-module.exports = nextConfig;
+		return config
+	},
+}
+
+const nextConfig = withPWA({
+	dest: "public",
+	disable: false,
+	runtimeCaching: [],
+})(config)
+
+module.exports = nextConfig
