@@ -70,15 +70,15 @@ export default function LinkButton() {
 
 	return (
 		<div
-			className={`flex flex-col justify-between items-center w-full px-[4%] py-[10px]`}
+			className={`flex flex-col justify-between items-center w-full px-[4%] py-[10px] font-semibold`}
 		>
 			<div
-				className={`flex flex-row justify-between items-start w-full h-full font-textBoxFont font-semibold ${
+				className={`flex flex-row justify-between items-start w-full h-full font-textBoxFont ${
 					isParticipate ? "h-[220px]" : " h-[90px]"
 				}`}
 			>
 				{isParticipate ? (
-					<div className="flex flex-col justify-between items-center w-full h-full font-textBoxFont font-semibold">
+					<div className="flex flex-col justify-between items-center w-full h-full font-textBoxFont">
 						<div className="flex justify-start items-center w-full h-[20px] text-white text-[12px]">
 							내 참여 정보
 						</div>
@@ -141,13 +141,13 @@ export default function LinkButton() {
 						(currentChallengeData.challengeName.includes("여성") &&
 							profileData.gender === "남성") ? (
 							<>
-								<div className="flex justify-center items-center w-[48%] h-[70px] rounded-[20px] border-2 text-[#9B9BA1] border-[#9B9BA1]">
+								<div className="flex justify-center items-center w-[48%] h-[70px] rounded-[20px] border-2 text-[#9B9BA1] border-[#9B9BA1] text-[24px]">
 									등록하기
 								</div>
 							</>
 						) : (
 							<Link
-								className="flex justify-center items-center w-[48%] h-[70px] rounded-[20px] border-2 border-white cursor-pointer "
+								className="flex justify-center items-center w-[48%] h-[70px] rounded-[20px] border-2 border-white cursor-pointer text-[24px]"
 								href={{
 									pathname: "/service/challenge/participate",
 									query: { id: challengeId },
@@ -158,7 +158,7 @@ export default function LinkButton() {
 						)}
 
 						<Link
-							className="flex justify-center items-center w-[48%] h-[70px] rounded-[20px] border-2 border-white cursor-pointer"
+							className="flex justify-center items-center w-[48%] h-[70px] rounded-[20px] border-2 border-white cursor-pointer text-[24px]"
 							href={{
 								pathname: userTutorialData.complete
 									? "/service/challenge/evaluate"

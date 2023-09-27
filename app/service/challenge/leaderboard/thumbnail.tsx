@@ -5,10 +5,9 @@ import { useEffect, useState } from "react"
 import {
 	challengeInfoList,
 	challengeInfoType,
-	challengeParticipantsInfo,
-	challengeParticipantsType,
 } from "@/app/utils/atoms/serviceGlobalState"
 import { useRecoilState } from "recoil"
+import Scroll from "@/public/svg/scroll.svg"
 
 export default function LeaderBoardThumbnail() {
 	const param = useSearchParams()
@@ -135,7 +134,7 @@ export default function LeaderBoardThumbnail() {
 				<div className="w-[100%] h-[40px] font-semibold text-[30px]">
 					{currentChallengeData?.challengeName}
 				</div>
-				<div className="flex justify-start items-center w-[100%] h-[20px] text-[12px]">
+				<div className="relative flex justify-start items-center w-[100%] h-[20px] text-[12px]">
 					{/* <div className="flex justify-end items-center h-[100%]">
 						D-
 						{currentChallengeData?.state === 0
@@ -150,7 +149,12 @@ export default function LeaderBoardThumbnail() {
 							? "총 상금 180,000원"
 							: "총 상금 100,000원"}
 					</div>
+					<Scroll
+						className={`absolute bottom-0 right-0 animate-scroll-down-indicator transition-all duration-500 opacity-100 
+						${showDetail ? "rotate-180" : null}`}
+					/>
 				</div>
+
 				{/* <div className="flex flex-col justify-center items-start w-[100%] h-[48px] text-[12px]">
 					{currentChallengeData?.comment}
 				</div> */}
