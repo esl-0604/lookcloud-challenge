@@ -29,8 +29,8 @@ export default function ChallengeEvaluateLookDetail() {
 	const [sendStatistic, setSendStatistic] = useState<boolean>(false)
 
 	useEffect(() => {
-		console.log(profileData.userToken)
-		console.log(challengeImgList[currentImg - 1]?.participationId)
+		// console.log(profileData.userToken)
+		// console.log(challengeImgList[currentImg - 1]?.participationId)
 		if (
 			profileData.userToken &&
 			challengeImgList[currentImg - 1]?.participationId &&
