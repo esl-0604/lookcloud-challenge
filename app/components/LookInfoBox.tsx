@@ -49,48 +49,7 @@ export default function LookInfoBox() {
 					</div>
 				</div>
 			</div>
-			<div className="flex flex-col mt-[12px]">
-				<div className="flex flex-row justify-between items-center w-[100%] h-[40px] bg-black mt-1 rounded-md px-[8px]">
-					<div className="flex flex-row">
-						<img
-							className="rounded-full"
-							src="/svg/sampleProfileImg.svg"
-							width="50px"
-							height="50px"
-							style={{ marginRight: 4 }}
-						/>
-						<div className="flex flex-col py-[8px]">
-							<div className="flex flex-row">
-								<span className="text-white text-[8px]">
-									{currentImg > 0 && challengeImgList.length > 0
-										? challengeImgList[currentImg - 1]["user"]["nickName"]
-										: null}
-								</span>
-							</div>
-							<span className="text-white text-[8px] leading-[8px]">
-								@
-								{currentImg > 0 && challengeImgList.length > 0
-									? challengeImgList[currentImg - 1]["user"][
-											"instagramUserName"
-									  ]
-									: null}
-							</span>
-						</div>
-					</div>
-					<span className="text-white text-[24px]">
-						{currentImg > 0 && challengeImgList.length > 0
-							? challengeImgList[currentImg - 1]["lScore"]
-							: null}
-					</span>
-				</div>
-				<div className="flex flex-col mt-[12px]">
-					{formattedData.map((formattedItem: string, index: number) => (
-						<span key={index} className="text-white text-[12px]">
-							{formattedItem}
-						</span>
-					))}
-				</div>
-			</div>
+	
 		</div>
 	)
 }

@@ -151,19 +151,12 @@ export default function ChallengeEvaluateLookDetail() {
 							</div>
 						))}
 					</div>
-					{canBeNext ? (
-						<NextBtn
-							className="cursor-pointer"
-							color={"white"}
-							onClick={NextImg}
-						/>
-					) : (
-						<NextBtn
-							className="cursor-pointer"
-							color={"#D4D4D4"}
-							onClick={NextImg}
-						/>
-					)}
+
+					<NextBtn
+						className="cursor-pointer"
+						color={canBeNext ? "white" : "#D4D4D4"}
+						onClick={NextImg}
+					/>
 				</div>
 			</div>
 		</div>

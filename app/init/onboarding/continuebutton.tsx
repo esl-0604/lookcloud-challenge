@@ -53,7 +53,7 @@ export default function ContinueButton({
 				else {
 					LocalStorage.removeItem("lookCloud-kakao-profile")
 					console.log("연결된 kakaoId가 없습니다.")
-					router.push("/init/login")
+					router.replace("/init/login")
 				}
 			}
 			// else if (stepNum === 4) {
@@ -117,16 +117,16 @@ export default function ContinueButton({
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
-				// 이미 가입한 사용자
-				if (status === "ILLEGAL_STATE") {
-					console.log(message)
-					router.replace("/init/login")
-					// alert("Done 버튼을 다시 눌러주세요.")
-				}
 				// 회원가입 성공
-				else {
+				if (data) {
+					console.log(data)
 					const userToken: string = data
 					GetUserInfoAPIcall(userToken)
+				}
+				// 이미 가입한 사용자
+				else {
+					console.log(message)
+					router.replace("/init/login")
 				}
 			})
 			// 회원가입 실패
@@ -147,22 +147,23 @@ export default function ContinueButton({
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
 				setApiWaiting(false)
-				// 가입하지 않은 사용자 입니다.
-				if (status === "NOT_FOUND") {
-					LocalStorage.removeItem("lookCloud-user-token")
-					LocalStorage.removeItem("lookCloud-kakao-Id")
-					LocalStorage.removeItem("lookCloud-kakao-profile")
-					router.replace("/init/login")
-				}
+
 				// 유저 조회 성공
-				else {
+				if (data) {
 					LocalStorage.removeItem("lookCloud-user-token")
-					LocalStorage.removeItem("lookCloud-kakao-Id")
 					LocalStorage.setItem("lookCloud-user-token", userToken)
 					if (LocalStorage.getItem("lookCloud-user-token")) {
 						router.replace("/service/challenge")
 						// setStep({ id: "4" })
 					}
+				}
+
+				// 가입하지 않은 사용자 입니다.
+				else {
+					LocalStorage.removeItem("lookCloud-user-token")
+					LocalStorage.removeItem("lookCloud-kakao-Id")
+					LocalStorage.removeItem("lookCloud-kakao-profile")
+					router.replace("/init/login")
 				}
 			})
 			.catch((error) => {

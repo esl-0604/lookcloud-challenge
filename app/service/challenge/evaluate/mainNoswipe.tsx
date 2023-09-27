@@ -28,6 +28,7 @@ export default function ChallengeEvaluateMainNoSwipe() {
 	const [currentImgEvaluate, setCurrentImgEvaluate] = useState<boolean>(true)
 	const [canBeNext, setCanBeNext] = useState<boolean>(false)
 	const [isNoMoreLook, setIsNoMoreLook] = useState<boolean>(false)
+	const [showNoMoreLook, setShowNoMoreLook] = useState<boolean>(false)
 
 	useEffect(() => {
 		if (showThumbs > -1 && profileData.userToken) {
@@ -87,6 +88,7 @@ export default function ChallengeEvaluateMainNoSwipe() {
 					} else {
 						console.log("평가할 룩이 더이상 없습니다.")
 						setIsNoMoreLook(true)
+						if (loading) setShowNoMoreLook(true)
 					}
 				} else {
 					console.log(message)
@@ -142,9 +144,12 @@ export default function ChallengeEvaluateMainNoSwipe() {
 	}
 
 	const NextImg = () => {
-		setCurrentImgEvaluate(false)
-		setCurrentImg((prev) => prev + 1)
-		setShowThumbs(-1)
+		if (isNoMoreLook) setShowNoMoreLook(true)
+		else if (canBeNext) {
+			setCurrentImgEvaluate(false)
+			setCurrentImg((prev) => prev + 1)
+			setShowThumbs(-1)
+		}
 	}
 
 	return (
@@ -155,12 +160,14 @@ export default function ChallengeEvaluateMainNoSwipe() {
 				currentImgEvaluate,
 				like,
 				canBeNext,
+				loading,
+				setShowNoMoreLook,
 				NextImg,
 			}}
 		>
 			{loading ? (
 				<div className="flex-1 flex flex-col justify-center items-center w-full px-[4%] bg-black">
-					{isNoMoreLook ? (
+					{showNoMoreLook ? (
 						<CheckBox />
 					) : (
 						<SpinnerBox text="이미지를 불러오는 중입니다, 잠시만 기다려주세요" />
@@ -168,7 +175,7 @@ export default function ChallengeEvaluateMainNoSwipe() {
 				</div>
 			) : (
 				<>
-					{isNoMoreLook ? <CheckBox /> : null}
+					{showNoMoreLook ? <CheckBox /> : null}
 					{currentImgEvaluate ? (
 						<ChallengeEvaluateLookDetail />
 					) : (
