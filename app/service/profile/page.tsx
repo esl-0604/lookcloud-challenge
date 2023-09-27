@@ -22,13 +22,13 @@ export default function Profile() {
 		LocalStorage.removeItem("lookCloud-user-token")
 		LocalStorage.removeItem("lookCloud-kakao-Id")
 		LocalStorage.removeItem("lookCloud-kakao-profile")
+		router.replace("/")
 		setProfileData({
 			userToken: null,
 			nickname: "",
 			gender: "",
 			instagramUserName: null,
 		})
-		router.replace("/")
 	}
 
 	return (
