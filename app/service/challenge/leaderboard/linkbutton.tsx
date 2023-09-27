@@ -177,7 +177,7 @@ export default function LinkButton() {
 				profileData.gender === "여성") ||
 			(currentChallengeData.challengeName.includes("여성") &&
 				profileData.gender === "남성") ? (
-				<div className="flex justify-start items-center text-[6px] w-full pt-[5px] text-[#9B9BA1]">
+				<div className="flex justify-start items-center text-[8px] w-full pt-[5px] text-[#9B9BA1]">
 					{`해당 챌린지는 ${
 						profileData.gender === "여성" ? "남성" : "여성"
 					} 유저만 등록하실 수 있습니다.`}
