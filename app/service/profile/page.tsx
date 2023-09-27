@@ -32,7 +32,7 @@ export default function Profile() {
 	}
 
 	return (
-		<main className="flex flex-col justify-start items-center absolute w-[100%] min-h-[100%] bg-[#F5F5F5]">
+		<main className="flex flex-col justify-start items-center absolute w-full h-full bg-[#F5F5F5]">
 			<ChallengeProfileHeader />
 			<div className="flex-1 flex flex-col justify-start items-center w-[100%] text-black">
 				<div className="mt-[86px]">
