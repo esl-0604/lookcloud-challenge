@@ -8,6 +8,19 @@ import { useEffect } from "react"
 export default function App() {
 	const router = useRouter()
 	const userToken = LocalStorage.getItem("lookCloud-user-token")
+	const kakaoID = LocalStorage.getItem("lookCloud-kakao-Id")
+
+	useEffect(() => {
+		// 로컬 쿠키에 유저토큰이 존재한다면, 올바른 유저토큰인지 확인.
+		if (userToken && kakaoID) GetUserInfoAPIcall(userToken)
+		// 로컬 쿠키에 유저토큰이 없다면, 쿠키를 초기화 & 자동 로그인 실패.
+		else {
+			LocalStorage.removeItem("lookCloud-user-token")
+			LocalStorage.removeItem("lookCloud-kakao-Id")
+			LocalStorage.removeItem("lookCloud-kakao-profile")
+			router.push("/init/login")
+		}
+	}, [])
 
 	// 올바른 유저토큰인지 확인하는 API call
 	const GetUserInfoAPIcall = async (userToken: string) => {
@@ -20,32 +33,27 @@ export default function App() {
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
-				// 올바르지 않은 유저 토큰인 경우, 쿠키 초기화 & 자동 로그인 실패.
-				if (status === "NOT_FOUND") {
-					LocalStorage.removeItem("lookCloud-user-token")
-					LocalStorage.removeItem("lookCloud-facebook-Id")
-					router.replace("/init/login")
-
-					// 올바른 유저 토큰인 경우, 자동 로그인 성공.
-				} else {
+				// 올바른 유저 토큰인 경우, 자동 로그인 성공.
+				if (data) {
 					router.replace("/service/challenge")
+				}
+
+				// 올바르지 않은 유저 토큰인 경우, 쿠키 초기화 & 자동 로그인 실패.
+				else {
+					LocalStorage.removeItem("lookCloud-user-token")
+					LocalStorage.removeItem("lookCloud-kakao-Id")
+					LocalStorage.removeItem("lookCloud-kakao-profile")
+					router.replace("/init/login")
 				}
 			})
 			.catch((error) => {
 				console.log(error)
+				LocalStorage.removeItem("lookCloud-user-token")
+				LocalStorage.removeItem("lookCloud-kakao-Id")
+				LocalStorage.removeItem("lookCloud-kakao-profile")
+				router.replace("/init/login")
 			})
 	}
-
-	useEffect(() => {
-		// 로컬 쿠키에 유저토큰이 존재한다면, 올바른 유저토큰인지 확인.
-		if (userToken) GetUserInfoAPIcall(userToken)
-		// 로컬 쿠키에 유저토큰이 없다면, 쿠키를 초기화 & 자동 로그인 실패.
-		else {
-			LocalStorage.removeItem("lookCloud-user-token")
-			LocalStorage.removeItem("lookCloud-facebook-Id")
-			router.push("/init/login")
-		}
-	}, [])
 
 	return (
 		<main className="flex flex-col justify-center items-center w-[100%] h-[100%] bg-black">

@@ -1,7 +1,7 @@
 "use client"
 
 import LocalStorage from "@/app/utils/localstorage"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useRecoilState } from "recoil"
 import {
 	challengeInfoList,
@@ -18,6 +18,7 @@ export default function ServiceLayout({
 	children: React.ReactNode
 }) {
 	const router = useRouter()
+	const path = usePathname()
 
 	// 유저 정보 저장 ------------------------------------------------------------
 	const userToken = LocalStorage.getItem("lookCloud-user-token")
@@ -27,6 +28,7 @@ export default function ServiceLayout({
 	useEffect(() => {
 		if (userToken) {
 			if (!profileData.userToken) {
+				console.log("유저 정보 업데이트")
 				GetUserInfo(userToken)
 			}
 		} else {
@@ -44,13 +46,8 @@ export default function ServiceLayout({
 		})
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
-				// 유저 조회 실패
-				if (status === "NOT_FOUND") {
-					console.log(message)
-					router.replace("/")
-				}
 				// 유저 조회 성공
-				else {
+				if (data) {
 					// console.log(data)
 					let newProfileData = { ...profileData }
 					newProfileData.userToken = userToken
@@ -61,6 +58,12 @@ export default function ServiceLayout({
 						newProfileData.instagramUserName = "@" + data["instagramUserName"]
 					}
 					setProfileData(newProfileData)
+				}
+
+				// 유저 조회 실패
+				else {
+					console.log(message)
+					router.replace("/")
 				}
 			})
 			.catch((error) => {
@@ -74,8 +77,9 @@ export default function ServiceLayout({
 		useRecoilState<challengeInfoType[]>(challengeInfoList)
 
 	useEffect(() => {
+		console.log("챌린지 정보 업데이트")
 		GetChallengeInfo()
-	}, [])
+	}, [path])
 
 	const GetChallengeInfo = async () => {
 		const GET_CHALLENGES_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/challenges`
