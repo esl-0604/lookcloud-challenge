@@ -97,7 +97,7 @@ export default function LeaderBoardThumbnail() {
 				<div className="flex flex-col justify-center items-start w-full">
 					<div className="flex flex-col justify-center items-start w-full mb-[5px]">
 						<div className="flex flex-row justify-start items-center w-full h-[22px] font-semibold">
-							챌린지 참여 정보
+							챌린지 참여 방법
 						</div>
 						<div className="flex flex-row justify-start items-center w-full">
 							{`아래 ‘등록하기' 버튼을 통해 참여를 희망하는 이미지를 선택하여

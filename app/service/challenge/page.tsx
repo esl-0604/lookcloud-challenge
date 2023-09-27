@@ -63,7 +63,7 @@ export default function Challenge() {
 					<CommingSoon />
 				</div>
 			</div>
-			<NavBar page="challenge" />
+	
 		</main>
 	)
 }

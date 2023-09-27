@@ -64,6 +64,8 @@ export default function Participate() {
 	// ---------------------------------------------------------------------
 	const PostParticipate = (buttonType: string) => {
 		if (buttonType === "Post") {
+			// 챌린지에 성별 제한이 있는 경우, 예외 처리
+
 			const formDataForSubmit = new FormData()
 			if (lookImageFile) {
 				formDataForSubmit.append("image", lookImageFile)
