@@ -42,9 +42,9 @@ export default function ChallengeEvaluateMainNoSwipe() {
 	}, [showThumbs])
 
 	useEffect(() => {
-		console.log({ "현재 위치 : ": currentImg })
-		console.log({ "현재 위치 평가 : ": currentImgEvaluate })
-		console.log({ "총 길이 : ": challengeImgList.length })
+		// console.log({ "현재 위치 : ": currentImg })
+		// console.log({ "현재 위치 평가 : ": currentImgEvaluate })
+		// console.log({ "총 길이 : ": challengeImgList.length })
 		if (challengeId && profileData.userToken && currentImgEvaluate) {
 			if (challengeImgList.length === currentImg) {
 				setCanBeNext(false)
@@ -74,7 +74,7 @@ export default function ChallengeEvaluateMainNoSwipe() {
 			.then((res) => res.json())
 			.then(({ status, message, data }) => {
 				if (data) {
-					console.log(data)
+					// console.log(data)
 					if (data.length > 0) {
 						setIsNoMoreLook(false)
 						const tempList = [...challengeImgList]
@@ -137,7 +137,7 @@ export default function ChallengeEvaluateMainNoSwipe() {
 				} else {
 					// setCurrentImgEvaluate(true)
 					// setShowThumbs(-1)
-					console.log(data)
+					// console.log(data)
 				}
 			})
 			.catch((error) => console.log(error))

@@ -102,7 +102,7 @@ export default function ChallengeLayout({
 					delete newUserChallengeObj[challengeId]
 					// console.log(newUserChallengeObj)
 				} else {
-					console.log(data)
+					// console.log(data)
 					let newUserChallengeObj = { ...userChallengeParticipateData }
 					newUserChallengeObj[challengeId] = data
 					setUserChallengeParticipateData(newUserChallengeObj)
