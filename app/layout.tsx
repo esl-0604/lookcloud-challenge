@@ -22,7 +22,7 @@ export default function RootLayout({
 					/>
 					<link rel="manifest" href="/manifest.json" />
 					<link
-						href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600&family=IBM+Plex+Sans:wght@100&family=Jacques+Francois&display=swap"
+						href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600&family=IBM+Plex+Sans:wght@400&family=Jacques+Francois:wght@400&display=swap"
 						rel="stylesheet"
 					></link>
 				</head>

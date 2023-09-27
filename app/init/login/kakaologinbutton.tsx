@@ -158,7 +158,7 @@ export default function KaKaoLoginButton() {
 				href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&response_type=code&scope=account_email profile_image`}
 				className="flex justify-center items-center w-[70%] max-w-[320px] cursor-pointer"
 			>
-				<div className="flex justify-center items-center w-full h-[52px] rounded-[29px] bg-[#707070] text-white text-[14px] font-loginBoxFont border-[2px] border-[#D9D9D9]">
+				<div className="flex justify-center items-center w-full h-[52px] rounded-[29px] bg-[#707070] text-white text-[14px] font-loginBoxFont font-normal border-[2px] border-[#D9D9D9]">
 					SIGN IN WITH KAKAO
 				</div>
 			</Link>
