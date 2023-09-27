@@ -9,8 +9,8 @@ export default function App() {
 	const router = useRouter()
 	const userToken = LocalStorage.getItem("lookCloud-user-token")
 	const kakaoID = LocalStorage.getItem("lookCloud-kakao-Id")
-	console.log(userToken)
-	console.log(kakaoID)
+	// console.log(userToken)
+	// console.log(kakaoID)
 
 	useEffect(() => {
 		// 로컬 쿠키에 유저토큰이 존재한다면, 올바른 유저토큰인지 확인.
