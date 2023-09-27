@@ -145,7 +145,9 @@ export default function LeaderBoardThumbnail() {
 						{currentChallengeData?.totalCount}명 참가중
 					</div>
 					<div className="flex justify-end items-center w-[110px] h-[100%]">
-						총 상금 100,000원
+						{currentChallengeData.challengeName === "페스티벌 룩"
+							? "총 상금 180,000원"
+							: "총 상금 100,000원"}
 					</div>
 				</div>
 				{/* <div className="flex flex-col justify-center items-start w-[100%] h-[48px] text-[12px]">
