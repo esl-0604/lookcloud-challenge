@@ -89,7 +89,7 @@ export default function KaKaoLoginButton() {
 				if (data) {
 					// console.log(data);
 					const userToken: string = data
-					GetUserInfoAPIcall(userToken, kakaoProfileUrl)
+					GetUserInfoAPIcall(kakaoId, userToken, kakaoProfileUrl)
 				}
 
 				// 카카오 계정으로 유저 조회 실패
@@ -111,6 +111,7 @@ export default function KaKaoLoginButton() {
 	}
 
 	const GetUserInfoAPIcall = async (
+		kakaoId: number,
 		userToken: string,
 		kakaoProfileUrl: string | null,
 	) => {
@@ -130,6 +131,7 @@ export default function KaKaoLoginButton() {
 					LocalStorage.removeItem("lookCloud-user-token")
 					LocalStorage.removeItem("lookCloud-kakao-Id")
 					LocalStorage.removeItem("lookCloud-kakao-profile")
+					LocalStorage.setItem("lookCloud-kakao-kakao", kakaoId.toString())
 					LocalStorage.setItem("lookCloud-user-token", userToken)
 					if (kakaoProfileUrl)
 						LocalStorage.setItem("lookCloud-kakao-profile", kakaoProfileUrl)
