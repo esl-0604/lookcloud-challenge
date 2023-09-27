@@ -131,7 +131,7 @@ export default function KaKaoLoginButton() {
 					LocalStorage.removeItem("lookCloud-user-token")
 					LocalStorage.removeItem("lookCloud-kakao-Id")
 					LocalStorage.removeItem("lookCloud-kakao-profile")
-					LocalStorage.setItem("lookCloud-kakao-kakao", kakaoId.toString())
+					LocalStorage.setItem("lookCloud-kakao-Id", kakaoId.toString())
 					LocalStorage.setItem("lookCloud-user-token", userToken)
 					if (kakaoProfileUrl)
 						LocalStorage.setItem("lookCloud-kakao-profile", kakaoProfileUrl)
