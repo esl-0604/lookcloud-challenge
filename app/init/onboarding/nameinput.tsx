@@ -17,14 +17,23 @@ export default function OnboardingNameInput() {
 	})
 
 	useEffect(() => {
-		if (!validateNickName) {
+		if (validateNickName === 1) {
+			setNoticeText({
+				text: "부적절한 단어가 포함되었습니다. 다시 입력해주세요",
+				theme: "text-[#DC2D2D]",
+			})
+			setNickName("")
+			setTimeout(() => {
+				setValidateNickName(0)
+			}, 1200)
+		} else if (validateNickName === 2) {
 			setNoticeText({
 				text: "이미 사용 중인 이름입니다. 다시 입력해주세요",
 				theme: "text-[#DC2D2D]",
 			})
 			setNickName("")
 			setTimeout(() => {
-				setValidateNickName(true)
+				setValidateNickName(0)
 			}, 1200)
 		} else {
 			setNoticeText({

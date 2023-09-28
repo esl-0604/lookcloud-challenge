@@ -10,6 +10,7 @@ const config = {
 
 		return config
 	},
+	reactStrictMode: false,
 }
 
 const nextConfig = withPWA({

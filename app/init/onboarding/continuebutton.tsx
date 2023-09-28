@@ -13,7 +13,8 @@ interface ContinueButtonProps {
 	gender: GenderType | null
 	// organ: OrganType | null
 	instagramId: string
-	setValidateNickName: React.Dispatch<React.SetStateAction<boolean>>
+	validateNickName: number
+	setValidateNickName: React.Dispatch<React.SetStateAction<number>>
 }
 
 export default function ContinueButton({
@@ -22,6 +23,7 @@ export default function ContinueButton({
 	gender,
 	// organ,
 	instagramId,
+	validateNickName,
 	setValidateNickName,
 }: ContinueButtonProps) {
 	const { step, setStep }: any = useContext(StepContext)
@@ -31,7 +33,7 @@ export default function ContinueButton({
 	const StepForward = () => {
 		if (canBeContinued) {
 			const stepNum = Number(step.id)
-			if (stepNum === 1) validateNickName()
+			if (stepNum === 1) isValidateNickName1()
 			else if (stepNum === 2) setStep({ id: (stepNum + 1).toString() })
 			else if (stepNum === 3) {
 				console.log({
@@ -62,7 +64,28 @@ export default function ContinueButton({
 		}
 	}
 
-	const validateNickName = async () => {
+	const isValidateNickName1 = async () => {
+		// 부적절한 닉네임인 경우
+		const fileURL = "/fword_list.txt"
+		fetch(fileURL)
+			.then((response) => response.text())
+			.then((contents) => {
+				const slangs = contents.split("\n")
+				// console.log(slangs)
+				let isOk = true
+				slangs.forEach((slang, i) => {
+					if (nickName.includes(slang)) {
+						console.log("부적절한 단어 안돼!")
+						isOk = false
+						setValidateNickName(1)
+					}
+				})
+				if (isOk) isValidateNickName2()
+			})
+			.catch((error) => console.error(error))
+	}
+	const isValidateNickName2 = async () => {
+		// 중복되는 닉네임이 있는 경우
 		setApiWaiting(true)
 		const REGISTER_USER_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/users/nickName`
 		await fetch(REGISTER_USER_URL, {
@@ -81,7 +104,7 @@ export default function ContinueButton({
 				if (data) {
 					// 중복된 닉네임이 있는 경우
 					if (data === "EXISTS") {
-						setValidateNickName(false)
+						setValidateNickName(2)
 					}
 
 					// 중복된 닉네임이 없는 경우

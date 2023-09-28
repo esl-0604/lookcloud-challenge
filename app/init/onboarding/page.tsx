@@ -28,7 +28,7 @@ export interface GenderType {
 export default function Onboarding() {
 	const [step, setStep] = useState<StepType>({ id: "1" })
 	const [nickName, setNickName] = useState<string>("")
-	const [validateNickName, setValidateNickName] = useState<boolean>(true)
+	const [validateNickName, setValidateNickName] = useState<number>(0) // 0: 사용가능, 1: 부적절한 단어 포함, 2: 중복 닉네임
 	const [gender, setGender] = useState<GenderType | null>(null)
 	// const [organ, setOrgan] = useState<OrganType | null>(null)
 	const [instagramId, setInstagramId] = useState<string>("")
@@ -99,6 +99,7 @@ export default function Onboarding() {
 							nickName={nickName}
 							gender={gender}
 							instagramId={instagramId}
+							validateNickName={validateNickName}
 							setValidateNickName={setValidateNickName}
 						/>
 					</div>
