@@ -37,11 +37,11 @@ export default function Profile() {
 			<div className="flex-1 flex flex-col justify-start items-center w-[100%] text-black">
 				<div className="mt-[86px]">
 					{userProfile ? (
-						<div className="flex justify-center items-center w-[180px] h-[180px] rounded-full overflow-hidden">
+						<div className="flex justify-center items-center w-[110px] h-[110px] rounded-full overflow-hidden">
 							<img className="object-cover" src={userProfile} alt="myProfile" />
 						</div>
 					) : (
-						<ProfileImg width={"180"} height={"180"} />
+						<ProfileImg width={"110"} height={"110"} />
 					)}
 				</div>
 				<div className="flex justify-center items-center w-[100%] h-[52px] mt-[30px] text-[24px] font-textBoxFont">

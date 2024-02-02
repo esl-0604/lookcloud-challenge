@@ -21,141 +21,169 @@ export default function ServiceLayout({
 	const path = usePathname()
 
 	// 유저 정보 저장 ------------------------------------------------------------
-	const userToken = LocalStorage.getItem("lookCloud-user-token")
+	// const userToken = LocalStorage.getItem("lookCloud-user-token")
+	// const [profileData, setProfileData] =
+	// 	useRecoilState<userProfileType>(userProfileState)
+
+	// useEffect(() => {
+	// 	if (userToken) {
+	// 		if (!profileData.userToken) {
+	// 			console.log("유저 정보 업데이트")
+	// 			GetUserInfo(userToken)
+	// 		}
+	// 	} else {
+	// 		router.replace("/")
+	// 	}
+	// }, [])
+
+	// const GetUserInfo = async (userToken: string) => {
+	// 	const GET_USER_INFO_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/users/${userToken}`
+	// 	await fetch(GET_USER_INFO_URL, {
+	// 		method: "GET",
+	// 		headers: {
+	// 			"Content-Type": "application/json",
+	// 		},
+	// 	})
+	// 		.then((res) => res.json())
+	// 		.then(({ status, message, data }) => {
+	// 			// 유저 조회 성공
+	// 			if (data) {
+	// 				// console.log(data)
+	// 				let newProfileData = { ...profileData }
+	// 				newProfileData.userToken = userToken
+	// 				newProfileData
+	// 				newProfileData.nickname = '"' + data["nickName"] + '"님'
+	// 				newProfileData.gender = data["gender"] === "MALE" ? "남성" : "여성"
+	// 				if (data["instagramUserName"]) {
+	// 					newProfileData.instagramUserName = "@" + data["instagramUserName"]
+	// 				}
+	// 				setProfileData(newProfileData)
+	// 			}
+
+	// 			// 유저 조회 실패
+	// 			else {
+	// 				console.log(message)
+	// 				router.replace("/")
+	// 			}
+	// 		})
+	// 		.catch((error) => {
+	// 			console.log(error)
+	// 			router.replace("/")
+	// 		})
+	// }
+
+	// 챌린지 정보 저장 ------------------------------------------------------------
+	// const [challengeDataList, setChallengeDataList] =
+	// 	useRecoilState<challengeInfoType[]>(challengeInfoList)
+
+	// useEffect(() => {
+	// 	console.log("챌린지 정보 업데이트")
+	// 	GetChallengeInfo()
+	// }, [path])
+
+	// const GetChallengeInfo = async () => {
+	// 	const GET_CHALLENGES_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/challenges`
+
+	// 	await fetch(GET_CHALLENGES_URL, {
+	// 		method: "GET",
+	// 		mode: "cors",
+	// 		headers: {
+	// 			"Content-Type": "application/json",
+	// 		},
+	// 	})
+	// 		.then((res) => res.json())
+	// 		.then(({ status, message, data }) => {
+	// 			if (data) {
+	// 				// console.log(typeof data[0].startedAt)
+	// 				let newChallengeDateList = data.map(
+	// 					(challenge: challengeInfoType, i: number) => {
+	// 						const today: Date = new Date()
+	// 						let state: number = 0
+
+	// 						const endDate: Date = challenge.endedAt
+	// 							? new Date(challenge.endedAt)
+	// 							: new Date()
+	// 						const startDate: Date = challenge.startedAt
+	// 							? new Date(challenge.startedAt)
+	// 							: new Date()
+
+	// 						if (startDate && endDate) {
+	// 							// state === -1 : 아직 시작안한 애들
+	// 							if (today < startDate) {
+	// 								state = -1
+	// 							}
+	// 							// state === 0 이상의 정수 : 진행 중인 애들
+	// 							else if (startDate <= today && today <= endDate) {
+	// 								const dTime: number = endDate.getTime() - today.getTime()
+	// 								const dDay: number = Math.ceil(dTime / (1000 * 60 * 60 * 24))
+	// 								state = dDay
+	// 							}
+	// 							// state === -2 : 이미 끝난 애들
+	// 							else {
+	// 								state = -2
+	// 							}
+	// 						}
+	// 						let newChallengeData = { ...challenge }
+	// 						newChallengeData.state = state
+
+	// 						// 현재는 프런트에서 하드코딩 추후에 api에서 직접 올라올 예정 ------------------
+	// 						newChallengeData.middleThumbnailUrl =
+	// 							"/image/challenge_thumbnail_1_2.png"
+	// 						newChallengeData.smallThumbnailUrl =
+	// 							"/image/challenge_thumbnail_1_3.png"
+	// 						// ----------------------------------------------------------------
+	// 						return newChallengeData
+	// 					},
+	// 				)
+	// 				newChallengeDateList = newChallengeDateList.sort(
+	// 					(a: challengeInfoType, b: challengeInfoType) => {
+	// 						return b.state - a.state
+	// 					},
+	// 				)
+	// 				newChallengeDateList = newChallengeDateList.sort(
+	// 					(a: challengeInfoType, b: challengeInfoType) => {
+	// 						const AendDate: Date = a.endedAt
+	// 							? new Date(a.endedAt)
+	// 							: new Date()
+	// 						const BendDate: Date = b.endedAt
+	// 							? new Date(b.endedAt)
+	// 							: new Date()
+	// 						return AendDate.getTime() - BendDate.getTime()
+	// 					},
+	// 				)
+	// 				setChallengeDataList(newChallengeDateList)
+	// 			}
+	// 		})
+	// 		.catch((error) => console.log(error))
+	// }
+
+	// 테스트 유저 정보 저장 --------------------------------------------------------
+	const alreadyLogined = LocalStorage.getItem("already-logined")
+	const nickName = LocalStorage.getItem("nickName")
+	const gender = LocalStorage.getItem("gender")
+	const instagramId = LocalStorage.getItem("instagramId")
+
 	const [profileData, setProfileData] =
 		useRecoilState<userProfileType>(userProfileState)
 
 	useEffect(() => {
-		if (userToken) {
+		if (alreadyLogined) {
 			if (!profileData.userToken) {
 				console.log("유저 정보 업데이트")
-				GetUserInfo(userToken)
+				let newProfileData = { ...profileData }
+				newProfileData.userToken = "00000"
+				newProfileData.nickname = '"' + nickName + '"님'
+				newProfileData.gender = gender === "MALE" ? "남성" : "여성"
+				if (instagramId) {
+					newProfileData.instagramUserName = "@" + instagramId
+				}
+				setProfileData(newProfileData)
 			}
 		} else {
 			router.replace("/")
 		}
 	}, [])
 
-	const GetUserInfo = async (userToken: string) => {
-		const GET_USER_INFO_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/users/${userToken}`
-		await fetch(GET_USER_INFO_URL, {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-			},
-		})
-			.then((res) => res.json())
-			.then(({ status, message, data }) => {
-				// 유저 조회 성공
-				if (data) {
-					// console.log(data)
-					let newProfileData = { ...profileData }
-					newProfileData.userToken = userToken
-					newProfileData
-					newProfileData.nickname = '"' + data["nickName"] + '"님'
-					newProfileData.gender = data["gender"] === "MALE" ? "남성" : "여성"
-					if (data["instagramUserName"]) {
-						newProfileData.instagramUserName = "@" + data["instagramUserName"]
-					}
-					setProfileData(newProfileData)
-				}
-
-				// 유저 조회 실패
-				else {
-					console.log(message)
-					router.replace("/")
-				}
-			})
-			.catch((error) => {
-				console.log(error)
-				router.replace("/")
-			})
-	}
-
-	// 챌린지 정보 저장 ------------------------------------------------------------
-	const [challengeDataList, setChallengeDataList] =
-		useRecoilState<challengeInfoType[]>(challengeInfoList)
-
-	useEffect(() => {
-		console.log("챌린지 정보 업데이트")
-		GetChallengeInfo()
-	}, [path])
-
-	const GetChallengeInfo = async () => {
-		const GET_CHALLENGES_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/challenges`
-
-		await fetch(GET_CHALLENGES_URL, {
-			method: "GET",
-			mode: "cors",
-			headers: {
-				"Content-Type": "application/json",
-			},
-		})
-			.then((res) => res.json())
-			.then(({ status, message, data }) => {
-				if (data) {
-					// console.log(typeof data[0].startedAt)
-					let newChallengeDateList = data.map(
-						(challenge: challengeInfoType, i: number) => {
-							const today: Date = new Date()
-							let state: number = 0
-
-							const endDate: Date = challenge.endedAt
-								? new Date(challenge.endedAt)
-								: new Date()
-							const startDate: Date = challenge.startedAt
-								? new Date(challenge.startedAt)
-								: new Date()
-
-							if (startDate && endDate) {
-								// state === -1 : 아직 시작안한 애들
-								if (today < startDate) {
-									state = -1
-								}
-								// state === 0 이상의 정수 : 진행 중인 애들
-								else if (startDate <= today && today <= endDate) {
-									const dTime: number = endDate.getTime() - today.getTime()
-									const dDay: number = Math.ceil(dTime / (1000 * 60 * 60 * 24))
-									state = dDay
-								}
-								// state === -2 : 이미 끝난 애들
-								else {
-									state = -2
-								}
-							}
-							let newChallengeData = { ...challenge }
-							newChallengeData.state = state
-
-							// 현재는 프런트에서 하드코딩 추후에 api에서 직접 올라올 예정 ------------------
-							newChallengeData.middleThumbnailUrl =
-								"/image/challenge_thumbnail_1_2.png"
-							newChallengeData.smallThumbnailUrl =
-								"/image/challenge_thumbnail_1_3.png"
-							// ----------------------------------------------------------------
-							return newChallengeData
-						},
-					)
-					newChallengeDateList = newChallengeDateList.sort(
-						(a: challengeInfoType, b: challengeInfoType) => {
-							return b.state - a.state
-						},
-					)
-					newChallengeDateList = newChallengeDateList.sort(
-						(a: challengeInfoType, b: challengeInfoType) => {
-							const AendDate: Date = a.endedAt
-								? new Date(a.endedAt)
-								: new Date()
-							const BendDate: Date = b.endedAt
-								? new Date(b.endedAt)
-								: new Date()
-							return AendDate.getTime() - BendDate.getTime()
-						},
-					)
-					setChallengeDataList(newChallengeDateList)
-				}
-			})
-			.catch((error) => console.log(error))
-	}
 	return <>{children}</>
 }
 

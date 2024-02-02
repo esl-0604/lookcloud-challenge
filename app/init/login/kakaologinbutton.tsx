@@ -56,12 +56,27 @@ export default function KaKaoLoginButton() {
 			.then((res) => res.json())
 			.then((data) => {
 				if (data) {
-					// console.log(data)
+					console.log(data)
 
+					// 로컬 테스트용 코드
 					const kakaoId: number = data.id
-					const kakaoProfileUrl: string | null = data.properties?.profile_image
+					const kakaoEmail: string = data.kakao_account.email
+					const kakaoProfileUrl: string | null =
+						data.kakao_account.profile.profile_image_url
+					LocalStorage.setItem("lookCloud-kakao-Id", kakaoId.toString())
+					LocalStorage.setItem("lookCloud-kakao-Email", kakaoEmail)
 
-					GetKakaoUserInfoAPIcall(kakaoId, kakaoProfileUrl)
+					if (kakaoProfileUrl)
+						LocalStorage.setItem("lookCloud-kakao-profile", kakaoProfileUrl)
+
+					if (LocalStorage.getItem("already-logined"))
+						router.replace("/service/challenge")
+					else router.push("/init/onboarding")
+
+					// 실서비스 코드
+					// const kakaoId: number = data.id
+					// const kakaoProfileUrl: string | null = data.properties?.profile_image
+					// GetKakaoUserInfoAPIcall(kakaoId, kakaoProfileUrl)
 				} else {
 					setApiWaiting(false)
 				}
@@ -72,6 +87,7 @@ export default function KaKaoLoginButton() {
 			})
 	}
 
+	// 실서비스 코드
 	const GetKakaoUserInfoAPIcall = async (
 		kakaoId: number,
 		kakaoProfileUrl: string | null,
@@ -87,9 +103,9 @@ export default function KaKaoLoginButton() {
 			.then(({ status, message, data }) => {
 				// 카카오 계정으로 유저 조회 성공
 				if (data) {
-					// console.log(data);
+					console.log(data)
 					const userToken: string = data
-					GetUserInfoAPIcall(kakaoId, userToken, kakaoProfileUrl)
+					// GetUserInfoAPIcall(kakaoId, userToken, kakaoProfileUrl)
 				}
 
 				// 카카오 계정으로 유저 조회 실패
@@ -110,6 +126,7 @@ export default function KaKaoLoginButton() {
 			})
 	}
 
+	// 실서비스 코드
 	const GetUserInfoAPIcall = async (
 		kakaoId: number,
 		userToken: string,

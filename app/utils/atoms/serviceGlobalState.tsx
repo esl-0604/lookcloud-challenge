@@ -63,32 +63,32 @@ export interface challengeInfoType {
 export const challengeInfoList = atom<challengeInfoType[]>({
 	key: "challengeInfoList",
 	default: [
-		// {
-		// 	challengeId: 0,
-		// 	challengeName: "고연전",
-		// 	startedAt: new Date("2023-09-09"),
-		// 	endedAt: new Date("2023-09-20"),
-		// 	state: 3,
-		// 	thumbnailUrl: "/image/challenge_thumbnail_1_1.png",
-		// 	middleThumbnailUrl: "/image/challenge_thumbnail_1_2.png",
-		// 	smallThumbnailUrl: "/image/challenge_thumbnail_1_3.png",
-		// 	comment:
-		// 		"고연전을 최대로 즐기기 위해 준비한 오늘의 스타일로 고연전 패션왕에 도전하세요!",
-		// 	totalCount: 7,
-		// },
-		// {
-		// 	challengeId: 1,
-		// 	challengeName: "소개팅",
-		// 	startedAt: new Date("2023-10-09"),
-		// 	endedAt: new Date("2023-10-20"),
-		// 	state: -1,
-		// 	thumbnailUrl: "/image/challenge_thumbnail_2_1.png",
-		// 	middleThumbnailUrl: "/image/challenge_thumbnail_1_2.png",
-		// 	smallThumbnailUrl: "/image/challenge_thumbnail_1_3.png",
-		// 	comment:
-		// 		"소개팅에서 가장 좋은 첫 인상을 남길 수 있는 스타일을 보여주세요!",
-		// 	totalCount: 0,
-		// },
+		{
+			challengeId: 0,
+			challengeName: "고연전",
+			startedAt: "2023-09-09",
+			endedAt: "2023-09-20",
+			state: 3,
+			thumbnailUrl: "/image/challenge_thumbnail_1_1.png",
+			middleThumbnailUrl: "/image/challenge_thumbnail_1_2.png",
+			smallThumbnailUrl: "/image/challenge_thumbnail_1_3.png",
+			comment:
+				"고연전을 최대로 즐기기 위해 준비한 오늘의 스타일로 고연전 패션왕에 도전하세요!",
+			totalCount: 7,
+		},
+		{
+			challengeId: 1,
+			challengeName: "소개팅",
+			startedAt: "2023-10-09",
+			endedAt: "2023-10-20",
+			state: -1,
+			thumbnailUrl: "/image/challenge_thumbnail_2_1.png",
+			middleThumbnailUrl: "/image/challenge_thumbnail_1_2.png",
+			smallThumbnailUrl: "/image/challenge_thumbnail_1_3.png",
+			comment:
+				"소개팅에서 가장 좋은 첫 인상을 남길 수 있는 스타일을 보여주세요!",
+			totalCount: 0,
+		},
 	],
 })
 

@@ -18,9 +18,6 @@ import {
 interface StepType {
 	id: "1" | "2" | "3"
 }
-export interface GenderType {
-	gender: "MALE" | "FEMALE"
-}
 // export interface OrganType {
 // 	organ: "고려대학교" | "연세대학교" | "기타"
 // }
@@ -29,7 +26,7 @@ export default function Onboarding() {
 	const [step, setStep] = useState<StepType>({ id: "1" })
 	const [nickName, setNickName] = useState<string>("")
 	const [validateNickName, setValidateNickName] = useState<number>(0) // 0: 사용가능, 1: 부적절한 단어 포함, 2: 중복 닉네임
-	const [gender, setGender] = useState<GenderType | null>(null)
+	const [gender, setGender] = useState<string>("")
 	// const [organ, setOrgan] = useState<OrganType | null>(null)
 	const [instagramId, setInstagramId] = useState<string>("")
 	const [canBeContinued, setCanBeContinued] = useState<boolean>(false)
@@ -48,7 +45,7 @@ export default function Onboarding() {
 				else setCanBeContinued(false)
 				break
 			case "2":
-				if (gender) setCanBeContinued(true)
+				if (gender.length > 0) setCanBeContinued(true)
 				else setCanBeContinued(false)
 				break
 			case "3":

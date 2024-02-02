@@ -1,7 +1,6 @@
 "use client"
 
 import { useContext, useState } from "react"
-import { GenderType } from "@/app/init/onboarding/page"
 import { useRouter } from "next/navigation"
 import LocalStorage from "@/app/utils/localstorage"
 import { StepContext } from "./context"
@@ -10,7 +9,7 @@ import SpinnerBox from "@/app/components/spinner"
 interface ContinueButtonProps {
 	canBeContinued: boolean
 	nickName: string
-	gender: GenderType | null
+	gender: string
 	// organ: OrganType | null
 	instagramId: string
 	validateNickName: number
@@ -51,8 +50,18 @@ export default function ContinueButton({
 				// }
 
 				const kakaoID = LocalStorage.getItem("lookCloud-kakao-Id")
-				if (kakaoID) registerUserAPIcall(Number(kakaoID))
-				else {
+				if (kakaoID) {
+					LocalStorage.setItem("already-logined", "true")
+					LocalStorage.setItem("nickName", nickName)
+					LocalStorage.setItem("gender", gender)
+					LocalStorage.setItem("instagramId", instagramId)
+					router.replace("/service/challenge")
+
+					// 실서비스 코드
+					// registerUserAPIcall(Number(kakaoID))
+				} else {
+					LocalStorage.removeItem("already-logined")
+					LocalStorage.removeItem("lookCloud-kakao-Email")
 					LocalStorage.removeItem("lookCloud-kakao-profile")
 					console.log("연결된 kakaoId가 없습니다.")
 					router.replace("/init/login")
@@ -80,47 +89,56 @@ export default function ContinueButton({
 						setValidateNickName(1)
 					}
 				})
-				if (isOk) isValidateNickName2()
+				if (isOk) {
+					setApiWaiting(false)
+					const stepNum = Number(step.id)
+					setStep({ id: (stepNum + 1).toString() })
+
+					// 실서비스 코드
+					// isValidateNickName2();
+				}
 			})
 			.catch((error) => console.error(error))
 	}
-	const isValidateNickName2 = async () => {
-		// 중복되는 닉네임이 있는 경우
-		setApiWaiting(true)
-		const REGISTER_USER_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/users/nickName`
-		await fetch(REGISTER_USER_URL, {
-			method: "POST",
-			mode: "cors",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				nickName: nickName,
-			}),
-		})
-			.then((res) => res.json())
-			.then(({ status, message, data }) => {
-				setApiWaiting(false)
-				if (data) {
-					// 중복된 닉네임이 있는 경우
-					if (data === "EXISTS") {
-						setValidateNickName(2)
-					}
 
-					// 중복된 닉네임이 없는 경우
-					else {
-						const stepNum = Number(step.id)
-						setStep({ id: (stepNum + 1).toString() })
-					}
-				} else {
-					console.log(message)
-				}
-			})
-			.catch((error) => {
-				setApiWaiting(false)
-				console.log(error)
-			})
-	}
+	// 실서비스 코드
+	// const isValidateNickName2 = async () => {
+	// 	// 중복되는 닉네임이 있는 경우
+	// 	setApiWaiting(true)
+	// 	const REGISTER_USER_URL = `${process.env.NEXT_PUBLIC_API_CALL_URL}/users/nickName`
+	// 	await fetch(REGISTER_USER_URL, {
+	// 		method: "POST",
+	// 		mode: "cors",
+	// 		headers: {
+	// 			"Content-Type": "application/json",
+	// 		},
+	// 		body: JSON.stringify({
+	// 			nickName: nickName,
+	// 		}),
+	// 	})
+	// 		.then((res) => res.json())
+	// 		.then(({ status, message, data }) => {
+	// 			setApiWaiting(false)
+	// 			if (data) {
+	// 				// 중복된 닉네임이 있는 경우
+	// 				if (data === "EXISTS") {
+	// 					setValidateNickName(2)
+	// 				}
+
+	// 				// 중복된 닉네임이 없는 경우
+	// 				else {
+	// 					const stepNum = Number(step.id)
+	// 					setStep({ id: (stepNum + 1).toString() })
+	// 				}
+	// 			} else {
+	// 				console.log(message)
+	// 			}
+	// 		})
+	// 		.catch((error) => {
+	// 			setApiWaiting(false)
+	// 			console.log(error)
+	// 		})
+	// }
 
 	const registerUserAPIcall = async (kakaoId: number) => {
 		setApiWaiting(true)
