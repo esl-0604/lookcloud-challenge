@@ -4,8 +4,8 @@
 https://www.notion.so/LookCloud-9ce10cc599c147278c2114b5951e1e97?pvs=4
 
 #### 실행방법
-git pull origin localtest
-yarn install
-yarn dev
---> localhost:3001 접속
-(평가하기 기능은 테스트 불가)
+* git pull origin localtest
+* yarn install
+* yarn dev
+* --> localhost:3001 접속
+* (평가하기 기능은 테스트 불가)
